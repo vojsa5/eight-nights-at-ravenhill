@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
+  <title>Blackmailer</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="78%">
+      <stop offset="0" stop-color="#2c3a4a"/>
+      <stop offset="1" stop-color="#05070a"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="72%">
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".8"/>
+    </radialGradient>
+    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="200" height="262" fill="url(#bg)"/>
+  <ellipse cx="40" cy="60" rx="26" ry="9" fill="#9fb8d0" opacity=".08" filter="url(#blur8)"/>
+  <ellipse cx="160" cy="50" rx="26" ry="9" fill="#9fb8d0" opacity=".08" filter="url(#blur8)"/>
+  <ellipse cx="30" cy="150" rx="26" ry="9" fill="#9fb8d0" opacity=".08" filter="url(#blur8)"/>
+  <ellipse cx="172" cy="140" rx="26" ry="9" fill="#9fb8d0" opacity=".08" filter="url(#blur8)"/>
+  <g fill="#9fc0e0" opacity=".62" filter="url(#halo)">
+    <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
+    <path d="M100 56 C64 56 54 92 57 118 C59 140 48 156 30 172 C60 168 80 172 100 176 C120 172 140 168 170 172 C152 156 141 140 143 118 C146 92 136 56 100 56 Z"/>
+  </g>
+  <g fill="#0b0a0f">
+    <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
+    <path d="M100 56 C64 56 54 92 57 118 C59 140 48 156 30 172 C60 168 80 172 100 176 C120 172 140 168 170 172 C152 156 141 140 143 118 C146 92 136 56 100 56 Z"/>
+  </g>
+  <ellipse cx="100" cy="116" rx="19" ry="25" fill="#000"/>
+  <ellipse cx="92" cy="108" rx="3" ry="1.8" fill="#cfe4ff" filter="url(#glow)"/>
+  <ellipse cx="108" cy="108" rx="3" ry="1.8" fill="#cfe4ff" filter="url(#glow)"/>
+  <g fill="#9fc0e0" opacity=".62" filter="url(#halo)">
+    <rect x="96" y="112" width="8" height="40" rx="4"/>
+    <ellipse cx="100" cy="160" rx="15" ry="13"/>
+    <path d="M88 168 L84 200 L116 200 L112 168Z"/>
+  </g>
+  <g fill="#0b0a0f">
+    <rect x="96" y="112" width="8" height="40" rx="4"/>
+    <ellipse cx="100" cy="160" rx="15" ry="13"/>
+    <path d="M88 168 L84 200 L116 200 L112 168Z"/>
+  </g>
+  <rect width="200" height="262" fill="url(#vig)"/>
+</svg>

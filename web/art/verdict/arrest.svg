@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>The wine cellar: worn steps lead down to a banded oak door, its iron key in the lock, under a hanging lantern</title>
+  <defs>
+    <radialGradient id="bg" cx="55%" cy="55%" r="80%">
+      <stop offset="0" stop-color="#1e2634"/>
+      <stop offset="1" stop-color="#030406"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <linearGradient id="oak" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#6a3c18"/>
+      <stop offset="1" stop-color="#24150b"/>
+    </linearGradient>
+    <linearGradient id="shaft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8aa8d8" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#8aa8d8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="flame" cx="50%" cy="60%" r="60%">
+      <stop offset="0" stop-color="#fff2b8"/>
+      <stop offset=".5" stop-color="#ffb040"/>
+      <stop offset="1" stop-color="#b85a10"/>
+    </radialGradient>
+    <pattern id="rack" width="13" height="13" patternUnits="userSpaceOnUse">
+      <rect width="13" height="13" fill="#0a0b0e"/>
+      <circle cx="6.5" cy="6.5" r="4" fill="#141a16" stroke="#26302c" stroke-width=".8"/>
+    </pattern>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- vaulted ceiling and a few stone courses -->
+  <path d="M0 0 H360 V40 C290 14 70 14 0 40Z" fill="#050608"/>
+  <g stroke="#2a303c" stroke-width=".8" opacity=".7">
+    <path d="M40 60 H120 M250 62 H330 M60 84 H130 M262 104 H300 M20 150 H40"/>
+    <path d="M80 60 V84 M290 62 V104"/>
+  </g>
+  <!-- cold light spilling down the stair from the hall above -->
+  <path d="M0 20 L76 20 L150 170 L36 170Z" fill="url(#shaft)" filter="url(#soft)"/>
+  <path d="M0 30 L60 30 L120 160 L40 160Z" fill="#8aa8d8" opacity=".08" filter="url(#soft)"/>
+  <!-- lantern glow -->
+  <circle cx="236" cy="94" r="62" fill="#ff9a3a" opacity=".32" filter="url(#soft)"/>
+  <ellipse cx="206" cy="176" rx="80" ry="10" fill="#ff9a3a" opacity=".14" filter="url(#soft)"/>
+  <!-- the wine rack in the dark -->
+  <rect x="270" y="70" width="52" height="100" fill="url(#rack)"/>
+  <rect x="268" y="68" width="56" height="3" fill="#15110c"/>
+  <g fill="#6a9a60" opacity=".55">
+    <circle cx="277" cy="82" r="1"/><circle cx="290" cy="108" r="1"/><circle cx="303" cy="95" r="1"/><circle cx="277" cy="134" r="1"/>
+  </g>
+  <!-- the arch and the banded oak door -->
+  <path d="M143 170 V98 A42 42 0 0 1 227 98 V170Z" fill="#262a32"/>
+  <path d="M143 98 A42 42 0 0 1 227 98" fill="none" stroke="#343944" stroke-width="3" stroke-dasharray="11 2"/>
+  <path d="M153 170 V98 A32 32 0 0 1 217 98 V170Z" fill="url(#oak)"/>
+  <path d="M169 70 V170 M185 66 V170 M201 70 V170" stroke="#1c1009" stroke-width="1.2"/>
+  <g fill="#0e0e10">
+    <rect x="153" y="94" width="64" height="5"/>
+    <rect x="153" y="122" width="64" height="5"/>
+    <rect x="153" y="158" width="64" height="5"/>
+  </g>
+  <g fill="#8a7458">
+    <circle cx="159" cy="96.5" r="1"/><circle cx="177" cy="96.5" r="1"/><circle cx="193" cy="96.5" r="1"/><circle cx="211" cy="96.5" r="1"/>
+    <circle cx="159" cy="124.5" r="1"/><circle cx="177" cy="124.5" r="1"/><circle cx="193" cy="124.5" r="1"/><circle cx="211" cy="124.5" r="1"/>
+    <circle cx="159" cy="160.5" r="1"/><circle cx="177" cy="160.5" r="1"/><circle cx="193" cy="160.5" r="1"/><circle cx="211" cy="160.5" r="1"/>
+  </g>
+  <!-- the lock and the big iron key -->
+  <rect x="197" y="131" width="14" height="19" rx="1.5" fill="#121214" stroke="#3e3e44"/>
+  <circle cx="204" cy="137" r="1.6" fill="#000"/>
+  <path d="M204 138 L196 148" stroke="#5a5a62" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="191.5" cy="153.5" r="6" fill="none" stroke="#5a5a62" stroke-width="2.6"/>
+  <path d="M195.5 149 A6 6 0 0 1 196 158" fill="none" stroke="#ffc070" stroke-width="1.2" stroke-opacity=".8" filter="url(#glow)"/>
+  <!-- worn stone steps -->
+  <path d="M0 96 H30 V108 H49 V120 H68 V132 H87 V144 H106 V156 H125 V170 H0Z" fill="#0d1118"/>
+  <g fill="#4a5c7c" opacity=".8">
+    <path d="M0 96 H30 L33 92 Q16 95 0 92Z"/><path d="M30 108 H49 L52 104 Q41 107 33 104Z"/>
+    <path d="M49 120 H68 L71 116 Q60 119 52 116Z"/><path d="M68 132 H87 L90 128 Q79 131 71 128Z"/>
+    <path d="M87 144 H106 L109 140 Q98 143 90 140Z"/><path d="M106 156 H125 L128 152 Q117 155 109 152Z"/>
+  </g>
+  <path d="M0 96 H30 M30 108 H49 M49 120 H68 M68 132 H87 M87 144 H106 M106 156 H125" stroke="#9ab4dc" stroke-opacity=".55" stroke-width="1.2"/>
+  <path d="M30 96 V108 M49 108 V120 M68 120 V132 M87 132 V144 M106 144 V156 M125 156 V170" stroke="#1e2634" stroke-width="1"/>
+  <!-- the lantern on its hook -->
+  <path d="M254 52 V64 M254 58 H236 V66" fill="none" stroke="#0c0c0e" stroke-width="2.4"/>
+  <path d="M236 66 Q232 70 236 73" fill="none" stroke="#0c0c0e" stroke-width="1.6"/>
+  <path d="M228 80 L244 80 L240 73 L232 73Z" fill="#141416"/>
+  <rect x="229" y="80" width="14" height="18" fill="url(#flame)" filter="url(#glow)"/>
+  <path d="M229 80 V98 M236 80 V98 M243 80 V98" stroke="#141416" stroke-width="1.4"/>
+  <ellipse cx="236" cy="90" rx="2" ry="3.4" fill="#fffbe8"/>
+  <rect x="227" y="98" width="18" height="4" fill="#141416"/>
+  <!-- flagstone floor -->
+  <rect x="0" y="170" width="360" height="30" fill="#0b0d11"/>
+  <path d="M0 170 H360" stroke="#ffb060" stroke-opacity=".18"/>
+  <path d="M60 184 H120 M150 190 H220 M250 182 H320" stroke="#1c212a" stroke-width=".8"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

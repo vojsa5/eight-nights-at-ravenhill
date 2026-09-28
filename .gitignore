@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+# output of tools.experiments; regenerate it locally
+results/
+# your own pictures (see web/art/custom/README.md)
+web/art/custom/*
+!web/art/custom/README.md

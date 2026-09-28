@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>The wine cellar at night: one candle on an upturned barrel, a folded blanket on a bare chair, and moonlight through a small barred window high above</title>
+  <defs>
+    <radialGradient id="bg" cx="46%" cy="55%" r="80%">
+      <stop offset="0" stop-color="#3a2410"/>
+      <stop offset=".42" stop-color="#121822"/>
+      <stop offset="1" stop-color="#030405"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="flame" cx="50%" cy="75%" r="60%">
+      <stop offset="0" stop-color="#fff2c0"/>
+      <stop offset=".6" stop-color="#ffb040"/>
+      <stop offset="1" stop-color="#c85a10"/>
+    </radialGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a82a8"/>
+      <stop offset="1" stop-color="#2a3a58"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a8c0e8" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#a8c0e8" stop-opacity=".08"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#030405"/>
+      <stop offset="1" stop-color="#030405" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="rack" width="12" height="14" patternUnits="userSpaceOnUse">
+      <rect width="12" height="14" fill="#0c0908"/>
+      <rect y="12.5" width="12" height="1.5" fill="#24180e"/>
+      <circle cx="6" cy="6.5" r="4.2" fill="#050706" stroke="#1a2418"/>
+      <circle cx="4.6" cy="5.2" r="1" fill="#c89a50" opacity=".45"/>
+    </pattern>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="haze" x="-30%" y="-10%" width="160%" height="120%"><feGaussianBlur stdDeviation="2.5"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- vaulted ceiling and stone joints -->
+  <path d="M0 0 H360 V72 C320 28 250 16 180 16 C110 16 40 28 0 72Z" fill="#060708"/>
+  <path d="M0 72 C40 28 110 16 180 16 C250 16 320 28 360 72" fill="none" stroke="#1c2432" stroke-width="2"/>
+  <path d="M130 70 H250 M126 96 H254 M130 122 H250 M160 70 V96 M200 70 V96 M180 96 V122 M222 96 V122 M150 122 V148 M236 122 V148" stroke="#1a1e26" stroke-opacity=".7"/>
+  <!-- wine racks fading into the dark -->
+  <rect x="14" y="66" width="108" height="106" fill="url(#rack)" stroke="#24180e" stroke-width="2"/>
+  <rect x="262" y="66" width="96" height="106" fill="url(#rack)" stroke="#24180e" stroke-width="2"/>
+  <rect x="0" y="60" width="132" height="116" fill="url(#fade)"/>
+  <rect x="250" y="60" width="110" height="116" fill="url(#fade)" transform="rotate(180 305 118)"/>
+  <!-- floor -->
+  <rect x="0" y="172" width="360" height="28" fill="#0a0b0d"/>
+  <path d="M0 182 H360 M60 172 L48 200 M140 172 L135 200 M240 172 L247 200 M310 172 L324 200" stroke="#15181e"/>
+  <!-- the barred window, snow piled outside -->
+  <rect x="206" y="30" width="42" height="24" fill="url(#win)" opacity=".8"/>
+  <path d="M206 54 V44 C216 40 228 42 236 40 C242 39 246 41 248 42 V54Z" fill="#dfe6f2" opacity=".75"/>
+  <g fill="#f0f4fa"><circle cx="212" cy="35" r="1"/><circle cx="226" cy="33" r="1.2"/><circle cx="240" cy="36" r="1"/><circle cx="220" cy="39" r=".9"/></g>
+  <rect x="206" y="30" width="42" height="24" fill="none" stroke="#07090c" stroke-width="3"/>
+  <path d="M216.5 30 V54 M227 30 V54 M237.5 30 V54" stroke="#07090c" stroke-width="2.6"/>
+  <path d="M204 55 H250 L254 62 H200Z" fill="#1a2230"/>
+  <!-- candle glow -->
+  <circle cx="162" cy="106" r="46" fill="#ffa030" opacity=".32" filter="url(#soft)"/>
+  <ellipse cx="170" cy="176" rx="70" ry="10" fill="#ff9a30" opacity=".18" filter="url(#soft)"/>
+  <g transform="translate(0 -6)">
+    <!-- upturned barrel -->
+    <path d="M146 132 C141 150 141 162 146 180 H178 C183 162 183 150 178 132Z" fill="#2a1a0e"/>
+    <path d="M154 133 C151 150 151 162 154 180 M170 133 C173 150 173 162 170 180" stroke="#1a1008"/>
+    <path d="M144 142 C154 145 170 145 180 142 M143.5 170 C154 173 170 173 180.5 170" fill="none" stroke="#0c0806" stroke-width="3"/>
+    <path d="M146 180 C141 162 141 150 146 132" fill="none" stroke="#ff9a3a" stroke-opacity=".3" stroke-width="1.5"/>
+    <ellipse cx="162" cy="132" rx="16" ry="4" fill="#4a3018"/>
+    <!-- the candle -->
+    <ellipse cx="162" cy="131" rx="7" ry="2" fill="#6a5a40"/>
+    <rect x="159" y="114" width="6" height="17" fill="#e8dcc0"/>
+    <path d="M159 116 C158 120 158 123 159.5 124" fill="none" stroke="#fff4dc" stroke-width="1.2"/>
+    <path d="M162 100 C166 106 166 112 162 113 C158 112 158 106 162 100Z" fill="url(#flame)" filter="url(#glow)"/>
+    <!-- the chair, and the folded blanket -->
+    <g fill="#1e140c">
+      <rect x="203" y="102" width="4" height="74"/><rect x="235" y="102" width="4" height="74"/>
+      <rect x="205" y="108" width="32" height="3"/><rect x="205" y="120" width="32" height="3"/>
+      <rect x="194" y="148" width="4" height="34"/><rect x="226" y="148" width="4" height="34"/>
+    </g>
+    <path d="M194 148 H230 L239 139 H203Z" fill="#2e1e12"/>
+    <path d="M197 139 H227 L234 132 V138 L227 145 C227 151 224 157 220 162 L214 157 L208 162 C203 156 199 150 199 145 H197Z" fill="#5a2c26"/>
+    <path d="M197 139 H227 L234 132 H204Z" fill="#76443c"/>
+    <path d="M197 142 H227 L234 135 M204 147 C206 153 208 157 208 161 M214 147 V157" fill="none" stroke="#2e1412" stroke-opacity=".8"/>
+    <path d="M204 132 L197 139 V145" fill="none" stroke="#ff9a3a" stroke-opacity=".4" stroke-width="1.2"/>
+  </g>
+  <!-- the shaft of moonlight, with the shadows of the bars -->
+  <path d="M210 54 L244 54 L230 176 L192 176Z" fill="url(#beam)" filter="url(#haze)"/>
+  <path d="M216.5 56 L204 174 M227 56 L214 174 M237.5 56 L224 174" stroke="#030405" stroke-opacity=".35" stroke-width="2" filter="url(#haze)"/>
+  <path d="M190 174 H232 L237 186 H185Z" fill="#b8cae8" opacity=".14" filter="url(#haze)"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

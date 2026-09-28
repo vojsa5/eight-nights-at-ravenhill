@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>Interview</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#2e3a34"/>
+      <stop offset="1" stop-color="#040605"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe6b0" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffe6b0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <line x1="180" y1="0" x2="180" y2="40" stroke="#1a1a1a" stroke-width="2"/>
+  <path d="M160 40 L200 40 L214 56 L146 56Z" fill="#2a3a2a" stroke="#8a8a6a"/>
+  <path d="M146 56 L214 56 L300 200 L60 200Z" fill="url(#beam)"/>
+  <g fill="#d8e0c0" opacity=".6" filter="url(#halo)">
+    <g transform="translate(236 112) scale(1.0)">
+      <ellipse cx="0" cy="-34" rx="17" ry="21"/>
+      <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
+      <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
+    </g>
+    <rect x="206" y="120" width="60" height="70" rx="4"/>
+  </g>
+  <g fill="#0b0a0f">
+    <g transform="translate(236 112) scale(1.0)">
+      <ellipse cx="0" cy="-34" rx="17" ry="21"/>
+      <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
+      <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
+    </g>
+    <rect x="206" y="120" width="60" height="70" rx="4"/>
+  </g>
+  <path d="M96 150 L264 150 L280 170 L80 170Z" fill="#3a2a1a" stroke="#8a6a2a"/>
+  <rect x="96" y="170" width="6" height="30" fill="#2a1a0e"/>
+  <rect x="258" y="170" width="6" height="30" fill="#2a1a0e"/>
+  <path d="M70 120 L70 200 M70 160 L110 160 L110 200" fill="none" stroke="#2a1a0e" stroke-width="6"/>
+  <ellipse cx="160" cy="148" rx="10" ry="3" fill="#efe6d6"/>
+  <path d="M151 140 L169 140 L167 148 L153 148Z" fill="#efe6d6"/>
+  <path d="M156 134 C152 126 162 122 158 114 M164 134 C160 126 170 122 166 114" fill="none" stroke="#efe6d6" stroke-opacity=".4" stroke-width="1.5"/>
+  <rect x="186" y="142" width="40" height="8" fill="#efe2c0" transform="rotate(-6 206 146)"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

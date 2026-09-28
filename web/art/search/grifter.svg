@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A ribbon-tied bundle of gilt-edged share certificates with a gold seal, a glinting lump of fake gold ore, and the corner of a colonial map</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="80%">
+      <stop offset="0" stop-color="#2e2a18"/>
+      <stop offset="1" stop-color="#050403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc878" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc878" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gold" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#fff0a0"/>
+      <stop offset=".5" stop-color="#e0a830"/>
+      <stop offset="1" stop-color="#7a5010"/>
+    </radialGradient>
+    <g id="cert">
+      <rect width="112" height="68" fill="#efe4c4"/>
+      <rect x="4" y="4" width="104" height="60" fill="none" stroke="#c89a38" stroke-width="2.2"/>
+      <rect x="8" y="8" width="96" height="52" fill="none" stroke="#b08a30" stroke-width=".7"/>
+      <g fill="#c89a38"><circle cx="4" cy="4" r="3.5"/><circle cx="108" cy="4" r="3.5"/><circle cx="4" cy="64" r="3.5"/><circle cx="108" cy="64" r="3.5"/></g>
+    </g>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- desk under the lamp -->
+  <rect y="84" width="360" height="116" fill="#1e140a"/>
+  <ellipse cx="185" cy="136" rx="160" ry="56" fill="url(#pool)"/>
+  <!-- the corner of a colonial map -->
+  <g transform="rotate(-9 110 118)">
+    <path d="M44 88 L156 88 L156 152 L44 152Z" fill="#c8b07a"/>
+    <path d="M44 88 L156 88 L156 152 L44 152Z" fill="none" stroke="#7a6034" stroke-width="1.5"/>
+    <path d="M44 124 C62 118 70 128 84 120 C96 112 104 124 116 116 C126 108 138 116 156 106 L156 88 L44 88Z" fill="#6a8a8a" opacity=".55"/>
+    <path d="M44 124 C62 118 70 128 84 120 C96 112 104 124 116 116 C126 108 138 116 156 106" fill="none" stroke="#5a4020" stroke-width="1.2"/>
+    <path d="M70 140 C84 132 96 138 108 130" fill="none" stroke="#8a2a1a" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <path d="M60 136 l5 5 m0 -5 l-5 5" stroke="#8a2a1a" stroke-width="1.4"/>
+    <g transform="translate(64 104)" fill="#5a4020"><path d="M0 -10 L2 0 L0 10 L-2 0Z M-10 0 L0 -2 L10 0 L0 2Z"/></g>
+  </g>
+  <!-- the bundle of share certificates -->
+  <g transform="rotate(5 190 128)">
+    <use href="#cert" x="140" y="100" transform="rotate(-6 196 134)"/>
+    <use href="#cert" x="136" y="96" transform="rotate(3 192 130)"/>
+    <use href="#cert" x="132" y="92"/>
+    <ellipse cx="188" cy="118" rx="16" ry="11" fill="none" stroke="#b08a30" stroke-width="1.2"/>
+    <path d="M181 121 L186 113 L190 118 L195 112" fill="none" stroke="#8a6a28" stroke-width="1.1"/>
+    <path d="M150 106 L226 106" stroke="#5a4428" stroke-width="2.4"/>
+    <g stroke="#6a5438" stroke-width=".8"><path d="M146 136 L172 136 M146 141 L166 141 M204 142 L232 142"/></g>
+    <!-- ribbon and seal -->
+    <rect x="160" y="88" width="9" height="76" fill="#9a1420"/>
+    <path d="M164 124 C150 112 146 132 164 126 C182 132 178 112 164 124Z" fill="#c02030" stroke="#6a0a12" stroke-width=".8"/>
+    <path d="M163 126 L154 142 M166 126 L172 143" stroke="#b01a28" stroke-width="3"/>
+    <circle cx="220" cy="136" r="10" fill="#e0b040" stroke="#fff0a0" stroke-width="1" stroke-dasharray="2 1.5" filter="url(#glow)"/>
+    <circle cx="220" cy="136" r="5.5" fill="#a87a20"/>
+  </g>
+  <!-- the fake gold ore -->
+  <circle cx="276" cy="144" r="30" fill="#ffd060" opacity=".22" filter="url(#soft)"/>
+  <path d="M248 160 L252 136 L268 124 L290 128 L304 144 L300 162 L276 170Z" fill="#453a28"/>
+  <path d="M252 136 L268 124 L290 128 L278 144 L260 148Z" fill="#62523a"/>
+  <path d="M290 128 L304 144 L300 162 L286 154 L278 144Z" fill="#2c2619"/>
+  <path d="M248 160 L260 148 L278 144 L286 154 L276 170Z" fill="#382f20"/>
+  <g fill="url(#gold)" filter="url(#glow)">
+    <path d="M262 138 L272 131 L279 139 L269 146Z"/>
+    <path d="M284 148 L293 143 L296 155 L286 158Z"/>
+    <path d="M256 154 L265 151 L268 160 L258 161Z"/>
+    <path d="M276 127 L286 129 L282 135Z"/>
+    <path d="M270 156 L276 153 L278 160Z"/>
+  </g>
+  <g fill="#fff6c0" filter="url(#glow)">
+    <path d="M272 118 L273.6 125 L280 126.5 L273.6 128 L272 135 L270.4 128 L264 126.5 L270.4 125Z"/>
+    <path d="M294 138 L295 141.5 L298.5 142.5 L295 143.5 L294 147 L293 143.5 L289.5 142.5 L293 141.5Z"/>
+    <path d="M259 150 L259.8 152.2 L262 153 L259.8 153.8 L259 156 L258.2 153.8 L256 153 L258.2 152.2Z"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

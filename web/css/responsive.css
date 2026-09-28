@@ -1,0 +1,53 @@
+/* Short windows (small laptops): tighter margins, so the board and its polaroids can be larger, and the
+   round's opening card keeps its button on screen. */
+@media (max-height: 800px) and (min-width: 701px) {
+  .board-wrap { padding-top: 10px; padding-bottom: 12px; }
+  .board { --tall: calc(100vh - 84px); --frame: 10px; }
+  .note { --note-room: 245px; padding: 20px 18px 14px; gap: 6px; }
+  .phase { font-size: 30px; margin: 2px 0; }
+  .pick .mini { width: 38px; height: 50px; }
+  .folder-tabs { top: 14px; gap: 3px; }  /* all six tabs fit in a 600px-tall window */
+  .folder-tabs button { padding: 9px 8px; font-size: 12.5px; }
+  .intro-art { aspect-ratio: 360 / 120; }
+  .intro-art img { object-fit: cover; }
+  .intro-body { padding: 30px 28px 16px; gap: 6px; }
+  .intro-body .traces { padding: 7px 12px; }
+  .intro-body .recap { padding-top: 6px; }
+}
+
+/* Narrow screens: the folder covers the board instead of pushing it; on phones the polaroids form a grid
+   and the folder tabs sit along the bottom. */
+@media (max-width: 1100px) {
+  .folder, .desk.folder-open .folder { position: fixed; right: 0; top: 0; bottom: 0; width: 0; }
+  .folder-slide { width: min(600px, 92vw); }
+  .folder-tabs { top: 92px; }
+  .folder-body { height: 100vh; }
+  .board { --room: calc(100vw - 88px); }
+  .props { display: none; }  /* the board takes the whole width */
+}
+@media (max-width: 700px) {
+  .traces.many ul { grid-template-columns: 1fr; }  /* one column of traces on phones */
+  .film .dots i { width: 6px; height: 6px; margin: 0 2px; }  /* the Advice film's many dots on one line */
+  .casebar { padding: 10px 14px; gap: 8px 10px; }
+  .casebar .btn { padding: 5px 9px; font-size: 12.5px; letter-spacing: .02em; }  /* Story, How to play, Advice and New case on one row */
+  .board-wrap { padding: 12px 12px 90px; }
+  .board { width: 100%; height: auto; min-height: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 12px; }
+  .strings { display: none; }
+  .card { position: relative; width: auto; transform: rotate(var(--tilt)) !important; left: auto !important; top: auto !important; }
+  .note { position: relative; left: auto; top: auto; transform: none; width: auto; grid-column: 1 / -1; order: -1; margin: 10px 0 6px; }
+  .cap .nm { font-size: 15px; }
+  .folder, .desk.folder-open .folder { position: fixed; left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 0; }
+  .folder-slide { position: static; width: auto; transform: none !important; transition: none; will-change: auto; }
+  .folder-body { transition: none; }
+  .folder-tabs { position: fixed; left: 0; right: 0; bottom: 0; top: auto; flex-direction: row; gap: 0; }
+  .folder-tabs button { writing-mode: horizontal-tb; transform: none; flex: 1; border-radius: 8px 8px 0 0; padding: 12px 2px; font-size: 10px;
+    letter-spacing: .02em; white-space: nowrap; }  /* the tabs stay on one line at 360px */
+  .desk.folder-open .folder-body { position: fixed; left: 0; right: 0; top: 0; bottom: 44px; height: auto; }
+  .rolegrid { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px 8px; }  /* three roles to a row */
+  .tpiles { grid-template-columns: 1fr; }  /* the Theory tab's piles one above another, their slips side by side */
+  .tpile { min-height: 0; }
+  .tlist { flex-direction: row; flex-wrap: wrap; }
+  .tslip { width: calc(50% - 3px); }
+  .reveal { grid-template-columns: 1fr; }
+  .reveal-art { margin: 18px auto 0; width: 60%; }
+}

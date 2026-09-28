@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>On the bedside table by candlelight: a police whistle on its chain, a warrant card in a leather wallet, a pair of handcuffs and a folded letter sealed with red wax</title>
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="35%" r="85%">
+      <stop offset="0" stop-color="#3c3020"/>
+      <stop offset="1" stop-color="#050404"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="52%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc870" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc870" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="flame" cx="50%" cy="70%" r="60%">
+      <stop offset="0" stop-color="#fff4c8"/>
+      <stop offset=".6" stop-color="#ffb040"/>
+      <stop offset="1" stop-color="#ff7a20" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="nickel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0ece0"/>
+      <stop offset=".45" stop-color="#b8b6ae"/>
+      <stop offset="1" stop-color="#5a5a58"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <g id="cuff">
+      <ellipse rx="17" ry="11" fill="none" stroke="#1c1e22" stroke-width="7"/>
+      <ellipse rx="17" ry="11" fill="none" stroke="#9aa0a6" stroke-width="4.2"/>
+      <path d="M-15 -4 A17 11 0 0 1 4 -10.6" fill="none" stroke="#eef0f2" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M-14 3 A15 9 0 0 0 6 8.6" fill="none" stroke="#50545a" stroke-width="1" stroke-dasharray="1.2 1.4"/>
+      <rect x="12" y="-5" width="11" height="10" rx="2" fill="#7c828a" stroke="#1c1e22"/>
+      <circle cx="17.5" cy="0" r="1.3" fill="#1c1e22"/>
+    </g>
+    <path id="links" d="M171 150 a4 2.4 0 1 0 8 0 a4 2.4 0 1 0 -8 0 M177.5 151 a4 2.4 0 1 0 8 0 a4 2.4 0 1 0 -8 0 M184 152 a4 2.4 0 1 0 8 0 a4 2.4 0 1 0 -8 0"/>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- candle -->
+  <circle cx="74" cy="54" r="30" fill="#ffb050" opacity=".22" filter="url(#soft)"/>
+  <rect x="69" y="62" width="10" height="34" fill="#e6dac0"/>
+  <rect x="69" y="62" width="4" height="34" fill="#fff4dc" opacity=".5"/>
+  <path d="M74 61 L74 56" stroke="#2a1a10" stroke-width="1"/>
+  <path d="M74 40 C78 48 79 54 74 58 C69 54 70 48 74 40Z" fill="url(#flame)" filter="url(#glow)"/>
+  <!-- the bedside table -->
+  <path d="M50 94 L310 94 L330 170 L30 170Z" fill="#22160c"/>
+  <path d="M50 94 L310 94" stroke="#3a2616" stroke-width="1.5"/>
+  <rect x="30" y="170" width="300" height="30" fill="#130b06"/>
+  <path d="M30 170.5 L330 170.5" stroke="#4a3018" stroke-width="1.5"/>
+  <rect x="120" y="178" width="120" height="18" fill="none" stroke="#24160c" stroke-width="1.5"/>
+  <circle cx="180" cy="187" r="3" fill="#8a6a30"/>
+  <ellipse cx="74" cy="98" rx="17" ry="4" fill="#8a6a30"/>
+  <ellipse cx="74" cy="96.5" rx="8" ry="2" fill="#5a4220"/>
+  <ellipse cx="180" cy="134" rx="150" ry="46" fill="url(#pool)"/>
+  <!-- the sealed letter -->
+  <g transform="rotate(-5 142 114)">
+    <rect x="110" y="102" width="72" height="34" fill="#000" opacity=".4" filter="url(#soft)"/>
+    <rect x="106" y="98" width="72" height="34" fill="#e4d8bc"/>
+    <path d="M106 98 L142 118 L178 98Z" fill="#d6c8a6" stroke="#9a8866" stroke-width=".8"/>
+    <path d="M150 125 L172 125 M150 129 L166 129" stroke="#6a5a44" stroke-width=".8"/>
+    <path d="M136.5 117 C136 113 140 111.5 142.5 112 C146 111 148.5 114.5 147.5 117.5 C149 120.5 145 124 142 123.5 C138 124.5 135 121 136.5 117Z" fill="#a01c1c" filter="url(#glow)"/>
+    <circle cx="142" cy="118" r="3.2" fill="none" stroke="#5e0e0e" stroke-width=".9"/>
+  </g>
+  <!-- the warrant card in its wallet -->
+  <g transform="rotate(5 234 112)">
+    <rect x="196" y="100" width="86" height="32" fill="#000" opacity=".45" filter="url(#soft)"/>
+    <rect x="192" y="96" width="42" height="32" rx="2" fill="#2e1a10"/>
+    <rect x="235" y="96" width="42" height="32" rx="2" fill="#35200f"/>
+    <rect x="195" y="99" width="36" height="26" rx="1" fill="none" stroke="#7a5430" stroke-width=".6" stroke-dasharray="1.6 1.2"/>
+    <path d="M213.0 102.0 L214.9 107.4 L220.1 104.9 L217.6 110.1 L223.0 112.0 L217.6 113.9 L220.1 119.1 L214.9 116.6 L213.0 122.0 L211.1 116.6 L205.9 119.1 L208.4 113.9 L203.0 112.0 L208.4 110.1 L205.9 104.9 L211.1 107.4Z" fill="#c8c8c0" stroke="#6a6a64" stroke-width=".5" filter="url(#glow)"/>
+    <circle cx="213" cy="112" r="3" fill="#7a7a74"/>
+    <rect x="239" y="100" width="34" height="24" fill="#e8dec4"/>
+    <circle cx="246" cy="107" r="3.4" fill="none" stroke="#3a3a5a" stroke-width=".9"/>
+    <path d="M253 105 L268 105 M253 109 L264 109 M243 115 L269 115 M243 119 L262 119" stroke="#5a4c3c" stroke-width=".8"/>
+  </g>
+  <!-- the handcuffs -->
+  <ellipse cx="180" cy="156" rx="52" ry="14" fill="#000" opacity=".45" filter="url(#soft)"/>
+  <use href="#cuff" transform="translate(146 148) rotate(4)"/>
+  <use href="#cuff" transform="translate(214 154) rotate(172)"/>
+  <g fill="none"><use href="#links" stroke="#1c1e22" stroke-width="3.6"/><use href="#links" stroke="#b8bec4" stroke-width="1.6"/></g>
+  <!-- the whistle on its chain -->
+  <g transform="translate(268 154) scale(1.18) translate(-268 -154)">
+    <path d="M252 157 C238 168 248 172 262 168 C276 164 286 164 292 158" fill="none" stroke="#000" stroke-opacity=".4" stroke-width="3" filter="url(#soft)"/>
+    <path d="M250 152 C236 162 244 170 260 166 C274 162 284 162 290 156" fill="none" stroke="#c8c4b8" stroke-width="1.6" stroke-dasharray="2 1.2"/>
+    <path d="M290 156 L294 152 M288 152 L296 155" stroke="#c8c4b8" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="251" cy="148.5" r="3.2" fill="none" stroke="#c8c4b8" stroke-width="1.4"/>
+    <rect x="254" y="144" width="26" height="9" rx="4.5" fill="url(#nickel)"/>
+    <path d="M279 145 L294 147 L294 150.5 L279 152Z" fill="url(#nickel)"/>
+    <rect x="273" y="144.4" width="4" height="2.2" fill="#1a1a1a"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

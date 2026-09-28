@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
+  <title>Framer</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="78%">
+      <stop offset="0" stop-color="#5c2a1c"/>
+      <stop offset="1" stop-color="#0b0403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="72%">
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".8"/>
+    </radialGradient>
+    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="200" height="262" fill="url(#bg)"/>
+  <g transform="rotate(7 150 70)">
+    <rect x="120" y="28" width="60" height="80" rx="2" fill="#d9c59a" opacity=".92"/>
+    <circle cx="150" cy="58" r="11" fill="#3a2a1a"/>
+    <path d="M130 98 C132 82 140 76 150 76 C160 76 168 82 170 98Z" fill="#3a2a1a"/>
+    <path d="M133 44 L167 94 M167 44 L133 94" stroke="#b3221b" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g fill="#ff8a5a" opacity=".62" filter="url(#halo)">
+    <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
+    <path d="M100 56 C64 56 54 92 57 118 C59 140 48 156 30 172 C60 168 80 172 100 176 C120 172 140 168 170 172 C152 156 141 140 143 118 C146 92 136 56 100 56 Z"/>
+    <path d="M138 196 L166 124 L177 128 L152 204Z"/>
+    <path d="M165 126 L169 106 L176 108 L174 128Z"/>
+  </g>
+  <g fill="#0b0a0f">
+    <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
+    <path d="M100 56 C64 56 54 92 57 118 C59 140 48 156 30 172 C60 168 80 172 100 176 C120 172 140 168 170 172 C152 156 141 140 143 118 C146 92 136 56 100 56 Z"/>
+    <path d="M138 196 L166 124 L177 128 L152 204Z"/>
+    <path d="M165 126 L169 106 L176 108 L174 128Z"/>
+  </g>
+  <ellipse cx="100" cy="116" rx="19" ry="25" fill="#000"/>
+  <ellipse cx="92" cy="114" rx="3" ry="1.8" fill="#ff7a4a" filter="url(#glow)"/>
+  <ellipse cx="108" cy="114" rx="3" ry="1.8" fill="#ff7a4a" filter="url(#glow)"/>
+  <rect width="200" height="262" fill="url(#vig)"/>
+</svg>

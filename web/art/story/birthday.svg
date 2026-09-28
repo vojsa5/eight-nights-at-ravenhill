@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>The birthday dinner: sixteen guests down the long table, Lord Edmund at its head</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="80%">
+      <stop offset="0" stop-color="#6a4420"/>
+      <stop offset="1" stop-color="#0a0604"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b8a888"/>
+      <stop offset="1" stop-color="#efe4c8"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="1.6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <circle cx="180" cy="70" r="60" fill="#ffc46b" opacity=".2" filter="url(#soft)"/>
+  <!-- chandelier -->
+  <g fill="#ffe0a0" filter="url(#glow)">
+    <circle cx="160" cy="26" r="1.6"/><circle cx="170" cy="29" r="1.6"/><circle cx="180" cy="30" r="1.8"/>
+    <circle cx="190" cy="29" r="1.6"/><circle cx="200" cy="26" r="1.6"/>
+  </g>
+  <path d="M160 26 Q180 36 200 26" fill="none" stroke="#8a6a3a" stroke-width="1"/>
+  <line x1="180" y1="0" x2="180" y2="30" stroke="#8a6a3a" stroke-width="1"/>
+  <!-- Lord Edmund at the head of the table, glass raised -->
+  <path d="M170 94 C170 82 190 82 190 94 L192 106 L168 106Z" fill="#0a0705"/>
+  <circle cx="180" cy="76" r="7" fill="#0a0705"/>
+  <path d="M189 92 L198 76" stroke="#0a0705" stroke-width="4" stroke-linecap="round"/>
+  <path d="M195 70 L201 70 L199 76 L197 76Z" fill="#e8b860" filter="url(#glow)"/>
+  <!-- the table in perspective -->
+  <path d="M160 104 L200 104 L310 200 L50 200Z" fill="url(#cloth)"/>
+  <!-- candles down the middle -->
+  <g fill="#f4ead0">
+    <rect x="178.6" y="106" width="2.8" height="7"/><rect x="178.2" y="120" width="3.6" height="9"/>
+    <rect x="177.5" y="140" width="5" height="12"/><rect x="176.5" y="168" width="7" height="16"/>
+  </g>
+  <g fill="#ffcf70" filter="url(#glow)">
+    <ellipse cx="180" cy="104.5" rx="1" ry="1.8"/><ellipse cx="180" cy="118" rx="1.3" ry="2.2"/>
+    <ellipse cx="180" cy="137.5" rx="1.7" ry="2.8"/><ellipse cx="180" cy="164.5" rx="2.4" ry="4"/>
+  </g>
+  <!-- guests, eight a side, larger as they come nearer -->
+  <g fill="#0b0806">
+    <g transform="translate(160 108) scale(.28)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(154 114) scale(.36)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(146 122) scale(.46)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(136 132) scale(.58)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(123 145) scale(.74)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(106 162) scale(.94)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(84 184) scale(1.2)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(56 214) scale(1.55)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(200 108) scale(-.28 .28)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(206 114) scale(-.36 .36)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(214 122) scale(-.46 .46)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(224 132) scale(-.58 .58)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(237 145) scale(-.74 .74)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(254 162) scale(-.94 .94)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(276 184) scale(-1.2 1.2)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+    <g transform="translate(304 214) scale(-1.55 1.55)"><circle cx="-18" cy="-30" r="11"/><path d="M-36 0 C-36 -16 0 -16 0 0Z"/></g>
+  </g>
+  <!-- glasses catching the light -->
+  <g fill="#9e1b1b" opacity=".85">
+    <rect x="163" y="111" width="1.6" height="2"/><rect x="195.4" y="111" width="1.6" height="2"/>
+    <rect x="150" y="126" width="2.4" height="3"/><rect x="207.6" y="126" width="2.4" height="3"/>
+    <rect x="131" y="148" width="3.4" height="4"/><rect x="225.6" y="148" width="3.4" height="4"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

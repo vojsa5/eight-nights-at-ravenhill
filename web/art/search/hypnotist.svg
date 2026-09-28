@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A silver pocket watch on a long chain, lying across a playbill for a mesmerist's show</title>
+  <defs>
+    <radialGradient id="bg" cx="55%" cy="45%" r="80%">
+      <stop offset="0" stop-color="#1e2432"/>
+      <stop offset="1" stop-color="#040508"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <rect y="120" width="360" height="80" fill="#15130f"/>
+  <ellipse cx="180" cy="150" rx="160" ry="46" fill="url(#pool)"/>
+  <g transform="rotate(-6 150 140)">
+    <rect x="96" y="96" width="112" height="74" fill="#e4d6b4"/>
+    <rect x="102" y="102" width="100" height="62" fill="none" stroke="#8a2a2a" stroke-width="2"/>
+    <polyline points="156.0,128.0 156.2,128.4 156.4,128.9 156.6,129.5 156.6,130.1 156.6,130.7 156.6,131.3 156.4,132.0 156.1,132.6 155.8,133.2 155.4,133.8 154.8,134.4 154.2,134.9 153.6,135.4 152.8,135.8 152.0,136.1 151.1,136.3 150.2,136.4 149.2,136.5 148.3,136.4 147.3,136.2 146.3,135.9 145.3,135.4 144.4,134.9 143.5,134.2 142.6,133.4 141.9,132.5 141.2,131.5 140.6,130.4 140.2,129.2 139.8,128.0 139.6,126.7 139.6,125.4 139.7,124.0 139.9,122.6 140.3,121.2 140.8,119.9 141.5,118.6 142.4,117.3 143.4,116.2 144.6,115.1 145.8,114.1 147.2,113.3 148.7,112.6 150.3,112.1 152.0,111.7 153.7,111.6 155.5,111.6 157.3,111.8 159.1,112.2 160.8,112.7 162.5,113.5 164.2,114.5 165.7,115.7 167.1,117.0 168.4,118.5 169.6,120.2 170.6,122.0 171.4,123.9 172.0,125.9 172.3,128.0 172.5,130.2 172.4,132.3 172.1,134.5 171.6,136.7 170.8,138.8 169.8,140.9 168.5,142.9 167.1,144.7 165.4,146.4 163.5,148.0 161.5,149.3 159.3,150.4 157.0,151.4 154.5,152.0 152.0,152.4 149.4,152.6 146.8,152.4 144.2,152.0 141.6,151.3 139.1,150.3 136.7,149.1 134.4,147.6 132.2,145.8 130.3,143.8 128.5,141.6 127.0,139.2 125.7,136.6 124.7,133.8 123.9,131.0 123.5,128.0 123.4,125.0 123.6,122.0 124.1,118.9 125.0,116.0 126.1,113.1 127.6,110.3 129.4,107.7 131.5,105.2 133.8,103.0 136.4,101.0 139.2,99.2 142.2,97.8 145.3,96.7 148.6,95.9 152.0,95.4 155.4,95.3 158.9,95.6 162.3,96.2 165.7,97.2 169.0,98.6 172.1,100.3 175.1,102.4 177.8,104.7 180.3,107.4 182.6,110.3 184.5,113.5 186.1,116.9 187.3,120.5 188.2,124.2 188.7,128.0 188.7,131.9 188.4,135.7 187.7,139.6 186.5,143.4 184.9,147.0 183.0,150.5 180.7,153.8 178.0,156.9 175.0,159.7 171.7,162.1 168.1,164.2" fill="none" stroke="#6a2a8a" stroke-width="1.4" stroke-opacity="0.8" stroke-linecap="round" filter="url(#glow)"/>
+    <rect x="112" y="150" width="80" height="4" fill="#8a2a2a"/>
+    <rect x="122" y="157" width="60" height="3" fill="#8a6a4a"/>
+  </g>
+  <path d="M60 108 C120 160 180 170 232 136" fill="none" stroke="#d8b46a" stroke-width="2" stroke-dasharray="3 1.5"/>
+  <circle cx="250" cy="128" r="32" fill="#ffe2a0" opacity=".25" filter="url(#blur8)"/>
+  <circle cx="250" cy="103" r="3.5" fill="none" stroke="#e6c783" stroke-width="2"/>
+  <circle cx="250" cy="128" r="22" fill="#d8b46a" stroke="#f4dca0" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="250" cy="128" r="19" fill="#fff6e0"/>
+  <line x1="269.0" y1="128.0" x2="266.0" y2="128.0" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="266.5" y1="137.5" x2="263.9" y2="136.0" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="259.5" y1="144.5" x2="258.0" y2="141.9" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="250.0" y1="147.0" x2="250.0" y2="144.0" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="240.5" y1="144.5" x2="242.0" y2="141.9" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="233.5" y1="137.5" x2="236.1" y2="136.0" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="231.0" y1="128.0" x2="234.0" y2="128.0" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="233.5" y1="118.5" x2="236.1" y2="120.0" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="240.5" y1="111.5" x2="242.0" y2="114.1" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="250.0" y1="109.0" x2="250.0" y2="112.0" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="259.5" y1="111.5" x2="258.0" y2="114.1" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="266.5" y1="118.5" x2="263.9" y2="120.0" stroke="#5a4420" stroke-width="1.2"/>
+  <line x1="250" y1="128" x2="250" y2="113" stroke="#2a1c0c" stroke-width="1.6"/>
+  <line x1="250" y1="128" x2="264" y2="130" stroke="#2a1c0c" stroke-width="1.6"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

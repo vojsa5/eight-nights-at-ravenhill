@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>Blackout</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#1c2436"/>
+      <stop offset="1" stop-color="#030407"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <rect x="220" y="24" width="84" height="130" rx="40" fill="#2a3a5a" opacity=".6"/>
+  <path d="M262 28 L262 154 M222 90 L302 90" stroke="#0b0d14" stroke-width="5"/>
+  <path d="M280 36 L266 70 L278 70 L258 112 L286 64 L272 64 L288 36Z" fill="#e8f0ff" filter="url(#glow)"/>
+  <path d="M300 154 L236 200 L360 200 L360 170Z" fill="#9fb8e0" opacity=".08"/>
+  <rect x="96" y="112" width="14" height="52" rx="2" fill="#d8ccb4"/>
+  <line x1="103" y1="112" x2="103" y2="104" stroke="#2a2018" stroke-width="2"/>
+  <circle cx="103" cy="103" r="2" fill="#ff5a2a" filter="url(#glow)"/>
+  <path d="M103 100 C96 86 112 78 104 64 C98 54 110 46 106 34" fill="none" stroke="#c8cde0" stroke-opacity=".5" stroke-width="3" filter="url(#glow)"/>
+  <path d="M70 164 L136 164 L130 176 L76 176Z" fill="#2a2018"/>
+  <rect x="0" y="176" width="360" height="24" fill="#07080c"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

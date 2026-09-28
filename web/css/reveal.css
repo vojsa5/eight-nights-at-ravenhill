@@ -1,0 +1,226 @@
+/* Cards over the board: the reveal after a clear or arrest, clues, the round's opening card, the
+   prologue and the closing card. They are paper documents with dark ink, like the case folder. The films
+   (the opening story, the story after each decision and the ending) play on a dark screen. */
+.modal { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; padding: 16px;
+  background: rgba(5,4,8,.78); }
+.modal.open { display: flex; }
+.modal > * { --ink: var(--paper-ink); --muted: var(--paper-muted); --line: var(--paper-line);
+  --save: #2e7d46; --elim: #b23a2a; --good: #2f7a5f; --bad: #a3322a; color: var(--paper-ink); }
+.paper { background: repeating-linear-gradient(transparent 0 25px, rgba(90,110,160,.1) 25px 26px), var(--paper);
+  box-shadow: 0 30px 80px rgba(0,0,0,.75); }
+.modal .kicker { color: var(--paper-muted); }
+.modal .btn { color: var(--paper-ink); border-color: var(--paper-line); background: rgba(255,255,255,.4); }
+.modal .btn.primary { background: linear-gradient(#d8b46a, #a8843e); color: #1b140a; border-color: #b08a44; }
+
+/* reveal and clue: the photo clipped to a case sheet */
+.reveal { display: grid; grid-template-columns: 300px 360px; max-width: 100%; position: relative; animation: rise .45s ease-out both; }
+.reveal-art { position: relative; margin: 22px 0 22px 22px; padding: 10px 10px 34px; background: #f4eddc; transform: rotate(-2deg);
+  box-shadow: 0 6px 16px rgba(0,0,0,.4); align-self: start; }
+.reveal-art::before { content: ""; position: absolute; top: -14px; left: 14px; width: 20px; height: 44px; border: 3px solid #a8a8a8;
+  border-radius: 10px; border-bottom-color: transparent; z-index: 2; }
+.reveal-art .frame-photo { position: relative; aspect-ratio: 200 / 262; overflow: hidden; perspective: 900px; background: #111; }
+.reveal-art .frame-photo::after { content: ""; position: absolute; inset: 0; background: #fff6dc; pointer-events: none;
+  animation: flash .9s ease-out both; }  /* the flash of the flip, as opacity: animating a filter redraws the picture every frame */
+.reveal-art .art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: flip .9s cubic-bezier(.2,.7,.2,1) both; }
+.reveal-art .stamp { font-size: 22px; padding: 2px 10px; border-width: 3px; animation: thump .35s .75s cubic-bezier(.3,1.6,.5,1) both; }
+.stamp.innocent { color: var(--ink-green); border-color: var(--ink-green); }
+.stamp.guilty { color: var(--ink-red); border-color: var(--ink-red); }
+.reveal-body { padding: 30px 28px 24px 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+.reveal-body h2 { margin: 0; font: 30px var(--typed); letter-spacing: .04em; line-height: 1.1; }
+.team { align-self: flex-start; font: 12px var(--typed); letter-spacing: .12em; text-transform: uppercase; padding: 2px 10px; border: 2px solid; }
+.team.good { color: var(--ink-green); }
+.team.bad { color: var(--ink-red); }
+.flavor { font-style: italic; color: var(--paper-muted); font-size: 17px; margin: 4px 0; }
+.outcome { font-size: 18px; }
+.outcome b { font: 22px var(--typed); margin-right: 6px; }
+.reveal .btn { align-self: flex-start; margin-top: 8px; }
+.reveal .clue-icon { position: absolute; right: 10px; bottom: 30px; font-size: 44px; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+.facts { margin: 0; padding-left: 18px; font-size: 17px; }
+.facts li { margin: 4px 0; }
+
+/* the round's opening card: the scene above a typed sheet */
+.intro { position: relative; width: 620px; max-width: 100%; max-height: calc(100vh - 32px); overflow: auto; animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
+.intro-art { position: relative; aspect-ratio: 360 / 200; background: #000; border-bottom: 3px solid #cfb482; }
+.intro-art img { width: 100%; height: 100%; display: block; }
+.intro-art::after { content: ""; position: absolute; inset: 0; background: #000; pointer-events: none; animation: dawn 1.4s ease-out both; }
+.intro-medal { position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%); width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center; font: 26px/1 system-ui, sans-serif; background: radial-gradient(circle at 40% 35%, #f4dca0, #a8843e 70%);
+  border: 2px solid #5a4420; box-shadow: 0 4px 14px rgba(0,0,0,.5); z-index: 1; }
+.intro-body { padding: 36px 34px 26px; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.intro-body h2 { margin: 0; font: 34px var(--typed); letter-spacing: .08em; text-transform: uppercase; }
+.intro-body .flavor { font-size: 18px; margin: 0; max-width: 480px; }
+.intro-body .meaning { margin: 0; max-width: 500px; font-size: 16px; }
+.intro-body .ev-steps { width: 100%; max-width: 500px; margin: 0; text-align: left; }  /* the event's group and what it does */
+.intro-body .ev-steps dd { font-size: 16px; }
+/* last night's traces: a typed slip under the event */
+.traces { width: 100%; max-width: 500px; margin: 2px 0 0; padding: 10px 14px; text-align: left; background: rgba(90,70,40,.07);
+  border-left: 3px solid #a8843e; }
+.traces-head { font: 12px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--paper-muted); margin-bottom: 4px; }
+.traces ul { margin: 0; padding: 0; list-style: none; font-size: 15px; line-height: 1.4; }
+.traces li { display: flex; gap: 8px; margin: 3px 0; }
+.traces li.quiet { font-style: italic; color: var(--paper-muted); }
+.traces.many { max-width: 560px; }
+.traces.many ul { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 14px; font-size: 14px; line-height: 1.3; }  /* many traces: two columns */
+.trace-icon { flex: none; width: 20px; text-align: center; }
+.traces p { margin: 0; font-size: 15px; line-height: 1.4; }
+.intro-body .recap { margin: 4px 0 0; padding-top: 10px; border-top: 1px dashed var(--paper-line); color: var(--paper-muted); font-size: 15px; max-width: 500px; }
+.intro .btn { margin-top: 6px; font-size: 14px; padding: 8px 20px; }
+
+/* the prologue: a telegram, then the briefing */
+.prologue { width: 680px; max-width: 100%; max-height: calc(100vh - 32px); overflow: auto; padding: 34px 40px 26px; animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
+.prologue h2 { margin: 0 0 4px; font: 32px var(--typed); letter-spacing: .08em; text-transform: uppercase; text-align: center; }
+.prologue .kicker { text-align: center; }
+.telegram { margin: 16px auto 18px; max-width: 520px; padding: 14px 18px; background: #f7eecf; border: 1px solid #cdb88c; transform: rotate(-.8deg);
+  box-shadow: 0 3px 8px rgba(0,0,0,.25); font: 15px/1.6 var(--typed); letter-spacing: .03em; }
+.telegram .head { display: flex; justify-content: space-between; font-size: 11px; color: var(--paper-muted); border-bottom: 1px solid #cdb88c; margin-bottom: 8px; padding-bottom: 4px; }
+.prologue p { margin: 0 0 10px; font-size: 17px; }
+.prologue ol { margin: 6px 0 12px; padding-left: 22px; font-size: 16px; }
+.prologue li { margin: 5px 0; }
+.prologue .sig { font: 26px var(--hand); text-align: right; margin: 6px 0 0; }
+.prologue .nav, .film .nav, .closing .nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 18px; }
+.prologue .dots i, .film .dots i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--paper-muted); margin: 0 3px; }
+.prologue .dots i.on { background: var(--paper-muted); }
+
+/* the conspiracy's crimes: the prologue's dossier, and the charge on a reveal card */
+.dossier { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 10px 18px; margin: 12px 0 14px; }
+.suspect { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 1.35; }
+.suspect .art { width: 42px; height: 55px; flex: none; object-fit: cover; border: 3px solid #f4eddc; box-shadow: 0 1px 3px rgba(0,0,0,.35); transform: rotate(-2deg); }
+.suspect b, .charge b { display: block; font: 13px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-red); margin-bottom: 2px; }
+.charge { margin: 0; font-size: 15px; line-height: 1.4; border-left: 3px solid var(--ink-red); padding-left: 10px; }
+.charge.truth { border-left-color: var(--ink-green); }
+.charge.truth b { color: var(--ink-green); }
+.charge.sealed { border-left-color: var(--paper-muted); }
+.charge.sealed b { color: var(--paper-muted); }
+
+/* the films: one scene at a time, the camera slowly moving in, the caption underneath */
+.film { width: min(920px, 100%, calc((100vh - 240px) * 1.8)); max-height: calc(100vh - 32px); overflow: auto; padding: 0 0 18px;
+  background: #0c0a08; color: #e8dcc0; border: 1px solid #3a2e20; box-shadow: 0 24px 70px rgba(0,0,0,.7); }
+.film.fresh { animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
+.film-frame { position: relative; aspect-ratio: 360 / 200; overflow: hidden; background: #000; }
+.film-pan { width: 100%; height: 100%; animation: push-in var(--scene) linear both; }
+.film-pan img { width: 100%; height: 100%; display: block; animation: fade-in 1s ease-out both; }
+.film-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.12); }
+.film-bar i { display: block; height: 100%; background: #cfb482; transform-origin: 0 50%; animation: fill var(--scene) linear both; }
+.film.paused .film-pan, .film.paused .film-bar i { animation-play-state: paused; }
+.film .film-skip { position: absolute; top: 12px; right: 12px; font: 13px var(--typed); letter-spacing: .06em; color: #e8dcc0;
+  background: rgba(0,0,0,.45); border: 1px solid rgba(232,220,192,.35); border-radius: 4px; padding: 5px 12px; cursor: pointer; }
+.film .film-skip:hover { border-color: #cfb482; }
+.film .film-caption { margin: 18px 30px 6px; min-height: 4.5em; font-size: 19px; line-height: 1.5; font-style: italic; animation: fade-in 1.2s .4s ease-out both; }
+.film .nav { margin: 8px 30px 0; }
+.film .btn { color: #e8dcc0; border-color: #5a4a34; background: rgba(255,255,255,.04); }
+.film .btn.primary { color: #1b140a; background: linear-gradient(#d8b46a, #a8843e); border-color: #b08a44; }
+.film .dots i { border-color: #8a7a60; }
+.film .dots i.on { background: #cfb482; border-color: #cfb482; }
+.film-caption .film-title { display: block; margin-bottom: 4px; font: 14px var(--typed); font-style: normal; letter-spacing: .1em;
+  text-transform: uppercase; color: #cfb482; }  /* the tip's heading in the Advice film */
+/* the guest's own photograph pinned over the scene of the decision, stamped */
+.film-photo { position: absolute; left: 6%; top: 9%; width: 16%; padding: 5px 5px 18px; background: #f4eddc; transform: rotate(-4deg);
+  box-shadow: 0 8px 20px rgba(0,0,0,.65); animation: drop-in .7s .3s cubic-bezier(.2,.7,.2,1) both; }
+.film-photo.right { left: auto; right: 6%; top: 15%; transform: rotate(4deg); animation-name: drop-in-right; }  /* below the Skip button */
+@keyframes drop-in-right { from { opacity: 0; transform: translateY(-24px) rotate(10deg); } to { opacity: 1; transform: rotate(4deg); } }
+.film-photo .art { display: block; width: 100%; aspect-ratio: 200 / 262; object-fit: cover; }
+.film-photo .stamp { font: clamp(9px, 1.7vw, 17px) var(--typed); padding: 1px 6px; border-width: 2px; animation: thump .35s 1.2s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes drop-in { from { opacity: 0; transform: translateY(-24px) rotate(-10deg); } to { opacity: 1; transform: rotate(-4deg); } }
+
+/* the closing card: every guest, by how their part in the case ended */
+.closing { width: 820px; max-width: 100%; max-height: calc(100vh - 32px); overflow: auto; padding: 30px 36px 24px; animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
+.closing h2 { margin: 0; font: 32px var(--typed); letter-spacing: .08em; text-transform: uppercase; text-align: center; }
+.closing .kicker { text-align: center; }
+.final-score { text-align: center; font: 54px/1 var(--typed); margin: 8px 0 14px; }
+.final-score span { font-size: 22px; color: var(--paper-muted); margin-left: 6px; }
+.verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px 18px; }
+.verdicts h3 { margin: 0 0 6px; font: 13px var(--typed); letter-spacing: .1em; text-transform: uppercase; border-bottom: 2px solid; padding-bottom: 3px; }
+.verdicts .bad h3 { color: var(--ink-red); }
+.verdicts .good h3 { color: var(--ink-green); }
+.verdict { display: flex; gap: 8px; align-items: center; margin: 5px 0; font-size: 15px; line-height: 1.2; }
+.verdict .art { width: 32px; height: 42px; flex: none; object-fit: cover; border: 2px solid #f4eddc; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.verdict small { display: block; font: 11px var(--typed); letter-spacing: .06em; text-transform: uppercase; }
+.verdict small.bad { color: var(--ink-red); }
+.verdict small.good { color: var(--ink-green); }
+.verdicts .none { margin: 4px 0; font-style: italic; color: var(--paper-muted); }
+.closing .nav { flex-wrap: wrap; }
+.closing .nav span { display: flex; gap: 8px; flex-wrap: wrap; }
+.closing .nav .btn { white-space: nowrap; }
+@keyframes push-in { from { transform: scale(1); } to { transform: scale(1.09); } }
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes flip { from { transform: rotateY(88deg) scale(.9); } to { transform: none; } }
+@keyframes flash { from { opacity: .85; } to { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes unfold { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes dawn { from { opacity: .8; } to { opacity: 0; } }
+@keyframes thump { from { opacity: 0; transform: translate(-50%, -50%) rotate(-16deg) scale(2.2); } to { opacity: 1; transform: translate(-50%, -50%) rotate(-16deg) scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-art .art, .reveal-art .stamp, .intro, .prologue, .film.fresh, .film-caption, .film-photo, .film-photo .stamp, .closing { animation: none; }
+  .film-pan, .film-pan img { animation: none; }
+  .reveal-art .frame-photo::after, .intro-art::after { display: none; }
+  .card, .folder-slide { transition: none; }
+}
+/* the clue a Notebook or Footprints night hands you, on the round's opening card (clues.js morningClueHtml) */
+.morning-clue { display: flex; gap: 12px; align-items: flex-start; text-align: left; margin: 4px 0 2px; padding: 10px 14px;
+  background: #fbf6ea; border-left: 3px solid var(--gold, #c9a45c); box-shadow: 0 1px 3px rgba(0,0,0,.2); max-width: 520px; }
+.morning-clue .clue-mark { font-size: 26px; line-height: 1; }
+.morning-clue .facts { margin: 6px 0 0; }
+
+/* How to play (howto.js): an exhibit pinned over each scene, below the Skip button, drawn with the board's own
+   marks (folder.css .smp-*, .signcard, .rankladder); sized to the film's frame */
+.film.howto .film-frame { container-type: inline-size; }
+.exhibit { --ink: var(--paper-ink); --muted: #574832; --line: var(--paper-line); position: absolute; right: 5%; top: 17%; z-index: 1;
+  width: clamp(150px, 34cqw, 300px); padding: 24px 12px 12px; background: linear-gradient(170deg, #f8f0de, #e8dab8); color: var(--paper-ink);
+  font-size: clamp(10px, 1.65cqw, 15px); line-height: 1.3; text-align: center; transform: rotate(2.5deg);
+  box-shadow: 0 12px 26px rgba(0,0,0,.65); animation: exhibit-in .7s .35s cubic-bezier(.2,.7,.2,1) both; }
+.exhibit::before { content: ""; position: absolute; top: 7px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff9a8a, #b3221b 55%, #5a0e0a); box-shadow: 0 2px 3px rgba(0,0,0,.5); }
+@keyframes exhibit-in { from { opacity: 0; transform: translateY(-26px) rotate(9deg); } to { opacity: 1; transform: rotate(2.5deg); } }
+.ex-label { position: absolute; top: 7px; left: 10px; font: .72em var(--typed); letter-spacing: .12em; text-transform: uppercase; color: #8a6a44; }
+.exhibit p { margin: 7px 0 0; font-style: italic; }
+.ex-guests { display: flex; justify-content: center; align-items: center; gap: 4px; }
+.ex-thumb .art { display: block; width: clamp(18px, 3.6cqw, 34px); aspect-ratio: 200 / 262; object-fit: cover; border: 2px solid #f4eddc;
+  box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.ex-guests.two { gap: 12px; }
+.ex-guests.two .art { width: clamp(30px, 6.5cqw, 60px); }
+.ex-guests.two b { font: 700 2.2em var(--typed); color: var(--ink-red); }
+.ex-list { margin: 0; padding: 0; list-style: none; text-align: left; }
+.ex-list li { margin: 4px 0; }
+.ex-list i, .ex-clue i { margin-right: 7px; font-style: normal; }
+.exhibit .signcard { margin-bottom: 5px; padding: 5px 8px; text-align: left; }
+.exhibit .signcard .si { font-size: 1.6em; }
+.exhibit .signcard b { font-size: 1.15em; }
+.exhibit .signcard span { font-size: .72em; }
+.exhibit .ex-clue { font-style: normal; }
+.ex-row { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 8px; border-radius: 3px;
+  background: linear-gradient(135deg, var(--cork), var(--cork-dark)); box-shadow: inset 0 0 10px rgba(0,0,0,.4); }
+.ex-stamps { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px 12px; padding: 4px 6px; }
+.ex-stamp { justify-self: center; padding: 2px 8px; border: 3px double; transform: rotate(-7deg); font: 700 1.15em var(--typed);
+  letter-spacing: .06em; text-transform: uppercase; -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.ex-stamp.cleared { color: var(--ink-green); }
+.ex-stamp.arrested { color: var(--ink-red); }
+.ex-stamps b { font: 700 1.3em Cinzel, Georgia, serif; color: #6a4a14; }
+.ex-search { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px 10px; }
+.ex-role { padding: 3px 6px; background: linear-gradient(#2a2420, #14100c); font: 700 1.4em/1.1 var(--hand); color: #9fd8b0; }
+.ex-role.sealed { font: 1em/1.6 var(--typed); letter-spacing: .1em; text-transform: uppercase; color: #ff9a8a; }
+.ex-search small { font: italic 1em "EB Garamond", Georgia, serif; color: var(--muted); }
+.ex-kinds { display: flex; justify-content: center; gap: 6px; }
+.ex-kinds span { display: grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 50%; font: 1.3em/1 system-ui, sans-serif;
+  background: radial-gradient(circle at 35% 30%, #fff6d8, #e6c783 60%, #a8843e); box-shadow: 0 2px 4px rgba(0,0,0,.35); }
+.ex-tabs { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.ex-tabs span { padding: 3px 12px; border: 1px solid #b89a60; border-left: 0; border-radius: 0 7px 7px 0; background: linear-gradient(90deg, #cfb482, #e4cf9e);
+  font: .9em var(--typed); letter-spacing: .1em; text-transform: uppercase; color: #3a2a14; box-shadow: 2px 2px 4px rgba(0,0,0,.25); }
+.ex-tabs span:nth-child(2) { margin-left: 8%; }
+.ex-tabs span:nth-child(3) { margin-left: 16%; }
+.ex-tabs span:nth-child(4) { margin-left: 24%; }
+.ex-tabs span:nth-child(5) { margin-left: 32%; }
+.ex-tabs span:nth-child(6) { margin-left: 40%; }
+.exhibit .rankladder { gap: 5px; margin: 0; }
+.exhibit .rankladder li { justify-content: center; padding: 0; background: none; box-shadow: none; }
+.exhibit .rankladder b { min-width: 5em; height: 2.1em; font-size: 1.05em; }
+@container (max-width: 520px) {  /* a phone's film: smaller, and clear of the Skip button */
+  .exhibit { top: 54px; right: 3%; width: 140px; padding: 8px 8px 7px; font-size: 9px; }
+  .exhibit::before, .ex-label { display: none; }
+  .ex-tabs span { padding: 1px 8px; }
+  .exhibit .signcard { padding: 3px 6px; margin-bottom: 3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exhibit { animation: none; }
+}

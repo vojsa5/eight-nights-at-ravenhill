@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A pair of garden shears on a windowsill with a snipped length of telephone wire tangled in the blades, while snow falls outside the dark window</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="80%">
+      <stop offset="0" stop-color="#1e2636"/>
+      <stop offset="1" stop-color="#040508"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e1626"/>
+      <stop offset="1" stop-color="#34466a"/>
+    </linearGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffb868" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#ffb868" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="blur"><feGaussianBlur stdDeviation="1"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the dark window and the snow -->
+  <rect x="80" y="0" width="200" height="110" fill="#0c0908"/>
+  <rect x="88" y="4" width="184" height="102" fill="url(#night)"/>
+  <g fill="#eef3fa">
+    <circle cx="100" cy="16" r="1.4"/><circle cx="122" cy="38" r="1.1"/><circle cx="140" cy="14" r="1.6"/><circle cx="160" cy="32" r="1.2"/>
+    <circle cx="108" cy="66" r="1.5"/><circle cx="132" cy="80" r="1.1"/><circle cx="154" cy="64" r="1.4"/><circle cx="166" cy="86" r="1.2"/>
+    <circle cx="202" cy="20" r="1.3"/><circle cx="224" cy="40" r="1.6"/><circle cx="246" cy="16" r="1.1"/><circle cx="262" cy="36" r="1.4"/>
+    <circle cx="196" cy="72" r="1.2"/><circle cx="218" cy="88" r="1.5"/><circle cx="240" cy="68" r="1.1"/><circle cx="258" cy="84" r="1.3"/>
+    <circle cx="116" cy="94" r="1"/><circle cx="210" cy="54" r="1"/><circle cx="150" cy="46" r="1"/><circle cx="234" cy="96" r="1"/>
+  </g>
+  <g fill="#eef3fa" opacity=".7" filter="url(#blur)">
+    <circle cx="128" cy="24" r="2.6"/><circle cx="252" cy="56" r="2.8"/><circle cx="172" cy="98" r="2.4"/><circle cx="98" cy="46" r="2.2"/>
+  </g>
+  <path d="M88 94 C110 86 140 90 180 84 C220 88 250 82 272 88 L272 106 L88 106Z" fill="#dfe6f2" opacity=".6"/>
+  <path d="M180 4 L180 106 M88 54 L272 54" stroke="#0c0908" stroke-width="5"/>
+  <!-- curtains -->
+  <path d="M40 0 L96 0 C88 36 84 80 92 134 L40 134Z" fill="#3a1016"/>
+  <path d="M320 0 L264 0 C272 36 276 80 268 134 L320 134Z" fill="#3a1016"/>
+  <path d="M60 0 C58 44 62 90 64 134 M78 0 C74 44 76 90 80 134 M300 0 C302 44 298 90 296 134 M282 0 C286 44 284 90 280 134" stroke="#1e070a" stroke-width="2" fill="none"/>
+  <!-- the deep sill in lamplight -->
+  <rect y="146" width="360" height="54" fill="#100b09"/>
+  <path d="M66 106 L294 106 L310 146 L50 146Z" fill="#5a3c22"/>
+  <rect x="50" y="146" width="260" height="9" fill="#2a1c10"/>
+  <ellipse cx="185" cy="128" rx="135" ry="32" fill="url(#pool)"/>
+  <!-- garden shears, blades open -->
+  <g stroke-linecap="round">
+    <path d="M188 128 L210 123.3" stroke="#8a8e9a" stroke-width="7"/>
+    <path d="M210 123.3 L272 110" stroke="#6a4020" stroke-width="8"/>
+    <path d="M214 120.5 L268 109" stroke="#a87038" stroke-width="1.4" opacity=".8"/>
+  </g>
+  <path d="M189 132.4 L126 144.3 L104 146 L124.8 138.5 L187 123.6Z" fill="#9aa0ae"/>
+  <path d="M189 132.4 L126 144.3 L104 146" fill="none" stroke="#dde4f0" stroke-width="1"/>
+  <g stroke-linecap="round">
+    <path d="M188 128 L210 132.4" stroke="#8a8e9a" stroke-width="7"/>
+    <path d="M210 132.4 L276 146" stroke="#7a4a24" stroke-width="8"/>
+    <path d="M214 130 L272 142" stroke="#b88048" stroke-width="1.4" opacity=".8"/>
+  </g>
+  <path d="M189 123.6 L122 111.8 L98 110 L120.7 117.6 L187 132.4Z" fill="#b4bac8"/>
+  <path d="M189 123.6 L122 111.8 L98 110" fill="none" stroke="#eef4fc" stroke-width="1.2" filter="url(#glow)"/>
+  <circle cx="188" cy="128" r="4" fill="#5a5e68" stroke="#c8ccd8" stroke-width="1.2"/>
+  <!-- the snipped telephone wire tangled in the blades -->
+  <g fill="none" stroke="#0a0908" stroke-width="2.4" stroke-linecap="round">
+    <path d="M82 184 C84 168 80 156 92 148 C104 140 118 150 124 140 C130 128 110 118 118 112 C126 106 138 124 144 132 C150 140 158 136 152 126 C148 118 158 116 168 126"/>
+    <path d="M174 130 C184 138 196 142 206 138 C216 134 210 126 222 124 C232 122 236 132 246 128"/>
+  </g>
+  <g fill="none" stroke="#6a6a72" stroke-width=".8" stroke-dasharray="1.5 2.5">
+    <path d="M92 148 C104 140 118 150 124 140 C130 128 110 118 118 112 C126 106 138 124 144 132"/>
+    <path d="M206 138 C216 134 210 126 222 124 C232 122 236 132 246 128"/>
+  </g>
+  <g stroke="#e0a860" stroke-width="1">
+    <path d="M168 126 L171 122 M168 126 L172 126 M168 126 L171 129"/>
+    <path d="M174 130 L171 127 M174 130 L170 131 M174 130 L173 134"/>
+  </g>
+  <circle cx="171" cy="128" r="2.4" fill="#ffe0a0" opacity=".85" filter="url(#glow)"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

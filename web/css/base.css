@@ -1,0 +1,72 @@
+/* Colours, fonts, the desk, the case bar and buttons. Lamp light by default, daylight with data-theme=light.
+   Paper (the case note, the folder, the cards) always uses dark ink: see --paper-* below. */
+:root {
+  --desk-1: #2a1a10; --desk-2: #140c07; --lamp: rgba(255, 214, 150, .16);
+  --cork: #8a6440; --cork-dark: #5a3f25; --frame-wood: #3a2414;
+  --ink: #ece4d4; --muted: #b0a28a; --line: #3a2c20; --gold: #c9a45c; --gold-2: #e6c783;
+  --bad: #d0493e; --good: #7fc4a4; --save: #8fd19e; --elim: #e0624f; --warn: #e6b450;
+  --soft-bad: rgba(208,73,62,.18); --soft-good: rgba(127,196,164,.16); --panel-2: #241a12;
+  --paper: #efe4c8; --paper-2: #e4d4b0; --paper-ink: #2b2118; --paper-muted: #6a5a44; --paper-line: #cdb88c;
+  --ink-red: #9e1b1b; --ink-green: #2a6a3c; --string-red: #b3221b; --string-green: #2f7a4a;
+  --typed: "Special Elite", "Courier New", monospace; --hand: Caveat, "Segoe Print", cursive;
+  /* worn rubber-stamp ink: a mask with small gaps in it (board.css .stamp, .phase) */
+  --worn: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -4.2 0 0 0 3.35'/%3E%3C/filter%3E%3Crect width='70' height='70' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-theme="light"] {
+  --desk-1: #b8905e; --desk-2: #8a643c; --lamp: rgba(255, 250, 235, .25);
+  --cork: #c49a68; --cork-dark: #a47a4a; --frame-wood: #6a4424;
+  --ink: #2b2118; --muted: #4a3a26; --line: #a88a5e; --gold: #8a6a2a; --gold-2: #6a4a14; --panel-2: #d8c4a0;
+}
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+:root[data-theme="light"] { color-scheme: light; }
+body { margin: 0; min-height: 100vh; color: var(--ink); font: 16px/1.45 "EB Garamond", Georgia, serif; overflow-x: hidden;
+  background:
+    radial-gradient(ellipse 120% 90% at 45% 40%, transparent 55%, rgba(0,0,0,.32)),
+    radial-gradient(ellipse at 38% 0%, var(--lamp), transparent 60%),
+    repeating-linear-gradient(92deg, rgba(0,0,0,.08) 0 2px, transparent 2px 9px, rgba(255,255,255,.025) 9px 10px, transparent 10px 23px),
+    linear-gradient(180deg, var(--desk-1), var(--desk-2)); }
+button { font: inherit; color: inherit; cursor: pointer; }
+
+.casebar { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; padding: 10px 24px;
+  background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.25)); border-bottom: 1px solid rgba(201,164,92,.25); }
+:root[data-theme="light"] .casebar { background: linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.15)); }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 21px Cinzel, Georgia, serif; letter-spacing: .08em; }
+.brand svg { width: 26px; height: 26px; }
+.brand span { background: linear-gradient(#f6e3b0, #c9a45c 75%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.7)); }
+:root[data-theme="light"] .brand span { background: none; color: var(--ink); filter: none; }
+.pips { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: 6px; }
+.pips svg { width: 17px; height: 17px; overflow: visible; }
+.pips .disc { fill: rgba(0,0,0,.25); stroke: var(--gold); stroke-width: 1; opacity: .55; }
+.pips .lit { fill: var(--gold); opacity: .22; }
+.pips .done .disc { opacity: .8; fill: rgba(201,164,92,.28); }
+.pips .done .lit { opacity: .85; }
+.pips .now { width: 21px; height: 21px; filter: drop-shadow(0 0 5px var(--gold-2)); }
+.pips .now .disc { stroke: var(--gold-2); opacity: 1; }
+.pips .now .lit { fill: var(--gold-2); opacity: 1; }
+.stat { color: var(--muted); font: 14px var(--typed); }
+.stat b { color: var(--ink); font: 700 17px Cinzel, Georgia, serif; }
+.spacer { flex: 1; }
+
+.btn { border: 1px solid var(--line); background: rgba(0,0,0,.25); border-radius: 4px; padding: 6px 14px;
+  font: 14px var(--typed); letter-spacing: .04em; color: var(--ink); }
+.btn:hover { border-color: var(--gold); }
+.btn.ghost { background: transparent; }
+.btn.primary { background: linear-gradient(#d8b46a, #a8843e); color: #1b140a; border-color: #d8b46a; }
+#theme { padding: 5px 10px; line-height: 0; }
+
+/* the desk: the board, and the case folder at the right edge */
+.desk { display: flex; min-height: calc(100vh - 56px); overflow-x: clip; }  /* the closed folder waits past the right edge;
+   clipping it keeps the page from growing, which would repaint the whole desk on every open and close */
+.board-wrap { position: relative; flex: 1; min-width: 0; display: flex; justify-content: center; align-items: flex-start; padding: 18px 64px 28px 24px; }
+/* things left on the desk either side of the board; they are put away while the folder is open */
+.props { position: absolute; inset: 0; overflow: hidden; pointer-events: none; transition: opacity .3s; }
+.desk.folder-open .props { opacity: 0; }
+.prop { position: absolute; display: block; }
+.prop.ring { left: 64px; top: 9%; width: 118px; aspect-ratio: 1; border-radius: 50%; border: 6px solid rgba(20,8,2,.3);
+  box-shadow: 0 0 0 1px rgba(20,8,2,.1), inset 0 0 4px 1px rgba(20,8,2,.25);
+  -webkit-mask: conic-gradient(#000 0 250deg, rgba(0,0,0,.3) 290deg, #000 340deg); mask: conic-gradient(#000 0 250deg, rgba(0,0,0,.3) 290deg, #000 340deg); }
+.prop.glass { left: 26px; bottom: 8%; width: clamp(190px, 16vw, 250px); transform: rotate(-26deg); }
+.prop.watch { right: 92px; top: 7%; width: clamp(120px, 10vw, 160px); transform: rotate(14deg); }
+.prop.letter { right: 84px; bottom: 9%; width: clamp(170px, 14vw, 220px); transform: rotate(-9deg); }

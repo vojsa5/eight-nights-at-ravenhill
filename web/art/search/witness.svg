@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A page torn from a diary, hidden in the toe of a shoe</title>
+  <defs>
+    <radialGradient id="bg" cx="55%" cy="45%" r="80%">
+      <stop offset="0" stop-color="#2a2218"/>
+      <stop offset="1" stop-color="#050403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <rect y="124" width="360" height="76" fill="#15120d"/>
+  <ellipse cx="180" cy="160" rx="150" ry="40" fill="url(#pool)"/>
+  <path d="M96 150 C96 134 120 128 150 128 L196 126 C214 126 226 132 232 146 C240 150 262 152 266 162 C268 170 262 174 250 174 L108 174 C98 174 94 166 96 150 Z" fill="#3a2414" stroke="#6a4424" stroke-width="2"/>
+  <path d="M150 128 C152 140 158 146 170 148 L196 148" fill="none" stroke="#6a4424" stroke-width="2"/>
+  <circle cx="158" cy="140" r="1.6" fill="#8a6a44"/>
+  <circle cx="165" cy="140" r="1.6" fill="#8a6a44"/>
+  <circle cx="172" cy="140" r="1.6" fill="#8a6a44"/>
+  <circle cx="179" cy="140" r="1.6" fill="#8a6a44"/>
+  <circle cx="186" cy="140" r="1.6" fill="#8a6a44"/>
+  <circle cx="193" cy="140" r="1.6" fill="#8a6a44"/>
+  <g transform="rotate(-18 190 104)">
+    <path d="M160 74 L222 70 L224 132 L214 128 L208 134 L198 128 L188 134 L178 128 L168 134 L162 130 Z" fill="#e8dcc0" filter="url(#glow)"/>
+    <path d="M168 84 C182 82 196 86 214 83" fill="none" stroke="#3a3a4a" stroke-width="1.3"/>
+    <path d="M168 93 C182 91 196 95 211 92" fill="none" stroke="#3a3a4a" stroke-width="1.3"/>
+    <path d="M168 102 C182 100 196 104 214 101" fill="none" stroke="#3a3a4a" stroke-width="1.3"/>
+    <path d="M168 111 C182 109 196 113 211 110" fill="none" stroke="#3a3a4a" stroke-width="1.3"/>
+    <path d="M168 120 C182 118 196 122 214 119" fill="none" stroke="#3a3a4a" stroke-width="1.3"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

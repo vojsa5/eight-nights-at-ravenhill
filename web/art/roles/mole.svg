@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
+  <title>Mole</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="78%">
+      <stop offset="0" stop-color="#3d3858"/>
+      <stop offset="1" stop-color="#07060c"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="72%">
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".8"/>
+    </radialGradient>
+    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="200" height="262" fill="url(#bg)"/>
+  <g fill="#cbb6ff" opacity=".62" filter="url(#halo)">
+    <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
+    <path d="M100 56 C64 56 54 92 57 118 C59 140 48 156 30 172 C60 168 80 172 100 176 C120 172 140 168 170 172 C152 156 141 140 143 118 C146 92 136 56 100 56 Z"/>
+    <path d="M134 176 C138 160 150 150 160 152 L174 146 L168 157 C176 163 177 175 171 183 L186 198 L166 191 C156 195 143 191 134 176Z"/>
+  </g>
+  <g fill="#0b0a0f">
+    <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
+    <path d="M100 56 C64 56 54 92 57 118 C59 140 48 156 30 172 C60 168 80 172 100 176 C120 172 140 168 170 172 C152 156 141 140 143 118 C146 92 136 56 100 56 Z"/>
+    <path d="M134 176 C138 160 150 150 160 152 L174 146 L168 157 C176 163 177 175 171 183 L186 198 L166 191 C156 195 143 191 134 176Z"/>
+  </g>
+  <ellipse cx="100" cy="116" rx="19" ry="25" fill="#000"/>
+  <path d="M79 108 C86 99 96 103 100 108 C104 103 114 99 121 108 C119 119 108 121 100 115 C92 121 81 119 79 108Z" fill="#2e2940" stroke="#cbb6ff" stroke-opacity=".8"/>
+  <ellipse cx="90" cy="109" rx="4" ry="2.4" fill="#efe6ff" filter="url(#glow)"/>
+  <ellipse cx="110" cy="109" rx="4" ry="2.4" fill="#efe6ff" filter="url(#glow)"/>
+  <circle cx="164" cy="158" r="1.8" fill="#ffd98a" filter="url(#glow)"/>
+  <path d="M44 262 L60 206 L64 207 L54 262Z" fill="#dfe4f0" opacity=".55" filter="url(#glow)"/>
+  <rect width="200" height="262" fill="url(#vig)"/>
+</svg>

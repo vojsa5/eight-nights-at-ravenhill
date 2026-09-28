@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A hollowed-out Bible full of banknotes, and a list of names with a sum pencilled beside each</title>
+  <defs>
+    <radialGradient id="bg" cx="55%" cy="45%" r="80%">
+      <stop offset="0" stop-color="#1e2432"/>
+      <stop offset="1" stop-color="#040508"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <rect y="120" width="360" height="80" fill="#15130f"/>
+  <ellipse cx="180" cy="150" rx="160" ry="46" fill="url(#pool)"/>
+  <rect x="70" y="110" width="150" height="54" rx="3" fill="#2a1a12" stroke="#5a3a22" stroke-width="2"/>
+  <rect x="80" y="116" width="130" height="42" fill="#e8dcc0"/>
+  <rect x="96" y="122" width="98" height="30" fill="#1a1008"/>
+  <rect x="100" y="124" width="60" height="22" rx="1" fill="#d4e6b8" stroke="#5a7a40" stroke-width="1" transform="rotate(-8 130 136)"/>
+  <rect x="106" y="127" width="60" height="22" rx="1" fill="#d4e6b8" stroke="#5a7a40" stroke-width="1" transform="rotate(-3 136 136)"/>
+  <rect x="112" y="124" width="60" height="22" rx="1" fill="#d4e6b8" stroke="#5a7a40" stroke-width="1" transform="rotate(2 142 136)"/>
+  <rect x="118" y="127" width="60" height="22" rx="1" fill="#d4e6b8" stroke="#5a7a40" stroke-width="1" transform="rotate(7 148 136)"/>
+  <path d="M142 116 L144 110 L146 116" fill="#8a1a1a"/>
+  <g transform="rotate(5 286 130)">
+    <rect x="244" y="96" width="84" height="80" fill="#efe6d2"/>
+    <line x1="252" y1="108" x2="298" y2="108" stroke="#4a4038" stroke-width="1.4"/>
+    <line x1="252" y1="117" x2="291" y2="117" stroke="#4a4038" stroke-width="1.4"/>
+    <line x1="252" y1="126" x2="297" y2="126" stroke="#4a4038" stroke-width="1.4"/>
+    <line x1="252" y1="135" x2="290" y2="135" stroke="#4a4038" stroke-width="1.4"/>
+    <line x1="252" y1="144" x2="296" y2="144" stroke="#4a4038" stroke-width="1.4"/>
+    <line x1="252" y1="153" x2="289" y2="153" stroke="#4a4038" stroke-width="1.4"/>
+    <line x1="252" y1="162" x2="295" y2="162" stroke="#4a4038" stroke-width="1.4"/>
+    <rect x="304" y="105" width="16" height="3" fill="#6a2a2a"/>
+    <rect x="304" y="114" width="16" height="3" fill="#6a2a2a"/>
+    <rect x="304" y="123" width="16" height="3" fill="#6a2a2a"/>
+    <rect x="304" y="132" width="16" height="3" fill="#6a2a2a"/>
+    <rect x="304" y="141" width="16" height="3" fill="#6a2a2a"/>
+    <rect x="304" y="150" width="16" height="3" fill="#6a2a2a"/>
+    <rect x="304" y="159" width="16" height="3" fill="#6a2a2a"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

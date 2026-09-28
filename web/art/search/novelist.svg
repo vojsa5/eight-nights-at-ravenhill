@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A writing desk under a lamp: a typewriter with a half-typed sheet, a tall stack of manuscript, a fountain pen and ink bottle, and crumpled pages on the floor</title>
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="35%" r="85%">
+      <stop offset="0" stop-color="#42301c"/>
+      <stop offset="1" stop-color="#050403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="52%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc870" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc870" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8782a"/>
+      <stop offset="1" stop-color="#ffc060"/>
+    </linearGradient>
+    <linearGradient id="enamel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2622"/>
+      <stop offset="1" stop-color="#0e0d0c"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <g id="ball">
+      <path d="M-8 -2 L-5 -7 L1 -8 L6 -5 L9 0 L6 6 L0 8 L-6 6 L-9 2Z" fill="#dcd0b2"/>
+      <path d="M0 -1 L9 0 L6 6 L0 8 L-6 6 L-2 3Z" fill="#a89878"/>
+      <path d="M-5 -7 L0 -1 L-8 -2 M1 -8 L0 -1 L6 -5 M0 -1 L-2 3 L-9 2" fill="none" stroke="#8a7a5a" stroke-width=".6"/>
+    </g>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- floor -->
+  <rect x="0" y="164" width="360" height="36" fill="#120a06"/>
+  <ellipse cx="180" cy="176" rx="110" ry="15" fill="url(#pool)"/>
+  <!-- desk -->
+  <rect x="0" y="116" width="360" height="26" fill="#24170c"/>
+  <rect x="0" y="142" width="360" height="7" fill="#3a2414"/>
+  <path d="M0 142.5 L360 142.5" stroke="#6a4424" stroke-width="1"/>
+  <rect x="40" y="149" width="280" height="8" fill="#1a1008"/>
+  <rect x="40" y="149" width="10" height="51" fill="#1a1008"/>
+  <rect x="310" y="149" width="10" height="51" fill="#1a1008"/>
+  <ellipse cx="178" cy="130" rx="150" ry="30" fill="url(#pool)"/>
+  <!-- the lamp -->
+  <circle cx="76" cy="60" r="36" fill="#ffb050" opacity=".22" filter="url(#soft)"/>
+  <rect x="74" y="64" width="4" height="62" fill="#8a6a30"/>
+  <ellipse cx="76" cy="127" rx="14" ry="3.5" fill="#5a4222"/>
+  <path d="M62 36 L90 36 L100 64 L52 64Z" fill="url(#shade)" filter="url(#glow)"/>
+  <ellipse cx="76" cy="64" rx="24" ry="2.4" fill="#fff0c0" filter="url(#glow)"/>
+  <!-- the typewriter -->
+  <ellipse cx="156" cy="134" rx="74" ry="6" fill="#000" opacity=".55" filter="url(#soft)"/>
+  <rect x="130" y="40" width="52" height="54" fill="#eee4cc"/>
+  <path d="M136 48 L176 48 M136 53 L174 53 M136 58 L176 58 M136 63 L168 63 M140 70 L176 70 M136 75 L172 75 M136 80 L158 80" stroke="#4a4038" stroke-width=".8"/>
+  <path d="M152 86 L176 86" stroke="#4a4038" stroke-width=".8"/>
+  <rect x="100" y="86" width="112" height="12" rx="6" fill="#121214"/>
+  <path d="M104 87.5 L208 87.5" stroke="#8a7a58" stroke-width="1" opacity=".6"/>
+  <path d="M120 84 L192 84" stroke="#a8a294" stroke-width="1.5"/>
+  <circle cx="95" cy="92" r="6.5" fill="#1a1a1c" stroke="#6a5a40"/>
+  <circle cx="217" cy="92" r="6.5" fill="#1a1a1c" stroke="#6a5a40"/>
+  <path d="M106 86 L94 74 L88 76" fill="none" stroke="#b0a890" stroke-width="2" stroke-linecap="round"/>
+  <path d="M100 98 L212 98 L226 132 L86 132Z" fill="url(#enamel)"/>
+  <path d="M100 98 L212 98" stroke="#9a8458" stroke-width="1" opacity=".7"/>
+  <path d="M124 98 A32 13 0 0 0 188 98Z" fill="#050506"/>
+  <path d="M130 98 L144 108 M137 98 L148 109 M144 98 L152 110 M151 98 L156 110 M158 98 L159 110 M165 98 L162 110 M172 98 L166 109 M179 98 L170 108" stroke="#6a665e" stroke-width=".7"/>
+  <rect x="150" y="95.5" width="12" height="3" fill="#8a2020"/>
+  <g fill="none" stroke-linecap="round" stroke-dasharray="0 9">
+    <path d="M120 112 H192.1 M115.5 120 H196.6" stroke="#5a5448" stroke-width="7.4"/>
+    <path d="M120 112 H192.1 M115.5 120 H196.6" stroke="#cfc6ae" stroke-width="5.8"/>
+  </g>
+  <rect x="128" y="125.5" width="56" height="4" rx="2" fill="#cfc6ae" stroke="#5a5448" stroke-width=".8"/>
+  <!-- the manuscript -->
+  <g transform="translate(6 0)">
+    <rect x="236" y="76" width="54" height="58" fill="#000" opacity=".45" filter="url(#soft)"/>
+    <rect x="230" y="118" width="54" height="15" fill="#e0d4b6"/>
+    <rect x="232" y="104" width="53" height="14" fill="#d8ccac"/>
+    <rect x="229" y="90" width="55" height="14" fill="#e2d6b8"/>
+    <rect x="231" y="78" width="53" height="12" fill="#dacdae"/>
+    <path d="M231 78 L284 78 L280 73 L235 73Z" fill="#f0e8d2"/>
+    <g stroke="#a8987a" stroke-width=".5">
+      <path d="M231 81 L284 81 M231 84 L284 84 M231 87 L284 87 M229 93 L284 93 M229 96 L284 96 M229 99 L284 99 M229 102 L284 102 M232 107 L285 107 M232 110 L285 110 M232 113 L285 113 M232 116 L285 116 M230 121 L284 121 M230 124 L284 124 M230 127 L284 127 M230 130 L284 130"/>
+    </g>
+    <path d="M257 73 L257 134" stroke="#8a5a3a" stroke-width="1.2"/>
+  </g>
+  <!-- ink and pen -->
+  <rect x="226" y="120" width="20" height="16" rx="2.5" fill="#141c30"/>
+  <rect x="229" y="125" width="14" height="7" fill="#d8ccb0"/>
+  <rect x="231" y="114" width="10" height="6" fill="#1a1a1a"/>
+  <path d="M228 122 L228 133" stroke="#6a80b0" stroke-width="1" opacity=".7"/>
+  <path d="M152 144 L214 137 L220 139 L154 146" fill="#000" opacity=".4" filter="url(#soft)"/>
+  <path d="M150 140 L212 133.4 L212.6 136.8 L151 143.4Z" fill="#0c0c10"/>
+  <path d="M178 137.8 L192 136.3" stroke="#c8a040" stroke-width="1"/>
+  <path d="M212 133.4 L222 133 L212.6 136.8Z" fill="#c8a040"/>
+  <!-- crumpled pages on the floor -->
+  <use href="#ball" transform="translate(122 172) scale(1.1)"/>
+  <use href="#ball" transform="translate(148 177) rotate(70)"/>
+  <use href="#ball" transform="translate(206 172) rotate(-40) scale(1.2)"/>
+  <use href="#ball" transform="translate(234 178) rotate(150) scale(.9)"/>
+  <use href="#ball" transform="translate(112 131) rotate(20) scale(.8)"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

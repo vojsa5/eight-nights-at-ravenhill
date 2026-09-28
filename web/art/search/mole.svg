@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A stack of letters with their red wax seals lifted, and a thin knife warming over a candle flame</title>
+  <defs>
+    <radialGradient id="bg" cx="55%" cy="45%" r="80%">
+      <stop offset="0" stop-color="#1e2432"/>
+      <stop offset="1" stop-color="#040508"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="blade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c8ccd8"/>
+      <stop offset=".35" stop-color="#e8a070"/>
+      <stop offset=".55" stop-color="#ff6a20"/>
+      <stop offset=".75" stop-color="#e8a070"/>
+      <stop offset="1" stop-color="#9aa0b0"/>
+    </linearGradient>
+    <g id="env">
+      <rect width="84" height="50" fill="#e4d8be"/>
+      <path d="M0 0 L42 28 L84 0" fill="#d6c8aa" stroke="#9a8664" stroke-width="1"/>
+      <ellipse cx="42" cy="30" rx="6" ry="4" fill="#000" opacity=".45"/>
+      <circle cx="42" cy="27" r="6" fill="#a8121e"/>
+      <circle cx="42" cy="27" r="3" fill="none" stroke="#6a0610" stroke-width="1"/>
+    </g>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- desk and candlelight -->
+  <rect y="120" width="360" height="80" fill="#15130f"/>
+  <ellipse cx="200" cy="148" rx="150" ry="44" fill="url(#pool)"/>
+  <circle cx="240" cy="84" r="40" fill="#ffa040" opacity=".28" filter="url(#soft)"/>
+  <!-- the candle in its chamberstick -->
+  <ellipse cx="240" cy="146" rx="26" ry="6" fill="#6a4a1c"/>
+  <ellipse cx="240" cy="144" rx="22" ry="4.5" fill="#b08838"/>
+  <path d="M262 144 C274 142 276 134 266 134" fill="none" stroke="#9a7430" stroke-width="3"/>
+  <rect x="233" y="94" width="14" height="50" fill="#e6d8bc"/>
+  <path d="M233 98 C231 104 232 108 233 110" stroke="#f4ead6" stroke-width="2" fill="none"/>
+  <path d="M240 64 C246 74 247 84 240 90 C233 84 234 74 240 64Z" fill="#ffd27a" filter="url(#glow)"/>
+  <path d="M240 76 C242 80 242 85 240 88 C238 85 238 80 240 76Z" fill="#fff4d0"/>
+  <!-- the thin knife held in the flame -->
+  <path d="M200 76 C214 73 250 72 272 73 L272 78 C250 78 216 78 200 76Z" fill="url(#blade)"/>
+  <path d="M230 75 L250 75" stroke="#ff5a20" stroke-width="2.4" opacity=".8" filter="url(#glow)"/>
+  <rect x="272" y="71" width="4" height="9" fill="#b08a40"/>
+  <rect x="276" y="71.5" width="36" height="8" rx="3.5" fill="#3a2414"/>
+  <circle cx="286" cy="75.5" r="1.2" fill="#c8a050"/><circle cx="300" cy="75.5" r="1.2" fill="#c8a050"/>
+  <!-- the stack of letters, seals prised up -->
+  <use href="#env" transform="rotate(-14 104 148) translate(62 123)"/>
+  <use href="#env" transform="rotate(7 164 172) translate(122 147)"/>
+  <use href="#env" transform="rotate(-4 176 146) translate(134 121)"/>
+  <!-- top letter, opened -->
+  <g transform="rotate(5 160 150)">
+    <path d="M118 104 L202 104 L160 80Z" fill="#cbbc9c" stroke="#9a8664" stroke-width="1"/>
+    <ellipse cx="160" cy="92" rx="6" ry="4.5" fill="#a8121e" filter="url(#glow)"/>
+    <rect x="118" y="104" width="84" height="50" fill="#2a2418"/>
+    <rect x="126" y="100" width="68" height="30" fill="#f2e8d2"/>
+    <g stroke="#6a5a48" stroke-width=".9"><path d="M132 108 L184 108 M132 114 L178 114 M132 120 L168 120"/></g>
+    <path d="M118 104 L160 132 L202 104 L202 154 L118 154Z" fill="#e8dcc4" stroke="#9a8664" stroke-width="1"/>
+    <path d="M118 154 L160 126 L202 154" fill="none" stroke="#b8a482" stroke-width=".8"/>
+    <circle cx="160" cy="131" r="2.5" fill="#a8121e" opacity=".8"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

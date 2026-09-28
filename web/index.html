@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eight Nights at Ravenhill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/board.css">
+<link rel="stylesheet" href="css/folder.css">
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<header class="casebar">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="13" r="9" fill="none" stroke="#e6c783" stroke-width="3"/><path d="M20 20 L29 29" stroke="#e6c783" stroke-width="4" stroke-linecap="round"/></svg>
+    <span>Eight Nights at Ravenhill</span>
+  </div>
+  <span class="stat">Night <span class="pips" id="pips"></span></span>
+  <span class="stat">Score <b id="score">0</b></span>
+  <span class="spacer"></span>
+  <button class="btn ghost" id="briefing" title="Watch how the case began, then the conspiracy, how to play and Inspector Hollis's advice">Story</button>
+  <button class="btn ghost" id="howto" title="How the game works, as a short film">How to play</button>
+  <button class="btn ghost" id="tips" title="Inspector Hollis's advice, one tip at a time">Advice</button>
+  <button class="btn primary" id="newgame">New case</button>
+  <button class="btn ghost" id="theme" title="Lamp light / daylight" aria-label="Toggle theme"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="6.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.7 A6.3 6.3 0 0 1 8 14.3Z" fill="currentColor"/></svg></button>
+</header>
+<main class="desk" id="desk">
+  <section class="board-wrap">
+    <div class="props" aria-hidden="true"><span class="prop ring"></span><img class="prop glass" src="art/desk/magnifier.svg" alt="">
+      <img class="prop watch" src="art/desk/watch.svg" alt=""><img class="prop letter" src="art/desk/letter.svg" alt=""></div>
+    <div class="board" id="board"></div>
+  </section>
+  <aside class="folder" id="folder" aria-label="Case folder"><div class="folder-slide">
+    <nav class="folder-tabs">
+      <button data-tab="testimony">Testimony</button>
+      <button data-tab="theory">Theory</button>
+      <button data-tab="casefile">Case file</button>
+      <button data-tab="roles">Roles</button>
+      <button data-tab="events">Events</button>
+      <button data-tab="rules">Rules</button>
+    </nav>
+    <div class="folder-body">
+      <div class="folder-head"><h2 id="folder-title"></h2><button class="folder-close" id="folder-close" title="Close the folder" aria-label="Close the folder">×</button></div>
+      <div class="tabbody" id="tabbody"></div>
+    </div>
+  </div></aside>
+</main>
+<div class="modal" id="modal"></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

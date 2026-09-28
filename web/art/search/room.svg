@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A guest's bedroom being searched: the steamer trunk thrown open, clothes spilling out, a drawer pulled from the nightstand under the lamp</title>
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="55%" r="80%">
+      <stop offset="0" stop-color="#2a2430"/>
+      <stop offset="1" stop-color="#040406"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="48%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8742a"/>
+      <stop offset="1" stop-color="#ffd890"/>
+    </linearGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a7098"/>
+      <stop offset="1" stop-color="#26344e"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- night at the window -->
+  <rect x="240" y="22" width="52" height="72" fill="url(#win)" opacity=".75"/>
+  <path d="M266 22 V94 M240 58 H292" stroke="#08090e" stroke-width="4"/>
+  <path d="M240 84 C256 80 276 82 292 78 V94 H240Z" fill="#dfe6f2" opacity=".5"/>
+  <g fill="#f0f4fa"><circle cx="250" cy="34" r="1"/><circle cx="280" cy="44" r="1.2"/><circle cx="256" cy="70" r="1"/><circle cx="284" cy="68" r="1"/></g>
+  <path d="M232 16 C236 50 234 80 238 104 L244 104 C240 80 242 50 242 16Z M300 16 C296 50 298 80 294 104 L288 104 C292 80 290 50 290 16Z" fill="#140f16"/>
+  <path d="M240 94 L292 94 L236 150 L170 150Z" fill="#8aa8d8" opacity=".1" filter="url(#soft)"/>
+  <!-- lamplight -->
+  <circle cx="86" cy="96" r="70" fill="#ffa040" opacity=".3" filter="url(#soft)"/>
+  <!-- the bed, stripped and in shadow -->
+  <path d="M252 172 V134 C270 126 300 132 330 124 L360 124 V172Z" fill="#141826"/>
+  <path d="M252 134 C270 126 300 132 330 124" fill="none" stroke="#8aa8d8" stroke-opacity=".35" stroke-width="1.4"/>
+  <rect x="332" y="96" width="8" height="76" fill="#0c0a0c"/>
+  <!-- floor -->
+  <rect x="0" y="170" width="360" height="30" fill="#0e0b0c"/>
+  <ellipse cx="190" cy="182" rx="110" ry="10" fill="#241816" opacity=".8"/>
+  <path d="M276 180 C284 172 306 172 314 178 C308 186 284 188 276 180Z" fill="#b8c0d4" opacity=".35"/>
+  <!-- nightstand and the drawer pulled out -->
+  <rect x="60" y="112" width="52" height="58" fill="#1e120a"/>
+  <rect x="58" y="110" width="56" height="4" fill="#2e1c10"/>
+  <path d="M62 124 L110 124 L118 136 L54 136Z" fill="#070404"/>
+  <path d="M66 132 L80 122 L94 126 L84 134Z" fill="#d8ccb4" opacity=".75"/>
+  <path d="M70 130 L80 124 M74 131 L86 126" stroke="#6a5a48" stroke-width=".7"/>
+  <path d="M90 134 L100 122 L110 128 L104 135Z" fill="#c8bca4" opacity=".6"/>
+  <rect x="54" y="136" width="64" height="12" fill="#3a2414"/>
+  <path d="M54 136 H118" stroke="#ffb060" stroke-opacity=".5"/>
+  <circle cx="86" cy="142" r="1.8" fill="#c8a060"/>
+  <path d="M40 178 L52 170 L64 176 L52 184Z" fill="#d8ccb4" opacity=".4"/>
+  <!-- the bedside lamp -->
+  <ellipse cx="86" cy="110" rx="9" ry="2.4" fill="#140c08"/>
+  <rect x="84.5" y="88" width="3" height="22" fill="#140c08"/>
+  <path d="M72 88 L100 88 L94 70 L78 70Z" fill="url(#shade)" filter="url(#glow)"/>
+  <!-- the open steamer trunk -->
+  <path d="M136 116 L228 116 L234 74 L130 74Z" fill="#1a0e0a"/>
+  <path d="M140 112 L224 112 L229 79 L135 79Z" fill="#5a2a26"/>
+  <path d="M147 79 L145 112 M161 79 L160 112 M175 79 L175 112 M189 79 L189 112 M203 79 L204 112 M217 79 L219 112" stroke="#3a1a18" stroke-width="2"/>
+  <path d="M136 122 L228 122 L224 116 L140 116Z" fill="#050303"/>
+  <path d="M146 120 C150 110 162 108 170 114 C176 106 190 106 196 114 C204 108 216 110 220 120Z" fill="#c8c0b0" opacity=".8"/>
+  <path d="M176 118 C182 112 196 112 204 118Z" fill="#6a7a9a"/>
+  <rect x="136" y="122" width="92" height="50" fill="#3a2616"/>
+  <rect x="136" y="134" width="92" height="4" fill="#24170c"/>
+  <rect x="136" y="158" width="92" height="4" fill="#24170c"/>
+  <g fill="#b08a40">
+    <path d="M136 122 H144 L136 130Z M228 122 H220 L228 130Z M136 172 H144 L136 164Z M228 172 H220 L228 164Z"/>
+    <rect x="178" y="122" width="8" height="9" rx="1"/>
+  </g>
+  <path d="M228 122 V172" stroke="#ffb060" stroke-opacity=".2"/>
+  <path d="M136 122 H228" stroke="#ffb060" stroke-opacity=".45"/>
+  <!-- clothes spilling out -->
+  <path d="M150 121 C146 134 150 148 144 160 C142 166 148 168 150 162 C156 150 156 134 160 122Z" fill="#d8d0c0" opacity=".85"/>
+  <path d="M212 120 C222 128 234 140 236 154 C238 164 240 170 248 174 L240 176 C232 170 230 162 228 152 C226 142 218 132 206 124Z" fill="#7a2a30"/>
+  <path d="M232 144 L227 146 M235 156 L229 157 M239 168 L233 168" stroke="#c8a060" stroke-width="1.2"/>
+  <path d="M104 176 C112 168 130 170 138 176 C134 182 112 184 104 176Z" fill="#4a5a7a" opacity=".85"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

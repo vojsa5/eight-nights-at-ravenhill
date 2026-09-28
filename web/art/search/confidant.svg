@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A bundle of old letters tied with a faded ribbon, beside a small framed photograph of two friends arm in arm</title>
+  <defs>
+    <radialGradient id="bg" cx="55%" cy="45%" r="80%">
+      <stop offset="0" stop-color="#2a2218"/>
+      <stop offset="1" stop-color="#050403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <rect y="124" width="360" height="76" fill="#15120d"/>
+  <ellipse cx="150" cy="150" rx="140" ry="40" fill="url(#pool)"/>
+  <g transform="rotate(-8 150 138)">
+    <rect x="98" y="118" width="92" height="54" fill="#d8caa8" stroke="#9a8664" stroke-width="1"/>
+    <path d="M98 118 L144 146 L190 118" fill="none" stroke="#9a8664" stroke-width="1"/>
+  </g>
+  <g transform="rotate(4 150 138)">
+    <rect x="108" y="112" width="92" height="54" fill="#e4d8be" stroke="#9a8664" stroke-width="1"/>
+    <path d="M108 112 L154 140 L200 112" fill="none" stroke="#9a8664" stroke-width="1"/>
+  </g>
+  <g transform="rotate(-2 150 138)">
+    <rect x="104" y="106" width="92" height="54" fill="#ece2ca" stroke="#9a8664" stroke-width="1"/>
+    <path d="M104 106 L150 134 L196 106" fill="none" stroke="#9a8664" stroke-width="1"/>
+  </g>
+  <path d="M150 104 L150 170" stroke="#b0606a" stroke-width="5"/>
+  <path d="M98 138 L204 138" stroke="#b0606a" stroke-width="5"/>
+  <path d="M150 138 C132 120 126 132 140 140 C126 148 132 158 150 140 C168 158 174 148 160 140 C174 132 168 120 150 138 Z" fill="#c8707a"/>
+  <g transform="rotate(6 272 120)">
+    <rect x="236" y="80" width="72" height="84" fill="#6a4a1c" stroke="#b08838" stroke-width="3"/>
+    <defs>
+      <clipPath id="clip-whole-246">
+        <path d="M246 92 h52 v60 h-52 Z"/>
+      </clipPath>
+    </defs>
+    <rect x="238" y="84" width="68" height="76" fill="#ffe2a0" opacity=".22" filter="url(#blur8)"/>
+    <g clip-path="url(#clip-whole-246)">
+      <rect x="246" y="92" width="52" height="60" fill="#e8d6b0"/>
+      <rect x="249" y="95" width="46" height="54" fill="#c9ad7c"/>
+      <circle cx="263.16" cy="116.21176470588235" r="6.0" fill="#5a4630"/>
+      <path d="M256.10117647058826 117.97647058823529 C254.33647058823533 107.38823529411765 271.9835294117647 107.38823529411765 270.2188235294118 117.97647058823529 Z" fill="#3a2a18"/>
+      <path d="M252.57176470588237 140.91764705882352 C252.57176470588237 126.8 273.74823529411765 126.8 273.74823529411765 140.91764705882352 Z" fill="#5a4630"/>
+      <circle cx="280.84000000000003" cy="116.21176470588235" r="6.0" fill="#5a4630"/>
+      <path d="M270.2517647058824 140.91764705882352 C270.2517647058824 126.8 291.42823529411766 126.8 291.42823529411766 140.91764705882352 Z" fill="#5a4630"/>
+      <path d="M266.8 129.2 L277.2 129.2" stroke="#5a4630" stroke-width="4.285714285714286"/>
+    </g>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

@@ -1,0 +1,440 @@
+/* The case folder at the right edge: manila tabs that stick out onto the desk, and a paper drawer
+   that slides open. Inside, everything is dark ink on paper. The .folder reserves its space at once;
+   .folder-slide moves with a transform on its own layer, so opening it repaints nothing. */
+.folder { position: relative; width: 0; flex: none; z-index: 10;
+  --ink: var(--paper-ink); --muted: #574832; --line: var(--paper-line); --panel-2: #e6d7b6;
+  --gold: #8a6a2a; --gold-2: #6a4a14; --bad: #a3322a; --good: #2f7a5f; --save: #2e7d46; --elim: #b23a2a; --warn: #a8741a;
+  --soft-bad: rgba(163,50,42,.12); --soft-good: rgba(47,122,95,.13); }
+.desk.folder-open .folder { width: min(600px, 46vw); }
+.folder-slide { position: absolute; top: 0; right: 0; bottom: 0; width: min(600px, 46vw); transform: translateX(100%);
+  transition: transform .3s ease; will-change: transform; }
+.desk.folder-open .folder-slide { transform: none; }
+.folder-tabs { position: absolute; right: 100%; top: 36px; display: flex; flex-direction: column; gap: 6px; }
+.folder-tabs button { writing-mode: vertical-rl; transform: rotate(180deg); padding: 16px 10px; border: 1px solid #b89a60; border-left: 0;
+  border-radius: 0 8px 8px 0; background: linear-gradient(90deg, #cfb482, #e4cf9e); color: #3a2a14;
+  font: 14px var(--typed); letter-spacing: .12em; text-transform: uppercase; box-shadow: -3px 3px 8px rgba(0,0,0,.35); }
+.folder-tabs button:hover { background: linear-gradient(90deg, #d8bf8e, #efdcae); }
+.folder-tabs button.active { background: var(--paper); border-color: var(--paper-line); }
+.desk:not(.folder-open) .folder-tabs button.active { background: linear-gradient(90deg, #cfb482, #e4cf9e); }
+.folder-body { position: sticky; top: 0; height: calc(100vh - 56px); overflow: hidden; display: flex; flex-direction: column;
+  background: repeating-linear-gradient(transparent 0 25px, rgba(90,110,160,.1) 25px 26px), var(--paper);
+  color: var(--paper-ink); box-shadow: -10px 0 30px rgba(0,0,0,.45); border-left: 6px solid #cfb482; }
+.folder-body { visibility: hidden; transition: visibility 0s .3s; }
+.desk.folder-open .folder-body { visibility: visible; transition-delay: 0s; }
+.folder-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 8px; border-bottom: 2px solid var(--paper-line); }
+.folder-head h2 { margin: 0; font: 22px var(--typed); letter-spacing: .12em; text-transform: uppercase; }
+.folder-close { border: 0; background: none; font: 28px/1 Georgia, serif; color: var(--paper-muted); padding: 0 4px; }
+.folder-close:hover { color: var(--paper-ink); }
+.tabbody { overflow: auto; padding: 14px 18px 24px; flex: 1; }
+
+/* Testimony */
+/* a key of real chips, and one line of help */
+.key { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; padding: 8px 10px; background: rgba(255,255,255,.3);
+  border: 1px dashed var(--line); font-size: 14.5px; }
+.key > span { display: inline-flex; align-items: center; gap: 4px; }
+.key .chip { cursor: default; margin: 0; }
+.key-help { margin: 8px 0 12px; font-size: 14.5px; line-height: 1.4; color: var(--muted); }
+table.grid { border-collapse: collapse; width: 100%; }
+.grid th { font: 13px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 5px 4px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+/* the round headers stay in view, and the witness column stays put when the table scrolls sideways */
+.grid thead th { position: sticky; top: -14px; z-index: 2; background: var(--paper); box-shadow: inset 0 -1px 0 var(--line); border-bottom: 0; }
+.grid thead th.wit { z-index: 3; }
+.grid .wit { position: sticky; left: -18px; z-index: 1; background: var(--paper); }
+.grid thead th.cur { color: var(--ink); background: #ecd28e; box-shadow: inset 0 -2px 0 #a8843e; }
+.grid tr.group th { padding: 14px 4px 5px; font-size: 12.5px; letter-spacing: .12em; color: var(--ink); border-bottom: 2px solid var(--line); }
+.grid tr.group th span { position: sticky; left: 0; }
+.grid td { padding: 3px 3px; border-bottom: 1px solid var(--line); white-space: nowrap; vertical-align: middle; }
+.grid tr:hover td { background: rgba(255,255,255,.35); }
+.grid tr:hover td.wit { background: #f6eedb; }
+/* the guest under the mouse on the board (testimony.js markChips) */
+.grid tr.hl td { background: rgba(236,200,110,.42); }
+.grid tr.hl td.wit { background: #efd896; box-shadow: inset 4px 0 0 #a8843e; }
+.grid tr.gone .who .nm { color: var(--muted); }  /* only the name: their revealed role stays readable */
+.grid td.cur { background: rgba(201,164,92,.16); }
+.who { display: flex; align-items: center; gap: 8px; }
+.thumb { width: 24px; height: 31px; flex: none; border: 2px solid #f4eddc; box-shadow: 0 1px 2px rgba(0,0,0,.35); }
+.who .nm { font: 700 19px var(--hand); line-height: 1; }
+.who .nm small { font: 12px var(--typed); color: var(--muted); }
+/* your note on the guest, as on the board: guilty or innocent */
+.who .mynote { display: inline-grid; place-items: center; width: 17px; height: 17px; margin-left: 6px; border-radius: 50%; vertical-align: 2px;
+  font: 700 11px/1 system-ui, sans-serif; color: #fff; }
+.who .mynote.n1 { background: var(--ink-red); }
+.who .mynote.n2 { background: var(--ink-green); }
+.who .sub { display: block; font: 14px "EB Garamond", Georgia, serif; line-height: 1.3; }
+.who .job { font-style: italic; color: var(--muted); font-size: 14px; }
+/* a witness's record: how many tips proved right and wrong, coloured like the chips */
+.rec { display: inline-flex; gap: 3px; margin-left: 6px; vertical-align: 1px; }
+.rec span { min-width: 20px; padding: 0 4px; border: 1px solid; border-radius: 3px; text-align: center; font: 700 12.5px/16px system-ui, sans-serif; }
+.rec .right { background: var(--soft-good); border-color: var(--good); color: var(--good); }
+.rec .wrong { background: var(--soft-bad); border-color: var(--bad); color: var(--bad); }
+.chip { display: inline-block; min-width: 25px; padding: 0 4px; border-radius: 3px; font: 14px/22px system-ui, sans-serif; margin-right: 2px;
+  border: 1px solid var(--line); background: rgba(255,255,255,.3); cursor: pointer; }
+.grid td.adv .chip { display: block; margin: 1px 0; }
+.grid td.sil { color: var(--muted); font: italic 12.5px system-ui, sans-serif; }
+.chip.s::before, .chip.e::before { display: inline-block; width: 1.1em; font-size: 1.15em; font-weight: 700; -webkit-text-stroke: .05em currentColor; }
+.chip.s::before { content: "✓"; color: var(--save); }
+.chip.e::before { content: "✕"; color: var(--elim); }
+.chip.right { background: var(--soft-good); border-color: var(--good); }
+.chip.wrong { background: var(--soft-bad); border-color: var(--bad); }
+.chip.hl { outline: 2px solid var(--warn); }
+.chip.interview { border-style: dashed; }
+.grid th .ev { font-family: system-ui, sans-serif; letter-spacing: 0; }
+.tag { font: 12px/18px var(--typed); letter-spacing: .04em; padding: 0 5px; border-radius: 2px; text-transform: uppercase; }
+.tag.bad { background: var(--soft-bad); color: var(--bad); }
+.tag.good { background: var(--soft-good); color: var(--good); }
+
+/* Case file */
+.chron { display: flex; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.chron .art { width: 46px; height: 60px; flex: none; border: 3px solid #f4eddc; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.chron .t { font: 13px var(--typed); letter-spacing: .1em; color: var(--muted); text-transform: uppercase; margin-bottom: 2px; }
+.chron .ok, .chron .no { display: inline-block; margin-left: 4px; padding: 0 6px; border: 1px solid; border-radius: 3px; font: 700 13px/18px system-ui, sans-serif; }
+.chron .ok { background: var(--soft-good); }
+.chron .no { background: var(--soft-bad); }
+.chron.clue .clue-mark { width: 46px; text-align: center; font-size: 24px; flex: none; }
+.ok { color: var(--save); font-weight: 700; }
+.no { color: var(--elim); font-weight: 700; }
+.noinfo { color: var(--muted); font-style: italic; }
+
+/* Theory: your notes as three piles of slips, each pile's header a stamp with pips for the guests left to find */
+.theory { --guilty: #9e1b1b; --innocent: #2a6a3c; --unsure: #6a5a44; }
+.tlead { margin: 0 0 6px; font-size: 16px; line-height: 1.4; }
+.twarn { color: var(--guilty); font-weight: 600; }
+.thelp { margin: 0 0 14px; font-size: 14px; line-height: 1.35; color: var(--muted); }
+.ttools { display: flex; justify-content: flex-end; margin: -4px 0 10px; }
+.treset { padding: 4px 12px; border: 1px solid var(--line); border-radius: 3px; background: rgba(255,255,255,.4);
+  font: 13px var(--typed); letter-spacing: .06em; color: var(--ink); }
+.treset:hover:not(:disabled) { border-color: var(--ink); background: #fff; }
+.treset:disabled { opacity: .45; cursor: default; }
+.treset.armed, .treset.armed:hover { background: var(--guilty); border-color: var(--guilty); color: #fff; }
+.tpiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: start; }
+.tpile { --c: var(--unsure); min-height: 260px; padding: 10px 6px 8px; border: 2px dashed color-mix(in srgb, var(--c) 45%, transparent);
+  border-radius: 4px; background: rgba(255,255,255,.2); transition: background .15s, border-color .15s; }
+.tpile.guilty { --c: var(--guilty); }
+.tpile.innocent { --c: var(--innocent); }
+.tpile.over { border-style: solid; border-color: var(--c); background: color-mix(in srgb, var(--c) 10%, transparent); }
+.tpile header { display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 10px; }
+.tpile h3 { margin: 0; padding: 1px 10px; border: 2.5px solid var(--c); border-radius: 3px; transform: rotate(-3deg); color: var(--c);
+  font: 700 17px var(--typed); letter-spacing: .12em; text-transform: uppercase; -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.tpips { display: flex; flex-wrap: wrap; justify-content: center; gap: 3px; }
+.tpips i { width: 11px; height: 11px; border: 1.5px solid var(--c); border-radius: 50%; }
+.tpips i.on { background: var(--c); }
+.tpips i.over { border-color: var(--guilty); background: repeating-linear-gradient(45deg, var(--guilty) 0 2px, transparent 2px 4px); }
+.tcount { font: 12.5px var(--typed); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.tlist { display: flex; flex-direction: column; gap: 6px; }
+.tempty { margin: 18px 0; text-align: center; font-style: italic; font-size: 14px; color: var(--muted); }
+.tslip { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 7px; row-gap: 3px; align-items: center; padding: 5px 6px;
+  background: #fbf6ea; border-left: 3px solid var(--c); box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.tslip[draggable="true"] { cursor: grab; }
+.tslip.dragging { opacity: .4; }
+.tslip.hl { background: #efd896; box-shadow: 0 0 0 2px #a8843e; }
+.tslip .thumb { grid-row: 1 / span 2; }
+.tname { font: 700 17px/1.05 var(--hand); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tname small { font: 11.5px var(--typed); color: var(--muted); }
+.ttail { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+.tswitch { display: inline-flex; }
+.tswitch button { width: 22px; height: 20px; padding: 0; border: 1px solid var(--line); margin-left: -1px; background: rgba(255,255,255,.5);
+  font: 700 12px/1 system-ui, sans-serif; color: var(--muted); }
+.tswitch button:first-child { border-radius: 3px 0 0 3px; margin-left: 0; }
+.tswitch button:last-child { border-radius: 0 3px 3px 0; }
+.tswitch button:hover { color: var(--ink); background: #fff; }
+.tswitch .n1.on { background: var(--guilty); border-color: var(--guilty); color: #fff; }
+.tswitch .n0.on { background: var(--unsure); border-color: var(--unsure); color: #fff; }
+.tswitch .n2.on { background: var(--innocent); border-color: var(--innocent); color: #fff; }
+/* how many of their tips fit your theory (green) and clash with it (red) */
+.tfit { display: inline-flex; gap: 2px; }
+.tfit b { min-width: 17px; padding: 0 3px; border: 1px solid; border-radius: 3px; text-align: center; font: 700 11.5px/15px system-ui, sans-serif; }
+.tfit b:first-child { color: var(--good); border-color: var(--good); background: var(--soft-good); }
+.tfit b:last-child { color: var(--bad); border-color: var(--bad); background: var(--soft-bad); }
+/* a guess of a guest's role: a pencilled line on their slip, picked from a sheet of this case's roles */
+.trole { grid-column: 2; justify-self: start; max-width: 100%; padding: 0 6px; border: 1px dashed var(--line); border-radius: 3px; background: none;
+  font: 700 15px/1.3 var(--hand); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trole:hover, .trole.open { border-style: solid; color: var(--ink); background: #fff; }
+.trole.good { color: var(--innocent); border-color: color-mix(in srgb, var(--innocent) 55%, transparent); }
+.trole.bad { color: var(--guilty); border-color: color-mix(in srgb, var(--guilty) 55%, transparent); }
+.trole.over { border: 1.5px solid var(--guilty); background: var(--soft-bad); }
+.trole.over::before { content: "⚠ "; font: 12px system-ui, sans-serif; }
+.tguess { grid-column: 2; font: italic 13.5px "EB Garamond", Georgia, serif; }
+.tguess.right { color: var(--good); }
+.tguess.right::after { content: " ✓"; font-style: normal; font-weight: 700; }
+.tguess.wrong { color: var(--bad); }
+.tguess.wrong::after { content: " ✕"; font-style: normal; font-weight: 700; }
+.tpicker { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; max-height: 66%; overflow: auto; padding: 12px 18px 14px;
+  background: repeating-linear-gradient(transparent 0 25px, rgba(90,110,160,.1) 25px 26px), #f6eedb; border-top: 3px solid #cfb482;
+  box-shadow: 0 -10px 28px rgba(0,0,0,.35); animation: tp-up .22s ease-out; }
+@keyframes tp-up { from { transform: translateY(24px); opacity: 0; } }
+.tpicker header { display: flex; align-items: center; gap: 9px; }
+.tpicker header .thumb { width: 30px; height: 39px; }
+.tpicker header b { flex: 1; font: 700 22px/1.1 var(--hand); }
+.tp-close { border: 0; background: none; font: 28px/1 Georgia, serif; color: var(--muted); padding: 0 4px; }
+.tp-close:hover { color: var(--ink); }
+.tpicker h4 { margin: 10px 0 6px; font: 12.5px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.rchips { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 6px; }
+.rchip { --side: var(--innocent); display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 7px; align-items: center; padding: 4px 6px 4px 4px;
+  border: 1px solid var(--line); border-left: 3px solid var(--side); background: #fbf6ea; color: var(--ink); text-align: left; }
+.rchip.bad { --side: var(--guilty); }
+.rchip .art { grid-row: 1 / span 2; width: 26px; height: 34px; object-fit: cover; border: 2px solid #f4eddc; box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+.rc-n { font: 12.5px/1.2 var(--typed); letter-spacing: .04em; text-transform: uppercase; }
+.rc-n small { color: var(--muted); letter-spacing: 0; }
+.rc-on { font: italic 13px/1.1 "EB Garamond", Georgia, serif; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rchip:hover:not(:disabled) { background: #fff; border-color: var(--side); }
+.rchip.on { background: color-mix(in srgb, var(--side) 14%, #fbf6ea); border-color: var(--side); box-shadow: inset 0 0 0 1px var(--side); }
+.rchip:disabled { opacity: .45; cursor: default; }
+.tp-foot { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+.tverdict { font: 700 13px/1 system-ui, sans-serif; }
+.tverdict.right { color: var(--good); }
+.tverdict.wrong { color: var(--bad); }
+
+/* Roles, Events and Rules: shared text styles */
+.rules p { margin: 0 0 10px; }
+.rules h3 { margin: 20px 0 8px; font: 16px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
+/* Roles: per side a head with pips, sealed guests, then a dossier card per role */
+.roles-tab .side { --side: #2f7a4a; }
+.roles-tab .side.bad { --side: #b3221b; }
+.side-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 22px 0 10px; }
+.side-head h3 { margin: 0; }
+.rolepips { display: flex; gap: 4px; }
+.rolepips i { width: 14px; height: 14px; border: 2px solid var(--side); border-radius: 50%; }
+.rolepips i.found { background: var(--side); }
+.rolepips i.sealed { background: repeating-linear-gradient(45deg, var(--side) 0 2px, transparent 2px 4px); }
+.side-head .count { font: 13px var(--typed); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.sealed-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 12px; }
+.sealed-row p { flex-basis: 100%; margin: 0; font-size: 14.5px; color: var(--muted); }
+.sealed-row .seal { font: 16px/1 system-ui, sans-serif; }
+.sealed-guest { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px 3px 3px; border: 1px dashed var(--side); border-radius: 3px;
+  background: rgba(255,255,255,.35); font-size: 14px; }
+.sealed-guest .art { width: 24px; height: 31px; border: 2px solid #f4eddc; box-shadow: 0 1px 2px rgba(0,0,0,.35); }
+.sealed-guest small { color: var(--muted); }
+/* the roles as a grid of portraits; a clicked one opens as a card across its row, the others close up around it */
+.rolegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); grid-auto-flow: dense; gap: 14px 12px; }
+.rolegrid .rolecard { grid-column: 1 / -1; animation: rc-open .22s ease-out; }
+@keyframes rc-open { from { opacity: 0; transform: scale(.97); } }
+.roletile { --side: #2f7a4a; position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 6px 8px;
+  border: 0; border-top: 4px solid var(--side); background: #fbf6ea; box-shadow: 0 1px 3px rgba(0,0,0,.25); color: var(--ink); text-align: center;
+  transition: transform .12s, box-shadow .12s; }
+.roletile.bad { --side: #b3221b; }
+.roletile:hover, .roletile:focus-visible { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,.3); }
+.roletile.found { background-color: #efe8d6; }
+.rt-art { position: relative; display: block; width: 76%; margin-bottom: 4px; }
+.rt-art .art { display: block; width: 100%; aspect-ratio: 200 / 262; object-fit: cover; border: 3px solid #f4eddc; border-bottom-width: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.35); transform: rotate(-2deg); }
+.roletile:nth-child(even) .rt-art .art { transform: rotate(2deg); }
+.roletile.found .rt-art .art { filter: grayscale(.6); }
+.rt-name { font: 13px/1.2 var(--typed); letter-spacing: .06em; text-transform: uppercase; }
+.rt-who { font: 700 17px/1 var(--hand); color: var(--side); }
+.rc-close { position: absolute; top: 4px; right: 6px; z-index: 1; border: 0; background: none; font: 26px/1 Georgia, serif; color: var(--muted); padding: 0 4px; }
+.rc-close:hover { color: var(--ink); }
+.rolecard { --side: #2f7a4a; position: relative; display: flex; gap: 12px; padding: 12px 12px 10px 10px; background: #fbf6ea;
+  background-image: repeating-linear-gradient(transparent 0 19px, rgba(90,110,160,.12) 19px 20px); border-top: 4px solid var(--side);
+  box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.rolecard.bad { --side: #b3221b; }
+.rolecard.found { background-color: #efe8d6; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+.rc-art { position: relative; flex: none; align-self: flex-start; }
+.rc-art .art { display: block; width: 88px; height: 115px; border: 3px solid #f4eddc; border-bottom-width: 10px; box-shadow: 0 2px 5px rgba(0,0,0,.35);
+  transform: rotate(-2deg); }
+.rolecard:nth-child(even) .rc-art .art { transform: rotate(2deg); }
+.rolecard.found .rc-art .art { filter: grayscale(.6); }
+.rc-stamp { position: absolute; top: 42%; left: 50%; padding: 0 5px; border: 2px solid var(--side); transform: translate(-50%, -50%) rotate(-14deg);
+  font: 12px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--side); background: rgba(244,237,220,.88); }
+.rc-body { min-width: 0; }
+.rc-body h4 { margin: 0 0 3px; font: 15px var(--typed); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+.rc-body p { margin: 0 0 4px; font-size: 14.5px; line-height: 1.35; color: var(--muted); }
+.rc-body .rc-flavor { font-style: italic; color: var(--ink); opacity: .75; }
+.rolecard .found-by { margin: 2px 0 5px; font-size: 14.5px; color: var(--ink); }
+.rolecard .crime { margin-top: 4px; font-size: 14px; font-style: italic; color: var(--ink-red); }
+/* what a role does, step by step: an icon, a small label and a line or two */
+.role-steps { margin: 6px 0 2px; display: grid; gap: 5px; }
+.role-steps .step { display: grid; grid-template-columns: 20px 1fr; column-gap: 6px; }
+.role-steps .step-icon { grid-row: 1 / span 2; font-size: 14px; line-height: 18px; text-align: center; }
+.role-steps dt { font: 11px/16px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.role-steps dd { margin: 0; font-size: 14.5px; line-height: 1.35; color: var(--ink); }
+.role-steps .seen dt { color: var(--side); }
+details.spare { margin-top: 26px; padding: 10px 12px 12px; border: 1px dashed var(--line); background: rgba(255,255,255,.22); }
+details.spare summary { cursor: pointer; font: 16px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
+details.spare summary span { margin-left: 8px; font: italic 15px "EB Garamond", Georgia, serif; letter-spacing: 0; text-transform: none; color: var(--muted); }
+details.spare[open] summary { margin-bottom: 4px; }
+.rules h4 { margin: 14px 0 6px; font: 14px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+/* Events: the case's nights as medals on a thread, then a card per event */
+.nights { position: relative; display: flex; justify-content: space-between; margin: 6px 0 20px; padding: 0 2px; list-style: none; }
+.nights::before { content: ""; position: absolute; left: 22px; right: 22px; top: 18px; border-top: 2px dashed var(--line); }
+.nights li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.nights a { display: contents; color: inherit; text-decoration: none; }
+.medal { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; font: 19px/1 system-ui, sans-serif;
+  background: radial-gradient(circle at 40% 35%, #f4dca0, #a8843e 70%); border: 2px solid #5a4420; box-shadow: 0 2px 6px rgba(0,0,0,.35); }
+.nights .n { font: 13px var(--typed); letter-spacing: .08em; color: var(--muted); }
+.nights .past .medal { filter: sepia(.4) saturate(.7); }
+.nights .now .medal { box-shadow: 0 0 0 3px #f2d27a, 0 0 16px rgba(242,210,122,.95); }
+.nights .now .n { color: var(--ink); font-weight: 700; }
+.nights .unknown .medal { background: #f3ead2; border: 2px dashed var(--muted); color: var(--muted); font: 700 17px var(--typed); box-shadow: none; }
+.nights a:hover .medal { transform: translateY(-2px); }
+.evcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+.evcard { scroll-margin-top: 12px; background: #fbf6ea; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+.evcard.now { box-shadow: 0 0 0 3px #f2d27a, 0 0 22px rgba(242,210,122,.6), 0 4px 12px rgba(0,0,0,.3); }
+.evart { position: relative; aspect-ratio: 360 / 150; background: #000; border-bottom: 3px solid #cfb482; }
+.evart img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.evcard.past .evart img { filter: sepia(.6) saturate(.6) brightness(.8); }
+.evart .medal { position: absolute; left: 14px; bottom: -20px; }
+.evstamp { position: absolute; top: 9px; right: 9px; padding: 1px 8px; border: 2px solid; transform: rotate(4deg);
+  font: 12px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--paper-muted); background: rgba(244,237,220,.9); }
+.evcard.now .evstamp { color: var(--ink-red); transform: rotate(-5deg) scale(1.1); }
+.evcard.future .evstamp { border-style: dashed; }
+.evtext { padding: 24px 14px 14px; }
+.evtext h3 { margin: 0 0 6px; font: 17px var(--typed); letter-spacing: .1em; text-transform: uppercase; }
+.evtext p { margin: 0; font-size: 15px; line-height: 1.4; }
+.evtext .mood { margin-bottom: 6px; font-style: italic; color: var(--muted); }
+.err { color: var(--bad); }
+/* a role or event marked for a planned change (PLANNED in roles.js / events.js): a small red rubber stamp beside its name */
+.rolecard .planned, .roletile .planned, .evcard .planned { display: inline-block; margin-left: 6px; padding: 0 5px; border: 1.5px solid var(--ink-red); border-radius: 2px;
+  color: var(--ink-red); font: 10px/15px var(--typed); letter-spacing: .06em; text-transform: uppercase; transform: rotate(-3deg);
+  vertical-align: 1px; }
+
+/* Rules: a case briefing under an illustrated header, each section numbered in red, with samples of the board's own marks */
+.ruleshero { position: relative; height: 168px; margin: -14px -18px 16px; overflow: hidden; background: #0a0e18; }
+.ruleshero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.ruleshero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 25%, rgba(8,8,14,.88)); }
+.rh-text { position: absolute; left: 18px; right: 18px; bottom: 14px; z-index: 1; }
+.rh-text span { font: 12px var(--typed); letter-spacing: .16em; text-transform: uppercase; color: #c9a45c; }
+.rh-text h2 { margin: 2px 0 0; font: 700 30px/1.1 Cinzel, Georgia, serif; letter-spacing: .04em; color: #f6e3b0; text-shadow: 0 2px 6px rgba(0,0,0,.8); }
+.rh-stamp { position: absolute; top: 16px; right: 16px; z-index: 1; padding: 3px 9px; border: 4px double #e0473a; transform: rotate(9deg);
+  font: 700 14px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: #ff6a58; background: rgba(0,0,0,.25);
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.brief h3 { display: flex; align-items: center; gap: 10px; margin-top: 26px; }
+.brief h3::after { content: ""; flex: 1; border-top: 1px dashed var(--line); }
+.brief h3 i { flex: none; display: grid; place-items: center; min-width: 28px; height: 28px; padding: 0 4px; border-radius: 14px;
+  background: var(--ink-red); color: #fff4e0; font: 700 12px/1 Cinzel, Georgia, serif; font-style: normal; letter-spacing: 0;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.25); }
+.brief .lede { font-size: 17px; line-height: 1.45; }
+.brief .lede::first-letter { float: left; margin: 5px 8px 0 0; font: 700 48px/.8 Cinzel, Georgia, serif; color: var(--ink-red); }
+.brief .aside { font-size: 15px; color: var(--muted); }
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 16px 0 4px; }
+.glance .tile { padding: 10px 6px 8px; text-align: center; background: #fbf6ea; border-top: 3px solid #c9a45c;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25); transform: rotate(-1deg); }
+.glance .tile:nth-child(even) { transform: rotate(1.2deg); }
+.glance .ti { display: block; margin-bottom: 3px; font: 20px/1 system-ui, sans-serif; color: #8a6a2a; }
+.glance b { display: block; font: 700 28px/1.1 Cinzel, Georgia, serif; color: var(--ink); }
+.glance b i { margin: 0 4px; font-style: normal; color: var(--muted); }
+.glance span { font: 11.5px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* the verdicts, as a ladder of medals: gold, silver, bronze, and a glass raised by the conspirators */
+.rankladder { display: grid; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.rankladder li { display: flex; align-items: center; gap: 12px; padding: 6px 12px 6px 6px; background: #fbf6ea; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.rankladder b { flex: none; display: grid; place-items: center; min-width: 64px; height: 34px; padding: 0 8px; border-radius: 17px;
+  font: 700 16px Cinzel, Georgia, serif; color: #fff; box-shadow: inset 0 -3px 0 rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.35); }
+.rankladder span { font-size: 15.5px; font-style: italic; line-height: 1.3; }
+.rankladder .r0 b { background: linear-gradient(#f6de8e, #b8902a); color: #3a2a08; }
+.rankladder .r1 b { background: linear-gradient(#f0f0ec, #a0a098); color: #2a2a28; }
+.rankladder .r2 b { background: linear-gradient(#e4ac7c, #94562a); }
+.rankladder .r3 b { background: linear-gradient(#b4404a, #5a0e14); }
+/* a day at Ravenhill: the hours along a strip of sky, from midnight blue through dawn and noon to dusk */
+.dayclock { position: relative; margin: 14px 0 6px; padding: 0 0 0 58px; list-style: none; }
+.dayclock::before { content: ""; position: absolute; left: 14px; top: 12px; bottom: 12px; width: 10px; border-radius: 5px;
+  background: linear-gradient(#141a36, #2c3566 16%, #c0706a 30%, #e8b860 44%, #f3dc92 62%, #d89a58 82%, #5a3a6a); box-shadow: inset 0 0 3px rgba(0,0,0,.45); }
+.dayclock li { position: relative; margin-bottom: 8px; padding: 8px 12px 9px; background: #fbf6ea; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.dayclock .medal { position: absolute; left: -57px; top: 50%; transform: translateY(-50%); }
+.dayclock .medal b { font: 900 20px/1 system-ui, sans-serif; -webkit-text-stroke: .04em currentColor; }
+.dayclock .clock { float: right; margin-left: 8px; font: 12px var(--typed); letter-spacing: .06em; color: var(--muted); }
+.dayclock h4 { margin: 0 0 2px; font: 14px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+.dayclock p { margin: 0; font-size: 14.5px; line-height: 1.35; }
+/* the eight nights: a column per kind of night, each night with its moon; the last one is the drawing room */
+.nightgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 12px 0; }
+.ng-kind { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 2px 2px 6px; text-align: center; border-bottom: 2px solid var(--line); }
+.ng-kind span { font: 19px/1 system-ui, sans-serif; }
+.ng-kind b { font: 11px/1.2 var(--typed); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.ng-night { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px 9px; text-align: center;
+  background: #fbf6ea; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.ng-night svg { width: 26px; height: 26px; }
+.ng-night .disc { fill: #2a2438; stroke: #6a5a40; stroke-width: .7; }
+.ng-night .lit { fill: #efe2b4; }
+.ng-night b { font: 700 15px/1 Cinzel, Georgia, serif; color: var(--ink); }
+.ng-night span { font-size: 13.5px; line-height: 1.2; }
+.ng-night em { font: normal 10.5px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: #6a4a14; }
+.ng-night.past { opacity: .62; }
+.ng-night.past::after { content: "✓"; position: absolute; top: 4px; right: 6px; font: 700 12px system-ui, sans-serif; color: var(--good); }
+.ng-night.now { background: #efd896; box-shadow: 0 0 0 2px #a8843e, 0 3px 8px rgba(0,0,0,.25); }
+.ng-night.last { background: linear-gradient(#2a2234, #16121c); color: #f3e6c4; }
+.ng-night.last b { color: #f6e3b0; }
+.ng-night.last svg { filter: drop-shadow(0 0 6px rgba(255,240,200,.75)); }
+.ng-night.last.now { box-shadow: 0 0 0 2px #e6c783, 0 3px 10px rgba(0,0,0,.4); }
+.showdown { position: relative; display: flex; align-items: flex-end; min-height: 172px; margin: 12px 0 4px; overflow: hidden; border-radius: 3px;
+  background: #16121c; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.showdown img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.showdown::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,6,8,.94) 0 42%, rgba(10,6,8,.25)); }
+.sd-text { position: relative; z-index: 1; max-width: 64%; padding: 14px 16px; color: #efe4c8; }
+.sd-text span { font: 11.5px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: #c9a45c; }
+.sd-text h4 { margin: 3px 0 5px; font: 700 22px Cinzel, Georgia, serif; color: #f6e3b0; }
+.sd-text p { margin: 0; font-size: 14.5px; line-height: 1.4; }
+/* signs in the night: this case's conspirators' traces, as small cards of night sky */
+.signgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+.signcard { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 10px; align-items: center; padding: 9px 10px; border-radius: 3px;
+  background: radial-gradient(ellipse at 20% 30%, #2e2a44, #16121e); box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.signcard .si { grid-row: 1 / span 2; font: 26px/1 system-ui, sans-serif; filter: drop-shadow(0 0 6px rgba(255,220,150,.5)); }
+.signcard b { font: 700 18px/1.1 var(--hand); color: #f6e3b0; }
+.signcard span { font: 11.5px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: #b8a888; }
+.samples { display: grid; gap: 10px; }
+.sample { display: flex; align-items: center; gap: 14px; }
+.sample .visual { display: flex; flex: none; align-items: center; justify-content: center; gap: 8px; width: 108px; min-height: 52px; padding: 6px;
+  border-radius: 3px; background: linear-gradient(135deg, var(--cork), var(--cork-dark)); box-shadow: inset 0 0 12px rgba(0,0,0,.4); }
+.sample p { margin: 0; font-size: 15px; line-height: 1.35; }
+.smp-badge { display: inline-flex; flex-direction: column; padding: 1px 4px; border-radius: 2px; background: rgba(244,237,220,.94);
+  font: 700 14px/1.15 system-ui, sans-serif; box-shadow: 0 1px 2px rgba(0,0,0,.4); }
+.smp-badge .s { color: var(--ink-green); }
+.smp-badge .e { color: var(--ink-red); }
+.smp-badge i { margin-right: 1px; font-size: 1.2em; font-style: normal; -webkit-text-stroke: .05em currentColor; }
+.smp-strings { width: 92px; height: 40px; overflow: visible; }
+.smp-strings path { fill: none; stroke-linecap: round; }
+.smp-strings .out { stroke-width: 3; }
+.smp-strings .in { stroke-width: 2; stroke-dasharray: 5 4; }
+.smp-strings .e { stroke: var(--string-red); }
+.smp-strings .s { stroke: var(--string-green); }
+.smp-pin { width: 17px; height: 17px; border-radius: 50%; box-shadow: 0 2px 3px rgba(0,0,0,.5);
+  background: radial-gradient(circle at 35% 30%, #fff0b0, #b8902a 55%, #5a4010); }
+.smp-pin.good { background: radial-gradient(circle at 35% 30%, #b8f0c8, #2f7a4a 55%, #0e3a1e); }
+.smp-pin.bad { background: radial-gradient(circle at 35% 30%, #ff9a8a, #b3221b 55%, #5a0e0a); }
+.smp-polaroid { position: relative; width: 34px; height: 50px; padding: 2px 2px 8px; background: #f4eddc; box-shadow: 0 1px 3px rgba(0,0,0,.45); }
+.smp-polaroid::before { content: ""; display: block; height: 100%; background: linear-gradient(#3a3028, #1a1410); }
+.smp-polaroid.guess span { position: absolute; left: 2px; right: 2px; bottom: 8px; padding: 1px 0; background: rgba(244,237,220,.86);
+  font: 700 12px/1.1 var(--hand); color: #3a3f58; text-align: center; }  /* as board.css .rl.guess */
+.smp-piles { display: flex; gap: 4px; }
+.smp-piles i { display: grid; place-items: center; width: 26px; height: 32px; border: 2px dashed; border-radius: 3px; background: rgba(244,237,220,.92);
+  font: 700 13px/1 system-ui, sans-serif; font-style: normal; }
+.smp-piles .g { color: #9e1b1b; }
+.smp-piles .u { color: #6a5a44; }
+.smp-piles .n { color: #2a6a3c; }
+.seating { display: flex; align-items: center; gap: 16px; }
+.seating p { margin: 0; font-size: 15px; line-height: 1.4; }
+.smp-seating { flex: none; width: 168px; height: 168px; }
+.smp-seating .table { fill: #6a4a2a; stroke: #3a2414; stroke-width: 2; }
+.smp-seating .seat circle { fill: #f4eddc; stroke: #8a6a44; stroke-width: 1; }
+.smp-seating .seat text { font: 7px var(--typed); fill: #3a2a14; text-anchor: middle; dominant-baseline: central; }
+.smp-seating .seat.me circle { fill: #e6c783; stroke: #6a4a14; stroke-width: 2; }
+.smp-seating .seat.hand circle { stroke: #7a4aa8; stroke-width: 2.2; }
+.smp-seating .hands { fill: none; stroke: #7a4aa8; stroke-width: 2.5; stroke-linecap: round; opacity: .7; }
+.smp-seating .look { fill: none; stroke: #8a6420; stroke-width: 2; stroke-dasharray: 3 2; }
+.smp-seating marker path { fill: #8a6420; }
+.houserules { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.house { display: flex; gap: 10px; padding: 10px 10px 10px 8px; background: #fbf6ea; border-left: 3px solid #c24a3a; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.house .icon { flex: none; width: 28px; text-align: center; font: 22px/1 system-ui, sans-serif; }
+.house b { font: 14px var(--typed); letter-spacing: .08em; text-transform: uppercase; }
+.house p { margin: 3px 0 0; font-size: 14.5px; line-height: 1.35; color: var(--muted); }
+@media (max-width: 700px) {
+  .seating { flex-direction: column; }
+  .ruleshero { height: 140px; }
+  .rh-text h2 { font-size: 24px; }
+  .ng-kind b { display: none; }  /* the kinds by their icons alone */
+  .ng-night span { font-size: 12.5px; }
+  .showdown::after { background: linear-gradient(rgba(10,6,8,.4), rgba(10,6,8,.94) 55%); }
+  .sd-text { max-width: none; padding-top: 70px; }
+}
+/* Events tab: the event cards under their groups (events.js GROUPS) */
+.evgroup + .evgroup { margin-top: 26px; }
+/* the kinds of night, explained in the role-step style (.role-steps), and each group's heading with its icon */
+.evkinds { margin: 0 0 24px; padding: 12px 14px; background: #fbf6ea; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.evkinds h3 { margin: 0 0 6px; }
+.evkinds .role-steps { gap: 8px; }
+.evgroup-head { display: flex; align-items: center; gap: 8px; }
+.evgroup-head .step-icon { font-size: 18px; }
+.evtext .ev-steps { margin-top: 8px; }
+/* Events timeline: each night's kind under its numeral, a night whose event the schedule already settles, and the
+   gap where the second cycle of the kinds begins */
+.nights .kind { font-size: 12px; line-height: 1; opacity: .75; }
+.nights .expected .medal { border: 2px dashed var(--gold, #c9a45c); opacity: .85; }
+.nights .unknown .medal { font: 17px/1 system-ui, sans-serif; }
+.nights .cycle { margin-left: 14px; }

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>The nightcap on its tray: a gloved hand tips a vial into the brandy while a second figure keeps watch</title>
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="55%" r="80%">
+      <stop offset="0" stop-color="#2a1a2a"/>
+      <stop offset="1" stop-color="#050306"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="45%" cy="50%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="amber" cx="50%" cy="60%" r="60%">
+      <stop offset="0" stop-color="#ffb040"/>
+      <stop offset="1" stop-color="#8a4a10"/>
+    </radialGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the doorway at the end of the passage, and the one keeping watch -->
+  <rect x="262" y="36" width="54" height="120" fill="#3a2a30" opacity=".55"/>
+  <path d="M289 60 m-9 0 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0" fill="#060406"/>
+  <path d="M272 156 C272 88 306 88 306 156Z" fill="#060406"/>
+  <path d="M294 116 C298 112 303 116 299 121 L294 126 L289 121 C285 116 290 112 294 116Z" fill="#e0567a" opacity=".75" filter="url(#glow)"/>
+  <!-- candlelight on the tray -->
+  <circle cx="130" cy="140" r="60" fill="#ffb060" opacity=".16" filter="url(#soft)"/>
+  <!-- silver tray -->
+  <ellipse cx="130" cy="160" rx="78" ry="14" fill="#8a8a94"/>
+  <ellipse cx="130" cy="157" rx="74" ry="11" fill="#b8b8c4"/>
+  <ellipse cx="130" cy="156" rx="64" ry="8" fill="#9a9aa6"/>
+  <!-- decanter -->
+  <path d="M64 150 C54 132 60 116 72 112 L72 98 L80 98 L80 112 C92 116 98 132 88 150Z" fill="#3a2210" opacity=".9"/>
+  <path d="M60 138 C62 126 90 126 92 138 C94 146 90 150 88 150 L64 150 C62 150 58 146 60 138Z" fill="url(#amber)" opacity=".7"/>
+  <rect x="71" y="90" width="10" height="8" rx="2" fill="#c8c0d0" opacity=".7"/>
+  <!-- the brandy glass -->
+  <path d="M112 118 C104 132 110 148 130 148 C150 148 156 132 148 118Z" fill="#d8d0c8" opacity=".25" stroke="#e8e0d8" stroke-opacity=".6"/>
+  <path d="M109 134 C110 144 118 148 130 148 C142 148 150 144 151 134Z" fill="url(#amber)" filter="url(#glow)"/>
+  <rect x="128.5" y="148" width="3" height="6" fill="#d8d0c8" opacity=".5"/>
+  <ellipse cx="130" cy="155" rx="10" ry="2" fill="#d8d0c8" opacity=".5"/>
+  <!-- the gloved hand and its vial -->
+  <path d="M176 70 C190 64 214 66 232 72 L238 88 C220 84 200 86 186 92 C176 96 166 92 164 84 C162 78 168 73 176 70Z" fill="#141014"/>
+  <path d="M164 84 C160 90 162 96 170 96 L178 94" fill="none" stroke="#141014" stroke-width="7" stroke-linecap="round"/>
+  <g transform="rotate(-38 158 92)">
+    <rect x="150" y="80" width="10" height="24" rx="3" fill="#6ad8a0" opacity=".55" stroke="#9ae8c0" stroke-opacity=".7"/>
+    <rect x="151.5" y="74" width="7" height="7" rx="1" fill="#2a2024"/>
+  </g>
+  <path d="M146 104 C142 110 140 116 140 122" stroke="#7af0b0" stroke-width="1.6" fill="none" stroke-dasharray="2 4" filter="url(#glow)"/>
+  <circle cx="140" cy="128" r="1.8" fill="#7af0b0" filter="url(#glow)"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

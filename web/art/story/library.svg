@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>The library at a quarter past eleven: the armchair by the fire, the fallen glass, the safe standing open</title>
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="60%" r="85%">
+      <stop offset="0" stop-color="#5a2410"/>
+      <stop offset="1" stop-color="#060302"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="45%" cy="50%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="fire" cx="50%" cy="80%" r="60%">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset=".5" stop-color="#ff8a2a"/>
+      <stop offset="1" stop-color="#8a2008" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- bookshelves -->
+  <g fill="#1a0e08">
+    <rect x="0" y="20" width="44" height="140"/>
+    <rect x="316" y="20" width="44" height="140"/>
+  </g>
+  <g fill="#2e1a10">
+    <rect x="4" y="30" width="36" height="2"/><rect x="4" y="62" width="36" height="2"/><rect x="4" y="94" width="36" height="2"/><rect x="4" y="126" width="36" height="2"/>
+    <rect x="320" y="30" width="36" height="2"/><rect x="320" y="62" width="36" height="2"/><rect x="320" y="94" width="36" height="2"/><rect x="320" y="126" width="36" height="2"/>
+  </g>
+  <g fill="#3a2016">
+    <rect x="6" y="40" width="4" height="22"/><rect x="11" y="44" width="5" height="18"/><rect x="18" y="38" width="4" height="24"/><rect x="26" y="42" width="6" height="20"/>
+    <rect x="6" y="74" width="6" height="20"/><rect x="14" y="70" width="4" height="24"/><rect x="22" y="76" width="5" height="18"/>
+    <rect x="322" y="40" width="5" height="22"/><rect x="330" y="44" width="4" height="18"/><rect x="338" y="38" width="6" height="24"/>
+    <rect x="324" y="74" width="4" height="20"/><rect x="332" y="70" width="6" height="24"/><rect x="342" y="76" width="4" height="18"/>
+  </g>
+  <!-- fireplace -->
+  <rect x="62" y="80" width="96" height="10" fill="#2a1a12"/>
+  <rect x="68" y="90" width="84" height="70" fill="#140a06"/>
+  <rect x="80" y="104" width="60" height="56" fill="#050201"/>
+  <circle cx="110" cy="146" r="46" fill="#ff8a2a" opacity=".35" filter="url(#soft)"/>
+  <path d="M88 160 C92 138 100 146 104 128 C108 140 112 126 116 116 C120 134 128 136 132 160Z" fill="url(#fire)" filter="url(#glow)"/>
+  <!-- the armchair, turned to the fire, and the hand over its arm -->
+  <path d="M176 176 L176 112 C176 96 188 88 204 88 L226 88 C242 88 252 96 252 112 L252 176Z" fill="#0c0605"/>
+  <path d="M168 140 C168 128 186 128 186 140 L186 176 L168 176Z" fill="#0a0504"/>
+  <path d="M242 140 C242 128 260 128 260 140 L260 176 L242 176Z" fill="#0a0504"/>
+  <path d="M172 130 C166 134 164 146 165 158" stroke="#1e100a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <ellipse cx="165" cy="163" rx="4" ry="5.5" fill="#1e100a"/>
+  <path d="M162 166 L161 172 M164.5 167 L164.5 174 M167 166 L168 172" stroke="#1e100a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M168 130 C164 136 162 146 162 156" fill="none" stroke="#ff8a2a" stroke-opacity=".3" stroke-width="1.2"/>
+  <path d="M176 112 C180 100 190 94 204 94" fill="none" stroke="#ff8a2a" stroke-opacity=".35" stroke-width="2"/>
+  <!-- floor, the fallen glass and the spill -->
+  <rect x="0" y="176" width="360" height="24" fill="#120806"/>
+  <ellipse cx="150" cy="186" rx="26" ry="4" fill="#8a3a10" opacity=".55"/>
+  <g transform="rotate(-78 136 184)">
+    <path d="M128 176 C124 184 128 192 136 192 C144 192 148 184 144 176Z" fill="#d8d0c8" opacity=".3" stroke="#e8e0d8" stroke-opacity=".6"/>
+    <rect x="135" y="192" width="2" height="5" fill="#d8d0c8" opacity=".5"/>
+  </g>
+  <!-- the safe, standing open and empty -->
+  <rect x="274" y="60" width="36" height="36" rx="2" fill="#1c1c20" stroke="#3a3a40" stroke-width="2"/>
+  <rect x="279" y="65" width="26" height="26" fill="#030303"/>
+  <path d="M274 60 L260 54 L260 102 L274 96Z" fill="#2a2a30"/>
+  <circle cx="266" cy="78" r="4" fill="#141418" stroke="#8a7a50" stroke-width="1.2"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

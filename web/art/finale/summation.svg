@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>The accusation: beside the lamp and the open case file with its photographs spread out, a hand in a dark sleeve points across the room at the armchair in the firelight</title>
+  <defs>
+    <radialGradient id="bg" cx="72%" cy="66%" r="85%">
+      <stop offset="0" stop-color="#6a3014"/>
+      <stop offset=".5" stop-color="#1e1520"/>
+      <stop offset="1" stop-color="#04050a"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="fire" cx="50%" cy="85%" r="65%">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset=".5" stop-color="#ff7a24"/>
+      <stop offset="1" stop-color="#8a2008" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c3a5a"/>
+      <stop offset="1" stop-color="#5c6e96"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe4a8"/>
+      <stop offset="1" stop-color="#e08a3a"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+    <g id="ph"><rect width="13" height="10" fill="#e6dccb"/><rect x="1.3" y="1.3" width="10.4" height="7.4" fill="#2e2824"/><path d="M4 8.7 C4 6 8 6 8 8.7Z M7.4 4.4 A1.4 1.4 0 1 1 7.39 4.3Z" fill="#6a5e52"/></g>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the curtained window, cold snow light -->
+  <circle cx="176" cy="68" r="44" fill="#7a90c0" opacity=".14" filter="url(#soft)"/>
+  <rect x="146" y="14" width="58" height="104" fill="url(#pane)"/>
+  <path d="M146 66 H204 M175 14 V66" stroke="#0c0e16" stroke-width="2.4"/>
+  <rect x="142" y="116" width="66" height="4" fill="#161420"/>
+  <path d="M132 8 C138 50 136 96 140 122 H149 C146 90 148 40 150 8Z M218 8 C212 50 214 96 210 122 H201 C204 90 202 40 200 8Z" fill="#110c12"/>
+  <path d="M0 150 H360" stroke="#2a1a14" stroke-width="1.2"/>
+  <!-- the fireplace behind the chair -->
+  <circle cx="296" cy="138" r="54" fill="#ff8a30" opacity=".42" filter="url(#soft)"/>
+  <rect x="246" y="98" width="96" height="5" fill="#3a2214"/>
+  <rect x="252" y="103" width="84" height="59" fill="#24140c"/>
+  <rect x="266" y="120" width="56" height="42" fill="#060201"/>
+  <path d="M298 162 C300 152 305 155 307 146 C310 154 313 150 315 142 C317 152 320 156 321 162Z" fill="url(#fire)" filter="url(#glow)"/>
+  <!-- floor and the long shadow of the chair -->
+  <rect x="0" y="162" width="360" height="38" fill="#0e0a0c"/>
+  <path d="M252 162 H340 L330 200 H240Z" fill="#ff8a30" opacity=".18" filter="url(#soft)"/>
+  <path d="M240 162 H300 L250 200 H140Z" fill="#000" opacity=".55"/>
+  <!-- the armchair, turned away, lit from behind -->
+  <path d="M240 162 V110 C236 106 236 96 242 94 C246 88 254 86 270 86 C286 86 294 88 298 94 C304 96 304 106 300 110 V162Z M242 162 h4 v5 h-4Z M294 162 h4 v5 h-4Z M240 162 V128 C234 128 232 132 233 138 V162Z M300 162 V128 C306 128 308 132 307 138 V162Z" fill="#0b0605"/>
+  <path d="M258 86.6 C286 86 294 88 298 94 C304 96 304 106 300 110 V160" fill="none" stroke="#ffa048" stroke-opacity=".75" stroke-width="1.6" filter="url(#glow)"/>
+  <path d="M240 160 V110 C236 106 236 98 240 95" fill="none" stroke="#ffa048" stroke-opacity=".3"/>
+  <path d="M300 128 C306 128 308 132 307 138 V160" fill="none" stroke="#ffa048" stroke-opacity=".6" stroke-width="1.2"/>
+  <!-- the side table, lamp, case file and photographs -->
+  <circle cx="72" cy="112" r="34" fill="#ffb060" opacity=".45" filter="url(#soft)"/>
+  <rect x="112" y="166" width="12" height="34" fill="#140a06"/>
+  <ellipse cx="118" cy="154" rx="78" ry="14" fill="#170c06"/>
+  <ellipse cx="118" cy="152" rx="78" ry="14" fill="#2c180c"/>
+  <ellipse cx="84" cy="150" rx="40" ry="9" fill="#ffb060" opacity=".25"/>
+  <path d="M40 154 C60 166 170 168 196 154" fill="none" stroke="#ffb060" stroke-opacity=".3"/>
+  <path d="M64 145 A8 2.5 0 0 0 80 145 A8 2.5 0 0 0 64 145Z M70.6 116 h2.8 v29 h-2.8Z" fill="#0e0806"/>
+  <path d="M59 118 H85 L78 99 H66Z" fill="url(#shade)" filter="url(#glow)"/>
+  <path d="M94 153 L130 147 L134 159 L96 165Z M130 147 L168 143 L174 155 L134 159Z" fill="#9a7a52"/>
+  <path d="M97 153.5 L128 148.5 L131.5 158 L99 163Z M132 148 L166 144.5 L171 154 L135.5 157.5Z" fill="#e2d6ba"/>
+  <path d="M102 156 L122 152.6 M103 159 L118 156.6" stroke="#8a7a60" stroke-width=".6"/>
+  <use href="#ph" transform="translate(142 145) scale(1 .6) rotate(-10)"/>
+  <use href="#ph" transform="translate(154 149) scale(1 .6) rotate(18)"/>
+  <use href="#ph" transform="translate(176 148) scale(1 .6) rotate(8)"/>
+  <use href="#ph" transform="translate(110 147) scale(1 .6) rotate(-4)"/>
+  <use href="#ph" transform="translate(84 154) scale(1 .6) rotate(-22)"/>
+  <!-- the pointing hand in a dark sleeve -->
+  <g transform="translate(148 84) rotate(8)">
+    <path d="M-200 -18 C-120 -15 -40 -12 -6 -10 L-3 -11 L-1 11 L-6 10 C-40 12 -120 18 -200 24Z" fill="#0a0708"/>
+    <path d="M-70 -7 C-48 -5 -30 -1 -14 0 M-3 -11 L-1 11" fill="none" stroke="#1e1614" stroke-width="1.2"/>
+    <path d="M0 -8 C8 -11 14 -10 19 -8 L20 -1 C24 -1 25 3 22 4 C25 5 24 9 20 9 C12 10 4 10 0 9Z M17 -8 L40 -6.5 C43.5 -6.2 43.5 -1.6 40 -1.4 L18 -0.6Z" fill="#0c0808"/>
+    <path d="M-140 16.5 C-80 13 -30 11 -6 10 M2 9.5 C10 10 16 10 20 9 M8 -2 C12 -1 16 1 19 3" fill="none" stroke="#ffb060" stroke-opacity=".5" stroke-width="1.1"/>
+    <path d="M41 -6.2 C43.6 -5.6 43.6 -2.2 41 -1.5" fill="none" stroke="#ffa048" stroke-opacity=".7"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

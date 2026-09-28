@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>The thaw at dawn: icicles drip from the manor eaves as the magistrate's motor car comes up the cleared drive, headlamps burning</title>
+  <defs>
+    <radialGradient id="bg" cx="80%" cy="50%" r="95%">
+      <stop offset="0" stop-color="#f6c888"/>
+      <stop offset=".16" stop-color="#d88a5e"/>
+      <stop offset=".42" stop-color="#4a3a5c"/>
+      <stop offset="1" stop-color="#0a0e1c"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="55%" cy="55%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8f2ff"/>
+      <stop offset="1" stop-color="#8ab4e8" stop-opacity=".3"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe8a8" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#ffe8a8" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the sun lifting over the moor -->
+  <circle cx="292" cy="100" r="60" fill="#ffd8a0" opacity=".35" filter="url(#soft)"/>
+  <circle cx="292" cy="100" r="13" fill="#fff0c8" filter="url(#glow)"/>
+  <!-- far ridge and near moor, snow going in patches -->
+  <path d="M0 104 C50 94 100 100 150 96 C200 92 250 102 300 100 C330 99 350 96 360 98 V200 H0Z" fill="#2c2838"/>
+  <path d="M0 118 C60 110 120 116 180 112 C240 108 300 116 360 112 V200 H0Z" fill="#171a26"/>
+  <g fill="#b8c4d8" opacity=".6">
+    <path d="M40 124 C56 118 82 120 96 126 C80 130 56 130 40 124Z"/>
+    <path d="M110 140 C130 134 150 138 158 144 C140 148 120 146 110 140Z"/>
+    <path d="M280 124 C300 118 330 120 346 126 C326 130 300 130 280 124Z"/>
+    <path d="M296 150 C312 144 336 148 344 154 C326 158 306 156 296 150Z"/>
+    <path d="M60 170 C84 162 116 166 124 174 C100 178 76 178 60 170Z"/>
+  </g>
+  <g fill="#7a8298" opacity=".45">
+    <path d="M150 104 C164 101 180 102 188 104 C174 106 160 106 150 104Z"/>
+    <path d="M226 106 C236 103 250 104 256 106 C246 108 234 108 226 106Z"/>
+  </g>
+  <!-- the cleared drive, wet and shining -->
+  <path d="M262 106 C240 110 200 118 190 134 C178 152 150 176 118 200 H322 C282 176 254 152 248 134 C250 122 260 112 272 106Z" fill="#2a2430"/>
+  <path d="M262 106 C240 110 200 118 190 134 C178 152 150 176 118 200 M272 106 C260 112 250 122 248 134 C254 152 282 176 322 200" fill="none" stroke="#c8d0e2" stroke-opacity=".55" stroke-width="2.4"/>
+  <path d="M252 116 C258 112 264 109 268 107" stroke="#f0b880" stroke-opacity=".4" stroke-width="2"/>
+  <g fill="#e8a878" opacity=".45">
+    <ellipse cx="236" cy="160" rx="12" ry="2"/><ellipse cx="200" cy="178" rx="16" ry="2.4"/><ellipse cx="262" cy="188" rx="14" ry="2.2"/>
+  </g>
+  <!-- the motor car, coming on -->
+  <g transform="translate(218 136)">
+    <path d="M-12 -14 L-44 64 L-4 64Z M12 -14 L44 64 L4 64Z" fill="url(#beam)"/>
+    <ellipse cx="0" cy="1" rx="30" ry="3" fill="#07080c" opacity=".7"/>
+    <rect x="-25" y="-14" width="7" height="15" rx="3" fill="#07080c"/>
+    <rect x="18" y="-14" width="7" height="15" rx="3" fill="#07080c"/>
+    <path d="M-29 -7 C-29 -18 -14 -18 -14 -7Z M29 -7 C29 -18 14 -18 14 -7Z" fill="#0e1018"/>
+    <rect x="-15" y="-22" width="30" height="16" fill="#10131c"/>
+    <path d="M-16 -22 V-35 Q0 -39 16 -35 V-22Z" fill="#0c0e16"/>
+    <rect x="-12" y="-33" width="24" height="10" fill="#e8a888" opacity=".35"/>
+    <path d="M0 -33 V-23" stroke="#0c0e16" stroke-width="1.4"/>
+    <rect x="-5" y="-24" width="10" height="18" rx="1.5" fill="#1a1c24" stroke="#c8b898" stroke-width="1.2"/>
+    <path d="M-2 -21 V-9 M0 -21 V-9 M2 -21 V-9" stroke="#3a3c46" stroke-width=".6"/>
+    <rect x="-1.5" y="-27" width="3" height="3" fill="#c8b898"/>
+    <rect x="-20" y="-6" width="40" height="2.4" fill="#8a8070"/>
+    <path d="M-11 -10 V-14 M11 -10 V-14" stroke="#10131c" stroke-width="1.4"/>
+    <circle cx="-11" cy="-15" r="12" fill="#ffd890" opacity=".45" filter="url(#soft)"/>
+    <circle cx="11" cy="-15" r="12" fill="#ffd890" opacity=".45" filter="url(#soft)"/>
+    <circle cx="-11" cy="-15" r="3.6" fill="#fff4cc" filter="url(#glow)"/>
+    <circle cx="11" cy="-15" r="3.6" fill="#fff4cc" filter="url(#glow)"/>
+  </g>
+  <!-- the manor's corner, eaves and dripping icicles -->
+  <rect x="0" y="26" width="24" height="174" fill="#0a0b12"/>
+  <rect x="6" y="70" width="12" height="30" fill="#ffb050" opacity=".55" filter="url(#glow)"/>
+  <path d="M0 0 H158 L146 22 H0Z" fill="#07080c"/>
+  <rect x="0" y="22" width="148" height="4" fill="#12141c"/>
+  <path d="M146 22 L158 0" stroke="#e8a878" stroke-opacity=".35" stroke-width="1.2"/>
+  <g fill="url(#ice)" filter="url(#glow)">
+    <path d="M28 26 L31 50 L34 26Z"/><path d="M40 26 L42 38 L44 26Z"/><path d="M52 26 L55.5 58 L59 26Z"/>
+    <path d="M66 26 L68 40 L70 26Z"/><path d="M78 26 L81 52 L84 26Z"/><path d="M92 26 L94 36 L96 26Z"/>
+    <path d="M104 26 L107 48 L110 26Z"/><path d="M118 26 L120 40 L122 26Z"/><path d="M130 26 L132.5 46 L135 26Z"/>
+  </g>
+  <g fill="#d8ecff" filter="url(#glow)">
+    <ellipse cx="55.5" cy="66" rx="1.1" ry="1.8"/><ellipse cx="81" cy="62" rx="1" ry="1.6"/><ellipse cx="107" cy="58" rx="1" ry="1.6"/>
+    <ellipse cx="31" cy="60" rx="1" ry="1.6"/><ellipse cx="81" cy="80" rx="1" ry="1.6"/><ellipse cx="132.5" cy="60" rx="1" ry="1.6"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

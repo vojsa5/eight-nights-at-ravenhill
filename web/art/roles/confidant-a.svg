@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
+  <title>Confidant</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="78%">
+      <stop offset="0" stop-color="#5a4226"/>
+      <stop offset="1" stop-color="#070503"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="72%">
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".8"/>
+    </radialGradient>
+    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="200" height="262" fill="url(#bg)"/>
+  <g fill="#f0d6a0" opacity=".62" filter="url(#halo)">
+    <path d="M14 300 L14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 L186 300 Z"/>
+    <path d="M60 184 L76 146 L92 180 Z"/>
+    <path d="M140 184 L124 146 L108 180 Z"/>
+    <path d="M86 136 L86 180 L114 180 L114 136 Z"/>
+    <ellipse cx="100" cy="108" rx="27" ry="33"/>
+    <path d="M66 100 C62 60 138 60 134 100 C124 92 76 92 66 100 Z"/>
+    <path d="M64 100 C80 94 120 94 136 100 L136 104 C120 98 80 98 64 104 Z"/>
+  </g>
+  <g fill="#0b0a0f">
+    <path d="M14 300 L14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 L186 300 Z"/>
+    <path d="M60 184 L76 146 L92 180 Z"/>
+    <path d="M140 184 L124 146 L108 180 Z"/>
+    <path d="M86 136 L86 180 L114 180 L114 136 Z"/>
+    <ellipse cx="100" cy="108" rx="27" ry="33"/>
+    <path d="M66 100 C62 60 138 60 134 100 C124 92 76 92 66 100 Z"/>
+    <path d="M64 100 C80 94 120 94 136 100 L136 104 C120 98 80 98 64 104 Z"/>
+  </g>
+  <defs>
+    <clipPath id="clip-left-110">
+      <path d="M110 184 L140.0 184 L140.0 184.0 L146.0 189.75 L140.0 195.5 L146.0 201.25 L140.0 207.0 L146.0 212.75 L140.0 218.5 L146.0 224.25 L140.0 230.0 L110 230 Z"/>
+    </clipPath>
+  </defs>
+  <rect x="102" y="176" width="82" height="62" fill="#ffe2a0" opacity=".22" filter="url(#blur8)"/>
+  <g clip-path="url(#clip-left-110)" filter="url(#glow)">
+    <rect x="110" y="184" width="66" height="46" fill="#e8d6b0"/>
+    <rect x="113" y="187" width="60" height="40" fill="#c9ad7c"/>
+    <circle cx="131.78" cy="202.56235294117647" r="4.6000000000000005" fill="#5a4630"/>
+    <path d="M126.36823529411765 203.91529411764708 C125.01529411764706 195.79764705882354 138.54470588235296 195.79764705882354 137.19176470588235 203.91529411764708 Z" fill="#3a2a18"/>
+    <path d="M123.66235294117647 221.5035294117647 C123.66235294117647 210.68 139.89764705882354 210.68 139.89764705882354 221.5035294117647 Z" fill="#5a4630"/>
+    <circle cx="154.22" cy="202.56235294117647" r="4.6000000000000005" fill="#5a4630"/>
+    <path d="M146.10235294117646 221.5035294117647 C146.10235294117646 210.68 162.33764705882353 210.68 162.33764705882353 221.5035294117647 Z" fill="#5a4630"/>
+    <path d="M136.4 212.52 L149.6 212.52" stroke="#5a4630" stroke-width="3.2857142857142856"/>
+  </g>
+  <rect width="200" height="262" fill="url(#vig)"/>
+</svg>

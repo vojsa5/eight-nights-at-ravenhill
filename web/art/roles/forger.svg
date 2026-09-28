@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
+  <title>Forger</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="78%">
+      <stop offset="0" stop-color="#1c2a4a"/>
+      <stop offset="1" stop-color="#03050b"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="72%">
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".8"/>
+    </radialGradient>
+    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="200" height="262" fill="url(#bg)"/>
+  <circle cx="100" cy="190" r="70" fill="#ffd9a0" opacity=".16" filter="url(#blur8)"/>
+  <g fill="#9fb4e0" opacity=".62" filter="url(#halo)">
+    <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
+    <path d="M86 136 L86 180 L114 180 L114 136 Z"/>
+    <ellipse cx="100" cy="108" rx="27" ry="33"/>
+  </g>
+  <g fill="#0b0a0f">
+    <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
+    <path d="M86 136 L86 180 L114 180 L114 136 Z"/>
+    <ellipse cx="100" cy="108" rx="27" ry="33"/>
+  </g>
+  <path d="M70 98 Q100 78 130 98 L126 104 Q100 88 74 104Z" fill="#3fa66a" opacity=".85" filter="url(#glow)"/>
+  <circle cx="111" cy="114" r="6" fill="#bcd6ff" stroke="#e6c783" stroke-width="2" filter="url(#glow)"/>
+  <g transform="rotate(-4 100 196)">
+    <rect x="54" y="166" width="92" height="60" rx="2" fill="#efe2c0" filter="url(#glow)"/>
+    <path d="M62 180 q8 -4 16 0 t16 0 t16 0 t16 0" fill="none" stroke="#6a5a40" stroke-width="1.4"/>
+    <path d="M62 190 q8 -4 16 0 t16 0 t16 0 t16 0" fill="none" stroke="#6a5a40" stroke-width="1.4"/>
+    <path d="M62 200 q8 -4 16 0 t16 0 t16 0 t16 0" fill="none" stroke="#6a5a40" stroke-width="1.4"/>
+    <circle cx="128" cy="212" r="8" fill="#b3221b"/>
+    <circle cx="128" cy="212" r="4" fill="#7a1010"/>
+  </g>
+  <path d="M92 150 L100 178 L108 150 Z" fill="#e6c783" filter="url(#glow)"/>
+  <circle cx="100" cy="186" r="3" fill="#10131a"/>
+  <rect width="200" height="262" fill="url(#vig)"/>
+</svg>

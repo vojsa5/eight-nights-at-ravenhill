@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A portable typewriter under a desk lamp, a press card with a small photograph propped against it, and a reporter's notebook with a pencil</title>
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="35%" r="85%">
+      <stop offset="0" stop-color="#3a3024"/>
+      <stop offset="1" stop-color="#050404"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="52%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffcf80" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffcf80" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd890" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#ffd890" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="enamel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2622"/>
+      <stop offset="1" stop-color="#0e0d0c"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- desk -->
+  <rect x="0" y="118" width="360" height="82" fill="#1a1109"/>
+  <rect x="0" y="118" width="360" height="2" fill="#2e1e10"/>
+  <ellipse cx="182" cy="146" rx="150" ry="46" fill="url(#pool)"/>
+  <!-- the desk lamp -->
+  <path d="M112 28 C100 10 62 12 58 44 L58 150" fill="none" stroke="#4a3a24" stroke-width="3"/>
+  <ellipse cx="58" cy="152" rx="16" ry="4" fill="#3a2c1a"/>
+  <path d="M92 50 L136 50 L250 156 L96 156Z" fill="url(#beam)" filter="url(#soft)"/>
+  <path d="M102 28 Q114 20 126 28 L138 50 L90 50Z" fill="#2c2824"/>
+  <path d="M104 30 Q114 24 124 30" fill="none" stroke="#8a7048" stroke-width="1" opacity=".6"/>
+  <ellipse cx="114" cy="50" rx="24" ry="3" fill="#ffe2a0" filter="url(#glow)"/>
+  <!-- the typewriter -->
+  <ellipse cx="190" cy="156" rx="80" ry="7" fill="#000" opacity=".55" filter="url(#soft)"/>
+  <rect x="164" y="52" width="52" height="44" fill="#eee4cc"/>
+  <path d="M170 60 L206 60 M170 65 L210 65 M170 70 L198 70 M170 75 L208 75 M170 80 L190 80" stroke="#4a4038" stroke-width=".8"/>
+  <path d="M142 90 L128 78 L122 80" fill="none" stroke="#b0a890" stroke-width="2" stroke-linecap="round"/>
+  <rect x="136" y="90" width="108" height="11" rx="5.5" fill="#121214"/>
+  <path d="M140 91.5 L240 91.5" stroke="#8a7a58" stroke-width="1" opacity=".6"/>
+  <path d="M156 88 L224 88" stroke="#a8a294" stroke-width="1.5"/>
+  <circle cx="131" cy="95.5" r="6" fill="#1a1a1c" stroke="#6a5a40"/>
+  <circle cx="249" cy="95.5" r="6" fill="#1a1a1c" stroke="#6a5a40"/>
+  <path d="M134 101 L246 101 L260 146 Q260 152 254 152 L126 152 Q120 152 120 146Z" fill="url(#enamel)"/>
+  <path d="M134 101 L246 101" stroke="#9a8458" stroke-width="1" opacity=".7"/>
+  <path d="M160 101 A30 13 0 0 0 220 101Z" fill="#050506"/>
+  <path d="M166 101 L178 112 M172 101 L182 113 M178 101 L186 113 M184 101 L190 114 M190 101 L190 114 M196 101 L194 114 M202 101 L198 113 M208 101 L202 113 M214 101 L206 112" stroke="#6a665e" stroke-width=".7"/>
+  <rect x="184" y="98.5" width="12" height="3" fill="#8a2020"/>
+  <circle cx="146" cy="106" r="6" fill="#26241f" stroke="#4a4436"/>
+  <circle cx="234" cy="106" r="6" fill="#26241f" stroke="#4a4436"/>
+  <g fill="none" stroke-linecap="round" stroke-dasharray="0 9">
+    <path d="M154 118 H226.1 M149.5 127 H230.6 M145 136 H235.1" stroke="#5a5448" stroke-width="7.4"/>
+    <path d="M154 118 H226.1 M149.5 127 H230.6 M145 136 H235.1" stroke="#cfc6ae" stroke-width="5.8"/>
+  </g>
+  <rect x="162" y="142.5" width="56" height="4" rx="2" fill="#cfc6ae" stroke="#5a5448" stroke-width=".8"/>
+  <rect x="118" y="152" width="144" height="4" fill="#0a0908"/>
+  <!-- the press card, propped against it -->
+  <g transform="rotate(-9 266 156)">
+    <rect x="252" y="116" width="30" height="40" rx="1.5" fill="#e6dcc2"/>
+    <rect x="252" y="116" width="30" height="6" rx="1" fill="#8a1c1c"/>
+    <rect x="256" y="126" width="11" height="13" fill="#5a5048"/>
+    <rect x="256" y="126" width="11" height="5" fill="#7a6e60"/>
+    <path d="M270 128 L278 128 M270 132 L277 132 M270 136 L278 136 M256 145 L278 145 M256 149 L270 149" stroke="#5a4c3c" stroke-width=".8"/>
+  </g>
+  <!-- the notebook and pencil -->
+  <g transform="rotate(-12 108 160)">
+    <rect x="92" y="144" width="38" height="40" fill="#000" opacity=".4" filter="url(#soft)"/>
+    <rect x="88" y="140" width="38" height="40" rx="1" fill="#e8e0c8"/>
+    <path d="M92 150 q2 -3 4 0 t4 0 l6 -2 q2 3 4 0 l8 1 M92 156 q3 -3 5 0 l5 -1 q2 -3 4 0 t4 0 l4 -1 M92 162 l7 -1 q2 3 4 0 t4 0 q2 -2 4 0 M92 168 q2 -3 4 0 l8 -1 q2 3 4 0 t5 0 M92 174 q3 -2 5 0 l6 -1" fill="none" stroke="#3e3e50" stroke-width=".8"/>
+    <g fill="none" stroke="#a8a8a0" stroke-width="1">
+      <ellipse cx="92" cy="140" rx="1.4" ry="2.4"/><ellipse cx="96.5" cy="140" rx="1.4" ry="2.4"/><ellipse cx="101" cy="140" rx="1.4" ry="2.4"/><ellipse cx="105.5" cy="140" rx="1.4" ry="2.4"/><ellipse cx="110" cy="140" rx="1.4" ry="2.4"/><ellipse cx="114.5" cy="140" rx="1.4" ry="2.4"/><ellipse cx="119" cy="140" rx="1.4" ry="2.4"/><ellipse cx="123.5" cy="140" rx="1.4" ry="2.4"/>
+    </g>
+  </g>
+  <g transform="translate(94 184) rotate(-30)">
+    <rect x="10" y="-2.2" width="46" height="4.4" fill="#c8922a"/>
+    <rect x="10" y="-.8" width="46" height="1" fill="#e8b850"/>
+    <path d="M10 -2.2 L0 0 L10 2.2Z" fill="#e8c89a"/>
+    <path d="M3.5 -.8 L0 0 L3.5 .8Z" fill="#2a2a2a"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

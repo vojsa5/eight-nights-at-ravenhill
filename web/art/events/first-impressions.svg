@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>First Impressions</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#7a5a2a"/>
+      <stop offset="1" stop-color="#0e0905"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <circle cx="180" cy="20" r="70" fill="#ffe6a0" opacity=".35" filter="url(#blur8)"/>
+  <circle cx="206.0" cy="24.0" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="201.03444185374863" cy="28.702282018339787" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="188.03444185374863" cy="31.60845213036123" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="171.96555814625137" cy="31.60845213036123" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="158.96555814625137" cy="28.702282018339787" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="154.0" cy="24.0" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="158.96555814625137" cy="19.297717981660217" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="171.96555814625137" cy="16.39154786963877" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="188.03444185374863" cy="16.39154786963877" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle cx="201.03444185374863" cy="19.297717981660213" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <path d="M150 22 Q180 40 210 22" fill="none" stroke="#e6c783" stroke-width="2"/>
+  <g fill="#ffd79a" opacity=".6" filter="url(#halo)">
+    <g transform="translate(96 118) scale(1.15)">
+      <ellipse cx="0" cy="-34" rx="17" ry="21"/>
+      <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
+      <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
+    </g>
+    <g transform="translate(264 118) scale(1.15)">
+      <ellipse cx="0" cy="-34" rx="17" ry="21"/>
+      <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
+      <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
+    </g>
+  </g>
+  <g fill="#0b0a0f">
+    <g transform="translate(96 118) scale(1.15)">
+      <ellipse cx="0" cy="-34" rx="17" ry="21"/>
+      <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
+      <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
+    </g>
+    <g transform="translate(264 118) scale(1.15)">
+      <ellipse cx="0" cy="-34" rx="17" ry="21"/>
+      <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
+      <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
+    </g>
+  </g>
+  <g fill="#1a1410" stroke="#ffd79a" stroke-width="1.2" stroke-opacity=".8">
+    <path d="M128 156 C146 140 162 134 176 134 L178 146 C164 147 150 153 138 166Z"/>
+    <path d="M232 156 C214 140 198 134 184 134 L182 146 C196 147 210 153 222 166Z"/>
+    <ellipse cx="180" cy="140" rx="10" ry="8"/>
+  </g>
+  <rect x="0" y="176" width="360" height="24" fill="#1a110a"/>
+  <rect x="57" y="152" width="6" height="26" rx="1.5" fill="#efe0c8"/>
+  <circle cx="60" cy="146" r="14.4" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
+  <path d="M60 137.9 C64.5 144.2 63.6 149.6 60 150.5 C56.4 149.6 55.5 144.2 60 137.9Z" fill="#ffd27a" filter="url(#glow)"/>
+  <rect x="297" y="152" width="6" height="26" rx="1.5" fill="#efe0c8"/>
+  <circle cx="300" cy="146" r="14.4" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
+  <path d="M300 137.9 C304.5 144.2 303.6 149.6 300 150.5 C296.4 149.6 295.5 144.2 300 137.9Z" fill="#ffd27a" filter="url(#glow)"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

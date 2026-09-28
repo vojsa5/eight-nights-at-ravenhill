@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>A tumbler laid on its side on a nightstand, its rim pressed to the wallpaper for listening, beside a scrap of paper, with a safe dial in the shadows</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="55%" r="80%">
+      <stop offset="0" stop-color="#1c2a26"/>
+      <stop offset="1" stop-color="#040605"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+      <stop offset=".45" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".9"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="wp" width="18" height="22" patternUnits="userSpaceOnUse">
+      <rect width="18" height="22" fill="#1d2a25"/>
+      <path d="M9 2 C13 6 13 9 9 11 C5 9 5 6 9 2Z M9 11 C12 14 12 17 9 20 C6 17 6 14 9 11Z" fill="#314438"/>
+      <circle cx="0" cy="11" r="1.3" fill="#6a5a34"/><circle cx="18" cy="11" r="1.3" fill="#6a5a34"/>
+    </pattern>
+    <pattern id="wp2" href="#wp" patternTransform="matrix(.62 .3 0 1 0 0)"/>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- wallpapered corner: back wall and side wall -->
+  <rect width="224" height="150" fill="url(#wp)"/>
+  <path d="M224 0 L360 0 L360 200 L224 200Z" fill="url(#wp2)"/>
+  <path d="M224 0 L360 0 L360 200 L224 200Z" fill="#000" opacity=".35"/>
+  <path d="M224 0 L256 0 L256 200 L224 200Z" fill="#000" opacity=".3"/>
+  <path d="M224 150 L360 195 L360 200 L224 200Z" fill="#070a08"/>
+  <path d="M224 146 L360 190" stroke="#2a1c12" stroke-width="5"/>
+  <path d="M0 146 L224 146" stroke="#2a1c12" stroke-width="5"/>
+  <path d="M224 0 L224 150" stroke="#0a0f0c" stroke-width="2"/>
+  <!-- the safe, faint in the shadows -->
+  <g opacity=".38">
+    <rect x="52" y="38" width="52" height="50" rx="3" fill="#161a1a" stroke="#3a4040" stroke-width="2"/>
+    <circle cx="78" cy="63" r="13" fill="#0e1010" stroke="#7a6c48" stroke-width="2"/>
+    <circle cx="78" cy="63" r="4" fill="#2a2a28"/>
+    <path d="M78 51 L78 54 M90 63 L87 63 M78 75 L78 72 M66 63 L69 63" stroke="#a8986a" stroke-width="1.2"/>
+  </g>
+  <!-- candlelight on the wall and nightstand -->
+  <ellipse cx="190" cy="130" rx="140" ry="60" fill="url(#pool)"/>
+  <!-- nightstand -->
+  <path d="M110 140 L224 140 L292 162 L128 162Z" fill="#4a2e1a"/>
+  <path d="M110 140 L128 162 L128 200 L110 200Z" fill="#1a0f08"/>
+  <rect x="128" y="162" width="164" height="38" fill="#2c1b10"/>
+  <path d="M136 170 L284 170 L284 190 L136 190Z" fill="none" stroke="#1a0f08" stroke-width="1.5"/>
+  <circle cx="210" cy="180" r="2.6" fill="#b08a40"/>
+  <!-- candle stub -->
+  <rect x="128" y="120" width="10" height="26" fill="#e2d4b4"/>
+  <ellipse cx="133" cy="146" rx="11" ry="3" fill="#8a6a30"/>
+  <circle cx="133" cy="106" r="22" fill="#ffb050" opacity=".22" filter="url(#soft)"/>
+  <path d="M133 104 C137 110 137 116 133 118 C129 116 129 110 133 104Z" fill="#ffd27a" filter="url(#glow)"/>
+  <!-- scrap of paper -->
+  <path d="M150 148 L186 146 L190 157 L152 159Z" fill="#e8dcc0"/>
+  <g stroke="#4a3a2a" stroke-width="1.2" stroke-linecap="round">
+    <path d="M156 152 L162 152 M166 151.5 L172 151.5 M176 151 L182 151"/>
+    <path d="M158 155.5 q3 -2 6 0 t6 0"/>
+  </g>
+  <!-- the tumbler, rim to the wall -->
+  <circle cx="232" cy="136" r="22" fill="#d8eef0" opacity=".1" filter="url(#soft)"/>
+  <path d="M206 128 L252 121 L252 151 L206 151Z" fill="#cfe2e6" fill-opacity=".2" stroke="#e6f4f6" stroke-opacity=".75" stroke-width="1.2"/>
+  <ellipse cx="206" cy="139.5" rx="4" ry="11.5" fill="#cfe2e6" fill-opacity=".45" stroke="#f0fafc" stroke-width="1.2"/>
+  <ellipse cx="252" cy="136" rx="5" ry="15" fill="#10181a" fill-opacity=".3" stroke="#f0fafc" stroke-width="1.4" filter="url(#glow)"/>
+  <path d="M212 128 L246 123" stroke="#fff" stroke-width="1.4" opacity=".75"/>
+  <path d="M214 146 L240 146" stroke="#ffc070" stroke-width="1" opacity=".6"/>
+  <!-- what comes through the wall -->
+  <g fill="none" stroke="#e8d8a8" stroke-width="1.3" stroke-linecap="round" opacity=".55">
+    <path d="M263 126 q5 10 0 20"/>
+    <path d="M271 121 q7 15 0 30"/>
+    <path d="M279 116 q9 20 0 40"/>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

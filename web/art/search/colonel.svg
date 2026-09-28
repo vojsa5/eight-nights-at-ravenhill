@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+  <title>On top of a chest of drawers: a campaign medal on its striped ribbon, a small leather ledger, a swagger stick and an old pith helmet</title>
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="35%" r="85%">
+      <stop offset="0" stop-color="#3e2e1c"/>
+      <stop offset="1" stop-color="#050403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="52%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".85"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffcf80" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffcf80" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="khaki" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d4b888"/>
+      <stop offset=".55" stop-color="#a88c60"/>
+      <stop offset="1" stop-color="#5a4830"/>
+    </linearGradient>
+    <radialGradient id="gold" cx="38%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#ffe6a0"/>
+      <stop offset=".6" stop-color="#c89a40"/>
+      <stop offset="1" stop-color="#7a5a20"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <ellipse cx="80" cy="50" rx="110" ry="80" fill="url(#pool)" opacity=".5"/>
+  <!-- the chest of drawers -->
+  <path d="M36 96 L324 96 L336 154 L24 154Z" fill="#2a190d"/>
+  <path d="M36 96 L324 96" stroke="#40281480" stroke-width="1.5"/>
+  <rect x="22" y="154" width="316" height="6" fill="#3a2414"/>
+  <path d="M22 154.5 L338 154.5" stroke="#6a4424" stroke-width="1"/>
+  <rect x="26" y="160" width="308" height="40" fill="#170d06"/>
+  <rect x="36" y="166" width="288" height="30" fill="none" stroke="#2c1a0e" stroke-width="1.5"/>
+  <g fill="none" stroke="#b08a40" stroke-width="2">
+    <path d="M89 176 Q97 186 105 176"/><path d="M255 176 Q263 186 271 176"/>
+  </g>
+  <g fill="#b08a40"><circle cx="89" cy="176" r="2.4"/><circle cx="105" cy="176" r="2.4"/><circle cx="255" cy="176" r="2.4"/><circle cx="271" cy="176" r="2.4"/></g>
+  <ellipse cx="186" cy="128" rx="150" ry="44" fill="url(#pool)"/>
+  <!-- the ledger -->
+  <g transform="rotate(-8 100 124)">
+    <rect x="80" y="112" width="48" height="32" fill="#000" opacity=".45" filter="url(#soft)"/>
+    <rect x="76" y="140" width="48" height="3" fill="#d8ccb0"/>
+    <rect x="76" y="108" width="48" height="32" rx="2" fill="#4e2614"/>
+    <rect x="76" y="108" width="7" height="32" rx="1" fill="#34180c"/>
+    <path d="M118 108 L124 108 L124 114Z M124 134 L124 140 L118 140Z" fill="#b08a40"/>
+    <rect x="92" y="119" width="22" height="9" fill="#5e3018" stroke="#b08a40" stroke-width=".7"/>
+    <path d="M78 110 L122 110" stroke="#8a5430" stroke-width=".8" opacity=".6"/>
+  </g>
+  <!-- the medal -->
+  <ellipse cx="154" cy="126" rx="16" ry="22" fill="#000" opacity=".4" filter="url(#soft)"/>
+  <rect x="140" y="102" width="5" height="19" fill="#a41e1e"/>
+  <rect x="145" y="102" width="2" height="19" fill="#e8e0d0"/>
+  <rect x="147" y="102" width="6" height="19" fill="#1e3a78"/>
+  <rect x="153" y="102" width="2" height="19" fill="#e8e0d0"/>
+  <rect x="155" y="102" width="5" height="19" fill="#a41e1e"/>
+  <rect x="140" y="102" width="20" height="19" fill="#000" opacity=".12"/>
+  <rect x="138" y="99" width="24" height="4" rx="1" fill="#c8a048"/>
+  <path d="M147 121 L150 124 L153 121" fill="none" stroke="#c8a048" stroke-width="1.6"/>
+  <circle cx="150" cy="134" r="11" fill="url(#gold)" filter="url(#glow)"/>
+  <circle cx="150" cy="134" r="8" fill="none" stroke="#7a5a20" stroke-width=".8"/>
+  <path d="M150 128 L151.6 132.4 L156 134 L151.6 135.6 L150 140 L148.4 135.6 L144 134 L148.4 132.4Z" fill="#8a6624"/>
+  <!-- the pith helmet -->
+  <g transform="translate(-6 0)">
+    <ellipse cx="240" cy="134" rx="56" ry="6" fill="#000" opacity=".55" filter="url(#soft)"/>
+    <path d="M186 136 Q196 124 210 120 C206 88 220 66 240 66 C260 66 274 88 270 120 Q284 124 298 138 Q272 130 240 130 Q208 130 186 136Z" fill="url(#khaki)"/>
+    <path d="M210 120 C210 112 211 107 212 104 L268 104 C269 107 270 112 270 120 Q240 116 210 120Z" fill="#8a7048"/>
+    <g fill="none" stroke="#5e4a2c" stroke-width=".8"><path d="M211 108 Q240 105 269 108"/><path d="M210.5 112 Q240 109 269.5 112"/><path d="M210 116 Q240 113 270 116"/></g>
+    <path d="M212 102 C212 84 222 72 236 69" fill="none" stroke="#f0dcae" stroke-width="1.4" opacity=".7" stroke-linecap="round"/>
+    <path d="M190 134 Q204 126 212 124" fill="none" stroke="#f0dcae" stroke-width="1" opacity=".6"/>
+    <ellipse cx="240" cy="66.5" rx="5" ry="2.2" fill="#b08a40"/>
+    <path d="M237 66.5 Q240 60 243 66.5Z" fill="#c8a048"/>
+  </g>
+  <!-- the swagger stick -->
+  <path d="M70 154 L254 148" stroke="#000" stroke-opacity=".45" stroke-width="5" filter="url(#soft)"/>
+  <path d="M72 151 L250 145" stroke="#3a2010" stroke-width="3.6" stroke-linecap="round"/>
+  <path d="M74 150 L248 144.2" stroke="#8a5a30" stroke-width=".9"/>
+  <path d="M66 151.3 L78 150.9" stroke="#c8a048" stroke-width="5" stroke-linecap="round"/>
+  <path d="M246 145.2 L254 144.9" stroke="#c8a048" stroke-width="3.8" stroke-linecap="round"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>
