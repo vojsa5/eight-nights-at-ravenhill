@@ -5,3 +5,5 @@ results/
 # your own pictures (see web/art/custom/README.md)
 web/art/custom/*
 !web/art/custom/README.md
+# the site for GitHub Pages, built by tools/build_pages.py
+_site/

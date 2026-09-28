@@ -18,6 +18,16 @@ python3 play.py            # then open http://localhost:8000
 No dependencies beyond Python 3.9+. Fonts load from Google Fonts; offline the page falls back to Georgia.
 For testing, `http://localhost:8000/?seed=11` starts a reproducible game (the seed is never shown to the player).
 
+## Play online
+
+The game also runs without the Python server, on GitHub Pages: https://vojsa5.github.io/eight-nights-at-ravenhill/.
+There the browser runs the same `ravenhill` package with [Pyodide](https://pyodide.org) (`web/js/pyengine.js`),
+and keeps each case as its seed and moves, so a reload picks up where you left off. The first visit downloads
+Pyodide (about 10 MB, cached afterwards). Your own pictures in `web/art/custom/` work only with the local server.
+
+Every push to `main` republishes the site (`.github/workflows/pages.yml`, which runs `tools/build_pages.py`).
+To try the static build locally: `python3 -m tools.build_pages && python3 -m http.server -d _site`.
+
 ## Project layout
 
 ```
@@ -59,6 +69,7 @@ web/                     the browser game
 tools/                   simulations and analysis
   simulate.py            play many games and print score statistics
   calibrate.py           rebuild data/calibration.json after rule changes
+  build_pages.py         build the static site for GitHub Pages (_site/)
   experiments.py         compare rule variants (defined in variants.py)
   audit.py               count illogical actions by guests
   roles_report.py        per role: how informative, how hidden, how often it misleads
