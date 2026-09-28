@@ -25,14 +25,40 @@
   .board { --room: calc(100vw - 88px); }
   .props { display: none; }  /* the board takes the whole width */
 }
-@media (max-width: 700px) {
+/* Phones, upright or on their side (a short window): the phone layout. */
+@media (max-width: 700px), (max-height: 500px) {
   .traces.many ul { grid-template-columns: 1fr; }  /* one column of traces on phones */
-  .film .dots i { width: 6px; height: 6px; margin: 0 2px; }  /* the Advice film's many dots on one line */
-  .casebar { padding: 10px 14px; gap: 8px 10px; }
-  .casebar .btn { padding: 5px 9px; font-size: 12.5px; letter-spacing: .02em; }  /* Story, How to play, Advice and New case on one row */
+  .film .dots i { width: 5px; height: 5px; margin: 0 1.5px; }  /* a long film's many dots on one line */
+  /* the header in three short rows: the title; the nights and the score; the buttons */
+  .casebar { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px 10px; padding: 8px 12px; }
+  .brand { min-width: 0; gap: 8px; font-size: 16px; letter-spacing: .05em; white-space: nowrap; }
+  .brand svg { width: 20px; height: 20px; flex: none; }
+  .brand span { overflow: hidden; text-overflow: ellipsis; }
+  .casebar .brand { grid-column: 1 / -1; }
+  .casebar .spacer { display: none; }
+  .case-actions { grid-column: 1 / -1; flex-wrap: nowrap; justify-content: space-between; gap: 6px; }
+  .casebar .btn { padding: 5px 8px; font-size: 12px; letter-spacing: .02em; white-space: nowrap; }
+  .pips { gap: 3px; }
+  .pips svg { width: 15px; height: 15px; }
+  .pips .now { width: 18px; height: 18px; }
+  /* films and the case papers: controls on one line, a little less padding */
+  .film .nav, .prologue .nav { gap: 6px; }
+  .film .nav { margin: 6px 12px 0; }
+  .film .nav > span:last-child { display: flex; gap: 6px; }
+  .film .btn, .prologue .nav .btn { padding: 6px 10px; font-size: 12.5px; white-space: nowrap; }
+  .film .dots { min-width: 0; overflow: hidden; white-space: nowrap; text-align: center; }
+  .film .film-caption { margin: 12px 16px 4px; font-size: 16.5px; min-height: 0; }
+  .prologue { padding: 24px 18px 18px; }
+  .prologue h2 { font-size: 26px; }
+  /* the night's opening card */
+  .intro-art { aspect-ratio: 360 / 150; }
+  .intro-art img { object-fit: cover; }
+  .intro-body { padding: 30px 18px 18px; gap: 8px; }
+  .intro-body h2 { font-size: 26px; }
   .board-wrap { padding: 12px 12px 90px; }
   .board { width: 100%; height: auto; min-height: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 12px; }
   .strings { display: none; }
+  .note .prompt small { display: none; }  /* "Point at a photograph to see its string": no strings on phones */
   .card { position: relative; width: auto; transform: rotate(var(--tilt)) !important; left: auto !important; top: auto !important; }
   .note { position: relative; left: auto; top: auto; transform: none; width: auto; grid-column: 1 / -1; order: -1; margin: 10px 0 6px; }
   .cap .nm { font-size: 15px; }
@@ -51,3 +77,34 @@
   .reveal { grid-template-columns: 1fr; }
   .reveal-art { margin: 18px auto 0; width: 60%; }
 }
+
+/* Phones on their side: the header in one row, eight photographs to a row, and the films and cards with
+   the picture beside the text rather than above it. */
+@media (max-height: 500px) and (min-width: 701px) {
+  .casebar { grid-template-columns: auto auto 1fr auto; padding: 6px 12px; }
+  .casebar .brand, .case-actions { grid-column: auto; }
+  .brand { font-size: 14px; letter-spacing: .03em; }
+  .casebar .stat { font-size: 0; white-space: nowrap; }  /* just the moons and the score, without their labels */
+  .casebar .stat b { font-size: 15px; }
+  .casebar .stat:has(#score) { justify-self: end; }
+  .board-wrap { padding: 10px 12px 60px; }
+  .board { grid-template-columns: repeat(11, 1fr); gap: 8px; }  /* the case note on the left, the photographs in two rows of eight */
+  .note { grid-column: 1 / span 3; grid-row: 1 / span 2; margin: 0; align-self: start; }
+  .film { width: min(900px, 100%); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: 1fr auto;
+    padding: 0; align-items: center; }
+  .film-frame { grid-row: 1 / span 2; align-self: stretch; aspect-ratio: auto; min-height: 220px; }
+  .film .film-caption { margin: 12px 14px 4px; font-size: 15px; }
+  .film .nav { margin: 0 12px 12px; }
+  .intro { width: min(860px, 100%); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); }
+  .intro-art { aspect-ratio: auto; border-bottom: none; border-right: 3px solid #cfb482; }
+  .intro-art img { object-fit: cover; object-position: 50% 40%; }
+  .intro-body h2 { font-size: 22px; }
+  .intro-body .flavor { font-size: 15px; }
+  .intro-body .ev-steps dd, .traces ul, .traces p { font-size: 13.5px; }
+  .intro-medal { bottom: auto; top: 12px; left: auto; right: -26px; transform: none; }
+  .intro-body { padding: 18px 20px 16px 36px; overflow: auto; }
+  .reveal { grid-template-columns: minmax(0, 36%) 1fr; }
+  .reveal-art { width: auto; margin: 16px 0 16px 16px; }
+  .reveal-body { padding: 16px 18px; }
+}
+
