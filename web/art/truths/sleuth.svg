@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="iris" data-cut-at="44% 48%">
+  <title>A month ago, in his study: Lord Edmund asks the Sleuth to keep watch on his guests, and the pocketbook fills with names, ticks and crosses</title>
+  <defs>
+    <radialGradient id="bg" cx="58%" cy="34%" r="80%">
+      <stop offset="0" stop-color="#28354a"/>
+      <stop offset="1" stop-color="#05070b"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".86"/>
+    </radialGradient>
+    <linearGradient id="fog" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fa6c2"/>
+      <stop offset="1" stop-color="#34465e"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe2a8" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#ffe2a8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffcf80" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#ffcf80" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="pane"><rect x="182" y="16" width="64" height="84"/></clipPath>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the shelves, a painting, the window full of fog (in the films the fog drifts past) -->
+  <rect x="0" y="0" width="56" height="116" fill="#0c1018"/>
+  <path fill="#1c2636" d="M4 30h48v2h-48zM4 62h48v2h-48zM4 94h48v2h-48z"/>
+  <path fill="#24303f" d="M6 12h4v18h-4zM11 15h5v15h-5zM18 11h4v19h-4zM30 14h6v16h-6zM40 12h4v18h-4zM6 46h6v16h-6zM14 43h4v19h-4zM24 47h5v15h-5zM38 44h5v18h-5zM8 77h5v17h-5zM16 80h6v14h-6zM30 76h4v18h-4zM36 79h6v15h-6z"/>
+  <rect x="64" y="24" width="26" height="20" fill="#1a2230" stroke="#4a4030" stroke-width="1.5"/>
+  <path d="M66 40 C72 34 78 37 82 33 C85 31 87 34 88 33 L88 42 L66 42Z" fill="#26303e"/>
+  <rect x="176" y="12" width="76" height="92" fill="#0a0d14"/>
+  <rect x="182" y="16" width="64" height="84" fill="url(#fog)"/>
+  <g clip-path="url(#pane)">
+    <circle cx="228" cy="34" r="9" fill="#dfe8f4" opacity=".55" filter="url(#soft)"/>
+    <path d="M182 84 L190 70 L193 76 L198 64 L203 78 L210 72 L216 84Z" fill="#53667e" opacity=".7"/>
+    <g class="lf-cloud" fill="#c9d6e8" filter="url(#soft)">
+      <ellipse cx="190" cy="52" rx="26" ry="5" opacity=".38"/>
+      <ellipse cx="236" cy="70" rx="30" ry="6" opacity=".32"/>
+      <ellipse cx="200" cy="88" rx="34" ry="6" opacity=".42"/>
+    </g>
+  </g>
+  <path d="M214 16 V100 M182 58 H246" stroke="#0a0d14" stroke-width="3"/>
+  <rect x="172" y="100" width="84" height="4" fill="#161c26"/>
+  <path d="M168 8 L184 8 C180 40 186 78 180 108 L166 108 C170 76 166 40 168 8Z" fill="#0d121c"/>
+  <path d="M244 8 L262 8 C264 40 258 78 262 108 L248 108 C242 78 248 40 244 8Z" fill="#0d121c"/>
+  <!-- Lord Edmund in his wing chair; in the films his hand lifts as he speaks -->
+  <path d="M90 118 L90 60 C90 44 100 38 120 38 C140 38 150 44 150 60 L150 118Z" fill="#131a25"/>
+  <path d="M90 60 C90 44 100 38 120 38 C140 38 150 44 150 60" fill="none" stroke="#3a4c64" stroke-width="1" opacity=".6"/>
+  <path d="M90 70 C83 72 83 92 90 96 M150 70 C157 72 157 92 150 96" fill="none" stroke="#1d2634" stroke-width="5"/>
+  <g fill="#05070a">
+    <path d="M102 118 C101 100 104 88 114 83 C120 81 126 81 132 84 C138 88 141 96 141 104 L141 118Z"/>
+    <path d="M117 72 L127 75 L128 85 L114 85Z"/>
+    <path d="M113 62 C112 52 118 46 125 46 C131 46 134.5 50 134.8 55 L135.4 59 L138 63.6 L135.6 64.6 L136 67 L135 68.5 C135.6 72 133 76.5 128 78 C124 79 120 77 118 75 C115 72 113.4 67 113 62Z"/>
+  </g>
+  <path d="M133.6 51 C134.6 53 134.8 55 134.8 55 L135.4 59 L138 63.6 L135.6 64.6 L136 67 L135 68.5 C135.6 72 133 76.5 128 78" fill="none" stroke="#ffcf80" stroke-opacity=".5" stroke-width=".8" stroke-linejoin="round"/>
+  <path d="M135 86 C138 89 140 95 141 102" fill="none" stroke="#ffcf80" stroke-opacity=".3" stroke-width=".8"/>
+  <g class="lf-toast" style="transform-box:view-box;transform-origin:137px 108px">
+    <path d="M136 108 L147 92" stroke="#05070a" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M144 94 C144 89 147 86 151 86.4 L157.5 84 C158.6 83.8 159 85.2 158 85.8 L153 88.6 C154 91 152.6 94.4 149.4 95.6 C147 96.4 144.6 95.8 144 94Z" fill="#05070a"/>
+    <path d="M151 86.4 L157.5 84 C158.6 83.8 159 85.2 158 85.8 L153 88.6 C154 91 152.6 94.4 149.4 95.6" fill="none" stroke="#ffcf80" stroke-opacity=".55" stroke-width=".7" stroke-linejoin="round"/>
+  </g>
+  <!-- the desk, the green lamp and its pool of light, a magnifying glass -->
+  <path d="M28 114 L312 114 L328 126 L12 126Z" fill="#2a1d12"/>
+  <rect x="12" y="126" width="316" height="74" fill="#110b07"/>
+  <rect x="12" y="126" width="316" height="1.5" fill="#3a2816"/>
+  <g fill="none" stroke="#1e140c" stroke-width="1.2"><rect x="30" y="134" width="96" height="22"/><rect x="140" y="134" width="96" height="22"/></g>
+  <ellipse cx="174" cy="120" rx="58" ry="7" fill="url(#pool)"/>
+  <path class="lf-hum" d="M162 99 L184 99 L204 120 L142 120Z" fill="url(#beam)"/>
+  <ellipse cx="173" cy="116" rx="9" ry="2" fill="#5a4222"/>
+  <rect x="171.5" y="99" width="3" height="16" fill="#b89a5a"/>
+  <path d="M160 100 Q173 86 186 100Z" fill="#2f5a2e"/>
+  <path d="M163 96 Q173 89 183 96" fill="none" stroke="#6a9a5a" stroke-width=".8" opacity=".6"/>
+  <ellipse cx="173" cy="100" rx="12" ry="1.4" fill="#ffe8b0" filter="url(#glow)"/>
+  <g data-fx="glow" data-at="173 104" data-r="46" data-tone="lamp"/>
+  <g data-fx="motes" data-at="173 108" data-r="22"/>
+  <path d="M104 119 L126 117 L128 121 L106 123Z" fill="#d8ccb0" opacity=".75"/>
+  <path d="M108 120 L122 118.8 M109 121.6 L120 120.6" stroke="#6a5a44" stroke-width=".5"/>
+  <path d="M144 121 L131 123.4" stroke="#2a1409" stroke-width="2.2" stroke-linecap="round"/>
+  <ellipse cx="151" cy="120" rx="7" ry="2.6" fill="#cfe0ff" opacity=".35" stroke="#b8923e" stroke-width="1.2"/>
+  <circle class="lf-glint" style="--d:1.8s" cx="153.5" cy="119" r="1.2" fill="#fffbe8" opacity="0"/>
+  <!-- the Sleuth, from behind, close to us, with the pocketbook open in their hand: in the films the ticks and the
+       crosses are pencilled in one after the other -->
+  <g class="lf-near">
+    <path d="M240 200 C240 150 242 118 252 106 C258 99 270 94 282 88 L312 88 C326 92 342 99 352 106 C358 111 362 118 362 124 L362 200Z" fill="#06080c"/>
+    <path d="M281 90 L287 74 C293 77 302 77 308 74 L314 90Z" fill="#06080c"/>
+    <ellipse cx="297.5" cy="70" rx="10.5" ry="10" fill="#06080c"/>
+    <path d="M283 64 C282 54 285 46 290 44 L296.5 47 L303 44 C308 46 311.5 54 311.5 64Z" fill="#0a0d13"/>
+    <path d="M269 64.6 C276 61.6 288 61 297 61 C307 61 318 61.6 325 64.6 C318 68 306 69 297 69 C288 69 276 68 269 64.6Z" fill="#06080c"/>
+    <path d="M286 60 C286 52 288 47 291 45.4" fill="none" stroke="#5a7090" stroke-width="1" opacity=".55"/>
+    <path d="M269 64.6 C276 61.6 288 61 297 61" fill="none" stroke="#ffcf80" stroke-width=".8" opacity=".4"/>
+    <path d="M243 168 C243 136 246 116 254 105 C260 99 270 94 280 89" fill="none" stroke="#ffcf80" stroke-width="1" opacity=".22"/>
+    <path d="M262 112 C252 124 252 134 258 140" fill="none" stroke="#06080c" stroke-width="12" stroke-linecap="round"/>
+    <path d="M256 138 L246 116" stroke="#06080c" stroke-width="9" stroke-linecap="round"/>
+    <g transform="translate(224 100) rotate(-9) skewX(-10)">
+      <rect x="-27" y="-17" width="54" height="34" rx="2" fill="#3a1a10"/>
+      <rect x="-25" y="-15.5" width="24.6" height="31" fill="#ebdfc2"/>
+      <rect x=".4" y="-15.5" width="24.6" height="31" fill="#e2d5b6"/>
+      <rect x="-3" y="-15.5" width="6" height="31" fill="#000" opacity=".18"/>
+      <path d="M-22 -12 h12 M3 -12 h10" stroke="#24324e" stroke-width="1.1"/>
+      <g fill="none" stroke="#5a4c3c" stroke-width=".6">
+        <path d="M-22 -7 q1.5 -2 3 0 t3 0 t3 0 t3 0 M-22 -2 q1.5 -2 3 0 t3 0 t3 0 M-22 3 q1.5 -2 3 0 t3 0 t3 0 t3 0 t2 0 M-22 8 q1.5 -2 3 0 t3 0 t3 0 t2 0 M-22 13 q1.5 -2 3 0 t3 0 t3 0"/>
+        <path d="M3 -7 q1.5 -2 3 0 t3 0 t3 0 t2 0 M3 -2 q1.5 -2 3 0 t3 0 t3 0 t3 0 M3 3 q1.5 -2 3 0 t3 0 t3 0 M3 8 q1.5 -2 3 0 t3 0 t3 0 t3 0 M3 13 q1.5 -2 3 0 t3 0 t2 0"/>
+      </g>
+      <g fill="none" stroke-width="1" stroke-linecap="round">
+        <path class="lf-type" style="--i:0" pathLength="1" d="M-6.5 -8 l1.5 1.8 l3 -4" stroke="#24324e"/>
+        <path class="lf-type" style="--i:1" pathLength="1" d="M-6.5 -4 l3 3 M-3.5 -4 l-3 3" stroke="#9e1b1b"/>
+        <path class="lf-type" style="--i:2" pathLength="1" d="M-6.5 2 l1.5 1.8 l3 -4" stroke="#24324e"/>
+        <path class="lf-type" style="--i:3" pathLength="1" d="M-6.5 7 l1.5 1.8 l3 -4" stroke="#24324e"/>
+        <path class="lf-type" style="--i:4" pathLength="1" d="M-6.5 11 l3 3 M-3.5 11 l-3 3" stroke="#9e1b1b"/>
+        <path class="lf-type" style="--i:5" pathLength="1" d="M19 -8 l1.5 1.8 l3 -4" stroke="#24324e"/>
+        <path class="lf-type" style="--i:6" pathLength="1" d="M19 -4 l3 3 M22 -4 l-3 3" stroke="#9e1b1b"/>
+        <path class="lf-type" style="--i:7" pathLength="1" d="M19 2 l1.5 1.8 l3 -4" stroke="#24324e"/>
+        <path class="lf-type" style="--i:8" pathLength="1" d="M19 6 l3 3 M22 6 l-3 3" stroke="#9e1b1b"/>
+        <path class="lf-type" style="--i:9" pathLength="1" d="M19 12 l1.5 1.8 l3 -4" stroke="#24324e"/>
+      </g>
+    </g>
+    <path d="M240 118 C242 112 248 110 251 113 C253 116 250 120 245 121Z" fill="#06080c"/>
+    <path d="M266 108 L254 102" stroke="#06080c" stroke-width="7" stroke-linecap="round"/>
+    <path d="M240 106 L250 94.6" stroke="#c8922a" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M239.2 106.9 L240.6 105.4" stroke="#2a2a2a" stroke-width="1.6"/>
+    <path d="M250 97 C253 94 258 97 257 101 C256 105 251 105 249 102Z" fill="#06080c"/>
+  </g>
+  <g data-fx="guest" data-at="236 90"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

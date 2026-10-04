@@ -23,54 +23,79 @@
       <feGaussianBlur stdDeviation="8"/>
     </filter>
   </defs>
+  <style>
+    /* its life on the night's opening card (intro.js inlines it as .ev-live): the chandelier lights up, the two guests
+       step in and shake hands, the candles flicker */
+    .ev-live .fi-light { animation: fi-on .9s var(--dawn, 0ms) ease-out both; }
+    .ev-live .fi-lamp { animation: fi-on .3s calc(var(--dawn, 0ms) + 60ms + var(--n) * 55ms) ease-out both; }
+    .ev-live .fi-left { animation: fi-left 1.2s calc(var(--dawn, 0ms) - 150ms) cubic-bezier(.25,.7,.3,1) both; }
+    .ev-live .fi-right { animation: fi-right 1.2s calc(var(--dawn, 0ms) - 150ms) cubic-bezier(.25,.7,.3,1) both; }
+    .ev-live .fi-clasp { animation: fi-on .2s calc(var(--dawn, 0ms) + 900ms) ease-out both; }
+    .ev-live .fi-shake { animation: fi-shake .7s calc(var(--dawn, 0ms) + 1000ms) ease-in-out both; }
+    .ev-live .fi-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: fi-flicker 1.3s ease-in-out 10 alternate; }
+    .ev-live .fi-flame.b { animation-duration: 1.7s; animation-delay: -.6s; }
+    @keyframes fi-on { from { opacity: 0; } }
+    @keyframes fi-left { from { transform: translateX(-34px); } to { transform: none; } }
+    @keyframes fi-right { from { transform: translateX(34px); } to { transform: none; } }
+    @keyframes fi-shake { 0%, 100% { transform: none; } 20% { transform: translateY(-2.5px); } 45% { transform: translateY(2px); } 70% { transform: translateY(-1.5px); } }
+    @keyframes fi-flicker { 0% { transform: none; } 30% { transform: scale(.94, 1.06) skewX(-3deg); } 60% { transform: scale(1.05, .95) skewX(2deg); } 100% { transform: scale(.98, 1.03); } }
+  </style>
   <rect width="360" height="200" fill="url(#bg)"/>
-  <circle cx="180" cy="20" r="70" fill="#ffe6a0" opacity=".35" filter="url(#blur8)"/>
-  <circle cx="206.0" cy="24.0" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="201.03444185374863" cy="28.702282018339787" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="188.03444185374863" cy="31.60845213036123" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="171.96555814625137" cy="31.60845213036123" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="158.96555814625137" cy="28.702282018339787" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="154.0" cy="24.0" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="158.96555814625137" cy="19.297717981660217" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="171.96555814625137" cy="16.39154786963877" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="188.03444185374863" cy="16.39154786963877" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
-  <circle cx="201.03444185374863" cy="19.297717981660213" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-light" cx="180" cy="20" r="70" fill="#ffe6a0" opacity=".35" filter="url(#blur8)"/>
+  <circle class="fi-lamp" style="--n:0" cx="206.0" cy="24.0" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:1" cx="201.03444185374863" cy="28.702282018339787" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:2" cx="188.03444185374863" cy="31.60845213036123" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:3" cx="171.96555814625137" cy="31.60845213036123" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:4" cx="158.96555814625137" cy="28.702282018339787" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:5" cx="154.0" cy="24.0" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:6" cx="158.96555814625137" cy="19.297717981660217" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:7" cx="171.96555814625137" cy="16.39154786963877" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:8" cx="188.03444185374863" cy="16.39154786963877" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
+  <circle class="fi-lamp" style="--n:9" cx="201.03444185374863" cy="19.297717981660213" r="2.2" fill="#fff4cc" filter="url(#glow)"/>
   <path d="M150 22 Q180 40 210 22" fill="none" stroke="#e6c783" stroke-width="2"/>
   <g fill="#ffd79a" opacity=".6" filter="url(#halo)">
+    <g class="fi-left">
     <g transform="translate(96 118) scale(1.15)">
       <ellipse cx="0" cy="-34" rx="17" ry="21"/>
       <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
       <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
     </g>
+    </g>
+    <g class="fi-right">
     <g transform="translate(264 118) scale(1.15)">
       <ellipse cx="0" cy="-34" rx="17" ry="21"/>
       <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
       <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
+    </g>
     </g>
   </g>
   <g fill="#0b0a0f">
+    <g class="fi-left">
     <g transform="translate(96 118) scale(1.15)">
       <ellipse cx="0" cy="-34" rx="17" ry="21"/>
       <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
       <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
     </g>
+    </g>
+    <g class="fi-right">
     <g transform="translate(264 118) scale(1.15)">
       <ellipse cx="0" cy="-34" rx="17" ry="21"/>
       <path d="M-9 -16 L-9 4 L9 4 L9 -16Z"/>
       <path d="M-58 90 C-56 30 -32 4 0 2 C32 4 56 30 58 90Z"/>
     </g>
+    </g>
   </g>
-  <g fill="#1a1410" stroke="#ffd79a" stroke-width="1.2" stroke-opacity=".8">
-    <path d="M128 156 C146 140 162 134 176 134 L178 146 C164 147 150 153 138 166Z"/>
-    <path d="M232 156 C214 140 198 134 184 134 L182 146 C196 147 210 153 222 166Z"/>
-    <ellipse cx="180" cy="140" rx="10" ry="8"/>
+  <g class="fi-shake" fill="#1a1410" stroke="#ffd79a" stroke-width="1.2" stroke-opacity=".8">
+    <path class="fi-left" d="M128 156 C146 140 162 134 176 134 L178 146 C164 147 150 153 138 166Z"/>
+    <path class="fi-right" d="M232 156 C214 140 198 134 184 134 L182 146 C196 147 210 153 222 166Z"/>
+    <ellipse class="fi-clasp" cx="180" cy="140" rx="10" ry="8"/>
   </g>
   <rect x="0" y="176" width="360" height="24" fill="#1a110a"/>
   <rect x="57" y="152" width="6" height="26" rx="1.5" fill="#efe0c8"/>
   <circle cx="60" cy="146" r="14.4" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
-  <path d="M60 137.9 C64.5 144.2 63.6 149.6 60 150.5 C56.4 149.6 55.5 144.2 60 137.9Z" fill="#ffd27a" filter="url(#glow)"/>
+  <path class="fi-flame" d="M60 137.9 C64.5 144.2 63.6 149.6 60 150.5 C56.4 149.6 55.5 144.2 60 137.9Z" fill="#ffd27a" filter="url(#glow)"/>
   <rect x="297" y="152" width="6" height="26" rx="1.5" fill="#efe0c8"/>
   <circle cx="300" cy="146" r="14.4" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
-  <path d="M300 137.9 C304.5 144.2 303.6 149.6 300 150.5 C296.4 149.6 295.5 144.2 300 137.9Z" fill="#ffd27a" filter="url(#glow)"/>
+  <path class="fi-flame b" d="M300 137.9 C304.5 144.2 303.6 149.6 300 150.5 C296.4 149.6 295.5 144.2 300 137.9Z" fill="#ffd27a" filter="url(#glow)"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

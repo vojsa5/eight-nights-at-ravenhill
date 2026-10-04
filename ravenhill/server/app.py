@@ -60,10 +60,11 @@ class Handler(BaseHTTPRequestHandler):
                 with LOCK:
                     GAMES[gid] = g
                 return self._send(200, game_state(gid, g))
-            if url.path == "/api/act":
+            if url.path == "/api/act":  # one guest, or on the last night two: the one who goes free, then the accused
                 g = self._game(body["id"])
                 with LOCK:
-                    g.act(int(body["char"]))
+                    for c in body.get("chars") or [body["char"]]:
+                        g.act(int(c))
                 return self._send(200, game_state(body["id"], g))
             if url.path == "/api/tool":
                 g = self._game(body["id"])

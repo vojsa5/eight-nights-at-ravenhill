@@ -30,16 +30,22 @@ VARIANTS = {v.name: v for v in [
     replace(STANDARD, name="no-eavesdropper", roster=swap({"Eavesdropper": "Thug"})),
     replace(STANDARD, name="no-colonel", roster=swap({"Colonel": "Photographer"})),
     replace(STANDARD, name="no-lovers", roster=swap({"Lover": "Thug"})),
+    replace(STANDARD, name="lovers-apart", lovers_agree=False),  # the Lovers' tips need not agree
     replace(STANDARD, name="no-grifter", roster=swap({"Grifter": "Framer"})),
     replace(STANDARD, name="blackmailer", roster=swap({"Grifter": "Blackmailer"})),
     replace(STANDARD, name="interview", event_pool=tuple("Interview" if e == "Footprints" else e for e in STANDARD.event_pool)),
     replace(STANDARD, name="events-any-order", grouped_events=False),
+    replace(STANDARD, name="shuffled-groups", shuffle_groups=True),  # which clue and which testimony night first, at random
+    # the earlier schedule: the four kinds of night in turn, twice (a clue on II and VI, the testimony on III and VII,
+    # which one first at random)
+    replace(STANDARD, name="two-cycles", night_groups=(0, 1, 2, 3), shuffle_groups=True),
     replace(STANDARD, name="no-events", **NO_EXTRAS),
-    replace(STANDARD, name="no-tool-events", event_rounds=(3, 5, 7), event_pool=QUIET_EVENTS),
+    replace(STANDARD, name="no-tool-events", event_pool=QUIET_EVENTS),  # no clues: nights II and III go without
     replace(STANDARD, name="no-first-impressions", first_impressions=False),
     replace(STANDARD, name="first-impressions-only", event_rounds=()),
     replace(STANDARD, name="events-3-5-7", event_rounds=(3, 5, 7)),
-    replace(STANDARD, name="5-rounds", rounds=5, mole_betrays_from=4, event_rounds=(2, 3, 4)),
+    # a short stay with a night of each kind: First Impressions, a clue, a testimony night, the Blackout, the last night
+    replace(STANDARD, name="5-rounds", rounds=5, mole_betrays_from=4, event_rounds=(2, 3, 4), night_groups=(0, 1, 2, 3)),
     # the first roster of the advice game: two Guests, a Recluse and an Amateur, 5 bad, 5 rounds
     replace(STANDARD, name="v1", roster=V1_ROSTER, rounds=5, mole_betrays_from=4, **NO_EXTRAS),
     replace(STANDARD, name="v1+hunch", roster=V1_ROSTER, rounds=5, mole_betrays_from=4, guest_hunch=True, **NO_EXTRAS),

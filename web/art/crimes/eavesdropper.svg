@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="iris" data-cut-at="44.5% 58.5%">
+  <title>In the dark passage a figure presses an ear to the library door, while beyond it a hand turns the dial of the wall safe</title>
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="45%" r="80%">
+      <stop offset="0" stop-color="#1c2a26"/>
+      <stop offset="1" stop-color="#040605"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="54%" cy="48%" r="75%">
+      <stop offset=".45" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".9"/>
+    </radialGradient>
+    <radialGradient id="lib" cx="74%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#7a4020"/>
+      <stop offset=".45" stop-color="#3e1c0e"/>
+      <stop offset="1" stop-color="#0e0604"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moon" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#5a8a7a" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#5a8a7a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sliver" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#ffd090" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffd090" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="1" y1="0" x2="0" y2=".4">
+      <stop offset="0" stop-color="#ffd890" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#ffd890" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="velvet" gradientUnits="userSpaceOnUse" x1="262" y1="96" x2="352" y2="176">
+      <stop offset="0" stop-color="#5a161c"/>
+      <stop offset="1" stop-color="#160406"/>
+    </linearGradient>
+    <pattern id="wp" width="18" height="22" patternUnits="userSpaceOnUse">
+      <rect width="18" height="22" fill="#1d2a25"/>
+      <path d="M9 2C13 6 13 9 9 11C5 9 5 6 9 2ZM9 11C12 14 12 17 9 20C6 17 6 14 9 11Z" fill="#314438"/>
+      <circle cx="0" cy="11" r="1.3" fill="#6a5a34"/><circle cx="18" cy="11" r="1.3" fill="#6a5a34"/>
+    </pattern>
+    <pattern id="dam" width="26" height="30" patternUnits="userSpaceOnUse">
+      <path d="M13 3C18 8 18 13 13 16C8 13 8 8 13 3ZM13 16C16 20 16 24 13 28C10 24 10 20 13 16ZM0 15C3 13 3 10 0 7M26 15C23 13 23 10 26 7" fill="#000" opacity=".14"/>
+    </pattern>
+    <clipPath id="slip"><path d="M125 131L148 129.5L148.5 139L125.5 140Z"/></clipPath>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="haze" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.2"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the passage: green wallpaper over dark wainscot, a little cold light from far down it -->
+  <rect width="158" height="124" fill="url(#wp)"/>
+  <rect width="158" height="124" fill="#020403" opacity=".5"/>
+  <ellipse cx="80" cy="70" rx="84" ry="70" fill="url(#moon)"/>
+  <rect y="124" width="158" height="52" fill="#0b0d0b"/>
+  <path d="M8 134H62V168H8ZM74 134H132V168H74Z" fill="none" stroke="#161a17" stroke-width="1.4"/>
+  <rect y="122" width="158" height="4" fill="#1a1a14"/>
+  <rect y="176" width="158" height="24" fill="#070807"/>
+  <!-- the library: lamplit oxblood wall, oak below, the bookcase -->
+  <rect x="170" width="190" height="176" fill="url(#lib)"/>
+  <rect x="170" width="190" height="122" fill="url(#dam)"/>
+  <rect x="170" y="124" width="190" height="52" fill="#24120a"/>
+  <path d="M184 134H242V168H184ZM256 134H312V168H256Z" fill="none" stroke="#3a2012" stroke-width="1.4"/>
+  <rect x="170" y="122" width="190" height="4" fill="#4a2a14"/>
+  <rect x="170" y="176" width="190" height="24" fill="#160a06"/>
+  <rect x="322" y="6" width="38" height="170" fill="#140a06"/>
+  <path d="M322 40H360V43H322ZM322 80H360V83H322ZM322 120H360V123H322Z" fill="#3a1e10"/>
+  <path d="M326 20h5v20h-5ZM333 24h4v16h-4ZM339 18h6v22h-6ZM347 22h5v18h-5ZM326 62h4v18h-4ZM332 58h6v22h-6ZM340 64h5v16h-5Z" fill="#4a2414"/>
+  <path d="M353 20h4v20h-4ZM347 60h5v20h-5ZM328 100h6v20h-6Z" fill="#6a2a1a" opacity=".8"/>
+  <ellipse cx="262" cy="80" rx="100" ry="78" fill="url(#pool)"/>
+  <ellipse cx="260" cy="182" rx="80" ry="10" fill="#ffb060" opacity=".12" filter="url(#soft)"/>
+  <g data-fx="glow" data-at="268 58" data-r="90" data-tone="lamp"/>
+  <g data-fx="motes" data-at="268 64" data-r="40"/>
+  <!-- the wall safe; in the films (css/film.css) its dial turns left, right, left, a click at a time -->
+  <rect x="207" y="61.5" width="38.5" height="37" rx="1.5" fill="#0c0a0a"/>
+  <rect x="209" y="64" width="33.5" height="32" rx="2" fill="#1c1c20" stroke="#3e3e44" stroke-width="1.6"/>
+  <path d="M210.5 65H241.5" stroke="#8a7a6a" stroke-opacity=".35"/>
+  <path d="M208 69h2.5v5H208ZM208 86.5h2.5v5H208Z" fill="#2e2e34"/>
+  <path d="M226 68.5L224.5 66H227.5Z" fill="#c8b070"/>
+  <circle cx="226" cy="80" r="9.2" fill="#141416" stroke="#9a8650" stroke-width="2"/>
+  <g class="lf-dial" style="transform-box:view-box;transform-origin:226px 80px">
+    <path d="M226 72V74M226 86V88M218 80H220M232 80H234M220.5 74.5L222 76M230 84L231.5 85.5M231.5 74.5L230 76M222 84L220.5 85.5" stroke="#b8a46c" stroke-width=".9"/>
+    <circle cx="226" cy="80" r="4" fill="#2a2620" stroke="#5a4e34" stroke-width=".8"/>
+    <path d="M226 76V78" stroke="#d8c890"/>
+  </g>
+  <path class="lf-glint" style="--d:-1.4s" d="M219.5 72.5L220 75.5L223 76L220 76.5L219.5 79.5L219 76.5L216 76L219 75.5Z" fill="#fffbe8" opacity="0"/>
+  <!-- the side table under it, and the sealed letter waiting to go in -->
+  <path d="M195 121.5h60v5h-60ZM197.5 126h2.5v50h-2.5ZM250 126h2.5v50H250Z" fill="#1e1008"/>
+  <rect x="192" y="118" width="66" height="3.5" rx="1" fill="#3a2010"/>
+  <path d="M192.5 118H257.5" stroke="#c0783a" stroke-opacity=".55" stroke-width=".8"/>
+  <g transform="rotate(-4 216 112)">
+    <rect x="206.5" y="106.5" width="19.5" height="11.5" fill="#e8dcc0"/>
+    <path d="M206.5 106.5L216.5 113L226.5 106.5" fill="none" stroke="#9a8866" stroke-width=".8"/>
+    <circle cx="216.5" cy="113" r="2.2" fill="#9e1b1b" filter="url(#glow)"/>
+    <ellipse class="lf-glint" style="--d:-.6s" cx="215.5" cy="112" rx="1" ry=".6" fill="#ffd8c8" opacity="0"/>
+  </g>
+  <!-- Lord Edmund's hand at the dial, in a claret velvet sleeve; it twists with the turns -->
+  <g class="lf-twist" style="transform-box:view-box;transform-origin:226px 80px">
+    <path d="M260 86.5C276 90 292 96 306 104C318 111 336 128 360 148V186C342 164 322 142 304 128C290 118 278 110 266 105.5Z" fill="url(#velvet)"/>
+    <path d="M260 86.5C276 90 292 96 306 104C318 111 336 128 360 148V154C338 134 318 116 304 109C290 101 276 95 261 90.5Z" fill="#8a3034" opacity=".35"/>
+    <path d="M252.5 85.5L261 87L265 105L255.5 102.5Z" fill="#ece0c8"/>
+    <path d="M252.5 85.5L261 87L262 90.5L253 89Z" fill="#fff6e4"/>
+    <circle cx="259.5" cy="96" r="1.3" fill="#d8b04a"/>
+    <path d="M253 87C247.5 83 241 80 235 79C231.5 78 228.5 77.5 226 77.5C223 77 222.5 79.5 225 80.5L232.5 82C234 84 233.5 86 231.5 86.5L228 86.5C225.5 87 226 89.5 228.5 89.5L235.5 90C242 93 248.5 97 255 101Z" fill="#c08a66"/>
+    <path d="M253 87C247.5 83 241 80 235 79C231.5 78 228.5 77.5 226 77.5C225 77 224 77.5 224 78.5C229 79 237 80.5 252.5 89.5Z" fill="#e6b896"/>
+    <path d="M232.5 82C235.5 83.5 237 86.5 235.5 90M235.5 79.5C239 81 240.5 82.5 240.5 85" fill="none" stroke="#8a5a40" stroke-width=".8"/>
+    <circle class="lf-glint" style="--d:-3.1s" cx="260" cy="95.5" r="1" fill="#fff4cc" opacity="0"/>
+  </g>
+  <!-- each click runs to the door as rings of sound -->
+  <g class="lf-heard" fill="none" stroke="#f0dca8" stroke-opacity=".6" stroke-width="1.3" stroke-linecap="round">
+    <path class="lf-click" d="M208 74q-4 6 0 12"/>
+    <path class="lf-click" style="--d:.08s" d="M195 71q-6 9 0 18"/>
+    <path class="lf-click" style="--d:.16s" d="M181 68q-8 12 0 24"/>
+  </g>
+  <!-- the wall between, cut through, and the door in it: panelled oak, a knob each side, the keyhole -->
+  <rect x="156" width="16" height="200" fill="#0a0705"/>
+  <path d="M156 6H172M156 13H172M164 0V6M160 6V13M168 6V13M164 13V20M156 20H172" stroke="#2a1610" stroke-width=".6"/>
+  <rect x="157" y="176" width="14" height="2" fill="#4a3018"/>
+  <rect x="151" y="18" width="26" height="4" fill="#2a1a10"/>
+  <path d="M160 22H168V34L166.5 36V96L168 98V126L166.5 128V148L168 150V174H160V150L161.5 148V128L160 126V98L161.5 96V36L160 34Z" fill="#3a2414"/>
+  <path d="M168 22V34L166.5 36V96L168 98V126L166.5 128V148L168 150V174" fill="none" stroke="#a0582a" stroke-opacity=".6" stroke-width=".8"/>
+  <path d="M153 106h7v2h-7Z" fill="#4a3a1e"/><circle cx="153" cy="107" r="3" fill="#6a5428"/>
+  <path d="M168 106h7v2h-7Z" fill="#8a6a30"/><circle cx="175" cy="107" r="3" fill="#c09a48"/>
+  <path d="M174 105.5a1.5 1.5 0 0 1 2.5 0" stroke="#fff0c0" stroke-width=".7" fill="none"/>
+  <path d="M159 113h1v8h-1Z" fill="#5a4620"/><path d="M168 113h1v8h-1Z" fill="#a8843c"/>
+  <!-- the light that comes through: the keyhole, and the sliver under the door -->
+  <path d="M160 116.5L128 123L142 144L160 118Z" fill="url(#beam)" filter="url(#haze)"/>
+  <path d="M160 117L140 130" stroke="#ffe0a0" stroke-opacity=".28" stroke-width="2.4" filter="url(#haze)"/>
+  <rect x="159.5" y="116" width="9" height="1.8" fill="#ffe0a0" filter="url(#glow)"/>
+  <circle cx="160" cy="117" r="2" fill="#fff4d0"/>
+  <path d="M160 174H168V176.5H160Z" fill="#ffd890" filter="url(#glow)"/>
+  <path d="M161 175V177L10 200H100Z" fill="url(#sliver)"/>
+  <g data-fx="glow" data-at="160 117" data-r="16" data-tone="lamp"/>
+  <!-- the one listening leans in to the door, and writes down each number on a cigarette paper by the keyhole's light -->
+  <g class="lf-hark" style="transform-box:view-box;transform-origin:109.5px 185px">
+    <path d="M144.5 94C138 97 129 98.5 122.5 101.5C111.5 106 103 117 98.5 137C95 152 94 170 92 185H127C127 172 129 159 133.5 148C138 134.5 142.5 121.5 149 108C152.5 101.5 154.5 97 153.5 95Z" fill="#060706"/>
+    <ellipse cx="149" cy="84" rx="10.3" ry="11.2" transform="rotate(14 149 84)" fill="#060706"/>
+    <path d="M159 87.5C158.5 91.5 156 95 153 96.5" fill="none" stroke="#ffc070" stroke-opacity=".45"/>
+    <circle cx="138" cy="134" r="11" fill="#ffc070" opacity=".24" filter="url(#haze)"/>
+    <path d="M123.5 105C121.5 115 122.5 126 126 134.5" fill="none" stroke="#060706" stroke-width="6.6" stroke-linecap="round"/>
+    <path d="M136 106C142.5 112.5 148 119 151 126" fill="none" stroke="#060706" stroke-width="6" stroke-linecap="round"/>
+    <path d="M125 131L148 129.5L148.5 139L125.5 140Z" fill="#f2e6c6"/>
+    <g fill="#2a1c0c" font-size="5.5" transform="rotate(-3 136.5 134.5)">
+      <text x="126.5" y="137" font-family="Georgia, serif">24</text><text x="135" y="137" font-family="Georgia, serif">7</text><text x="140" y="137" font-family="Georgia, serif">31</text>
+    </g>
+    <g clip-path="url(#slip)"><g transform="rotate(-3 136.5 134.5)"><rect class="lf-jot" x="148" y="126" width="24" height="17.5" fill="#f2e6c6"/></g></g>
+    <path d="M118 132.5C118 129 122.5 128.5 125.5 131L126.5 138.5C125 141 119.5 140.5 119 138ZM122.5 137.5C125 136.5 128 136.5 129 138C128 139.5 125.5 140 123 139.5Z" fill="#0a0908"/>
+    <g class="lf-jot">
+      <g class="lf-tremble">
+        <path d="M147.5 136L151.5 128.5" stroke="#c8a060" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M147.5 136L148.5 134.5" stroke="#2a2a2a" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M148.5 124.5C150 122 155 122 156 125C156.5 128.5 154 131 150.5 130C148.5 129.5 147.5 127 148.5 124.5Z" fill="#0a0908"/>
+        <path d="M156.5 126C156.5 128.5 154.5 130 152 130.5" fill="none" stroke="#ffc070" stroke-opacity=".5" stroke-width=".7"/>
+      </g>
+    </g>
+  </g>
+  <!-- where the flashback lays the guest's photograph, over the one who did it -->
+  <g data-fx="guest" data-at="140 92"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

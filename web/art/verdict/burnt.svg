@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="black">
   <title>A bedroom fireplace at night, the last embers glowing under charred pages, one half-burnt sheet on the hearth and an empty trunk standing open in the moonlight</title>
   <defs>
     <radialGradient id="bg" cx="45%" cy="60%" r="85%">
@@ -23,6 +23,10 @@
       <stop offset="0" stop-color="#9ab4dc" stop-opacity=".3"/>
       <stop offset="1" stop-color="#9ab4dc" stop-opacity=".05"/>
     </linearGradient>
+    <radialGradient id="chill" cx="45%" cy="64%" r="50%">
+      <stop offset="0" stop-color="#04060c" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#04060c" stop-opacity="0"/>
+    </radialGradient>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
       <feGaussianBlur stdDeviation="2" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -31,6 +35,8 @@
     <filter id="haze" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.5"/></filter>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- in the story after a mistake (css/verdict.css) the embers flare and die (lf-ebb, lf-char), the last sparks go up
+       and the cold comes in (lf-chill) -->
   <!-- window with the moon -->
   <path d="M34 92 L34 40 C34 24 80 24 80 40 L80 92Z" fill="url(#win)" opacity=".7"/>
   <circle cx="48" cy="40" r="5" fill="#e8eef8" filter="url(#glow)"/>
@@ -46,32 +52,34 @@
   <rect x="96" y="42" width="136" height="8" fill="#2a2622"/>
   <rect x="104" y="50" width="120" height="94" fill="#1a1614"/>
   <path d="M124 144 V84 C124 72 136 68 164 68 C192 68 204 72 204 84 V144Z" fill="#060302"/>
-  <path d="M124 144 V84 C124 72 136 68 164 68 C192 68 204 72 204 84 V144" fill="none" stroke="#ff8a2a" stroke-opacity=".22" stroke-width="2"/>
+  <path class="lf-ebb" d="M124 144 V84 C124 72 136 68 164 68 C192 68 204 72 204 84 V144" fill="none" stroke="#ff8a2a" stroke-opacity=".22" stroke-width="2"/>
   <rect x="112" y="32" width="5" height="10" fill="#0e0c0b"/><ellipse cx="114.5" cy="32" rx="4" ry="1.2" fill="#0e0c0b"/>
   <path d="M210 42 C206 36 208 28 214 26 C220 28 222 36 218 42Z" fill="#0e0c0b"/>
-  <ellipse cx="164" cy="130" rx="42" ry="24" fill="#ff7a20" opacity=".5" filter="url(#soft)"/>
+  <ellipse class="lf-ebb" cx="164" cy="130" rx="42" ry="24" fill="#ff7a20" fill-opacity=".5" filter="url(#soft)"/>
   <path d="M158 120 C150 108 168 98 160 86 C154 78 164 72 162 66" fill="none" stroke="#7a7680" stroke-opacity=".3" stroke-width="3" filter="url(#haze)"/>
+  <g data-fx="smoke" data-at="161 94" data-r="11"/>
   <!-- embers and the charred pages -->
-  <path d="M134 138 C140 128 152 130 164 127 C176 130 188 128 194 138Z" fill="url(#ember)" filter="url(#glow)"/>
-  <path d="M140 131 C142 118 156 114 162 121 C156 122 150 126 148 132Z" fill="#2c2826" stroke="#ff9a3a" stroke-opacity=".8" stroke-width=".8"/>
-  <path d="M152 131 L166 120 L178 126 L164 135Z" fill="#4a4644" stroke="#ffb050" stroke-opacity=".7" stroke-width=".7"/>
-  <path d="M170 130 C171 117 185 112 191 121 C185 121 179 125 177 131Z" fill="#26221f" stroke="#ff8a2a" stroke-opacity=".8" stroke-width=".8"/>
+  <path class="lf-ebb" d="M134 138 C140 128 152 130 164 127 C176 130 188 128 194 138Z" fill="url(#ember)" filter="url(#glow)"/>
+  <path class="lf-char" d="M140 131 C142 118 156 114 162 121 C156 122 150 126 148 132Z" fill="#2c2826" stroke="#ff9a3a" stroke-opacity=".8" stroke-width=".8"/>
+  <path class="lf-char" d="M152 131 L166 120 L178 126 L164 135Z" fill="#4a4644" stroke="#ffb050" stroke-opacity=".7" stroke-width=".7"/>
+  <path class="lf-char" d="M170 130 C171 117 185 112 191 121 C185 121 179 125 177 131Z" fill="#26221f" stroke="#ff8a2a" stroke-opacity=".8" stroke-width=".8"/>
   <path d="M145 129 C147 122 154 119 158 122 M174 128 C176 121 183 118 187 121" fill="none" stroke="#7a726c" stroke-opacity=".7" stroke-width=".8"/>
-  <g fill="#ffd070" filter="url(#glow)">
+  <g class="lf-ebb" fill="#ffd070" filter="url(#glow)">
     <circle cx="146" cy="135" r="1.2"/><circle cx="168" cy="136" r="1"/><circle cx="184" cy="134" r="1.3"/>
   </g>
   <g stroke="#0a0706" stroke-width="2.4">
     <path d="M130 127 H198 M130 138 H198"/>
     <path d="M136 127 V142 M148 127 V140 M160 127 V140 M172 127 V140 M184 127 V140 M196 127 V142"/>
   </g>
+  <g data-fx="embers" data-at="164 114" data-r="20" data-tone="dying"/>
   <!-- hearth, and the warm spill on the floor -->
   <path d="M96 144 H232 L238 152 H90Z" fill="#2a2420"/>
-  <ellipse cx="164" cy="158" rx="78" ry="14" fill="#ff8a2a" opacity=".22" filter="url(#soft)"/>
+  <ellipse class="lf-ebb" cx="164" cy="158" rx="78" ry="14" fill="#ff8a2a" fill-opacity=".22" filter="url(#soft)"/>
   <!-- the half-burnt page -->
   <path d="M142 156 L175 152 L178 156 L175 159 L180 162 L178 166 L183 170 L150 175Z" fill="#dccaa6"/>
   <path d="M147 159.5 L172 156.6 M148 163.5 L174 160.4 M149 167.5 L176 164.4 M150 171.5 L170 169.2" stroke="#8a7658" stroke-opacity=".6" stroke-width=".7"/>
   <path d="M175 152 L181 151 L184 156 L181 160 L186 163 L184 167 L189 170 L183 170 L178 166 L180 162 L175 159 L178 156Z" fill="#1a1008"/>
-  <path d="M175 152 L178 156 L175 159 L180 162 L178 166 L183 170" fill="none" stroke="#ffb040" stroke-width="1.3" filter="url(#glow)"/>
+  <path class="lf-ebb" d="M175 152 L178 156 L175 159 L180 162 L178 166 L183 170" fill="none" stroke="#ffb040" stroke-width="1.3" filter="url(#glow)"/>
   <path d="M196 160 L200 158 L202 162Z M206 166 L211 165 L209 169Z" fill="#1a1412"/>
   <!-- the trunk, open and empty -->
   <path d="M252 120 L306 120 L310 84 L256 84Z" fill="#2a1410" stroke="#3a2616" stroke-width="3"/>
@@ -79,6 +87,7 @@
   <path d="M242 126 L298 126 L306 118 L250 118Z" fill="#040302" stroke="#3a2616" stroke-width="1.5"/>
   <path d="M254 126 V160 M286 126 V160" stroke="#4a3a24" stroke-width="3"/>
   <rect x="267" y="128" width="6" height="9" fill="#8a7a50"/>
-  <path d="M242 160 V126 L250 118" fill="none" stroke="#ff8a2a" stroke-opacity=".35" stroke-width="1.5"/>
+  <path class="lf-ebb" d="M242 160 V126 L250 118" fill="none" stroke="#ff8a2a" stroke-opacity=".35" stroke-width="1.5"/>
+  <rect class="lf-chill" width="360" height="200" fill="url(#chill)" opacity="0"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

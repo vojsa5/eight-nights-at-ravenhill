@@ -44,11 +44,11 @@
   <path d="M262 144 C274 142 276 134 266 134" fill="none" stroke="#9a7430" stroke-width="3"/>
   <rect x="233" y="94" width="14" height="50" fill="#e6d8bc"/>
   <path d="M233 98 C231 104 232 108 233 110" stroke="#f4ead6" stroke-width="2" fill="none"/>
-  <path d="M240 64 C246 74 247 84 240 90 C233 84 234 74 240 64Z" fill="#ffd27a" filter="url(#glow)"/>
-  <path d="M240 76 C242 80 242 85 240 88 C238 85 238 80 240 76Z" fill="#fff4d0"/>
+  <path class="lf-flame" d="M240 64 C246 74 247 84 240 90 C233 84 234 74 240 64Z" fill="#ffd27a" filter="url(#glow)"/>
+  <path class="lf-flame" style="--d:-.4s" d="M240 76 C242 80 242 85 240 88 C238 85 238 80 240 76Z" fill="#fff4d0"/>
   <!-- the thin knife held in the flame -->
   <path d="M200 76 C214 73 250 72 272 73 L272 78 C250 78 216 78 200 76Z" fill="url(#blade)"/>
-  <path d="M230 75 L250 75" stroke="#ff5a20" stroke-width="2.4" opacity=".8" filter="url(#glow)"/>
+  <path class="lf-firelit" d="M230 75 L250 75" stroke="#ff5a20" stroke-width="2.4" opacity=".8" filter="url(#glow)"/>
   <rect x="272" y="71" width="4" height="9" fill="#b08a40"/>
   <rect x="276" y="71.5" width="36" height="8" rx="3.5" fill="#3a2414"/>
   <circle cx="286" cy="75.5" r="1.2" fill="#c8a050"/><circle cx="300" cy="75.5" r="1.2" fill="#c8a050"/>
@@ -67,5 +67,10 @@
     <path d="M118 154 L160 126 L202 154" fill="none" stroke="#b8a482" stroke-width=".8"/>
     <circle cx="160" cy="131" r="2.5" fill="#a8121e" opacity=".8"/>
   </g>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <g data-fx="glow" data-at="240 80" data-r="38" data-tone="candle"/>
+  <path class="lf-glint" style="--d:-2.53s" d="M214 68 L214.8 73.2 L220 74 L214.8 74.8 L214 80 L213.2 74.8 L208 74 L213.2 73.2Z" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="196 108" data-r="66" data-tone="right"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

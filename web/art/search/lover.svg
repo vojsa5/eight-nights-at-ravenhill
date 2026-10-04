@@ -29,7 +29,7 @@
   <circle cx="86" cy="58" r="26" fill="#ffb050" opacity=".22" filter="url(#soft)"/>
   <rect x="80" y="64" width="12" height="42" fill="#e6d8bc"/>
   <ellipse cx="86" cy="106" rx="14" ry="3.5" fill="#8a6a30"/>
-  <path d="M86 46 C90 53 90 60 86 62 C82 60 82 53 86 46Z" fill="#ffd27a" filter="url(#glow)"/>
+  <path class="lf-flame" d="M86 46 C90 53 90 60 86 62 C82 60 82 53 86 46Z" fill="#ffd27a" filter="url(#glow)"/>
   <!-- the envelope and the letter peeking out -->
   <g transform="rotate(-7 130 128)">
     <rect x="92" y="92" width="76" height="34" fill="#f2e8d4"/>
@@ -72,5 +72,10 @@
   <circle cx="198" cy="161" r="12" fill="#9a1020"/>
   <path d="M187 158 C190 148 206 147 210 156 C206 152 194 152 190 162Z" fill="#c42a38"/>
   <path d="M198 161 m-3 0 a3 3 0 1 1 5 2 a6 6 0 1 1 -9 -5 a9 9 0 1 1 12 11" fill="none" stroke="#4e0610" stroke-width="1.4"/>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <g data-fx="glow" data-at="86 56" data-r="28" data-tone="candle"/>
+  <path class="lf-glint" style="--d:-2.53s" d="M226 124 L226.7 128.3 L231 129 L226.7 129.7 L226 134 L225.3 129.7 L221 129 L225.3 128.3Z" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="186 132" data-r="68" data-tone="right"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

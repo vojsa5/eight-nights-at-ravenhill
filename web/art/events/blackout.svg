@@ -16,17 +16,46 @@
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
+    <radialGradient id="lamp" cx="29%" cy="55%" r="85%">
+      <stop offset="0" stop-color="#ffd9a0" stop-opacity=".6"/>
+      <stop offset=".5" stop-color="#ffc47a" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#ffb060" stop-opacity=".16"/>
+    </radialGradient>
   </defs>
+  <style>
+    /* its life on the night's opening card (intro.js inlines it as .ev-live): the lights flicker and fail, lightning
+       fills the window, the candle gutters and dies and its smoke curls up from the ember */
+    .ev-live .bo-lit { animation: bo-fail 1.3s calc(var(--dawn, 0ms) - 150ms) linear both; }
+    .ev-live .bo-bolt { animation: bo-bolt .9s calc(var(--dawn, 0ms) + 750ms) linear both; }
+    .ev-live .bo-flash { animation: bo-flash .9s calc(var(--dawn, 0ms) + 750ms) linear both; }
+    .ev-live .bo-flame { transform-origin: 103px 103px; animation: bo-gutter 1.7s calc(var(--dawn, 0ms) - 150ms) ease-in-out both; }
+    .ev-live .bo-smoke { transform-origin: 103px 100px; animation: bo-smoke 1.6s calc(var(--dawn, 0ms) + 1250ms) ease-out both,
+      bo-curl 2.6s calc(var(--dawn, 0ms) + 2850ms) ease-in-out 6 alternate; }
+    .ev-live .bo-ember { animation: bo-ember 1.8s calc(var(--dawn, 0ms) + 1300ms) ease-in-out 5 alternate both; }
+    @keyframes bo-fail { 0%, 38% { opacity: 1; } 41% { opacity: .2; } 44% { opacity: .9; } 52% { opacity: .85; } 54% { opacity: .05; }
+      57% { opacity: .6; } 60%, 100% { opacity: 0; } }
+    @keyframes bo-bolt { 0% { opacity: 0; } 4% { opacity: 1; } 9% { opacity: .15; } 14%, 100% { opacity: 1; } }
+    @keyframes bo-flash { 0% { opacity: 0; } 4% { opacity: .5; } 9% { opacity: .05; } 14% { opacity: .35; } 40%, 100% { opacity: 0; } }
+    @keyframes bo-gutter { 0% { opacity: 1; transform: none; } 30% { transform: scale(1.06, .92) skewX(4deg); } 50% { opacity: 1; transform: scale(.95, 1.05) skewX(-3deg); }
+      62% { transform: scale(.7, .5) skewX(10deg); } 70% { opacity: 1; transform: scale(1.05, .8) skewX(-6deg); } 80% { opacity: .7; transform: scale(.4, .3); }
+      86%, 100% { opacity: 0; transform: scale(.1, .1); } }
+    @keyframes bo-smoke { from { opacity: 0; transform: translateY(16px) scaleY(.5); } to { opacity: 1; transform: none; } }
+    @keyframes bo-curl { from { transform: none; } to { transform: skewX(-5deg) scaleY(1.04); } }
+    @keyframes bo-ember { from { opacity: .45; } to { opacity: 1; } }
+  </style>
   <rect width="360" height="200" fill="url(#bg)"/>
   <rect x="220" y="24" width="84" height="130" rx="40" fill="#2a3a5a" opacity=".6"/>
   <path d="M262 28 L262 154 M222 90 L302 90" stroke="#0b0d14" stroke-width="5"/>
-  <path d="M280 36 L266 70 L278 70 L258 112 L286 64 L272 64 L288 36Z" fill="#e8f0ff" filter="url(#glow)"/>
+  <path class="bo-bolt" d="M280 36 L266 70 L278 70 L258 112 L286 64 L272 64 L288 36Z" fill="#e8f0ff" filter="url(#glow)"/>
   <path d="M300 154 L236 200 L360 200 L360 170Z" fill="#9fb8e0" opacity=".08"/>
   <rect x="96" y="112" width="14" height="52" rx="2" fill="#d8ccb4"/>
   <line x1="103" y1="112" x2="103" y2="104" stroke="#2a2018" stroke-width="2"/>
-  <circle cx="103" cy="103" r="2" fill="#ff5a2a" filter="url(#glow)"/>
-  <path d="M103 100 C96 86 112 78 104 64 C98 54 110 46 106 34" fill="none" stroke="#c8cde0" stroke-opacity=".5" stroke-width="3" filter="url(#glow)"/>
+  <circle class="bo-ember" cx="103" cy="103" r="2" fill="#ff5a2a" filter="url(#glow)"/>
+  <path class="bo-smoke" d="M103 100 C96 86 112 78 104 64 C98 54 110 46 106 34" fill="none" stroke="#c8cde0" stroke-opacity=".5" stroke-width="3" filter="url(#glow)"/>
+  <path class="bo-flame" d="M103 86 C108.5 93.5 107.5 100.5 103 102 C98.5 100.5 97.5 93.5 103 86Z" fill="#ffd27a" filter="url(#glow)" opacity="0"/>
   <path d="M70 164 L136 164 L130 176 L76 176Z" fill="#2a2018"/>
   <rect x="0" y="176" width="360" height="24" fill="#07080c"/>
+  <rect class="bo-lit" width="360" height="200" fill="url(#lamp)" opacity="0"/>
+  <rect class="bo-flash" width="360" height="200" fill="#dfe8ff" opacity="0"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

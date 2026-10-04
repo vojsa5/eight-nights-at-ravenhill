@@ -51,9 +51,26 @@ def advise_round(game):
             today[c] = game.advice_of(c, others, public, last)
         if game.roles[c] == "Hypnotist":
             game.suggestions[game.round] = (today[c].save, today[c].eliminate)
+    lovers = [c for c in sorted(today) if game.roles[c] == "Lover" and c != subject and not (c == bribed and paymaster in game.alive)]
+    if game.rules.lovers_agree and len(lovers) == 2 and not events.single_tip(event):
+        agree(today[lovers[0]], today[lovers[1]])
     for c in sorted(today):
         events.trim_advice(event, today[c])
         game.advice.append(today[c])
+
+
+def agree(first, second):
+    """The Lovers tell each other everything, and their stories match: when their tips share nothing, the second
+    takes up one of the first's, the arrest if it can, else the clear. (The first never names the second, nor
+    itself, so the second still never names the other Lover.) A hypnotised or bribed Lover says what it must."""
+    if first.save == second.save or first.eliminate == second.eliminate:
+        return
+    if first.eliminate != second.save:
+        second.eliminate = first.eliminate
+    elif first.save != second.eliminate:
+        second.save = first.save
+    else:
+        second.save, second.eliminate = first.save, first.eliminate
 
 
 def bribed_advice(game, c, paymaster, public, last):
@@ -187,7 +204,8 @@ def copycat(ctx):
 
 
 def lover(ctx):
-    """Lies like other bad characters, but never advises saving (or eliminating) their Lover."""
+    """Lies like other bad characters, but never advises saving (or eliminating) their Lover. The two Lovers'
+    tips are then made to agree on one (advise_round, agree)."""
     p = ctx.p
     partner = next((x for x, r in ctx.mind.roles.items() if r == "Lover"), None)
     elim = max((x for x in ctx.others if x != partner),

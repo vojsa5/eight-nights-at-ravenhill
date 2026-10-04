@@ -1,0 +1,32 @@
+{
+  "rules": {
+    "cases": {
+      "$case": {
+        ".read": true,
+        "seed": {
+          ".write": "!data.exists() && !root.child('cases').exists() && $case.matches(/^[A-Za-z0-9_-]{1,64}$/)",
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() < 4294967296"
+        },
+        "moves": {
+          "$n": {
+            ".write": "!data.exists() && data.parent().parent().child('seed').exists()",
+            ".validate": "$n.matches(/^[0-9]{1,2}$/) && newData.isString() && (newData.val().matches(/^\\[\"act\",[0-9]{1,2}\\]$/) || newData.val().matches(/^\\[\"tool\",\"interview\",[0-9]{1,2}\\]$/))"
+          }
+        },
+        "notes": {
+          ".write": "data.parent().child('seed').exists()",
+          ".validate": "newData.isString() && newData.val().length < 4000"
+        },
+        "read": {
+          "$slot": {
+            ".write": "!data.exists() && data.parent().parent().child('seed').exists()",
+            ".validate": "($slot.matches(/^[a-z]+$/) || $slot.matches(/^[a-z]+-[ab]$/)) && newData.isNumber()"
+          }
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}

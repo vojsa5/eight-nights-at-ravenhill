@@ -33,6 +33,9 @@
     <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- in the story after an arrest (css/verdict.css) the door swings shut and the cellar shakes, dust sifts down, the
+       key turns and the lantern swings; lf-* parts move -->
+  <g class="lf-jolt">
   <!-- vaulted ceiling and a few stone courses -->
   <path d="M0 0 H360 V40 C290 14 70 14 0 40Z" fill="#050608"/>
   <g stroke="#2a303c" stroke-width=".8" opacity=".7">
@@ -43,8 +46,8 @@
   <path d="M0 20 L76 20 L150 170 L36 170Z" fill="url(#shaft)" filter="url(#soft)"/>
   <path d="M0 30 L60 30 L120 160 L40 160Z" fill="#8aa8d8" opacity=".08" filter="url(#soft)"/>
   <!-- lantern glow -->
-  <circle cx="236" cy="94" r="62" fill="#ff9a3a" opacity=".32" filter="url(#soft)"/>
-  <ellipse cx="206" cy="176" rx="80" ry="10" fill="#ff9a3a" opacity=".14" filter="url(#soft)"/>
+  <circle class="lf-sway" style="transform-box:view-box;transform-origin:236px 66px" cx="236" cy="94" r="62" fill="#ff9a3a" opacity=".32" filter="url(#soft)"/>
+  <ellipse class="lf-pool" cx="206" cy="176" rx="80" ry="10" fill="#ff9a3a" opacity=".14" filter="url(#soft)"/>
   <!-- the wine rack in the dark -->
   <rect x="270" y="70" width="52" height="100" fill="url(#rack)"/>
   <rect x="268" y="68" width="56" height="3" fill="#15110c"/>
@@ -54,6 +57,8 @@
   <!-- the arch and the banded oak door -->
   <path d="M143 170 V98 A42 42 0 0 1 227 98 V170Z" fill="#262a32"/>
   <path d="M143 98 A42 42 0 0 1 227 98" fill="none" stroke="#343944" stroke-width="3" stroke-dasharray="11 2"/>
+  <path d="M153 170 V98 A32 32 0 0 1 217 98 V170Z" fill="#020203"/>
+  <g class="lf-shut" style="transform-origin:0 50%">
   <path d="M153 170 V98 A32 32 0 0 1 217 98 V170Z" fill="url(#oak)"/>
   <path d="M169 70 V170 M185 66 V170 M201 70 V170" stroke="#1c1009" stroke-width="1.2"/>
   <g fill="#0e0e10">
@@ -69,9 +74,20 @@
   <!-- the lock and the big iron key -->
   <rect x="197" y="131" width="14" height="19" rx="1.5" fill="#121214" stroke="#3e3e44"/>
   <circle cx="204" cy="137" r="1.6" fill="#000"/>
-  <path d="M204 138 L196 148" stroke="#5a5a62" stroke-width="2.6" stroke-linecap="round"/>
-  <circle cx="191.5" cy="153.5" r="6" fill="none" stroke="#5a5a62" stroke-width="2.6"/>
-  <path d="M195.5 149 A6 6 0 0 1 196 158" fill="none" stroke="#ffc070" stroke-width="1.2" stroke-opacity=".8" filter="url(#glow)"/>
+  <g class="lf-turn" style="transform-box:view-box;transform-origin:204px 137px">
+    <path d="M204 138 L196 148" stroke="#5a5a62" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="191.5" cy="153.5" r="6" fill="none" stroke="#5a5a62" stroke-width="2.6"/>
+    <path d="M195.5 149 A6 6 0 0 1 196 158" fill="none" stroke="#ffc070" stroke-width="1.2" stroke-opacity=".8" filter="url(#glow)"/>
+    <path class="lf-glint" style="--d:-3.05s" d="M196 145.5 L196.9 150.1 L201.5 151 L196.9 151.9 L196 156.5 L195.1 151.9 L190.5 151 L195.1 150.1Z" fill="#fff4d8" opacity="0"/>
+  </g>
+  </g>
+  <!-- dust shaken from the arch -->
+  <g fill="#9aa6ba">
+    <circle class="lf-sift" style="--d:0s" cx="160" cy="70" r=".9" opacity="0"/><circle class="lf-sift" style="--d:.08s" cx="176" cy="62" r=".7" opacity="0"/>
+    <circle class="lf-sift" style="--d:.03s" cx="188" cy="58" r="1.1" opacity="0"/><circle class="lf-sift" style="--d:.14s" cx="199" cy="60" r=".7" opacity="0"/>
+    <circle class="lf-sift" style="--d:.05s" cx="212" cy="66" r=".9" opacity="0"/><circle class="lf-sift" style="--d:.2s" cx="168" cy="64" r=".6" opacity="0"/>
+    <circle class="lf-sift" style="--d:.11s" cx="222" cy="78" r=".7" opacity="0"/><circle class="lf-sift" style="--d:.17s" cx="150" cy="80" r=".6" opacity="0"/>
+  </g>
   <!-- worn stone steps -->
   <path d="M0 96 H30 V108 H49 V120 H68 V132 H87 V144 H106 V156 H125 V170 H0Z" fill="#0d1118"/>
   <g fill="#4a5c7c" opacity=".8">
@@ -83,15 +99,18 @@
   <path d="M30 96 V108 M49 108 V120 M68 120 V132 M87 132 V144 M106 144 V156 M125 156 V170" stroke="#1e2634" stroke-width="1"/>
   <!-- the lantern on its hook -->
   <path d="M254 52 V64 M254 58 H236 V66" fill="none" stroke="#0c0c0e" stroke-width="2.4"/>
-  <path d="M236 66 Q232 70 236 73" fill="none" stroke="#0c0c0e" stroke-width="1.6"/>
-  <path d="M228 80 L244 80 L240 73 L232 73Z" fill="#141416"/>
-  <rect x="229" y="80" width="14" height="18" fill="url(#flame)" filter="url(#glow)"/>
-  <path d="M229 80 V98 M236 80 V98 M243 80 V98" stroke="#141416" stroke-width="1.4"/>
-  <ellipse cx="236" cy="90" rx="2" ry="3.4" fill="#fffbe8"/>
-  <rect x="227" y="98" width="18" height="4" fill="#141416"/>
+  <g class="lf-sway" style="transform-box:view-box;transform-origin:236px 66px">
+    <path d="M236 66 Q232 70 236 73" fill="none" stroke="#0c0c0e" stroke-width="1.6"/>
+    <path d="M228 80 L244 80 L240 73 L232 73Z" fill="#141416"/>
+    <rect x="229" y="80" width="14" height="18" fill="url(#flame)" filter="url(#glow)"/>
+    <path d="M229 80 V98 M236 80 V98 M243 80 V98" stroke="#141416" stroke-width="1.4"/>
+    <ellipse class="lf-flame" cx="236" cy="90" rx="2" ry="3.4" fill="#fffbe8"/>
+    <rect x="227" y="98" width="18" height="4" fill="#141416"/>
+  </g>
   <!-- flagstone floor -->
   <rect x="0" y="170" width="360" height="30" fill="#0b0d11"/>
   <path d="M0 170 H360" stroke="#ffb060" stroke-opacity=".18"/>
   <path d="M60 184 H120 M150 190 H220 M250 182 H320" stroke="#1c212a" stroke-width=".8"/>
+  </g>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

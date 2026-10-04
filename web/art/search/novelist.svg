@@ -99,5 +99,9 @@
   <use href="#ball" transform="translate(206 172) rotate(-40) scale(1.2)"/>
   <use href="#ball" transform="translate(234 178) rotate(150) scale(.9)"/>
   <use href="#ball" transform="translate(112 131) rotate(20) scale(.8)"/>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <g data-fx="glow" data-at="76 58" data-r="40" data-tone="lamp"/>
+  <g data-fx="found" data-at="258 104" data-r="48" data-tone="right"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

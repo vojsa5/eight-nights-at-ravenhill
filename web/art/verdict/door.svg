@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 200" width="180" height="200" preserveAspectRatio="none">
+  <title>One leaf of the morning room's panelled double doors, its brass knob by the edge where the daylight comes through (the other leaf is its mirror)</title>
+  <defs>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#140c07"/>
+      <stop offset=".6" stop-color="#28180d"/>
+      <stop offset="1" stop-color="#3c2413"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e120a"/>
+      <stop offset="1" stop-color="#33200f"/>
+    </linearGradient>
+    <linearGradient id="day" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffd8a0" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffe6bc" stop-opacity=".3"/>
+    </linearGradient>
+    <radialGradient id="brass" cx=".36" cy=".32" r=".72">
+      <stop offset="0" stop-color="#fff2c4"/>
+      <stop offset=".42" stop-color="#c89a48"/>
+      <stop offset="1" stop-color="#3e2a10"/>
+    </radialGradient>
+    <pattern id="grain" width="11" height="200" patternUnits="userSpaceOnUse">
+      <path d="M2.5 0 C3.5 60 1.5 120 3 200 M7.5 0 C6.5 70 8.5 140 7 200" fill="none" stroke="#000" stroke-opacity=".18" stroke-width=".7"/>
+      <path d="M5 0 C5.6 80 4.4 150 5.2 200" fill="none" stroke="#7a4a24" stroke-opacity=".12" stroke-width=".5"/>
+    </pattern>
+  </defs>
+  <rect width="180" height="200" fill="url(#wood)"/>
+  <rect width="180" height="200" fill="url(#grain)"/>
+  <!-- the two panels: a moulded frame round a raised field, lit from the gap on the right -->
+  <g>
+    <path d="M26 16 H152 L146 22 H32Z" fill="#170d06"/>
+    <path d="M26 16 L32 22 V106 L26 112Z" fill="#4a2c16"/>
+    <path d="M26 112 L32 106 H146 L152 112Z" fill="#33200f"/>
+    <path d="M152 16 V112 L146 106 V22Z" fill="#1a0f07"/>
+    <rect x="32" y="22" width="114" height="84" fill="url(#field)"/>
+    <path d="M44 34 H134 V94 H44Z" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="1.2"/>
+    <path d="M134 34 V94 H44" fill="none" stroke="#6a4222" stroke-opacity=".55" stroke-width=".8"/>
+  </g>
+  <g>
+    <path d="M26 128 H152 L146 134 H32Z" fill="#170d06"/>
+    <path d="M26 128 L32 134 V178 L26 184Z" fill="#4a2c16"/>
+    <path d="M26 184 L32 178 H146 L152 184Z" fill="#33200f"/>
+    <path d="M152 128 V184 L146 178 V134Z" fill="#1a0f07"/>
+    <rect x="32" y="134" width="114" height="44" fill="url(#field)"/>
+    <path d="M44 146 H134 V166 H44Z" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="1.2"/>
+    <path d="M134 146 V166 H44" fill="none" stroke="#6a4222" stroke-opacity=".55" stroke-width=".8"/>
+  </g>
+  <!-- the daylight along the edge, the astragal, the knob and the keyhole -->
+  <rect x="96" width="84" height="200" fill="url(#day)"/>
+  <rect x="175" width="5" height="200" fill="#120a05"/>
+  <path d="M175 0 V200" stroke="#ffe2b0" stroke-opacity=".35" stroke-width=".8"/>
+  <circle cx="163" cy="112" r="7" fill="#2a190c" stroke="#8a6a30" stroke-width=".8"/>
+  <circle cx="163" cy="112" r="4.8" fill="url(#brass)"/>
+  <rect x="160" y="124" width="6" height="11" rx="2" fill="url(#brass)"/>
+  <path d="M163 127.5 m-1.1 0 a1.1 1.1 0 1 1 2.2 0 l.5 4 h-3.2Z" fill="#0a0604"/>
+</svg>

@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="black">
+  <title>The back stairs at a quarter past eleven: a frightened guest peers between the banisters as a shadow slips out of the library door</title>
+  <defs>
+    <radialGradient id="bg" cx="80%" cy="45%" r="85%">
+      <stop offset="0" stop-color="#2a1e16"/>
+      <stop offset=".55" stop-color="#14110f"/>
+      <stop offset="1" stop-color="#040507"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="55%" cy="45%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <linearGradient id="spill" x1="1" y1="0" x2="0" y2=".3">
+      <stop offset="0" stop-color="#ffb060" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#ffb060" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="moon" x1="0" y1="0" x2=".6" y2="1">
+      <stop offset="0" stop-color="#b8cce8" stop-opacity=".46"/>
+      <stop offset="1" stop-color="#b8cce8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="under" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c0907"/>
+      <stop offset="1" stop-color="#030303"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="spark" x="-300%" y="-300%" width="700%" height="700%">
+      <feGaussianBlur stdDeviation="1" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the passage: wainscot, a little window over the stairs, the clock at a quarter past eleven (in the films its
+       pendulum swings) -->
+  <rect x="150" y="84" width="210" height="28" fill="#0e0b09"/>
+  <path d="M150 84 H360" stroke="#2a2018" stroke-width="1.5"/>
+  <path d="M80 56 V26 C80 16 106 16 106 26 V56Z" fill="#7d90ae"/>
+  <path d="M93 18 V56 M80 38 H106" stroke="#0a0b10" stroke-width="2"/>
+  <path d="M80 56 L106 56 L174 126 L112 132Z" fill="url(#moon)"/>
+  <rect x="214" y="44" width="16" height="36" rx="2" fill="#1e1610"/>
+  <rect x="217.5" y="58" width="9" height="18" fill="#0a0806"/>
+  <g class="lf-swing" style="transform-box:view-box;transform-origin:222px 58px">
+    <path d="M222 58 V71" stroke="#8a7040" stroke-width=".7"/>
+    <circle cx="222" cy="72" r="2.2" fill="#b8923e"/>
+  </g>
+  <circle cx="222" cy="44" r="10" fill="#1e1610"/>
+  <circle cx="222" cy="44" r="8" fill="#cfc2a4" opacity=".7"/>
+  <path d="M222 44 L229 44 M222 44 L220.1 39.4" stroke="#1a120a" stroke-width="1.1" stroke-linecap="round"/>
+  <g fill="#1a120a"><circle cx="222" cy="37.6" r=".5"/><circle cx="228.4" cy="44" r=".5"/><circle cx="222" cy="50.4" r=".5"/><circle cx="215.6" cy="44" r=".5"/></g>
+  <!-- the library door ajar on the firelight, and someone slipping out (in the films the fire flickers and they lean
+       out to look along the passage) -->
+  <circle cx="314" cy="80" r="40" fill="#ff8a2a" opacity=".16" filter="url(#soft)"/>
+  <rect x="296" y="34" width="38" height="80" fill="#2a1e14"/>
+  <rect class="lf-firelit" x="300" y="38" width="16" height="76" fill="#ffb060"/>
+  <path d="M316 38 L330 37 L330 115 L316 114Z" fill="#0c0805"/>
+  <g data-fx="glow" data-at="310 84" data-r="40" data-tone="fire"/>
+  <path class="lf-firelit" d="M300 114 L316 114 L270 134 L196 134Z" fill="url(#spill)"/>
+  <rect x="150" y="112" width="210" height="2" fill="#2a2018"/>
+  <path d="M150 114 H360 V134 H150Z" fill="#000" opacity=".35"/>
+  <g transform="translate(616 0) scale(-1 1)">
+    <g class="lf-lurk">
+      <path d="M316 114 L301 114 L376 134 L394 134Z" fill="#050302" opacity=".8"/>
+      <path d="M308 43.5 C311.5 43.5 313.8 46 314 49 L315.4 51.6 L314 52.4 L314 54.6 C313.6 56.6 312 57.6 310 57.6 L310 60 C314 62 315.5 68 315.5 76 L316.5 114 L309.5 114 L308 92 L306 114 L301 114 L301 66 C301 61 302.5 59 304 58 C301.5 56 301 53 301.2 50 C301.5 46 304.5 43.5 308 43.5Z" fill="#050302"/>
+    </g>
+  </g>
+  <!-- the stairwell going down into the dark, a diary page dropped on a step (in the films it lifts in the draught) -->
+  <path d="M150 112 L150 200 L0 200 L0 112Z" fill="url(#under)"/>
+  <path d="M150 134 H360 V200 H150Z" fill="url(#under)"/>
+  <path d="M150 118 H130 V130 H110 V142 H90 V154 H70 V166 H50 V178 H30 V190 H10 V200 H150Z" fill="#17161a"/>
+  <path d="M130 118 H150 M110 130 H130 M90 142 H110 M70 154 H90 M50 166 H70 M30 178 H50" stroke="#56688a" stroke-width="1.2"/>
+  <g class="lf-page" style="transform-box:view-box;transform-origin:72px 153px">
+    <path d="M72 153 L74 146 L88 148 L87 153Z" fill="#e6dcc4"/>
+    <path d="M75 148.4 L85 149.8 M74.6 150.6 L84 151.8" stroke="#3a3040" stroke-width=".45"/>
+  </g>
+  <!-- the witness, crouched on the top steps with a candle just pinched out (in the films they tremble and blink, and
+       the smoke curls up) -->
+  <g class="lf-tremble" style="transform-box:view-box;transform-origin:102px 142px">
+    <g fill="#030305">
+      <path d="M115.4 84 C115.4 80 118.4 77.4 122 77.4 C125.6 77.4 128 80 128.2 83 L129.8 85.6 L128.2 86.2 C128 89 125.4 91 122.4 91 C118.6 91 115.4 88 115.4 84Z"/>
+      <path d="M118 89 L125 90 L126 96 C129 100 130 106 129 112 L124 118 C120 122 114 126 110 128 L106 141 L98 142 L100 132 C98 126 99 118 102 110 C104 102 110 94 118 89Z"/>
+      <path d="M108 124 C114 118 124 114 132 116 L134 119 C126 120 118 124 112 130Z"/>
+      <path d="M124 97 C130 99 136 100 140 100" stroke="#030305" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="142" cy="100" rx="2.8" ry="3.4"/>
+      <path d="M114 100 C112 108 112 114 114 119" stroke="#030305" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+    <path d="M116.4 80.6 C118 78.2 120 77.4 122.4 77.4 M117 90 C110 95 104 102 102 110 C99 118 98 126 100 132" fill="none" stroke="#b8cce8" stroke-opacity=".6" stroke-width=".8"/>
+    <path d="M127.8 80.6 C128.1 81.4 128.2 82.2 128.2 83" fill="none" stroke="#ffb060" stroke-opacity=".4" stroke-width=".6"/>
+    <g class="lf-blink" style="--d:2.2s"><circle cx="126.2" cy="83.2" r=".9" fill="#f4e8d0" filter="url(#spark)"/></g>
+    <rect x="112.6" y="110" width="3" height="10" fill="#d8ccb8" opacity=".8"/>
+    <path d="M114.1 110 V107.6" stroke="#222" stroke-width=".6"/>
+    <ellipse cx="114" cy="121" rx="5" ry="1.4" fill="#7a6040"/>
+    <g data-fx="smoke" data-at="114 103" data-r="7"/>
+  </g>
+  <!-- the banisters in front of them -->
+  <g fill="#170f0a">
+    <path d="M150 74 L156 74 L156 126 L150 126Z"/>
+    <circle cx="153" cy="71" r="4"/>
+    <path d="M150 78 L18 162 L18 167 L150 83Z"/>
+  </g>
+  <g stroke="#170f0a" stroke-width="2.4">
+    <path d="M142 83 V118 M126 93 V130 M110 103 V130 M94 113 V142 M78 123 V154 M62 133 V166 M46 144 V166 M30 154 V178"/>
+  </g>
+  <path d="M150 78 L18 162 M155 74 V126" stroke="#8a9ab6" stroke-width=".6" opacity=".5"/>
+  <g data-fx="guest" data-at="128 92"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
-  <title>Eavesdropper</title>
+  <title>Eavesdropper: a glass pressed to the library door, Lord Edmund's sealed letter burning in the grate</title>
   <defs>
     <radialGradient id="bg" cx="50%" cy="36%" r="78%">
       <stop offset="0" stop-color="#4a3a28"/>
@@ -21,14 +21,42 @@
     </filter>
   </defs>
   <rect width="200" height="262" fill="url(#bg)"/>
-  <circle cx="150" cy="236" r="46" fill="#ffb35a" opacity=".3" filter="url(#blur8)"/>
+  <g opacity=".7">
+    <rect width="31" height="262" fill="#36261a"/>
+    <rect x="5" y="16" width="20" height="54" fill="none" stroke="#5e4429" stroke-width="1.5"/>
+    <rect x="5" y="112" width="20" height="96" fill="none" stroke="#5e4429" stroke-width="1.5"/>
+    <path d="M31 0 V262" stroke="#9a6e3c" stroke-width="1.6"/>
+  </g>
+  <path d="M25 78 Q21 85 25 92 M19 73 Q13 85 19 97 M13 68 Q5 85 13 102" fill="none" stroke="#ffc46b" stroke-width="1.3" stroke-linecap="round" opacity=".5"/>
+  <circle cx="152" cy="238" r="48" fill="#ffb35a" opacity=".4" filter="url(#blur8)"/>
   <g transform="translate(100 262) scale(1.12 1.2) translate(-100 -262)" fill="#050302" opacity=".92">
     <path d="M14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 Z"/>
     <path d="M100 56 C64 56 54 92 57 118 C59 140 48 156 30 172 C60 168 80 172 100 176 C120 172 140 168 170 172 C152 156 141 140 143 118 C146 92 136 56 100 56 Z"/>
   </g>
   <ellipse cx="91" cy="82" rx="4" ry="2.2" fill="#ff5a3a" filter="url(#glow)"/>
   <ellipse cx="109" cy="82" rx="4" ry="2.2" fill="#ff5a3a" filter="url(#glow)"/>
-  <rect x="144" y="226" width="12" height="36" rx="2" fill="#e9d8c0"/>
-  <path d="M150 204 C157 214 156 222 150 225 C144 222 143 214 150 204Z" fill="#ffc46b" filter="url(#glow)"/>
+  <path d="M40 166 C30 150 24 130 34 112 L48 104 L52 112 C42 124 42 144 56 160 Z" fill="#050302" opacity=".92"/>
+  <path d="M32 70 L56 76 L56 94 L32 100 Z" fill="#ffe6b8" fill-opacity=".22" stroke="#ffd9a0" stroke-width="1.4" stroke-linejoin="round" filter="url(#glow)"/>
+  <ellipse cx="32" cy="85" rx="3" ry="15" fill="none" stroke="#fff2d0" stroke-width="1.4"/>
+  <path d="M56 76 V94" stroke="#ffe6b8" stroke-width="3.4"/>
+  <path d="M37 75 L51 78.4" stroke="#fff6dc" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+  <path d="M38 104 C36 98 40 94 46 95 C52 94 56 98 54 104 C52 109 40 110 38 104 Z" fill="#050302"/>
+  <path d="M41 97 C41 90 47 88 50 91" fill="none" stroke="#050302" stroke-width="3.8" stroke-linecap="round"/>
+  <ellipse cx="152" cy="252" rx="28" ry="8" fill="#d0581e" filter="url(#glow)"/>
+  <path d="M122 246 H182 M122 255 H182 M128 242 V262 M141 242 V262 M154 242 V262 M167 242 V262 M180 242 V262" stroke="#140b05" stroke-width="2.6"/>
+  <g transform="rotate(-12 148 228)">
+    <rect x="124" y="214" width="46" height="28" rx="1" fill="#efe2c0" filter="url(#glow)"/>
+    <path d="M124 214 L147 230 L170 214" fill="none" stroke="#a8946c" stroke-width="1"/>
+    <path d="M128 236 H140 M128 239 H137" stroke="#6a5a40" stroke-width=".9"/>
+    <circle cx="147" cy="230" r="4.4" fill="#b3221b"/>
+    <circle cx="147" cy="230" r="2" fill="#7a1010"/>
+    <path d="M160 214 L170 214 L170 242 L156 242 C161 236 154 232 160 227 C155 222 162 219 160 214 Z" fill="#2a1408"/>
+    <path d="M156 242 C161 236 154 232 160 227 C155 222 162 219 160 214" fill="none" stroke="#ff9a3a" stroke-width="1.6" filter="url(#glow)"/>
+  </g>
+  <path d="M158 240 C150 228 161 217 157 202 C167 210 171 221 167 229 C173 223 173 215 171 209 C181 219 181 233 173 243 Z" fill="#ffb347" opacity=".9" filter="url(#glow)"/>
+  <path d="M163 240 C159 232 165 224 163 216 C169 224 171 232 167 240 Z" fill="#fff0b0"/>
+  <g fill="#ffc46b" filter="url(#glow)">
+    <circle cx="164" cy="192" r="1.3"/><circle cx="174" cy="182" r="1"/><circle cx="156" cy="184" r=".9"/>
+  </g>
   <rect width="200" height="262" fill="url(#vig)"/>
 </svg>

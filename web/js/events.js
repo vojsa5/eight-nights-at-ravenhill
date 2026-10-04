@@ -26,12 +26,13 @@ export const LAST_NIGHT = ["🌕", "last-night", "The last night at Ravenhill. Y
 
 export const eventOf = (round) => ui.S.events[round];
 
-// The events fall into groups by what they change. Each group is shown like a step on a role card (roles.js
-// stepsHtml): its icon and name as the label, and under it what the group means, or what one event does.
+// The events fall into groups by what they change, each group's events in the order they come. Each group is shown
+// like a step on a role card (roles.js stepsHtml): its icon and name as the label, and under it what the group means,
+// or what one event does.
 export const GROUPS = [
   { icon: "🌙", name: "The guests learn something", what: "At nightfall every guest learns something, so the next testimony is sharper.", events: ["First Impressions", "Séance"] },
-  { icon: "🔎", name: "You learn something", what: "You get a clue of your own in the morning: a notebook left open, or prints in the snow.", events: ["Notebook", "Footprints"] },
-  { icon: "💬", name: "The testimony changes", what: "The day's advice names only one side: only whom to clear, or only whom to arrest.", events: ["Dinner Party", "Inquest"] },
+  { icon: "🔎", name: "You learn something", what: "You get a clue of your own in the morning: first a notebook left open, then prints in the snow.", events: ["Notebook", "Footprints"] },
+  { icon: "💬", name: "The testimony changes", what: "The day's advice names only one side: first only whom to clear, then only whom to arrest.", events: ["Dinner Party", "Inquest"] },
   { icon: "🌑", name: "The house goes quiet", what: "In a Blackout nobody investigates, so the day's advice rests on what the guests already knew. On the last night nobody advises at all, and you decide alone.",
     events: ["Blackout"], lastNight: true },  // the last night has no event, but belongs here
 ];
@@ -40,25 +41,58 @@ const OTHER = { icon: "✦", name: "Other events", what: "", events: [] };
 // GROUPS falls into "Other events".
 export const eventGroup = (e) => (e ? GROUPS.find((g) => g.events.includes(e)) || OTHER : GROUPS.find((g) => g.lastNight));
 
-// The kind of night each night is: the groups come round in cycles, in their order (ravenhill/events.py schedule()).
-export const nightGroup = (round) => GROUPS[(round - 1) % GROUPS.length];
+// The kind of night each night is, an index into GROUPS (Rules.night_groups in ravenhill/rules.py): each half of
+// the stay opens with the guests learning something and ends with the house going quiet; in between, the first half
+// brings you the two clues and the second changes the testimony twice.
+export const NIGHTS = [0, 1, 1, 3, 0, 2, 2, 3];
+export const HALF = NIGHTS.length / 2;  // nights I–IV, then V–VIII
+export const nightGroup = (round) => GROUPS[NIGHTS[(round - 1) % NIGHTS.length]];
 
-// A night's event as far as it can be known: the event itself once it has come, or else the only one of its
-// group's events still to come when that group has only one night left; null while it could be either.
+// A night's event: the event itself once it has come, and before that the one the fixed schedule gives it (each
+// group's nights take its events in order, as in ravenhill/events.py schedule()); null on the last night.
 export function nightEvent(S, round) {
   if (S.events[round]) return S.events[round];
-  const g = nightGroup(round), used = new Set(Object.values(S.events));
-  const eventNight = (n) => !(n === S.rounds && g.lastNight);  // the last group's last night is the drawing room
-  if (!eventNight(round)) return null;
-  const left = g.events.filter((e) => EVENTS[e] && !used.has(e));
-  const nightsLeft = Array.from({ length: S.rounds }, (_, i) => i + 1)
-    .filter((n) => n > S.round && nightGroup(n) === g && !S.events[n] && eventNight(n));
-  return left.length === 1 && nightsLeft.length === 1 ? left[0] : null;
+  if (round === S.rounds) return null;  // the drawing room
+  const g = nightGroup(round);
+  const before = Array.from({ length: round - 1 }, (_, i) => i + 1).filter((n) => nightGroup(n) === g).length;
+  return g.events[before] || null;
 }
 
 // Rows in the role-step style: [group, text] -> the group's icon and name, then the text.
 export const groupStepsHtml = (rows) => `<dl class="role-steps ev-steps">${rows.map(([g, text]) =>
   `<div class="step"><span class="step-icon">${g.icon}</span><dt>${g.name}</dt><dd>${text}</dd></div>`).join("")}</dl>`;
+
+// The event on the round's opening card (intro.js; the folder's tabs keep groupStepsHtml): an index card with the
+// kind of night as its label, the kind's icon in a medallion, then what the event means, its first sentence as the
+// lead. The nights about seats add a small drawing of the table; a worked example in brackets becomes its caption.
+export function nightKindHtml(event, meaning) {
+  const g = eventGroup(event), fig = FIGURES[event];
+  const example = fig && meaning.match(/\s*\(([^)]*)\)/), figure = fig ? fig(example?.[1]) : "";
+  const text = example && figure.includes(example[1]) ? meaning.replace(example[0], "") : meaning;
+  const [, lead, rest = ""] = text.match(/^(.*?[.!?])(\s.*)?$/s) || [null, text];
+  return `<div class="ev-kind"><div class="ev-kind-label"><span class="ev-kind-medal" aria-hidden="true">${g.icon}</span>
+    <span class="ev-kind-name">${g.name}</span></div><p class="ev-kind-text"><span class="ev-lead">${lead}</span>${rest}</p>${figure}</div>`;
+}
+
+// A place card at the table, and a look along it: a dotted line from one seat to the one before, an eye on top.
+const seatHtml = (n, cls) => `<span class="ev-seat ${cls}">#${n}</span>`;
+const GLANCE = `<svg class="ev-glance" viewBox="0 0 94 24" aria-hidden="true"><path class="ev-arc" d="M74 22C70 4 24 4 20 20"/>
+  <path class="ev-head" d="M18.6 15.2 20 20 23.5 16.4"/><g class="ev-eye" transform="translate(47 8)"><path d="M-8 0Q0-6 8 0Q0 6-8 0Z"/><circle r="2.3"/></g></svg>`;
+const HANDS = `<svg class="ev-hands" viewBox="0 0 150 24" aria-hidden="true"><path d="M72 22C68 6 23 6 19 22M78 22C82 6 127 6 131 22"/>
+  <circle cx="45.5" cy="10" r="2.8"/><circle cx="104.5" cy="10" r="2.8"/></svg>`;
+const FIGURES = {
+  // each guest looks at the previous seat: the seats the example names, in pairs ("#5 knows about #4, #0 about #15")
+  "First Impressions": (example) => {
+    const n = (example || "").match(/\d+/g) || [];
+    if (n.length < 4) return "";
+    const pair = (who, seen) => `<span class="ev-pair">${GLANCE}${seatHtml(seen, "seen")}${seatHtml(who, "who")}</span>`;
+    return `<figure class="ev-fig"><div class="ev-table" aria-hidden="true">${pair(n[0], n[1])}<span class="ev-more">···</span>${pair(n[2], n[3])}</div>
+      <figcaption>${example}</figcaption></figure>`;
+  },
+  // everyone holds the hands of the guests on either side
+  "Séance": () => `<figure class="ev-fig" aria-hidden="true"><div class="ev-table"><span class="ev-trio">${HANDS}${seatHtml(4, "seen")}
+    ${seatHtml(5, "who")}${seatHtml(6, "seen")}</span></div></figure>`,
+};
 
 // Events marked for a planned change (see PLANNED_CHANGES in ravenhill/events.py), stamped on their cards in the Events tab.
 export const PLANNED = {};

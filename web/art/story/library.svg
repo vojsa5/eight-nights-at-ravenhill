@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="pull" data-cut-at="38% 100%">
   <title>The library at a quarter past eleven: the armchair by the fire, the fallen glass, the safe standing open</title>
   <defs>
     <radialGradient id="bg" cx="30%" cy="60%" r="85%">
@@ -41,7 +41,12 @@
   <rect x="68" y="90" width="84" height="70" fill="#140a06"/>
   <rect x="80" y="104" width="60" height="56" fill="#050201"/>
   <circle cx="110" cy="146" r="46" fill="#ff8a2a" opacity=".35" filter="url(#soft)"/>
-  <path d="M88 160 C92 138 100 146 104 128 C108 140 112 126 116 116 C120 134 128 136 132 160Z" fill="url(#fire)" filter="url(#glow)"/>
+  <!-- in the films (css/film.css): the fire burns and throws its light about, embers go up; the armchair and the glass
+       are the near layer, and the film opens on the glass, still rocking, then pulls back to the room -->
+  <path class="lf-fire" d="M88 160 C92 138 100 146 104 128 C108 140 112 126 116 116 C120 134 128 136 132 160Z" fill="url(#fire)" filter="url(#glow)"/>
+  <g data-fx="glow" data-at="110 138" data-r="96" data-tone="fire"/>
+  <g data-fx="embers" data-at="110 112" data-r="24"/>
+  <g class="lf-near">
   <!-- the armchair, turned to the fire, and the hand over its arm -->
   <path d="M176 176 L176 112 C176 96 188 88 204 88 L226 88 C242 88 252 96 252 112 L252 176Z" fill="#0c0605"/>
   <path d="M168 140 C168 128 186 128 186 140 L186 176 L168 176Z" fill="#0a0504"/>
@@ -49,14 +54,18 @@
   <path d="M172 130 C166 134 164 146 165 158" stroke="#1e100a" stroke-width="8" fill="none" stroke-linecap="round"/>
   <ellipse cx="165" cy="163" rx="4" ry="5.5" fill="#1e100a"/>
   <path d="M162 166 L161 172 M164.5 167 L164.5 174 M167 166 L168 172" stroke="#1e100a" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M168 130 C164 136 162 146 162 156" fill="none" stroke="#ff8a2a" stroke-opacity=".3" stroke-width="1.2"/>
-  <path d="M176 112 C180 100 190 94 204 94" fill="none" stroke="#ff8a2a" stroke-opacity=".35" stroke-width="2"/>
+  <path class="lf-firelit" d="M168 130 C164 136 162 146 162 156" fill="none" stroke="#ff8a2a" stroke-opacity=".3" stroke-width="1.2"/>
+  <path class="lf-firelit" d="M176 112 C180 100 190 94 204 94" fill="none" stroke="#ff8a2a" stroke-opacity=".35" stroke-width="2"/>
   <!-- floor, the fallen glass and the spill -->
   <rect x="0" y="176" width="360" height="24" fill="#120806"/>
-  <ellipse cx="150" cy="186" rx="26" ry="4" fill="#8a3a10" opacity=".55"/>
-  <g transform="rotate(-78 136 184)">
-    <path d="M128 176 C124 184 128 192 136 192 C144 192 148 184 144 176Z" fill="#d8d0c8" opacity=".3" stroke="#e8e0d8" stroke-opacity=".6"/>
-    <rect x="135" y="192" width="2" height="5" fill="#d8d0c8" opacity=".5"/>
+  <ellipse class="lf-spill" style="transform-box:view-box;transform-origin:126px 186px" cx="150" cy="186" rx="26" ry="4" fill="#8a3a10" opacity=".55"/>
+  <g class="lf-rock" style="transform-box:view-box;transform-origin:137px 189px">
+    <g transform="rotate(-78 136 184)">
+      <path d="M128 176 C124 184 128 192 136 192 C144 192 148 184 144 176Z" fill="#d8d0c8" opacity=".3" stroke="#e8e0d8" stroke-opacity=".6"/>
+      <rect x="135" y="192" width="2" height="5" fill="#d8d0c8" opacity=".5"/>
+    </g>
+    <circle class="lf-glint" style="--d:2.4s" cx="131" cy="180.5" r="1.1" fill="#fff4dc" opacity="0"/>
+  </g>
   </g>
   <!-- the safe, standing open and empty -->
   <rect x="274" y="60" width="36" height="36" rx="2" fill="#1c1c20" stroke="#3a3a40" stroke-width="2"/>

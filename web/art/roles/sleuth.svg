@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
-  <title>Sleuth</title>
+  <title>Sleuth: under the wall lamp, an open pocketbook of guests, a tick for innocent and a cross for guilty</title>
   <defs>
     <radialGradient id="bg" cx="50%" cy="36%" r="78%">
       <stop offset="0" stop-color="#3a4a5e"/>
@@ -27,6 +27,10 @@
       <stop offset=".6" stop-color="#bcd6ff" stop-opacity=".75"/>
       <stop offset="1" stop-color="#5a78b0" stop-opacity=".6"/>
     </radialGradient>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffd9a0" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   <rect width="200" height="262" fill="url(#bg)"/>
   <ellipse cx="40" cy="150" rx="70" ry="12" fill="#c9d8f0" opacity=".09" filter="url(#blur8)"/>
@@ -53,11 +57,26 @@
     <ellipse cx="100" cy="80" rx="50" ry="9"/>
     <path d="M70 80 C70 54 82 46 100 50 C118 46 130 54 130 80 Z"/>
   </g>
-  <line x1="138.0" y1="196.0" x2="162.1" y2="206.4" stroke="#3a2a1a" stroke-width="8" stroke-linecap="round" transform="rotate(17.5 138 172)"/>
-  <circle cx="138" cy="172" r="24" fill="url(#lens)" stroke="#e6c783" stroke-width="5" filter="url(#glow)"/>
-  <ellipse cx="138" cy="172" rx="13.2" ry="7.7" fill="#f4f1ea"/>
-  <circle cx="138" cy="172" r="5.8" fill="#3b6fb0"/>
-  <circle cx="138" cy="172" r="2.6" fill="#050505"/>
-  <circle cx="136.1" cy="169.8" r="1.2" fill="#fff"/>
+  <ellipse cx="140" cy="196" rx="50" ry="38" fill="url(#lamp)"/>
+  <g transform="rotate(-9 140 196)">
+    <rect x="107" y="174" width="66" height="46" rx="3" fill="#3a2416" filter="url(#glow)"/>
+    <path d="M110 177 C120 175 132 176 140 180 L140 217 C132 213 120 212 110 214 Z" fill="#efe6cc"/>
+    <path d="M170 177 C160 175 148 176 140 180 L140 217 C148 213 160 212 170 214 Z" fill="#e4d8b8"/>
+    <path d="M140 180 L140 217" stroke="#a8946c" stroke-width=".8"/>
+    <g fill="#8a7e68">
+      <rect x="114" y="186" width="11" height="1.6"/><rect x="114" y="196" width="9" height="1.6"/><rect x="114" y="206" width="12" height="1.6"/>
+      <rect x="144" y="186" width="10" height="1.6"/><rect x="144" y="196" width="12" height="1.6"/><rect x="144" y="206" width="9" height="1.6"/>
+    </g>
+    <g fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M128 185 L131 188.5 L136.5 181.5" stroke="#1f2c44"/>
+      <path d="M129 193.5 L136 200.5 M136 193.5 L129 200.5" stroke="#a52a20"/>
+      <path d="M128 205 L131 208.5 L136.5 201.5" stroke="#1f2c44"/>
+      <path d="M158 185 L161 188.5 L166.5 181.5" stroke="#1f2c44"/>
+      <path d="M159 193.5 L166 200.5 M166 193.5 L159 200.5" stroke="#a52a20"/>
+    </g>
+    <ellipse cx="115" cy="213" rx="7.5" ry="3.6" fill="#0b0a0f" stroke="#c9d8f0" stroke-opacity=".35" transform="rotate(-35 115 213)"/>
+  </g>
+  <line x1="170" y1="168" x2="182" y2="186" stroke="#3a2a1a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="164" cy="160" r="9" fill="url(#lens)" fill-opacity=".55" stroke="#e6c783" stroke-width="2.6" filter="url(#glow)"/>
   <rect width="200" height="262" fill="url(#vig)"/>
 </svg>

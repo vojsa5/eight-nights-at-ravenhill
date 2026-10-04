@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="pull" data-cut-at="50% 45%">
+  <title>Out in the falling snow beside the lit hall window, two gloved hands close a pair of garden shears on the telephone wire, and it parts in a spark</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#1e2a44"/>
+      <stop offset="1" stop-color="#03050a"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="48%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".86"/>
+    </radialGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#060a14"/>
+      <stop offset=".75" stop-color="#1a2640"/>
+      <stop offset="1" stop-color="#2c3a58"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a4b2cc"/>
+      <stop offset="1" stop-color="#2e3a56"/>
+    </linearGradient>
+    <linearGradient id="pane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffdc98"/>
+      <stop offset="1" stop-color="#f09040"/>
+    </linearGradient>
+    <ellipse id="pr" rx="3" ry="1.4"/>
+    <pattern id="stone" width="24" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 .5 H24 M0 10.5 H24 M6 .5 V10.5 M18 10.5 V20.5" fill="none" stroke="#242e42" stroke-width=".8"/>
+    </pattern>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the snowy night: the sky, the moor, the garden hedge, the telegraph pole -->
+  <rect x="148" width="212" height="124" fill="url(#sky)"/>
+  <circle cx="264" cy="40" r="60" fill="#8aa8d8" opacity=".1" filter="url(#soft)"/>
+  <path d="M360 112 C320 104 280 108 240 104 C200 100 170 108 148 106 V124 H360Z" fill="#6a7a9c"/>
+  <path d="M360 112 C320 104 280 108 240 104 C200 100 170 108 148 106" fill="none" stroke="#a8b8d4" stroke-width="1" opacity=".7"/>
+  <g fill="#0c1220"><path d="M290 108 L286 94 L282 108Z"/><path d="M278 107 L275 97 L272 107Z"/><path d="M218 103 L214 91 L210 103Z"/></g>
+  <rect x="306" y="22" width="5" height="106" fill="#0c0f18"/>
+  <rect x="290" y="30" width="36" height="4" fill="#0c0f18"/>
+  <path d="M290 30 H326 M306 22 H311" stroke="#dfe7f4" stroke-width="1.6"/>
+  <g fill="#9ab8c8"><rect x="295" y="25.5" width="3" height="4.5" rx="1"/><rect x="318" y="25.5" width="3" height="4.5" rx="1"/><rect x="307" y="24" width="3" height="5" rx="1"/></g>
+  <path d="M360 132 V122 C340 118 300 120 260 118 C220 116 180 120 148 118 V132Z" fill="#0e1a18"/>
+  <path d="M360 122 C340 118 300 120 260 118 C220 116 180 120 148 118 C180 116 220 114 260 115 C300 116 340 116 360 119Z" fill="#dfe7f4"/>
+  <rect x="148" y="130" width="212" height="70" fill="url(#field)"/>
+  <!-- the corner of the house, the lit hall window, the butler at the telephone inside -->
+  <rect width="150" height="150" fill="#131925"/>
+  <rect width="150" height="150" fill="url(#stone)"/>
+  <g fill="#1c2436">
+    <rect x="135" y="2" width="15" height="11"/><rect x="140" y="25" width="10" height="11"/><rect x="135" y="48" width="15" height="11"/>
+    <rect x="140" y="71" width="10" height="11"/><rect x="135" y="94" width="15" height="11"/><rect x="140" y="117" width="10" height="11"/>
+  </g>
+  <circle cx="104" cy="72" r="54" fill="#ffb060" opacity=".22" filter="url(#soft)"/>
+  <g data-fx="glow" data-at="104 72" data-r="62" data-tone="lamp"/>
+  <rect x="66" y="29" width="76" height="86" fill="#2c3446"/>
+  <rect class="lf-hum" x="72" y="35" width="64" height="74" fill="url(#pane)" filter="url(#glow)"/>
+  <g fill="#3a1e0c">
+    <circle cx="122" cy="77" r="5.5"/>
+    <path d="M135 109 C135 95 130 88 122 87 C114 88 108 95 107 109 Z"/>
+    <rect x="114.6" y="71" width="3.4" height="11" rx="1.7"/>
+    <path d="M116 81 L110 90 L111 99" fill="none" stroke="#3a1e0c" stroke-width="3.4" stroke-linejoin="round"/>
+    <rect x="131.5" y="84" width="2" height="25"/>
+    <path d="M135 78.5 L128 80 L128.5 84 L134.5 83.5 Z"/>
+  </g>
+  <path d="M116.3 82 C117 92 127 92 131 104" fill="none" stroke="#3a1e0c" stroke-width=".8"/>
+  <path d="M72 62 H136 M104 35 V109" stroke="#1a2030" stroke-width="2.6"/>
+  <path d="M64 27 H144" stroke="#dfe7f4" stroke-width="2.4"/>
+  <path d="M62 115 C74 110 122 110 146 115 L146 118 H62 Z" fill="#e8eef8"/>
+  <g fill="#dfe7f4"><path d="M75 118 L76.5 125 L78 118 Z"/><path d="M91 118 L92 122 L93 118 Z"/><path d="M119 118 L120.5 127 L122 118 Z"/><path d="M135 118 L136 121 L137 118 Z"/></g>
+  <path d="M145 150 C120 141 80 144 40 140 C20 139 8 141 0 140 V150Z" fill="#c8d4e8"/>
+  <!-- the snow before the house, the window's light on it, footprints coming round from the door -->
+  <path d="M360 200 V140 C300 134 220 140 145 146 C100 150 40 146 0 148 V200Z" fill="url(#field)"/>
+  <path d="M60 148 L140 148 L152 200 L38 200Z" fill="#ffc070" opacity=".16" filter="url(#soft)"/>
+  <g fill="#3a4a6a" opacity=".55"><use href="#pr" x="30" y="185"/><use href="#pr" x="54" y="185"/><use href="#pr" x="78" y="174"/><use href="#pr" x="102" y="176"/><use href="#pr" x="126" y="168"/><use href="#pr" x="150" y="173"/><use href="#pr" x="174" y="168"/><use href="#pr" x="198" y="176"/><use href="#pr" x="220" y="174"/><use href="#pr" x="238" y="185"/></g>
+  <!-- the telephone line from the pole to the house, a ridge of snow along it; the bracket at the corner -->
+  <path d="M146 96 C142 97 140 99 137 101" fill="none" stroke="#05070c" stroke-width="1.4"/>
+  <path d="M150 99 H146 V94" fill="none" stroke="#3a4050" stroke-width="1.6"/>
+  <rect x="144" y="92" width="4" height="5" rx="1.5" fill="#e8eef4"/>
+  <!-- in the films (css/film.css + the scene's own rules): the shears snap shut, the spark flashes, the cut ends
+       fall and snow drops off the wire; the snow falls thicker, the window's lamp hums -->
+  <g class="lf-droop" style="transform-box:view-box;transform-origin:308px 28px;--fall:-34deg">
+    <path d="M308 28Q234.5 74.5 180 89.5" fill="none" stroke="#05070c" stroke-width="1.5"/>
+    <path d="M308 27Q234.5 73.5 180 88.5" fill="none" stroke="#e8eef8" stroke-width=".9" opacity=".85"/>
+  </g>
+  <g class="lf-droop" style="transform-box:view-box;transform-origin:146px 96px;--fall:96deg">
+    <path d="M146 96Q162 94.5 180 89.5" fill="none" stroke="#05070c" stroke-width="1.5"/>
+    <path d="M146 95Q162 93.5 180 88.5" fill="none" stroke="#e8eef8" stroke-width=".9" opacity=".85"/>
+  </g>
+  <g fill="#eef3fa"><circle class="lf-sift" style="--d:.66s" cx="178" cy="88" r="1" opacity="0"/><circle class="lf-sift" style="--d:.7s" cx="183" cy="87" r=".8" opacity="0"/><circle class="lf-sift" style="--d:.68s" cx="186" cy="86" r="1.1" opacity="0"/><circle class="lf-sift" style="--d:.74s" cx="174" cy="89.5" r=".7" opacity="0"/><circle class="lf-sift" style="--d:.8s" cx="190" cy="85" r=".8" opacity="0"/><circle class="lf-sift" style="--d:.72s" cx="170" cy="90.5" r=".9" opacity="0"/></g>
+  <!-- the garden shears in two gloved hands -->
+    <g class="lf-snip" style="transform-box:view-box;transform-origin:197.5px 107px;--open:12deg;--shut:-5deg">
+      <path d="M227.5 147.5C257 188 292 236.5 321.5 277L300 291.5C274.5 248 244.5 196.5 216 152.5Z" fill="#141a28"/>
+      <g fill="#c8d4e8" opacity=".75"><circle cx="234.5" cy="167" r=".6"/><circle cx="241.5" cy="186.5" r=".6"/><circle cx="256" cy="195.5" r=".6"/></g>
+      <path d="M201.5 121.5L191.5 106.5 195.5 104 205.5 119Z" fill="#5a6274"/>
+      <path d="M221 151.5L201 122 205 119 225.5 149Z" fill="#6a4020"/>
+      <path d="M222.5 148L205 121.5" stroke="#b07a40" stroke-width="1" opacity=".8"/>
+      <path d="M202 123.5L200 121 204.5 117.5 206.5 120.5Z" fill="#9a8a5a"/>
+      <path d="M229.5 149.5L233 154.5 220.5 163 217.5 155.5Z" fill="#1e2230"/>
+      <path d="M217.5 133.5C210.5 137 208.5 143 212 148C215.5 153 219.5 154 223.5 152.5L228.5 149C226.5 143 222 136.5 217.5 133.5Z" fill="#0a090c"/>
+      <path d="M214 140.5C212 141.5 211 143 211 145M216 144.5C213.5 145.5 212.5 146.5 213 148.5M218.5 147.5C216 148.5 215 150 215.5 152" fill="none" stroke="#2e2e3a" stroke-width=".7"/>
+      <path d="M199 103.5L181.5 82Q173 73 167.5 71L194.5 104.5Z" fill="#7a8498"/>
+      <path d="M194.5 103.5L168 72" stroke="#eef4ff" stroke-width=".7" opacity=".9"/>
+    </g>
+    <g class="lf-snip" style="transform-box:view-box;transform-origin:197.5px 107px;--open:-12deg;--shut:5deg">
+      <path d="M234.5 135C275 164 323.5 199.5 364 229L378.5 207.5C335.5 182 283.5 152 239.5 123.5Z" fill="#141a28"/>
+      <g fill="#c8d4e8" opacity=".75"><circle cx="254" cy="141.5" r=".6"/><circle cx="273.5" cy="148.5" r=".6"/><circle cx="283" cy="163.5" r=".6"/></g>
+      <path d="M209.5 115L194.5 105 197 101 212 111Z" fill="#5a6274"/>
+      <path d="M239.5 135L209.5 114.5 212.5 110.5 242 130.5Z" fill="#6a4020"/>
+      <path d="M238.5 132L212 114.5" stroke="#b07a40" stroke-width="1" opacity=".8"/>
+      <path d="M211 116L208 114 211.5 109.5 214 111.5Z" fill="#9a8a5a"/>
+      <path d="M237 137L241.5 140.5 250.5 127.5 242.5 125Z" fill="#1e2230"/>
+      <path d="M221 124.5C224 118 230.5 116 235.5 119.5C240.5 122.5 241 127 239.5 130.5L236.5 135.5C230.5 134 223.5 129.5 221 124.5Z" fill="#0a090c"/>
+      <path d="M228 121.5C229 119 230 118 232.5 118.5M231.5 123.5C232.5 121 233.5 120 236 120.5M234.5 125.5C235.5 123 237 122.5 239 122.5" fill="none" stroke="#2e2e3a" stroke-width=".7"/>
+      <path d="M194 108.5L172.5 91Q163.5 82.5 161.5 77L195 104Z" fill="#a8b0c2"/>
+      <path d="M194 104L162.5 77.5" stroke="#eef4ff" stroke-width="1" opacity=".9"/>
+    </g>
+  <circle cx="197.5" cy="107" r="2.6" fill="#3a404c" stroke="#c8d0e0" stroke-width=".9"/>
+  <!-- the spark -->
+  <g class="lf-snap">
+    <circle cx="180" cy="89.5" r="20" fill="#ffe0a0" opacity=".6" filter="url(#soft)"/>
+    <circle cx="180" cy="89.5" r="2.6" fill="#fff6d0" filter="url(#glow)"/>
+    <path d="M180 89.5 m-2 -2 l-4 -5 m4 7 l-6 -1 m6 -1 l2 -6 m-1.5 8 l1 6 m-1 -6 l-5 4" fill="none" stroke="#fff4c0" stroke-width=".7" stroke-linecap="round"/>
+  </g>
+  <g data-fx="breath" data-at="250 92" data-r="16"/>
+  <g class="lf-thicken" opacity="0">
+    <g class="lf-fall fast">
+      <g id="more" fill="#e8eef8"><circle cx="169" cy="21" r="1.4"/><circle cx="337" cy="8" r=".8"/><circle cx="278" cy="14" r="1.2"/><circle cx="302" cy="9" r="1"/><circle cx="23" cy="13" r="1.4"/><circle cx="218" cy="10" r="1"/><circle cx="50" cy="72" r="1.4"/><circle cx="34" cy="107" r=".8"/><circle cx="118" cy="82" r=".8"/><circle cx="299" cy="76" r="1.4"/><circle cx="29" cy="30" r=".8"/><circle cx="289" cy="19" r="1.2"/></g>
+      <use href="#more" y="-112"/><use href="#more" y="112"/>
+    </g>
+  </g>
+  <g data-fx="snow"/>
+  <!-- where the flashback lays the guest's photograph, over the one who did it -->
+  <g data-fx="guest" data-at="224 98"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

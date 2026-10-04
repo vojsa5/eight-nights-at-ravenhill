@@ -44,7 +44,7 @@
   <rect x="69" y="62" width="10" height="34" fill="#e6dac0"/>
   <rect x="69" y="62" width="4" height="34" fill="#fff4dc" opacity=".5"/>
   <path d="M74 61 L74 56" stroke="#2a1a10" stroke-width="1"/>
-  <path d="M74 40 C78 48 79 54 74 58 C69 54 70 48 74 40Z" fill="url(#flame)" filter="url(#glow)"/>
+  <path class="lf-flame" d="M74 40 C78 48 79 54 74 58 C69 54 70 48 74 40Z" fill="url(#flame)" filter="url(#glow)"/>
   <!-- the bedside table -->
   <path d="M50 94 L310 94 L330 170 L30 170Z" fill="#22160c"/>
   <path d="M50 94 L310 94" stroke="#3a2616" stroke-width="1.5"/>
@@ -91,5 +91,11 @@
     <path d="M279 145 L294 147 L294 150.5 L279 152Z" fill="url(#nickel)"/>
     <rect x="273" y="144.4" width="4" height="2.2" fill="#1a1a1a"/>
   </g>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <g data-fx="glow" data-at="74 52" data-r="30" data-tone="candle"/>
+  <path class="lf-glint" style="--d:-2.53s" d="M213 104 L213.8 109.2 L219 110 L213.8 110.8 L213 116 L212.2 110.8 L207 110 L212.2 109.2Z" fill="#fffbe8" opacity="0"/>
+  <path class="lf-glint" style="--d:-1.7s" d="M262 141 L262.7 145.3 L267 146 L262.7 146.7 L262 151 L261.3 146.7 L257 146 L261.3 145.3Z" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="208 128" data-r="70" data-tone="right"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

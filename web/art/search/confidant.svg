@@ -1,65 +1,115 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
-  <title>A bundle of old letters tied with a faded ribbon, beside a small framed photograph of two friends arm in arm</title>
+  <title>On the dressing table, by a candle burnt down to a stub: a chess scoresheet in two hands, every move with the time beside it from 10.02 at night to 6.55 in the morning, and a white knight lying beside it</title>
   <defs>
-    <radialGradient id="bg" cx="55%" cy="45%" r="80%">
-      <stop offset="0" stop-color="#2a2218"/>
+    <radialGradient id="bg" cx="40%" cy="40%" r="85%">
+      <stop offset="0" stop-color="#36301e"/>
       <stop offset="1" stop-color="#050403"/>
     </radialGradient>
-    <radialGradient id="vig" cx="50%" cy="55%" r="75%">
+    <radialGradient id="vig" cx="50%" cy="54%" r="75%">
       <stop offset=".5" stop-color="#000" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".86"/>
     </radialGradient>
     <radialGradient id="pool" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
-      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+      <stop offset="0" stop-color="#ffcf80" stop-opacity=".36"/>
+      <stop offset="1" stop-color="#ffcf80" stop-opacity="0"/>
     </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5a6070"/>
+      <stop offset=".5" stop-color="#22262e"/>
+      <stop offset="1" stop-color="#0e1014"/>
+    </linearGradient>
+    <linearGradient id="ivory" x1="0" y1="0" x2="1" y2=".3">
+      <stop offset="0" stop-color="#fff6e0"/>
+      <stop offset=".6" stop-color="#e8d6b0"/>
+      <stop offset="1" stop-color="#a88c60"/>
+    </linearGradient>
+    <pattern id="paper" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="6" height="14" fill="#fff" opacity=".022"/>
+    </pattern>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="3" result="b"/>
-      <feMerge>
-        <feMergeNode in="b"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8"/>
-    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
-  <rect y="124" width="360" height="76" fill="#15120d"/>
-  <ellipse cx="150" cy="150" rx="140" ry="40" fill="url(#pool)"/>
-  <g transform="rotate(-8 150 138)">
-    <rect x="98" y="118" width="92" height="54" fill="#d8caa8" stroke="#9a8664" stroke-width="1"/>
-    <path d="M98 118 L144 146 L190 118" fill="none" stroke="#9a8664" stroke-width="1"/>
-  </g>
-  <g transform="rotate(4 150 138)">
-    <rect x="108" y="112" width="92" height="54" fill="#e4d8be" stroke="#9a8664" stroke-width="1"/>
-    <path d="M108 112 L154 140 L200 112" fill="none" stroke="#9a8664" stroke-width="1"/>
-  </g>
-  <g transform="rotate(-2 150 138)">
-    <rect x="104" y="106" width="92" height="54" fill="#ece2ca" stroke="#9a8664" stroke-width="1"/>
-    <path d="M104 106 L150 134 L196 106" fill="none" stroke="#9a8664" stroke-width="1"/>
-  </g>
-  <path d="M150 104 L150 170" stroke="#b0606a" stroke-width="5"/>
-  <path d="M98 138 L204 138" stroke="#b0606a" stroke-width="5"/>
-  <path d="M150 138 C132 120 126 132 140 140 C126 148 132 158 150 140 C168 158 174 148 160 140 C174 132 168 120 150 138 Z" fill="#c8707a"/>
-  <g transform="rotate(6 272 120)">
-    <rect x="236" y="80" width="72" height="84" fill="#6a4a1c" stroke="#b08838" stroke-width="3"/>
-    <defs>
-      <clipPath id="clip-whole-246">
-        <path d="M246 92 h52 v60 h-52 Z"/>
-      </clipPath>
-    </defs>
-    <rect x="238" y="84" width="68" height="76" fill="#ffe2a0" opacity=".22" filter="url(#blur8)"/>
-    <g clip-path="url(#clip-whole-246)">
-      <rect x="246" y="92" width="52" height="60" fill="#e8d6b0"/>
-      <rect x="249" y="95" width="46" height="54" fill="#c9ad7c"/>
-      <circle cx="263.16" cy="116.21176470588235" r="6.0" fill="#5a4630"/>
-      <path d="M256.10117647058826 117.97647058823529 C254.33647058823533 107.38823529411765 271.9835294117647 107.38823529411765 270.2188235294118 117.97647058823529 Z" fill="#3a2a18"/>
-      <path d="M252.57176470588237 140.91764705882352 C252.57176470588237 126.8 273.74823529411765 126.8 273.74823529411765 140.91764705882352 Z" fill="#5a4630"/>
-      <circle cx="280.84000000000003" cy="116.21176470588235" r="6.0" fill="#5a4630"/>
-      <path d="M270.2517647058824 140.91764705882352 C270.2517647058824 126.8 291.42823529411766 126.8 291.42823529411766 140.91764705882352 Z" fill="#5a4630"/>
-      <path d="M266.8 129.2 L277.2 129.2" stroke="#5a4630" stroke-width="4.285714285714286"/>
+  <rect width="360" height="92" fill="url(#paper)"/>
+  <!-- the dressing table and its tilting mirror -->
+  <path d="M44 90 H316 L344 160 H16Z" fill="#2a190d"/>
+  <path d="M44 90 H316" stroke="#4a3018" stroke-width="1.2"/>
+  <rect x="14" y="160" width="332" height="6" fill="#3a2414"/>
+  <path d="M14 160.5 H346" stroke="#6a4424" stroke-width="1"/>
+  <rect x="20" y="166" width="320" height="34" fill="#170d06"/>
+  <g fill="none" stroke="#2c1a0e" stroke-width="1.5"><rect x="30" y="172" width="140" height="26"/><rect x="190" y="172" width="140" height="26"/></g>
+  <g fill="#b08a40"><circle cx="100" cy="184" r="2.4"/><circle cx="260" cy="184" r="2.4"/></g>
+  <path d="M146 90 V54 M214 90 V54" stroke="#2a190d" stroke-width="4"/>
+  <ellipse cx="180" cy="48" rx="31" ry="40" fill="#3a2414"/>
+  <ellipse cx="180" cy="48" rx="27" ry="36" fill="url(#glass)"/>
+  <path d="M164 26 C160 34 158 46 160 58" fill="none" stroke="#c8d0dc" stroke-width="2" opacity=".25" stroke-linecap="round"/>
+  <ellipse cx="160" cy="64" rx="6" ry="9" fill="#ffcf80" opacity=".18" filter="url(#soft)"/>
+  <g fill="#b08a40"><circle cx="146" cy="52" r="2.4"/><circle cx="214" cy="52" r="2.4"/></g>
+  <ellipse cx="180" cy="126" rx="160" ry="44" fill="url(#pool)"/>
+  <!-- the candle, burnt down to a stub in the night (in the films it flickers) -->
+  <circle cx="64" cy="86" r="30" fill="#ffb060" opacity=".18" filter="url(#soft)"/>
+  <ellipse cx="64" cy="104" rx="15" ry="4" fill="#5a4020"/>
+  <ellipse cx="64" cy="102.4" rx="12" ry="3.2" fill="#a8843a"/>
+  <path d="M58 102 V96 C58 94.6 60 94 64 94 C68 94 70 94.6 70 96 V102Z" fill="#e6d8bc"/>
+  <path d="M59 96 C58.4 98 59 100 58.6 102.4 M67.4 95 C68.4 97 67.4 99 68.4 101.6 L68 103.4" fill="none" stroke="#e6d8bc" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M64 94 V91.4" stroke="#222" stroke-width=".6"/>
+  <path class="lf-flame" d="M64 82 C66.6 86 66.6 90 64 91.6 C61.4 90 61.4 86 64 82Z" fill="#ffd27a" filter="url(#glow)"/>
+  <g data-fx="glow" data-at="64 86" data-r="44" data-tone="candle"/>
+  <!-- a bottle of cologne and a stud box -->
+  <path d="M286 102 H296 V86 H286Z" fill="#9ab0a0" opacity=".45"/>
+  <rect x="288.6" y="81" width="4.8" height="5" fill="#b08a40"/>
+  <path d="M287.4 88 V100" stroke="#fff" stroke-width=".8" opacity=".4"/>
+  <ellipse cx="308" cy="106" rx="8" ry="3" fill="#2a1a0e"/>
+  <path d="M300 106 V102 H316 V106" fill="#6a4a2a"/>
+  <ellipse cx="308" cy="102" rx="8" ry="3" fill="#8a6438"/>
+  <!-- the scoresheet: the left column in one hand, the right in another, and the time beside every move -->
+  <g transform="translate(110 97) scale(.94 .8) rotate(-4)">
+    <rect x="4" y="5" width="120" height="78" fill="#000" opacity=".45" filter="url(#soft)"/>
+    <rect width="120" height="78" fill="#ece2c8"/>
+    <path d="M60 4 V74 M4 12 H116" stroke="#8a7450" stroke-width=".6"/>
+    <g font-family="Georgia, serif" font-size="5.4" fill="#5a4a30" text-anchor="middle" letter-spacing=".4">
+      <text x="32" y="9.4">WHITE</text><text x="88" y="9.4">BLACK</text>
+    </g>
+    <g font-family="Georgia, serif" font-size="6.2" fill="#2a2018">
+      <text x="4" y="21">1.</text><text x="13" y="21">P–K4</text><text x="57" y="21" text-anchor="end">10.02</text>
+      <text x="4" y="30">2.</text><text x="13" y="30">Kt–KB3</text><text x="57" y="30" text-anchor="end">10.07</text>
+      <text x="4" y="48">24.</text><text x="15" y="48">Q×B</text><text x="57" y="48" text-anchor="end">11.14</text>
+      <text x="4" y="66">51.</text><text x="15" y="66">R–Q7</text><text x="57" y="66" text-anchor="end">3.40</text>
+      <text x="4" y="75">78.</text><text x="15" y="75">K–B3</text><text x="57" y="75" text-anchor="end">6.49</text>
+    </g>
+    <g font-family="Georgia, serif" font-size="6.2" font-style="italic" fill="#24305a">
+      <text x="64" y="21">P–K4</text><text x="116" y="21" text-anchor="end">10.04</text>
+      <text x="64" y="30">Kt–QB3</text><text x="116" y="30" text-anchor="end">10.11</text>
+      <text x="64" y="48">R–K1</text><text x="116" y="48" text-anchor="end">12.40</text>
+      <text x="64" y="66">K–B1</text><text x="116" y="66" text-anchor="end">3.52</text>
+      <text x="64" y="75">K–Kt2</text><text x="116" y="75" text-anchor="end">6.55</text>
+    </g>
+    <g fill="none" stroke-linecap="round" stroke-dasharray="0 4" stroke-width="1.1">
+      <path d="M14 38 H54 M14 56 H54" stroke="#2a2018"/><path d="M68 38 H112 M68 56 H112" stroke="#24305a"/>
     </g>
   </g>
+  <path d="M74 152 L104 146" stroke="#000" stroke-opacity=".4" stroke-width="3" filter="url(#soft)"/>
+  <path d="M72 148 L102 142" stroke="#c89a40" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M72 148 L76 147.2" stroke="#e8d0b0" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M69 148.6 L72 148" stroke="#3a3030" stroke-width="1" stroke-linecap="round"/>
+  <!-- the white knight, lying on its side beside it -->
+  <ellipse cx="262" cy="142" rx="26" ry="5" fill="#000" opacity=".5" filter="url(#soft)"/>
+  <g transform="translate(240 136) rotate(84) scale(.66)">
+    <g fill="url(#ivory)">
+      <path d="M-16 0 H16 V-3.4 C16 -5.4 14.4 -6.6 12.4 -6.6 H-12.4 C-14.4 -6.6 -16 -5.4 -16 -3.4Z"/>
+      <path d="M-13 -6.6 H13 C13 -8.8 11.4 -10.4 9.4 -10.4 H-9.4 C-11.4 -10.4 -13 -8.8 -13 -6.6Z"/>
+      <path d="M-10.6 -10.4 H10.6 L9.6 -13.4 H-9.6Z"/>
+      <path d="M-9.6 -13.4 C-11.6 -20 -12.4 -28 -10 -35 C-8.6 -39 -6.4 -42 -4.6 -44 L-4 -50 L-.6 -45.4 L1.6 -50.6 L3.2 -44.4 C7.6 -42.6 11 -39 13.6 -34 L18 -26.6 C19.2 -24.6 18.6 -22 16.4 -21.2 C14.6 -20.6 13 -21.2 11.6 -22.6 C10 -24 8 -24.4 6 -24 C4.6 -23.6 3.8 -22.6 4 -21 C5 -17.6 8 -16 9.6 -13.4Z"/>
+    </g>
+    <path d="M-10 -35 L-7.4 -33.6 M-11.2 -30 L-8.4 -28.8 M-11.8 -25 L-9 -24.2 M-11.8 -20 L-9 -19.6 M-10.6 -10.4 H10.6 M-13 -6.6 H13 M11.6 -22.6 C12.4 -23.6 13.6 -24 15 -23.6" fill="none" stroke="#7a6038" stroke-width=".9" stroke-linecap="round"/>
+    <ellipse cx="5.4" cy="-35.6" rx="1.5" ry="1" fill="#3a2a18" transform="rotate(30 5.4 -35.6)"/>
+  </g>
+  <!-- in the films (css/film.css) the candle lives and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <circle class="lf-glint" style="--d:-1.8s" cx="250" cy="128" r="1.4" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="182 120" data-r="76"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

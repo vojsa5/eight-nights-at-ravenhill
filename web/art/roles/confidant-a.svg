@@ -1,62 +1,99 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
-  <title>Confidant</title>
+  <title>Confidant: the bowler and the pipe, a white knight in his hand over the chessboard</title>
   <defs>
-    <radialGradient id="bg" cx="50%" cy="36%" r="78%">
-      <stop offset="0" stop-color="#5a4226"/>
-      <stop offset="1" stop-color="#070503"/>
+    <radialGradient id="bg" cx="50%" cy="34%" r="80%">
+      <stop offset="0" stop-color="#4c5a34"/>
+      <stop offset=".55" stop-color="#1f2614"/>
+      <stop offset="1" stop-color="#060704"/>
     </radialGradient>
     <radialGradient id="vig" cx="50%" cy="45%" r="72%">
       <stop offset=".55" stop-color="#000" stop-opacity="0"/>
       <stop offset="1" stop-color="#000" stop-opacity=".8"/>
     </radialGradient>
-    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3.5"/>
-    </filter>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffd890" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffd890" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ivory" x1="0" y1="0" x2="1" y2=".3">
+      <stop offset="0" stop-color="#fff6e0"/>
+      <stop offset=".6" stop-color="#e8d6b0"/>
+      <stop offset="1" stop-color="#a88c60"/>
+    </linearGradient>
+    <linearGradient id="dim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#060704" stop-opacity="0"/>
+      <stop offset="1" stop-color="#060704" stop-opacity=".75"/>
+    </linearGradient>
+    <filter id="halo" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.5"/></filter>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="3" result="b"/>
-      <feMerge>
-        <feMergeNode in="b"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+      <feGaussianBlur stdDeviation="2.6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8"/>
-    </filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="smoke" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.2"/></filter>
   </defs>
   <rect width="200" height="262" fill="url(#bg)"/>
-  <g fill="#f0d6a0" opacity=".62" filter="url(#halo)">
-    <path d="M14 300 L14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 L186 300 Z"/>
+  <circle cx="160" cy="54" r="46" fill="#ffd890" opacity=".16" filter="url(#blur8)"/>
+  <!-- the smoking-room clock in the dark behind him, at two minutes past ten: the first move -->
+  <g opacity=".36" filter="url(#glow)">
+    <path d="M20 84 V52 C20 40 27 34 36 34 C45 34 52 40 52 52 V84Z" fill="#c8b080"/>
+    <circle cx="36" cy="58" r="12" fill="#efe2c0"/>
+    <path d="M36 58 L29.4 54.4 M36 58 L37.6 47.4" stroke="#3a2a18" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+  <g fill="#e9d39a" opacity=".6" filter="url(#halo)">
+    <path d="M14 330 L14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 L186 330 Z"/>
     <path d="M60 184 L76 146 L92 180 Z"/>
     <path d="M140 184 L124 146 L108 180 Z"/>
     <path d="M86 136 L86 180 L114 180 L114 136 Z"/>
     <ellipse cx="100" cy="108" rx="27" ry="33"/>
-    <path d="M66 100 C62 60 138 60 134 100 C124 92 76 92 66 100 Z"/>
-    <path d="M64 100 C80 94 120 94 136 100 L136 104 C120 98 80 98 64 104 Z"/>
+    <path d="M73 92 C71 60 129 60 127 92 Z"/>
+    <ellipse cx="100" cy="92" rx="40" ry="7"/>
+    <path d="M118 124 C126 126 134 126 140 122 L141 128 C134 133 124 132 117 129 Z"/>
+    <path d="M136 112 L146 112 L145 127 L137 127 Z"/>
   </g>
-  <g fill="#0b0a0f">
-    <path d="M14 300 L14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 L186 300 Z"/>
+  <g fill="#0b0c09">
+    <path d="M14 330 L14 262 C18 204 52 176 100 172 C148 176 182 204 186 262 L186 330 Z"/>
     <path d="M60 184 L76 146 L92 180 Z"/>
     <path d="M140 184 L124 146 L108 180 Z"/>
     <path d="M86 136 L86 180 L114 180 L114 136 Z"/>
     <ellipse cx="100" cy="108" rx="27" ry="33"/>
-    <path d="M66 100 C62 60 138 60 134 100 C124 92 76 92 66 100 Z"/>
-    <path d="M64 100 C80 94 120 94 136 100 L136 104 C120 98 80 98 64 104 Z"/>
+    <path d="M73 92 C71 60 129 60 127 92 Z"/>
+    <ellipse cx="100" cy="92" rx="40" ry="7"/>
+    <path d="M118 124 C126 126 134 126 140 122 L141 128 C134 133 124 132 117 129 Z"/>
+    <path d="M136 112 L146 112 L145 127 L137 127 Z"/>
   </g>
-  <defs>
-    <clipPath id="clip-left-110">
-      <path d="M110 184 L140.0 184 L140.0 184.0 L146.0 189.75 L140.0 195.5 L146.0 201.25 L140.0 207.0 L146.0 212.75 L140.0 218.5 L146.0 224.25 L140.0 230.0 L110 230 Z"/>
-    </clipPath>
-  </defs>
-  <rect x="102" y="176" width="82" height="62" fill="#ffe2a0" opacity=".22" filter="url(#blur8)"/>
-  <g clip-path="url(#clip-left-110)" filter="url(#glow)">
-    <rect x="110" y="184" width="66" height="46" fill="#e8d6b0"/>
-    <rect x="113" y="187" width="60" height="40" fill="#c9ad7c"/>
-    <circle cx="131.78" cy="202.56235294117647" r="4.6000000000000005" fill="#5a4630"/>
-    <path d="M126.36823529411765 203.91529411764708 C125.01529411764706 195.79764705882354 138.54470588235296 195.79764705882354 137.19176470588235 203.91529411764708 Z" fill="#3a2a18"/>
-    <path d="M123.66235294117647 221.5035294117647 C123.66235294117647 210.68 139.89764705882354 210.68 139.89764705882354 221.5035294117647 Z" fill="#5a4630"/>
-    <circle cx="154.22" cy="202.56235294117647" r="4.6000000000000005" fill="#5a4630"/>
-    <path d="M146.10235294117646 221.5035294117647 C146.10235294117646 210.68 162.33764705882353 210.68 162.33764705882353 221.5035294117647 Z" fill="#5a4630"/>
-    <path d="M136.4 212.52 L149.6 212.52" stroke="#5a4630" stroke-width="3.2857142857142856"/>
+  <g fill="#e8e2d0" opacity=".28" filter="url(#smoke)">
+    <ellipse cx="142" cy="102" rx="4" ry="6"/><ellipse cx="147" cy="88" rx="5" ry="7"/><ellipse cx="143" cy="72" rx="6" ry="8"/>
+  </g>
+  <ellipse cx="141" cy="111" rx="3.2" ry="1.4" fill="#ffb060" filter="url(#glow)"/>
+  <!-- the chessboard in front of him, and the white knight he is about to move -->
+  <path d="M5 227.4 H195 L220 292 H-20Z" fill="#24180c"/>
+  <path d="M10 232 H190 L214 292 H-14Z" fill="#cdb488"/>
+  <path d="M32.5 232H55L51.9 247.7H27.8ZM77.5 232H100L100 247.7H75.9ZM122.5 232H145L148.1 247.7H124.1ZM167.5 232H190L196.3 247.7H172.2ZM3.7 247.7H27.8L21.9 267.4H-4.2ZM51.9 247.7H75.9L74 267.4H47.9ZM100 247.7H124.1L126 267.4H100ZM148.1 247.7H172.2L178.1 267.4H152.1ZM21.9 267.4H47.9L43 292H14.5ZM74 267.4H100L100 292H71.5ZM126 267.4H152.1L157 292H128.5ZM178.1 267.4H204.2L214 292H185.5Z" fill="#3a2814"/>
+  <path d="M5 227.4 H195" stroke="#e9d39a" stroke-width=".8" opacity=".5"/>
+  <ellipse cx="124" cy="214" rx="62" ry="44" fill="url(#lamp)"/>
+  <rect y="230" width="200" height="32" fill="url(#dim)"/>
+  <g transform="translate(124 224)">
+    <g fill="url(#ivory)" filter="url(#glow)">
+      <path d="M-16 0 H16 V-3.4 C16 -5.4 14.4 -6.6 12.4 -6.6 H-12.4 C-14.4 -6.6 -16 -5.4 -16 -3.4Z"/>
+      <path d="M-13 -6.6 H13 C13 -8.8 11.4 -10.4 9.4 -10.4 H-9.4 C-11.4 -10.4 -13 -8.8 -13 -6.6Z"/>
+      <path d="M-10.6 -10.4 H10.6 L9.6 -13.4 H-9.6Z"/>
+      <path d="M-9.6 -13.4 C-11.6 -20 -12.4 -28 -10 -35 C-8.6 -39 -6.4 -42 -4.6 -44 L-4 -50 L-.6 -45.4 L1.6 -50.6 L3.2 -44.4 C7.6 -42.6 11 -39 13.6 -34 L18 -26.6 C19.2 -24.6 18.6 -22 16.4 -21.2 C14.6 -20.6 13 -21.2 11.6 -22.6 C10 -24 8 -24.4 6 -24 C4.6 -23.6 3.8 -22.6 4 -21 C5 -17.6 8 -16 9.6 -13.4Z"/>
+    </g>
+    <g fill="none" stroke="#7a6038" stroke-width=".7" stroke-linecap="round">
+      <path d="M-10 -35 L-7.4 -33.6 M-11.2 -30 L-8.4 -28.8 M-11.8 -25 L-9 -24.2 M-11.8 -20 L-9 -19.6 M-10.6 -10.4 H10.6 M-13 -6.6 H13 M11.6 -22.6 C12.4 -23.6 13.6 -24 15 -23.6"/>
+    </g>
+    <ellipse cx="5.4" cy="-35.6" rx="1.5" ry="1" fill="#3a2a18" transform="rotate(30 5.4 -35.6)"/>
+    <circle cx="15.6" cy="-24.4" r=".7" fill="#3a2a18"/>
+    <g fill="#0b0c09">
+      <path d="M14.6 -13.6 C21 -15 27 -12 31 -7 C34.6 -2.4 37.4 3.6 39.4 9.4 L28 15.4 C24 9.6 19 4.4 14 1.6Z"/>
+      <path d="M32 23.6 L43.6 17.6 L56 44 L42 50Z"/>
+      <path d="M17 -13.6 C11 -14 6 -13.6 3.6 -12.4 C2.4 -11.8 2.6 -10 4 -9.8 C7 -9.6 12 -10 17 -10.2Z"/>
+      <path d="M17.2 -9.6 C12 -9.8 7.4 -9.2 5.2 -8 C4 -7.4 4.2 -5.6 5.6 -5.4 C8.6 -5.2 12.6 -5.6 17.4 -6Z"/>
+      <path d="M17.4 -5.4 C13 -5.4 9.4 -4.8 7.6 -3.8 C6.6 -3.2 6.8 -1.6 8 -1.4 C10.6 -1.2 14 -1.6 17.6 -2.2Z"/>
+      <path d="M17.6 -1.8 C14.6 -1.6 12.4 -1 11.4 -.2 C10.8 .4 11.2 1.6 12.2 1.6 C14 1.6 16 1 18 .4Z"/>
+    </g>
+    <path d="M28 15.4 L39.4 9.4 L43.6 17.6 L32 23.6Z" fill="#e6dcc4" opacity=".85"/>
+    <path d="M17 -13.6 C11 -14 6 -13.6 3.6 -12.4 M17.2 -9.6 C12 -9.8 7.4 -9.2 5.2 -8 M17.4 -5.4 C13 -5.4 9.4 -4.8 7.6 -3.8 M17.6 -1.8 C14.6 -1.6 12.4 -1 11.4 -.2 M14.6 -13.6 C21 -15 27 -12 31 -7 C34.6 -2.4 37.4 3.6 39.4 9.4" fill="none" stroke="#e9d39a" stroke-width=".6" opacity=".55"/>
   </g>
   <rect width="200" height="262" fill="url(#vig)"/>
 </svg>

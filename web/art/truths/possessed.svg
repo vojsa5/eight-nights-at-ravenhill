@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="black">
+  <title>The Séance: the lamps go down, hands are joined around the table, the planchette stirs, the mirror hangs turned to the wall, and something takes hold of one of the sitters</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="80%">
+      <stop offset="0" stop-color="#26343a"/>
+      <stop offset="1" stop-color="#040607"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="45%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="dim" gradientUnits="userSpaceOnUse" cx="180" cy="80" r="170">
+      <stop offset=".2" stop-color="#020304" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#020304" stop-opacity=".85"/>
+      <stop offset=".8" stop-color="#020304" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="cold" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#bff0e0" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#bff0e0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="top" cx="50%" cy="45%" r="55%">
+      <stop offset="0" stop-color="#3a2c22"/>
+      <stop offset="1" stop-color="#140d09"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="eyes" x="-100%" y="-400%" width="300%" height="900%">
+      <feGaussianBlur stdDeviation="1.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="halo" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the parlour: drapes, the lamp on the sideboard and the sconce, and the mirror turned to the wall (in the films it
+       sways on its wire) -->
+  <path d="M0 0 H34 C30 30 36 70 28 104 H0Z" fill="#101a1c"/>
+  <path d="M12 0 C10 40 14 80 8 104 M24 0 C22 40 26 76 20 104" stroke="#081012" stroke-width="1.5" fill="none"/>
+  <rect x="0" y="100" width="360" height="4" fill="#0c1214"/>
+  <rect x="34" y="84" width="54" height="20" fill="#0c0a08"/>
+  <circle class="lf-dying" cx="58" cy="66" r="22" fill="#ffc070" opacity=".3" filter="url(#soft)"/>
+  <path d="M52 84 C52 78 54 76 58 75 C62 76 64 78 64 84Z" fill="#8a6a30"/>
+  <path d="M55 75 C54 70 55.4 64 58 60 C60.6 64 62 70 61 75Z" fill="#fff4d8" opacity=".35"/>
+  <g class="lf-dying"><path class="lf-flame" d="M58 66 C56.6 68.4 56.8 71 58 71.6 C59.2 71 59.4 68.4 58 66Z" fill="#ffd27a" filter="url(#glow)"/></g>
+  <circle class="lf-dying" cx="336" cy="34" r="16" fill="#ffc070" opacity=".24" filter="url(#soft)"/>
+  <path d="M334 48 L334 40 C330 40 328 37 328 34 H344 C344 37 342 40 338 40 L338 48Z" fill="#6a5020"/>
+  <g class="lf-dying"><path class="lf-flame" style="--d:-.7s" d="M336 26 C334.8 28.4 335 31 336 31.6 C337 31 337.2 28.4 336 26Z" fill="#ffd27a" filter="url(#glow)"/></g>
+  <path d="M296 16 L304 26 M304 16 L296 26" stroke="#3a3428" stroke-width=".5"/>
+  <g class="lf-swing" style="transform-box:view-box;transform-origin:300px 14px">
+    <path d="M300 14 L284 30 M300 14 L316 30" stroke="#8a8070" stroke-width=".6"/>
+    <rect x="280" y="28" width="40" height="34" fill="#2a1e14" stroke="#1a120c" stroke-width="2"/>
+    <path d="M282 30 L318 60 M318 30 L282 60" stroke="#1a120c" stroke-width="1.6"/>
+    <circle cx="300" cy="14" r="1.4" fill="#5a5040"/>
+  </g>
+  <!-- what has hold of the sitter in the middle (in the films): a cold light breathing round them, a pale double rising
+       out of them, the eyes alight, wisps wavering up; the lamps do not touch it -->
+  <circle class="lf-wake" cx="180" cy="60" r="44" fill="url(#cold)"/>
+  <g class="lf-wake" style="--d:-3s" fill="#cfe8e0" opacity=".42" filter="url(#halo)">
+    <g transform="translate(184 30) scale(1.25) translate(-245 -43)">
+      <path d="M257 43 C258 33 252 27 245 27 C239 27 235.5 31 235.2 36 L234.6 40 L232 44.6 L234.4 45.6 L234 48 L235 49.5 C234.4 53 237 57.5 242 59 C246 60 250 58 252 56 C255 53 256.6 48 257 43Z"/>
+      <path d="M243 53 L253 56 L256 66 L242 66Z"/>
+      <path d="M226 100 C224 86 228 74 234 68 C240 63 246 61 252 62 C262 64 270 72 272 84 C274 92 274 98 274 100Z"/>
+    </g>
+  </g>
+  <g fill="none" stroke="#cfe8e0" stroke-linecap="round" opacity=".22" filter="url(#halo)">
+    <path class="lf-flame" d="M166 84 C158 72 170 64 164 52 C161 46 165 40 163 34" stroke-width="3"/>
+    <path class="lf-flame" style="--d:-.9s" d="M195 84 C203 72 191 64 197 52 C200 46 196 40 198 34" stroke-width="3"/>
+  </g>
+  <g data-fx="smoke" data-at="182 36" data-r="16"/>
+  <g fill="#050708">
+    <ellipse cx="181" cy="57" rx="8" ry="9.6" transform="rotate(-16 181 57)"/>
+    <path d="M176 62 C177 68 176 72 172 78 L190 78 C186 73 185.6 68 187.6 62Z"/>
+    <path d="M158 104 C158 88 164 80 174 77 L188 77 C198 80 202 88 202 104Z"/>
+  </g>
+  <path d="M172.4 54.6 C172.6 50 176.4 47 181 47.4 C184.4 47.8 187.2 49.8 188.4 52.6 M163 84 C166 80 170 78 174 77 M188 77 C192 78 196 80 199 84" fill="none" stroke="#bff0e0" stroke-width=".8" opacity=".7"/>
+  <g fill="#eafff8" filter="url(#eyes)" transform="rotate(-16 181 57)">
+    <ellipse class="lf-twinkle" cx="177.4" cy="56" rx="1.7" ry="1"/>
+    <ellipse class="lf-twinkle" style="--d:.3s" cx="184.6" cy="56" rx="1.7" ry="1"/>
+  </g>
+  <!-- the sitters on the far side, hands joined across the table: the one in the middle is being taken -->
+  <g fill="#050708">
+    <circle cx="112" cy="70" r="8.4"/>
+    <path d="M94 104 C94 90 100 82 112 81 C124 82 130 90 130 104Z"/>
+    <circle cx="248" cy="70" r="8.4"/>
+    <path d="M230 104 C230 90 236 82 248 81 C260 82 266 90 266 104Z"/>
+  </g>
+  <g fill="none" stroke="#050708" stroke-width="5" stroke-linecap="round">
+    <path d="M100 92 C94 100 90 108 92 116 M124 92 C132 98 140 104 150 108"/>
+    <path d="M166 90 C162 96 156 102 150 108 M194 90 C198 96 204 102 210 108"/>
+    <path d="M236 92 C228 98 220 104 210 108 M260 92 C266 100 270 108 268 116"/>
+  </g>
+  <!-- the table, the talking board and the planchette (in the films it quivers) -->
+  <path d="M76 124 C76 150 90 176 180 178 C270 176 284 150 284 124Z" fill="#0c0807"/>
+  <path d="M100 150 C104 164 110 172 116 176 M150 156 C150 166 152 172 154 178 M210 156 C210 166 208 172 206 178 M260 150 C256 164 250 172 244 176" stroke="#050403" stroke-width="2" fill="none"/>
+  <ellipse cx="180" cy="124" rx="104" ry="26" fill="url(#top)"/>
+  <ellipse cx="180" cy="124" rx="104" ry="26" fill="none" stroke="#4a3a2a" stroke-width="1" opacity=".6"/>
+  <ellipse cx="180" cy="124" rx="40" ry="11" fill="#b8a888" opacity=".55"/>
+  <g font-family="Georgia, serif" font-size="4" fill="#3a2a1a" opacity=".85">
+    <text x="146" y="123">YES</text><text x="206" y="123">NO</text>
+    <text x="158" y="117.6">A B C D E F G</text><text x="160" y="133">H I J K L M N</text>
+  </g>
+  <g class="lf-tremble" style="transform-box:view-box;transform-origin:182px 126px">
+    <path d="M182 118.6 C188 118.6 192 121.6 190 125.4 C188.6 128 184 129 182 131 C180 129 175.4 128 174 125.4 C172 121.6 176 118.6 182 118.6Z" fill="#c8a878" stroke="#5a4028" stroke-width=".6"/>
+    <ellipse cx="182" cy="123.6" rx="2.4" ry="1.5" fill="#1a120c"/>
+  </g>
+  <g fill="#050708">
+    <ellipse cx="92" cy="118" rx="4" ry="2.6"/><ellipse cx="150" cy="109" rx="4" ry="2.4"/><ellipse cx="210" cy="109" rx="4" ry="2.4"/><ellipse cx="268" cy="118" rx="4" ry="2.6"/>
+  </g>
+  <g fill="none" stroke="#9ad8c8" stroke-width=".6" opacity=".5">
+    <path d="M147 107.6 C149 106.4 152 106.4 153.6 108 M207 107.6 C209 106.4 212 106.4 213.6 108 M89 116.4 C91 115 94 115 95.6 116.6 M265 116.4 C267 115 270 115 271.6 116.6"/>
+  </g>
+  <!-- the lamps go down as the scene goes on, until only the cold light round the sitter is left (in the films) -->
+  <rect class="lf-thicken" width="360" height="200" fill="url(#dim)" opacity=".5"/>
+  <!-- the two sitters with their backs to us, close by -->
+  <g class="lf-near">
+    <g fill="#030405">
+      <circle cx="70" cy="160" r="15"/>
+      <path d="M22 200 C24 182 40 172 70 171 C94 172 108 178 116 188 L118 200Z"/>
+      <path d="M100 178 C108 170 112 162 114 150" stroke="#030405" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <circle cx="290" cy="160" r="15"/>
+      <path d="M338 200 C336 182 320 172 290 171 C266 172 252 178 244 188 L242 200Z"/>
+      <path d="M260 178 C252 170 248 162 246 150" stroke="#030405" stroke-width="9" fill="none" stroke-linecap="round"/>
+    </g>
+    <ellipse cx="115" cy="148" rx="5" ry="3" fill="#030405"/>
+    <ellipse cx="245" cy="148" rx="5" ry="3" fill="#030405"/>
+    <path d="M57 152.5 A15 15 0 0 1 83 152.5 M277 152.5 A15 15 0 0 1 303 152.5" fill="none" stroke="#9ad8c8" stroke-width=".8" opacity=".3"/>
+  </g>
+  <g data-fx="guest" data-at="180 78"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

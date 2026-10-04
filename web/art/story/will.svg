@@ -28,12 +28,16 @@
   <!-- desk and lamplight -->
   <rect x="0" y="136" width="360" height="64" fill="#1a1109"/>
   <ellipse cx="140" cy="150" rx="130" ry="30" fill="url(#pool)"/>
+  <!-- in the films (css/film.css): the lamplight breathes, dust turns in it, the wax and the nib catch the light -->
+  <g data-fx="glow" data-at="140 150" data-r="130" data-ry="36" data-tone="lamp"/>
+  <g data-fx="motes" data-at="150 104" data-r="48"/>
   <!-- the will -->
   <g transform="rotate(-4 110 150)">
     <rect x="62" y="122" width="96" height="48" fill="#efe4c8"/>
     <text x="110" y="136" text-anchor="middle" font-family="Georgia, serif" font-size="8" font-style="italic" fill="#3a2a18">Last Will &amp; Testament</text>
     <g stroke="#8a7658" stroke-width=".8"><path d="M72 144 L148 144 M72 150 L148 150 M72 156 L130 156"/></g>
     <circle cx="140" cy="160" r="6" fill="#9e1b1b" filter="url(#glow)"/>
+    <ellipse class="lf-glint" style="--d:1.2s" cx="138" cy="157.8" rx="2" ry="1.2" fill="#ffd8c8" opacity="0"/>
     <path d="M136 166 L134 172 M144 166 L146 172" stroke="#9e1b1b" stroke-width="2"/>
   </g>
   <!-- the letter to the Yard -->
@@ -45,5 +49,6 @@
   <!-- fountain pen -->
   <path d="M44 190 L126 178 L127 182 L45 194Z" fill="#0c0c10"/>
   <path d="M126 178 L136 177 L127 182Z" fill="#c8a040"/>
+  <circle class="lf-glint" style="--d:3.6s" cx="132" cy="178.6" r="1.1" fill="#fff4c8" opacity="0"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

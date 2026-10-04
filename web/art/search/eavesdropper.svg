@@ -54,7 +54,7 @@
   <rect x="128" y="120" width="10" height="26" fill="#e2d4b4"/>
   <ellipse cx="133" cy="146" rx="11" ry="3" fill="#8a6a30"/>
   <circle cx="133" cy="106" r="22" fill="#ffb050" opacity=".22" filter="url(#soft)"/>
-  <path d="M133 104 C137 110 137 116 133 118 C129 116 129 110 133 104Z" fill="#ffd27a" filter="url(#glow)"/>
+  <path class="lf-flame" d="M133 104 C137 110 137 116 133 118 C129 116 129 110 133 104Z" fill="#ffd27a" filter="url(#glow)"/>
   <!-- scrap of paper -->
   <path d="M150 148 L186 146 L190 157 L152 159Z" fill="#e8dcc0"/>
   <g stroke="#4a3a2a" stroke-width="1.2" stroke-linecap="round">
@@ -74,5 +74,10 @@
     <path d="M271 121 q7 15 0 30"/>
     <path d="M279 116 q9 20 0 40"/>
   </g>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <g data-fx="glow" data-at="133 110" data-r="24" data-tone="candle"/>
+  <path class="lf-glint" style="--d:-2.53s" d="M241 119 L241.7 123.3 L246 124 L241.7 124.7 L241 129 L240.3 124.7 L236 124 L240.3 123.3Z" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="216 140" data-r="52"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

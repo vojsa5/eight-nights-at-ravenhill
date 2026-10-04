@@ -11,7 +11,7 @@ from ravenhill.advice import seance_held
 from ravenhill.game import Game
 from ravenhill.rules import STANDARD, is_bad
 
-NO_ABILITY = {"Confidant", "Colonel", "Recluse", "Novelist", "Guest", "Grifter", "Lunatic", "Possessed", "Hypnotist"}
+NO_ABILITY = {"Witness", "Confidant", "Colonel", "Recluse", "Novelist", "Guest", "Grifter", "Lunatic", "Possessed", "Hypnotist"}
 
 
 class AuditGame(Game):

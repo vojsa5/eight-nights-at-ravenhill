@@ -14,7 +14,7 @@ from ravenhill.players import make_player
 from ravenhill.players.calibration import load_calibration
 from ravenhill.rules import N_CHARS, STANDARD, is_bad
 
-ABILITY_ROLES = {"Sleuth", "Witness", "Housekeeper", "Reporter", "Photographer", "Constable", "Thug", "Mastermind", "Mole", "Framer", "Eavesdropper", "Copycat"}
+ABILITY_ROLES = {"Sleuth", "Housekeeper", "Reporter", "Photographer", "Constable", "Thug", "Mastermind", "Mole", "Framer", "Eavesdropper", "Copycat"}
 SURE = 0.1  # "read": the smart player's chance of misjudging the character is at most 10%
 
 

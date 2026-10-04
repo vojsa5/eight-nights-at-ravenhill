@@ -34,10 +34,10 @@ export function morningClueHtml(S, round) {
   return "";
 }
 
-// A notebook entry as a sentence.
-export function factText(f) {
-  if (f.kind === "side") return `${guestRef(f.target)} looks <b class="${f.bad ? "no" : "ok"}">${f.bad ? "guilty" : "innocent"}</b>`;
-  if (f.kind === "role") return `${guestRef(f.target)} is the <b>${f.role}</b>`;
-  if (f.kind === "count") return `${f.k} of ${f.chars.map(guestRef).join(" and ")} ${f.k === 1 ? "is" : "are"} guilty`;
-  return `${guestRef(f.a)} and ${guestRef(f.b)} are on ${f.same ? "the same side" : "different sides"}`;
+// A notebook entry as a sentence; `ref` names a guest (the Case file makes them chips).
+export function factText(f, ref = guestRef) {
+  if (f.kind === "side") return `${ref(f.target)} looks <b class="${f.bad ? "no" : "ok"}">${f.bad ? "guilty" : "innocent"}</b>`;
+  if (f.kind === "role") return `${ref(f.target)} is the <b>${f.role}</b>`;
+  if (f.kind === "count") return `${f.k} of ${f.chars.map((c) => ref(c)).join(" and ")} ${f.k === 1 ? "is" : "are"} guilty`;
+  return `${ref(f.a)} and ${ref(f.b)} are on ${f.same ? "the same side" : "different sides"}`;
 }

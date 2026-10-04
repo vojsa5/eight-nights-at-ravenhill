@@ -20,26 +20,53 @@
       <feGaussianBlur stdDeviation="8"/>
     </filter>
   </defs>
+  <style>
+    /* its life on the night's opening card (intro.js inlines it as .ev-live): the papers are laid on the bench, the
+       gavel comes down twice, and the scales swing and settle */
+    .ev-live .iq-paper { animation: iq-lay .5s calc(var(--dawn, 0ms) + var(--n) * 120ms) cubic-bezier(.2,.7,.3,1) both; }
+    .ev-live .iq-gavel { transform-origin: 298px 190px; animation: iq-gavel 1.2s calc(var(--dawn, 0ms) + 300ms) both; }
+    .ev-live .iq-impact { transform-origin: 300px 168px; animation: iq-impact .36s calc(var(--dawn, 0ms) + 660ms) ease-out 2 both; }
+    .ev-live .iq-room { animation: iq-jolt .36s calc(var(--dawn, 0ms) + 660ms) linear 2 both; }
+    .ev-live .iq-scales { transform-origin: 180px 62px; animation: iq-sway 1.9s calc(var(--dawn, 0ms) + 650ms) ease-in-out both; }
+    @keyframes iq-lay { from { opacity: 0; transform: translate(-40px, -6px); } }
+    @keyframes iq-gavel { 0% { transform: none; animation-timing-function: ease-out; } 20% { transform: translate(2px, -13px) rotate(12deg); animation-timing-function: cubic-bezier(.6,0,1,1); }
+      30% { transform: none; animation-timing-function: ease-out; } 50% { transform: translate(2px, -13px) rotate(12deg); animation-timing-function: cubic-bezier(.6,0,1,1); }
+      60%, 100% { transform: none; } }
+    @keyframes iq-impact { from { opacity: .9; transform: scale(.8); } to { opacity: 0; transform: scale(2.2); } }
+    @keyframes iq-jolt { 0%, 30%, 100% { transform: none; } 8% { transform: translateY(1.6px); } }
+    @keyframes iq-sway { 0%, 100% { transform: none; } 12% { transform: rotate(-6deg); } 30% { transform: rotate(4deg); } 48% { transform: rotate(-2.5deg); }
+      66% { transform: rotate(1.2deg); } 82% { transform: rotate(-.5deg); } }
+  </style>
   <rect width="360" height="200" fill="url(#bg)"/>
   <circle cx="180" cy="60" r="80" fill="#ffd9a0" opacity=".22" filter="url(#blur8)"/>
+  <g class="iq-room">
   <g stroke="#e6c783" stroke-width="3" fill="none" filter="url(#glow)">
     <path d="M180 44 L180 150"/>
-    <path d="M130 62 L230 62"/>
-    <path d="M130 62 L114 102 M130 62 L146 102 M230 62 L214 96 M230 62 L246 96"/>
+    <rect x="170" y="44" width="20" height="106" stroke="none"/>
   </g>
-  <path d="M108 102 Q130 116 152 102Z" fill="#e6c783" filter="url(#glow)"/>
-  <path d="M208 96 Q230 110 252 96Z" fill="#e6c783" filter="url(#glow)"/>
+  <g class="iq-scales">
+    <g stroke="#e6c783" stroke-width="3" fill="none" filter="url(#glow)">
+      <path d="M130 62 L230 62"/>
+      <path d="M130 62 L114 102 M130 62 L146 102 M230 62 L214 96 M230 62 L246 96"/>
+    </g>
+    <path d="M108 102 Q130 116 152 102Z" fill="#e6c783" filter="url(#glow)"/>
+    <path d="M208 96 Q230 110 252 96Z" fill="#e6c783" filter="url(#glow)"/>
+  </g>
   <circle cx="180" cy="42" r="5" fill="#e6c783"/>
   <path d="M156 150 L204 150 L196 158 L164 158Z" fill="#e6c783"/>
   <rect x="0" y="158" width="360" height="42" fill="#2a1a0e"/>
   <rect x="0" y="158" width="360" height="4" fill="#5a3a1e"/>
-  <g transform="rotate(-18 290 150)">
-    <rect x="262" y="138" width="44" height="18" rx="4" fill="#3a2414" stroke="#8a6a2a"/>
-    <rect x="282" y="156" width="6" height="34" fill="#3a2414" stroke="#8a6a2a"/>
+  <g class="iq-gavel">
+    <g transform="rotate(-18 290 150)">
+      <rect x="262" y="138" width="44" height="18" rx="4" fill="#3a2414" stroke="#8a6a2a"/>
+      <rect x="282" y="156" width="6" height="34" fill="#3a2414" stroke="#8a6a2a"/>
+    </g>
   </g>
   <ellipse cx="300" cy="168" rx="20" ry="5" fill="#3a2414" stroke="#8a6a2a"/>
-  <rect x="50" y="148" width="50" height="6" fill="#efe2c0" opacity=".8" transform="rotate(-4 75 150)"/>
-  <rect x="53" y="144" width="50" height="6" fill="#efe2c0" opacity=".8" transform="rotate(-1 75 150)"/>
-  <rect x="56" y="140" width="50" height="6" fill="#efe2c0" opacity=".8" transform="rotate(2 75 150)"/>
+  <ellipse class="iq-impact" cx="300" cy="168" rx="20" ry="5" fill="none" stroke="#e6c783" stroke-width="1.5" opacity="0"/>
+  <g class="iq-paper" style="--n:0"><rect x="50" y="148" width="50" height="6" fill="#efe2c0" opacity=".8" transform="rotate(-4 75 150)"/></g>
+  <g class="iq-paper" style="--n:1"><rect x="53" y="144" width="50" height="6" fill="#efe2c0" opacity=".8" transform="rotate(-1 75 150)"/></g>
+  <g class="iq-paper" style="--n:2"><rect x="56" y="140" width="50" height="6" fill="#efe2c0" opacity=".8" transform="rotate(2 75 150)"/></g>
+  </g>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

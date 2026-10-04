@@ -11,7 +11,7 @@ const key = (interviews) => `<div class="key">
   <span><span class="chip s right">4</span><span class="chip e wrong">6</span> proved right / wrong</span>
   ${interviews ? `<span><span class="chip s interview">7</span> from an Interview</span>` : ""}</div>
   <p class="key-help">The numbers under a name count how many of their tips proved right and wrong. Point at a row to see its
-  strings on the board; click a chip to select that guest.</p>`;
+  strings on the board; click a name or a chip to select that guest.</p>`;
 
 const NOTES = ["", `<span class="mynote n1" title="Your note: guilty">✕</span>`, `<span class="mynote n2" title="Your note: innocent">✓</span>`];
 
@@ -42,7 +42,7 @@ export function testimonyHtml() {
       if (!a && !b) return S.silenced[r] === c.id ? `<td class="sil">silenced</td>` : `<td></td>`;
       return `<td class="adv ${cur(r)}">${a ? chips(a, "") : ""}${b ? chips(b, " interview") : ""}</td>`;
     }).join("");
-    return `<tr class="${c.alive ? "" : "gone"}" data-row="${c.id}"><td class="wit">${advisorCell(c, right, wrong)}</td>${cells}</tr>`;
+    return `<tr class="${c.alive ? "" : "gone"}${ui.selected === c.id ? " picked" : ""}" data-row="${c.id}"><td class="wit">${advisorCell(c, right, wrong)}</td>${cells}</tr>`;
   };
   const inHouse = S.chars.filter((c) => c.alive), gone = S.chars.filter((c) => !c.alive);
   const group = (label, list) => (list.length ? `<tr class="group"><th colspan="${rounds.length + 1}"><span>${label} · ${list.length}</span></th></tr>${list.map(row).join("")}` : "");
@@ -57,10 +57,10 @@ export function markChips() {
   body.querySelectorAll(".chip.hl, [data-row].hl").forEach((el) => el.classList.remove("hl"));
   if (ui.hoverChar === null) return;
   body.querySelectorAll(`.chip[data-c="${ui.hoverChar}"]`).forEach((el) => el.classList.add("hl"));
-  const row = body.querySelector(`[data-row="${ui.hoverChar}"]`);
+  const row = body.querySelector(`.cf-report[data-row="${ui.hoverChar}"]`) || body.querySelector(`[data-row="${ui.hoverChar}"]`);  // a Case file report before a clue naming them
   if (!row) return;
   row.classList.add("hl");
-  if (ui.folderOpen) showInFolder(body, row, body.querySelector(".grid thead")?.offsetHeight);
+  if (ui.folderOpen) showInFolder(body, row, body.querySelector(".grid thead, .cf-date")?.offsetHeight);  // clear of a sticky header
 }
 
 function advisorCell(c, right, wrong) {

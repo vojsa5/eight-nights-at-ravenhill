@@ -73,10 +73,14 @@
     <path d="M276 127 L286 129 L282 135Z"/>
     <path d="M270 156 L276 153 L278 160Z"/>
   </g>
-  <g fill="#fff6c0" filter="url(#glow)">
+  <g class="lf-twinkle" fill="#fff6c0" filter="url(#glow)">
     <path d="M272 118 L273.6 125 L280 126.5 L273.6 128 L272 135 L270.4 128 L264 126.5 L270.4 125Z"/>
     <path d="M294 138 L295 141.5 L298.5 142.5 L295 143.5 L294 147 L293 143.5 L289.5 142.5 L293 141.5Z"/>
     <path d="M259 150 L259.8 152.2 L262 153 L259.8 153.8 L259 156 L258.2 153.8 L256 153 L258.2 152.2Z"/>
   </g>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <path class="lf-glint" style="--d:-2.53s" d="M216 129 L216.8 134.2 L222 135 L216.8 135.8 L216 141 L215.2 135.8 L210 135 L215.2 134.2Z" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="200 130" data-r="62"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

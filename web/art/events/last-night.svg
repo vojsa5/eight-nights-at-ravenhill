@@ -20,19 +20,37 @@
       <feGaussianBlur stdDeviation="8"/>
     </filter>
   </defs>
+  <style>
+    /* its life on the night's opening card (intro.js inlines it as .ev-live): the full moon rises, the ravens fly
+       across it, the windows are lit one by one, and in the last, the drawing room's, the fire flickers */
+    .ev-live .ln-moon { animation: ln-rise 1.9s calc(var(--dawn, 0ms) - 300ms) cubic-bezier(.2,.6,.3,1) both; }
+    .ev-live .ln-birds { animation: ln-drift 4s calc(var(--dawn, 0ms) - 400ms) cubic-bezier(.2,.6,.4,1) both; }
+    .ev-live .ln-bird { transform-box: fill-box; transform-origin: center; animation: ln-flap .42s calc(var(--n) * -.15s) ease-in-out 24 alternate; }
+    .ev-live .ln-win { animation: ln-lit .35s calc(var(--dawn, 0ms) + 250ms + var(--n) * 280ms) ease-out both; }
+    .ev-live .ln-win.fire { animation: ln-lit .35s calc(var(--dawn, 0ms) + 810ms) ease-out both, ln-fire .7s calc(var(--dawn, 0ms) + 1160ms) ease-in-out 16 alternate; }
+    @keyframes ln-rise { from { transform: translateY(34px); } to { transform: none; } }
+    @keyframes ln-drift { from { transform: translate(-22px, 8px); } to { transform: none; } }
+    @keyframes ln-flap { from { transform: none; } to { transform: scaleY(.3); } }
+    @keyframes ln-lit { from { opacity: 0; } }
+    @keyframes ln-fire { 0% { opacity: 1; } 30% { opacity: .72; } 55% { opacity: .95; } 80% { opacity: .8; } 100% { opacity: .9; } }
+  </style>
   <rect width="360" height="200" fill="url(#bg)"/>
-  <circle cx="270" cy="56" r="30" fill="#f0f0ff" filter="url(#glow)"/>
-  <circle cx="270" cy="56" r="60" fill="#c8d4ff" opacity=".2" filter="url(#blur8)"/>
-  <path d="M210 40 q6 -5 12 0 q6 -5 12 0" fill="none" stroke="#0b0d14" stroke-width="2.4"/>
-  <path d="M236 70 q6 -5 12 0 q6 -5 12 0" fill="none" stroke="#0b0d14" stroke-width="2.4"/>
-  <path d="M190 64 q6 -5 12 0 q6 -5 12 0" fill="none" stroke="#0b0d14" stroke-width="2.4"/>
-  <path d="M300 96 q6 -5 12 0 q6 -5 12 0" fill="none" stroke="#0b0d14" stroke-width="2.4"/>
+  <g class="ln-moon">
+    <circle cx="270" cy="56" r="30" fill="#f0f0ff" filter="url(#glow)"/>
+    <circle cx="270" cy="56" r="60" fill="#c8d4ff" opacity=".2" filter="url(#blur8)"/>
+  </g>
+  <g class="ln-birds">
+    <path class="ln-bird" style="--n:0" d="M210 40 q6 -5 12 0 q6 -5 12 0" fill="none" stroke="#0b0d14" stroke-width="2.4"/>
+    <path class="ln-bird" style="--n:1" d="M236 70 q6 -5 12 0 q6 -5 12 0" fill="none" stroke="#0b0d14" stroke-width="2.4"/>
+    <path class="ln-bird" style="--n:2" d="M190 64 q6 -5 12 0 q6 -5 12 0" fill="none" stroke="#0b0d14" stroke-width="2.4"/>
+    <path class="ln-bird" style="--n:3" d="M300 96 q6 -5 12 0 q6 -5 12 0" fill="none" stroke="#0b0d14" stroke-width="2.4"/>
+  </g>
   <path d="M0 170 Q120 130 220 150 T360 146 L360 200 L0 200Z" fill="#0a0d16"/>
   <path d="M70 150 L70 104 L96 80 L122 104 L122 96 L140 96 L140 70 L148 70 L148 96 L168 96 L186 78 L204 96 L204 150Z" fill="#05070c"/>
   <path d="M100 80 L100 60 L108 60 L108 72" fill="#05070c"/>
-  <rect x="86" y="116" width="7" height="10" fill="#ffd27a" filter="url(#glow)"/>
-  <rect x="150" y="112" width="7" height="10" fill="#ffd27a" filter="url(#glow)"/>
-  <rect x="182" y="120" width="7" height="10" fill="#ffd27a" filter="url(#glow)"/>
+  <rect class="ln-win" style="--n:0" x="86" y="116" width="7" height="10" fill="#ffd27a" filter="url(#glow)"/>
+  <rect class="ln-win" style="--n:1" x="150" y="112" width="7" height="10" fill="#ffd27a" filter="url(#glow)"/>
+  <rect class="ln-win fire" style="--n:2" x="182" y="120" width="7" height="10" fill="#ffd27a" filter="url(#glow)"/>
   <ellipse cx="120" cy="178" rx="160" ry="12" fill="#9fb4e0" opacity=".1" filter="url(#blur8)"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

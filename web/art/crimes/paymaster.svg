@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="pull" data-cut-at="53% 51%">
+  <title>By the study door the footman stands with his back turned and a white-gloved hand open behind him, and a black-gloved hand presses banknotes into it</title>
+  <defs>
+    <radialGradient id="bg" cx="44%" cy="26%" r="80%">
+      <stop offset="0" stop-color="#3a3020"/>
+      <stop offset="1" stop-color="#050403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="52%" cy="50%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="livery" gradientUnits="userSpaceOnUse" x1="171" y1="0" x2="289" y2="0">
+      <stop offset="0" stop-color="#222c4c"/>
+      <stop offset="1" stop-color="#070910"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+    <g id="notes">
+      <rect x="179" y="87" width="36" height="14" fill="#b4c894" transform="rotate(-7 197 94)"/>
+      <rect x="178" y="87.5" width="36" height="14" fill="#c6daa8" transform="rotate(-3 197 94)"/>
+    </g>
+    <g id="note">
+      <rect x="177" y="88" width="36" height="14" fill="#d4e6b8" stroke="#5a7a40" stroke-width=".8"/>
+      <rect x="179.5" y="90.5" width="31" height="9" fill="none" stroke="#7a9a5a" stroke-width=".5"/>
+      <ellipse cx="203" cy="95" rx="3.5" ry="3" fill="#a8c088"/>
+      <path d="M185 93.5H197M185 96.5H195" stroke="#7a9a5a" stroke-width=".6"/>
+    </g>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the service passage: plain distempered wall, boarded dado, the study door -->
+  <path d="M0 18H300" stroke="#2a2416" stroke-width="2"/>
+  <rect y="128" width="300" height="72" fill="#120d08"/>
+  <path d="M8 130V200M22 130V200M36 130V200M50 130V200M64 130V200M78 130V200M92 130V200M106 130V200M120 130V200M134 130V200M148 130V200M162 130V200M176 130V200M190 130V200M290 130V200" stroke="#0a0705" stroke-width="1.2"/>
+  <rect y="126" width="300" height="4" fill="#2a1e12"/>
+  <path d="M0 126H300" stroke="#6a4a26" stroke-opacity=".5" stroke-width=".8"/>
+  <rect x="306" width="54" height="200" fill="#1a1009"/>
+  <rect x="299" width="8" height="200" fill="#2a1a0e"/>
+  <path d="M299.5 0V200" stroke="#a06a34" stroke-opacity=".4"/>
+  <path d="M318 12H360M318 102H360V114H318V200M318 12V102" fill="none" stroke="#0e0804" stroke-width="2.4"/>
+  <path d="M324 150h4v8h-4Z" fill="#5a4620"/><circle cx="334" cy="154" r="5" fill="#8a6a30"/>
+  <!-- the candle in its sconce, and its light -->
+  <ellipse cx="165" cy="84" rx="150" ry="96" fill="url(#pool)"/>
+  <circle cx="143" cy="24" r="24" fill="#ffb050" opacity=".25" filter="url(#soft)"/>
+  <ellipse cx="143" cy="38" rx="5" ry="9" fill="#4a3a1c"/>
+  <path d="M143 44C143 50 141 52 137 52" fill="none" stroke="#6a5428" stroke-width="1.6"/>
+  <ellipse cx="143" cy="44" rx="7" ry="2" fill="#8a6a30"/>
+  <rect x="140.5" y="27" width="5" height="17" fill="#e8dcc0"/>
+  <path d="M140.5 27H145.5" stroke="#fff6e0"/>
+  <path class="lf-flame" d="M143 16C146.5 21 146.5 25 143 27C139.5 25 139.5 21 143 16Z" fill="#ffd27a" filter="url(#glow)"/>
+  <g data-fx="glow" data-at="143 22" data-r="44" data-tone="candle"/>
+  <path d="M265 0H315C313 60 309 130 315 200H271C267 140 271 60 265 0Z" fill="#000" opacity=".35" filter="url(#soft)"/>
+  <!-- the footman, back turned: tailcoat, the two brass buttons at the waist, his right arm bent behind him -->
+  <path d="M169 0H273C271 40 267 90 265 118C269 150 275 180 277 200H167C169 180 175 150 179 118C177 90 173 40 169 0Z" fill="url(#livery)"/>
+  <path d="M221 0V118M179 118C199 121 243 121 265 118" fill="none" stroke="#06080e" stroke-width="1.2"/>
+  <path d="M221 122L216 200H226Z" fill="#06070b"/>
+  <path d="M169.5 0C173 40 177 90 179 118C175 150 169 180 167.5 200" fill="none" stroke="#c08a50" stroke-opacity=".35" stroke-width="1.2"/>
+  <path d="M175 22C189 14 207 14 217 20M225 20C235 14 251 14 263 20" fill="none" stroke="#3a4668" stroke-width="1.2" opacity=".6"/>
+  <circle cx="211" cy="121.5" r="2.2" fill="#d8aa40"/><circle cx="231" cy="121.5" r="2.2" fill="#b08a34"/>
+  <path class="lf-glint" style="--d:-3.3s" d="M211 117.5 L211.5 121 L215 121.5 L211.5 122 L211 125.5 L210.5 122 L207 121.5 L210.5 121Z" fill="#fffbe8" opacity="0"/>
+  <path d="M257 0H287C289 30 289 68 285 90C283 99 275 103 267 101L259 60Z" fill="#0c0f1a"/>
+  <!-- in the films (css/film.css): the bundle is held out from the dark and pressed into the waiting hand, which closes on
+       it and opens again; the next bundle comes. The top note flutters, the brass catches the light -->
+  <g class="lf-take">
+    <path d="M283 92C267 95 243 100 223 103V121C245 120 267 116 281 110Z" fill="#141a2e"/>
+    <path d="M283 92C267 95 243 100 223 103V105.5C245 102.5 267 97.5 283 95Z" fill="#2e3858" opacity=".8"/>
+    <path d="M216 103L224 102.5L225 121.5L217 122Z" fill="#c89a38"/>
+    <path d="M227 102.5L230 102.5L231 121L228 121.5Z" fill="#a07a2a"/>
+    <path d="M217 103.5H223" stroke="#f0d070" stroke-width=".8"/>
+    <circle cx="237" cy="107" r="1.6" fill="#d8aa40"/><circle cx="238" cy="114" r="1.6" fill="#d8aa40"/>
+    <path class="lf-glint" style="--d:-1.9s" d="M237 103.5 L237.5 106.5 L240.5 107 L237.5 107.5 L237 110.5 L236.5 107.5 L233.5 107 L236.5 106.5Z" fill="#fffbe8" opacity="0"/>
+    <path d="M217 104C211 103 201 103 194 104.5C192 108 192 116 194 120C201 122 211 122 217 121Z" fill="#ece8de"/>
+    <path d="M197 110C203 109 209 109.5 214 111M196 115C202 114 208 114.5 213 116" fill="none" stroke="#bcb6a8" stroke-width=".6"/>
+    <path d="M217 117C209 119 201 120 194 120C201 122 211 122 217 121Z" fill="#c0baac"/>
+    <g class="lf-received" opacity="0"><use href="#notes" y="8"/><use href="#note" y="8"/></g>
+    <g class="lf-clasp" style="transform-box:view-box;transform-origin:194px 112px" fill="#e6e2d6" stroke="#b4ae9f" stroke-width=".5">
+      <path d="M194 105C188 103.5 182 102 177 101.5C174.5 101.5 174 104 176 105C181 106 187 107 194 108Z"/>
+      <path d="M194 108.5C187 108 180 107.5 174.5 108C172 108.5 172 111 174.5 111.5C180 112 187 112 194 112Z"/>
+      <path d="M194 112.5C188 113 182 113.5 177 114.5C174.5 115 175 117.5 177.5 117.5C183 117 188 116.5 194 116Z"/>
+      <path d="M194 116.5C190 117.5 186 118.5 182.5 120C180.5 120.5 181.5 123 183.5 122.5C187 121.5 190.5 120.5 194 120Z"/>
+    </g>
+    <path d="M207 104C204 100 200 96.5 196 95C193.5 94 192.5 97 194.5 98C197.5 100 200 102.5 201.5 105Z" fill="#f2eee6"/>
+  </g>
+  <!-- the one paying: plain dark sleeve and black glove -->
+  <g class="lf-proffer">
+    <path d="M-10 84C23 82 105 84 143 88L143 114C105 116 23 118 -10 120Z" fill="#141218"/>
+    <path d="M-10 84C23 82 105 84 143 88V91C105 87 23 86 -10 88Z" fill="#34303c" opacity=".6"/>
+    <path d="M141 87C151 85.5 161 86 171 89L174 109C166 113 153 114 141 113Z" fill="#09080b"/>
+    <path d="M170 99C177 99.5 187 100 192 101.5C195 102.5 195 105.5 192 106C185 106.5 177 106 170 105Z" fill="#09080b"/>
+    <path d="M171 104C177 104 181 106 181 108.5C181 111 177 112 171 111.5Z" fill="#0c0b0e"/>
+    <path d="M168 109C173 109.5 176 111 175.5 113C175 114.5 171 115 166 114.5Z" fill="#09080b"/>
+    <path d="M147 88C155 87 163 87.5 170 90M173 105.5C176 106 178 107 179 108.5" fill="none" stroke="#45414f" stroke-width=".9" stroke-linecap="round"/>
+    <g class="lf-handed">
+      <use href="#notes"/>
+      <g class="lf-flutter" style="transform-box:view-box;transform-origin:181px 96px"><use href="#note"/></g>
+    </g>
+    <path d="M155 88C163 85.5 173 85.5 181 88C185 89 187 91 185.5 93C184 94.5 180 94.5 176 93.5C169 92.5 162 93 157 94.5Z" fill="#09080b"/>
+    <path d="M161 87.5C168 86 175 86 182 88.5" fill="none" stroke="#4a4654" stroke-width=".8" stroke-linecap="round"/>
+  </g>
+  <!-- the dark the paying hand comes out of -->
+  <rect width="120" height="200" fill="url(#dark)"/>
+  <!-- where the flashback lays the guest's photograph, over the one who did it -->
+  <g data-fx="guest" data-at="132 96"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

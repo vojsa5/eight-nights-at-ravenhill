@@ -9,7 +9,7 @@
   --paper: #efe4c8; --paper-2: #e4d4b0; --paper-ink: #2b2118; --paper-muted: #6a5a44; --paper-line: #cdb88c;
   --ink-red: #9e1b1b; --ink-green: #2a6a3c; --string-red: #b3221b; --string-green: #2f7a4a;
   --typed: "Special Elite", "Courier New", monospace; --hand: Caveat, "Segoe Print", cursive;
-  /* worn rubber-stamp ink: a mask with small gaps in it (board.css .stamp, .phase) */
+  /* worn rubber-stamp ink: a mask with small gaps in it (board.css .stamp) */
   --worn: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -4.2 0 0 0 3.35'/%3E%3C/filter%3E%3Crect width='70' height='70' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 :root[data-theme="light"] {
@@ -77,3 +77,4 @@ button { font: inherit; color: inherit; cursor: pointer; }
   background: var(--paper, #f4eddc); color: #2b2118; font: 15px "Special Elite", Georgia, serif; letter-spacing: .04em;
   box-shadow: 0 6px 20px rgba(0,0,0,.5); animation: engine-pulse 1.6s ease-in-out infinite; }
 @keyframes engine-pulse { 50% { opacity: .6; } }
+.notice { z-index: 110; top: 12px; bottom: auto; width: max-content; max-width: calc(100vw - 32px); text-align: center; animation: none; }  /* state.js notice */

@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="pull" data-cut-at="51% 30%">
+  <title>By candlelight in a guest room at Ravenhill: a portable typewriter, a Yorkshire Post press card in a hat band and a notebook of names, and the story of the decade being typed</title>
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#3a2a1a"/>
+      <stop offset="1" stop-color="#060403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="48%" cy="45%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".86"/>
+    </radialGradient>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c2a44"/>
+      <stop offset="1" stop-color="#4a5a78"/>
+    </linearGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2a2e"/>
+      <stop offset="1" stop-color="#0c0c0e"/>
+    </linearGradient>
+    <clipPath id="pane"><rect x="126" y="12" width="108" height="72"/></clipPath>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the window, and the snow falling past it (in the films) -->
+  <rect x="120" y="6" width="120" height="84" fill="#0e0a07"/>
+  <rect x="126" y="12" width="108" height="72" fill="url(#night)"/>
+  <g clip-path="url(#pane)">
+    <path d="M126 70 C150 64 180 68 200 62 C214 58 226 62 234 60 L234 84 L126 84Z" fill="#8a9ab4" opacity=".55"/>
+    <path d="M196 62 L204 54 L212 62Z M206 60 L206 56" fill="#0e121c" stroke="#0e121c"/>
+    <g class="lf-fall">
+      <g id="flakes" fill="#eef3fb">
+        <circle cx="134" cy="20" r="1"/><circle cx="150" cy="40" r=".8"/><circle cx="168" cy="26" r="1.1"/><circle cx="184" cy="48" r=".8"/>
+        <circle cx="200" cy="18" r="1"/><circle cx="218" cy="36" r=".9"/><circle cx="228" cy="60" r="1"/><circle cx="142" cy="66" r=".9"/>
+        <circle cx="176" cy="72" r=".8"/><circle cx="210" cy="78" r="1"/><circle cx="158" cy="90" r=".9"/><circle cx="224" cy="100" r=".8"/>
+      </g>
+      <use href="#flakes" y="-112"/>
+    </g>
+  </g>
+  <path d="M180 12 V84 M126 48 H234" stroke="#0e0a07" stroke-width="3"/>
+  <path d="M108 0 L124 0 C120 30 126 64 120 96 L106 96Z M252 0 L236 0 C240 30 234 64 240 96 L254 96Z" fill="#1e120c"/>
+  <!-- the desk and the candle -->
+  <path d="M0 98 L360 98 L360 142 L0 142Z" fill="#24170d"/>
+  <rect x="0" y="98" width="360" height="1.5" fill="#3a2814"/>
+  <rect x="0" y="142" width="360" height="58" fill="#0e0905"/>
+  <rect x="0" y="142" width="360" height="1.5" fill="#32220f"/>
+  <ellipse cx="160" cy="122" rx="150" ry="26" fill="url(#pool)"/>
+  <circle cx="84" cy="62" r="30" fill="#ffb060" opacity=".2" filter="url(#soft)"/>
+  <ellipse cx="84" cy="124" rx="12" ry="3" fill="#7a5a2a"/>
+  <path d="M80 124 L81 112 L87 112 L88 124Z" fill="#8a6a30"/>
+  <ellipse cx="84" cy="112" rx="7" ry="1.8" fill="#a8843e"/>
+  <rect x="80.5" y="74" width="7" height="38" fill="#ece2c8"/>
+  <path d="M80.5 78 C82 80 82 84 81 88" stroke="#d8c8a0" stroke-width="1.4" fill="none"/>
+  <path d="M84 74 V70.5" stroke="#2a2a2a" stroke-width=".8"/>
+  <path class="lf-flame" d="M84 58 C80 64 80.6 70 84 71.2 C87.4 70 88 64 84 58Z" fill="#ffd27a" filter="url(#glow)"/>
+  <path class="lf-flame" style="--d:-.6s" d="M84 63 C82.4 66 82.6 69 84 70 C85.4 69 85.6 66 84 63Z" fill="#fff4d0"/>
+  <g data-fx="glow" data-at="84 66" data-r="70" data-tone="candle"/>
+  <!-- the notebook of names -->
+  <g transform="rotate(-6 70 128)">
+    <rect x="34" y="114" width="70" height="26" fill="#000" opacity=".35" filter="url(#soft)"/>
+    <rect x="32" y="110" width="68" height="26" rx="1.5" fill="#2a1c12"/>
+    <rect x="34" y="111.5" width="31.5" height="23" fill="#e8dcc0"/>
+    <rect x="66.5" y="111.5" width="31.5" height="23" fill="#dccfb0"/>
+    <g fill="none" stroke="#3a3040" stroke-width=".6">
+      <path d="M37 116 q1.5 -1.6 3 0 t3 0 t3 0 M51 116 h10 M37 120.5 q1.5 -1.6 3 0 t3 0 t3 0 t3 0 M53 120.5 h8 M37 125 q1.5 -1.6 3 0 t3 0 M50 125 h11 M37 129.5 q1.5 -1.6 3 0 t3 0 t3 0 M52 129.5 h9"/>
+      <path d="M69 116 q1.5 -1.6 3 0 t3 0 t3 0 t3 0 M85 116 h9 M69 120.5 q1.5 -1.6 3 0 t3 0 M83 120.5 h11 M69 125 q1.5 -1.6 3 0 t3 0 t3 0 M85 125 h9 M69 129.5 q1.5 -1.6 3 0 t3 0 t3 0 M84 129.5 h10"/>
+    </g>
+    <circle cx="90" cy="125" r="3.4" fill="none" stroke="#9e1b1b" stroke-width=".8"/>
+  </g>
+  <!-- the typewriter, the page typing itself in the films -->
+  <ellipse cx="186" cy="132" rx="54" ry="7" fill="#000" opacity=".45" filter="url(#soft)"/>
+  <g class="lf-lurk">
+    <rect x="148" y="78" width="76" height="9" rx="4.5" fill="#141416"/>
+    <circle cx="146" cy="82.5" r="4" fill="#1e1e22" stroke="#6a6a70" stroke-width=".8"/>
+    <circle cx="226" cy="82.5" r="4" fill="#1e1e22" stroke="#6a6a70" stroke-width=".8"/>
+    <path d="M144 80 L137 74" stroke="#5a5a60" stroke-width="1.4" stroke-linecap="round"/><circle cx="136.4" cy="73.4" r="1.3" fill="#2a2a2e"/>
+    <path d="M160 30 L212 30 L212 80 L160 80Z" fill="#f2ead6"/>
+    <path d="M160 30 L212 30 L212 33 L160 33Z" fill="#fff" opacity=".35"/>
+    <text x="186" y="40" text-anchor="middle" font-family="'Special Elite', 'Courier New', monospace" font-size="5.6" fill="#1a1612">MURDER AT</text>
+    <text x="186" y="47" text-anchor="middle" font-family="'Special Elite', 'Courier New', monospace" font-size="5.6" fill="#1a1612">RAVENHILL</text>
+    <path d="M176 50.5 H196" stroke="#1a1612" stroke-width=".5"/>
+    <g fill="none" stroke="#3a3430" stroke-width=".9">
+      <path class="lf-type" style="--i:0" pathLength="1" d="M165 56 H207"/>
+      <path class="lf-type" style="--i:1" pathLength="1" d="M165 60 H205"/>
+      <path class="lf-type" style="--i:2" pathLength="1" d="M165 64 H207"/>
+      <path class="lf-type" style="--i:3" pathLength="1" d="M165 68 H198"/>
+      <path class="lf-type" style="--i:4" pathLength="1" d="M168 72 H206"/>
+      <path class="lf-type" style="--i:5" pathLength="1" d="M165 76 H190"/>
+    </g>
+  </g>
+  <path d="M152 88 L220 88 L234 124 C234 128 230 130 226 130 L146 130 C142 130 138 128 138 124Z" fill="url(#body)"/>
+  <path d="M152 88 L220 88" stroke="#5a5a62" stroke-width="1"/>
+  <path d="M164 90 L208 90 L202 98 L170 98Z" fill="#0a0a0c"/>
+  <g stroke="#3a3a40" stroke-width=".5">
+    <path d="M172 91 L180 97 M178 91 L182 97 M184 91 L185 97 M190 91 L188 97 M196 91 L191 97 M201 91 L193 97"/>
+  </g>
+  <path d="M176 103.4 H196" stroke="#b8a070" stroke-width=".6" opacity=".7"/>
+  <g stroke="#d8d0c0" stroke-linecap="round">
+    <path d="M156 110 H216.1" stroke-width="4.2" stroke-dasharray="0 6"/>
+    <path d="M153 116 H218.1" stroke-width="4.4" stroke-dasharray="0 6.5"/>
+    <path d="M150 122 H220.1" stroke-width="4.6" stroke-dasharray="0 7"/>
+  </g>
+  <rect x="168" y="126" width="36" height="2.4" rx="1.2" fill="#c8c0b0"/>
+  <path d="M146 110 C150 104 156 102 162 104" fill="none" stroke="#ffd290" stroke-width=".7" opacity=".5"/>
+  <circle class="lf-glint" style="--d:1.2s" cx="224" cy="80.5" r="1.1" fill="#fff8e6" opacity="0"/>
+  <!-- the hat with the press card in its band, and a cigarette left burning -->
+  <ellipse cx="282" cy="122" rx="40" ry="8" fill="#000" opacity=".4" filter="url(#soft)"/>
+  <path d="M244 118 C250 112 266 110 282 110 C298 110 314 112 320 118 C314 124 298 126 282 126 C266 126 250 124 244 118Z" fill="#1c1814"/>
+  <path d="M262 114 C260 104 264 92 272 88 L282 91 L292 88 C300 92 304 104 302 114 C296 118 268 118 262 114Z" fill="#26201a"/>
+  <path d="M262.6 110 C270 113 294 113 301.6 110 L302 114 C294 118 270 118 262 114Z" fill="#0c0a08"/>
+  <g transform="rotate(-8 270 101)">
+    <rect x="262" y="94" width="16" height="13" fill="#ece4cc"/>
+    <text x="270" y="101.2" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="4.6" fill="#1a1612">PRESS</text>
+    <text x="270" y="104.8" text-anchor="middle" font-family="Georgia, serif" font-size="1.8" fill="#5a2018">YORKSHIRE POST</text>
+  </g>
+  <path d="M272 89 C276 90 280 92 282 96" fill="none" stroke="#ffd290" stroke-width=".6" opacity=".35"/>
+  <ellipse cx="320" cy="132" rx="11" ry="3" fill="#3a3a40"/>
+  <ellipse cx="320" cy="131.4" rx="8" ry="2" fill="#141416"/>
+  <path d="M314 130.6 L330 128" stroke="#e8e0d0" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="330.4" cy="127.9" r="1" fill="#ff8a3a" filter="url(#glow)"/>
+  <g data-fx="smoke" data-at="331 121" data-r="9"/>
+  <g data-fx="guest" data-at="236 70"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

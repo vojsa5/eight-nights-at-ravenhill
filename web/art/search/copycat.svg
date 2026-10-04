@@ -71,5 +71,9 @@
   <path d="M195 88 L195 114" stroke="#8a6a40" stroke-width=".8" opacity=".7"/>
   <path d="M198 117 C200 134 212 146 196 150 C188 152 196 152 200 150" fill="none" stroke="#0c0a09" stroke-width="1.8"/>
   <path d="M202 150 C230 152 262 148 300 158" fill="none" stroke="#0c0a09" stroke-width="2"/>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <g data-fx="glow" data-at="86 90" data-r="40" data-tone="lamp"/>
+  <g data-fx="found" data-at="178 142" data-r="62"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

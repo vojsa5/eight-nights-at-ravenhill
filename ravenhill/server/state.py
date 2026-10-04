@@ -48,9 +48,9 @@ TRACES = ("Forger", "Eavesdropper", "Hypnotist", "Mole", "Paymaster", "Grifter",
 
 def night_traces(g, r):
     """Which of TRACES were at work in the house on night r: the roles only, never who holds them. A trace
-    shows whenever its conspirator is in the house, even on a night they happen to skip (the Hypnotist on
-    night I, the Paymaster with two guests left), so it stops only once they are gone. The Lovers leave a
-    trace only while both are in the house (they meet at night); nobody works in a Blackout."""
+    shows whenever its conspirator is in the house, even on a night they happen to skip (the Hypnotist and the
+    Paymaster on night I, the Paymaster with two guests left), so it stops only once they are gone. The Lovers
+    leave a trace only while both are in the house (they meet at night); nobody works in a Blackout."""
     if not allows_investigations(g.events.get(r)):
         return []
     present = [g.roles[c] for c in range(N_CHARS) if not (c in g.revealed and g.revealed[c][1] < r)]
@@ -76,7 +76,7 @@ def game_state(gid, g):
         "history": [{k: v for k, v in h.items() if not (k == "role" and h["char"] in hidden)} for h in g.history],
         "silenced": {str(r): c for r, c in g.silenced.items()},
         "advice": [advice_json(a) for a in g.advice],
-        "events": {str(r): e for r, e in g.events.items() if r <= g.round},  # future events stay secret
+        "events": {str(r): e for r, e in g.events.items() if r <= g.round},  # so far; the page knows the fixed schedule (web/js/events.js)
         "toolReady": {tool: g.tool_ready(tool) for tool in TOOLS},
         "notebooks": [{"round": s["round"], "char": s["char"], "facts": [fact_json(f) for f in s["facts"]], "older": s.get("older", False)}
                       for s in g.notebooks],

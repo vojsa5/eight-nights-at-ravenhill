@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 184">
+  <!-- a clipping from the Moorland Herald's society page, torn out the week of the birthday dinner -->
+  <defs>
+    <linearGradient id="print" x1="0" y1="0" x2=".3" y2="1">
+      <stop offset="0" stop-color="#ebe3cc"/><stop offset=".7" stop-color="#ddd2b4"/><stop offset="1" stop-color="#cfc29f"/>
+    </linearGradient>
+    <linearGradient id="photo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8d887c"/><stop offset=".6" stop-color="#5f5a50"/><stop offset="1" stop-color="#3a3630"/>
+    </linearGradient>
+    <radialGradient id="pin" cx=".36" cy=".3" r=".75">
+      <stop offset="0" stop-color="#ff9a8a"/><stop offset=".5" stop-color="#b3221b"/><stop offset="1" stop-color="#4a0a06"/>
+    </radialGradient>
+    <filter id="soft" x="-10%" y="-10%" width="125%" height="125%"><feGaussianBlur stdDeviation="3"/></filter>
+    <pattern id="dots" width="2.4" height="2.4" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r=".55" fill="#2a2620" fill-opacity=".35"/></pattern>
+  </defs>
+  <path id="torn" d="M8 10 L20 8 L27 11 L39 7 L50 10 L62 7 L71 10 L84 8 L95 11 L108 7 L120 10 L123 22 L120 36 L124 50 L121 66 L124 80 L120 96 L123 110 L121 126 L124 142 L120 158 L123 172 L110 175 L98 172 L85 176 L72 173 L60 176 L47 172 L34 176 L22 173 L9 175 L11 160 L7 146 L10 130 L7 114 L11 98 L8 82 L11 66 L7 50 L10 34 L7 22 Z"
+    fill="#000" opacity=".42" transform="translate(4 5)" filter="url(#soft)"/>
+  <path d="M8 10 L20 8 L27 11 L39 7 L50 10 L62 7 L71 10 L84 8 L95 11 L108 7 L120 10 L123 22 L120 36 L124 50 L121 66 L124 80 L120 96 L123 110 L121 126 L124 142 L120 158 L123 172 L110 175 L98 172 L85 176 L72 173 L60 176 L47 172 L34 176 L22 173 L9 175 L11 160 L7 146 L10 130 L7 114 L11 98 L8 82 L11 66 L7 50 L10 34 L7 22 Z"
+    fill="url(#print)"/>
+  <g fill="#26221c" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
+    <text x="66" y="24" font-size="6.2" letter-spacing="1.6">THE MOORLAND HERALD</text>
+    <text x="66" y="44" font-size="11.6" font-weight="700" letter-spacing=".2">LORD RAVENHILL</text>
+    <text x="66" y="58" font-size="13" font-weight="700" letter-spacing=".4">AT SEVENTY</text>
+    <text x="66" y="68" font-size="6" font-style="italic">Sixteen guests expected at the manor</text>
+  </g>
+  <path d="M16 28 H116 M16 30 H116" stroke="#26221c" stroke-width=".6" stroke-opacity=".7"/>
+  <path d="M30 72.5 H102" stroke="#26221c" stroke-width=".5" stroke-opacity=".6"/>
+  <rect x="17" y="78" width="98" height="40" fill="url(#photo)"/>
+  <path d="M17 108 L34 98 L46 101 L58 92 L64 95 L70 88 L74 88 L74 84 L78 84 L78 88 L84 88 L94 97 L104 94 L115 100 V118 H17 Z" fill="#26221c" fill-opacity=".75"/>
+  <rect x="62" y="91" width="22" height="9" fill="#26221c" fill-opacity=".8"/>
+  <rect x="17" y="78" width="98" height="40" fill="url(#dots)"/>
+  <g fill="#26221c" fill-opacity=".42">
+    <rect x="17" y="124" width="46" height="2.2"/><rect x="17" y="129" width="44" height="2.2"/><rect x="17" y="134" width="46" height="2.2"/>
+    <rect x="17" y="139" width="40" height="2.2"/><rect x="17" y="144" width="46" height="2.2"/><rect x="17" y="149" width="45" height="2.2"/>
+    <rect x="17" y="154" width="46" height="2.2"/><rect x="17" y="159" width="30" height="2.2"/>
+    <rect x="69" y="124" width="46" height="2.2"/><rect x="69" y="129" width="46" height="2.2"/><rect x="69" y="134" width="42" height="2.2"/>
+    <rect x="69" y="139" width="46" height="2.2"/><rect x="69" y="144" width="44" height="2.2"/><rect x="69" y="149" width="46" height="2.2"/>
+    <rect x="69" y="154" width="46" height="2.2"/><rect x="69" y="159" width="46" height="2.2"/><rect x="69" y="164" width="25" height="2.2"/>
+  </g>
+  <path d="M66 123 V167" stroke="#26221c" stroke-width=".4" stroke-opacity=".5"/>
+  <circle cx="66" cy="15" r="5.4" fill="#000" opacity=".45" transform="translate(1.8 2.4)" filter="url(#soft)"/>
+  <circle cx="66" cy="15" r="5.4" fill="url(#pin)"/>
+</svg>

@@ -19,7 +19,7 @@ def run_night(game):
     if blackmailer is not None and len(game.alive) > 1:
         game.silenced[game.round] = menace_target(game, blackmailer)
     paymaster = game.find_alive("Paymaster")
-    if paymaster is not None and len(game.alive) > 2:
+    if paymaster is not None and len(game.alive) > 2 and game.round > 1:  # from night II, as the Hypnotist
         game.bribes[game.round] = (paymaster, menace_target(game, paymaster))
     hypnotist = game.find_alive("Hypnotist")
     said = game.suggestions.get(game.round - 1)
@@ -90,7 +90,7 @@ def most_reliable(game, actor, exclude=()):
 
 
 def check_alignment(game, m, others, unknown, forged):
-    """Sleuth, Witness and Amateur: check one character, preferring whoever accused them. The Amateur's result is random."""
+    """Sleuth and Amateur: check one character, preferring whoever accused them. The Amateur's result is random."""
     pool = [x for x in game.accusers(m.c) if x in unknown] or unknown
     if pool:
         t = game.rng.choice(pool)
@@ -188,7 +188,7 @@ def photographer(game, m, others, unknown, forged):
         m.sames.append((a, b, same != forged))
 
 
-# Roles without an entry (Confidant, Colonel, Possessed, Novelist, Recluse, Grifter, Lunatic, and the Forger,
+# Roles without an entry (Witness, Confidant, Colonel, Possessed, Novelist, Recluse, Grifter, Lunatic, and the Forger,
 # Blackmailer, Paymaster and Hypnotist, who pick their targets in run_night) have no night ability of their own.
 ABILITIES = {
     "Sleuth": check_alignment,
@@ -201,7 +201,6 @@ ABILITIES = {
     "Reporter": learn_role,
     "Mole": learn_role,
     "Housekeeper": housekeeper,
-    "Witness": check_alignment,
     "Constable": constable,
     "Framer": framer,
     "Guest": guest,

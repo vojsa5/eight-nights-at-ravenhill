@@ -43,5 +43,9 @@
     <path d="M252 60 L308 148 M308 60 L252 148" stroke="#5a3a1e" stroke-width="2"/>
     <path d="M262 56 L280 40 L298 56" fill="none" stroke="#9a9a9a" stroke-width="1.5"/>
   </g>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <path class="lf-glint" style="--d:-2.53s" d="M132 133.5 L132.6 137.4 L136.5 138 L132.6 138.6 L132 142.5 L131.4 138.6 L127.5 138 L131.4 137.4Z" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="138 140" data-r="50"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

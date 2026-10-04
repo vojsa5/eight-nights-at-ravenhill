@@ -16,7 +16,7 @@ import random
 
 from . import abilities, advice, events, notebook
 from .mind import Mind
-from .rules import N_CHARS, PAIRS, STANDARD, is_bad, registers_bad
+from .rules import N_CHARS, PAIRS, STANDARD, is_bad
 from .view import View
 
 
@@ -51,8 +51,8 @@ class Game:
             if len(pair) == 2:
                 self.minds[pair[0]].roles[pair[1]] = pair_role
                 self.minds[pair[1]].roles[pair[0]] = pair_role
-        for c, r in enumerate(roles):  # the Witness saw one conspirator leave the library (never the Grifter, who looks innocent)
-            seen = [x for x, rx in enumerate(roles) if r == "Witness" and registers_bad(rx, r)]
+        for c, r in enumerate(roles):  # the Witness saw one of the guilty leave the library, face to face: the Grifter too
+            seen = [x for x, rx in enumerate(roles) if r == "Witness" and is_bad(rx)]
             if seen:
                 self.minds[c].known[rng.choice(seen)] = True
         self._start_round()

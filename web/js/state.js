@@ -10,9 +10,20 @@ export const ui = {
   tab: "testimony",  // the case folder's open tab (folder.js)
   folderOpen: false, // the case folder at the right edge
   customArt: {},     // role (lower case) -> picture in web/art/custom/
+  read: {},          // the books won and read in this case: book slot -> when it was finished (reading.js)
 };
 
 export const $ = (id) => document.getElementById(id);
+
+// A slip at the foot of the page, gone after `ms` (or staying, with 0).
+export function notice(text, ms = 6000) {
+  document.querySelector(".notice")?.remove();
+  const el = document.createElement("div");
+  el.className = "engine-loading notice";
+  el.textContent = text;
+  document.body.append(el);
+  if (ms) setTimeout(() => el.remove(), ms);
+}
 
 // The last night: two guests remain in the drawing room, and one choice decides both. You name the guilty
 // one, who is arrested; the other goes free (actions.js accuse).

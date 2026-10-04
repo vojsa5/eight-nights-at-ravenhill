@@ -23,8 +23,28 @@
       <feGaussianBlur stdDeviation="8"/>
     </filter>
   </defs>
+  <style>
+    /* its life on the night's opening card (intro.js inlines it as .ev-live): the candles are lit one by one and warm
+       the room, the claret is poured, and two of the guests raise their glasses and touch them */
+    .ev-live .dp-warm { animation: dp-on 1.1s calc(var(--dawn, 0ms) + 150ms) ease-out both; }
+    .ev-live .dp-halo { animation: dp-on .5s calc(var(--dawn, 0ms) + 100ms + var(--n) * 220ms) ease-out both; }
+    .ev-live .dp-flame { transform-box: fill-box; transform-origin: 50% 100%;
+      animation: dp-light .45s calc(var(--dawn, 0ms) + 100ms + var(--n) * 220ms) ease-out both,
+        dp-flicker 1.3s calc(var(--dawn, 0ms) + 550ms + var(--n) * 220ms) ease-in-out 10 alternate; }
+    .ev-live .dp-wine { transform-box: fill-box; transform-origin: 50% 100%; animation: dp-pour .5s calc(var(--dawn, 0ms) + 600ms + var(--n) * 140ms) ease-out both; }
+    .ev-live .dp-glass { transform-origin: 158px 170px; animation: dp-toast 1.3s calc(var(--dawn, 0ms) + 1250ms) ease-in-out both; }
+    .ev-live .dp-glass.r { transform-origin: 202px 170px; animation-name: dp-toast-r; }
+    .ev-live .dp-clink { transform-box: fill-box; transform-origin: center; animation: dp-clink .5s calc(var(--dawn, 0ms) + 1700ms) ease-out both; }
+    @keyframes dp-on { from { opacity: 0; } }
+    @keyframes dp-light { from { opacity: 0; transform: scale(.2, .1); } 55% { opacity: 1; transform: scale(1.1, 1.25); } to { opacity: 1; transform: none; } }
+    @keyframes dp-flicker { 0% { transform: none; } 35% { transform: scale(.94, 1.06) skewX(3deg); } 70% { transform: scale(1.04, .95) skewX(-2deg); } 100% { transform: scale(.98, 1.03); } }
+    @keyframes dp-pour { from { transform: scaleY(0); } }
+    @keyframes dp-toast { 0%, 100% { transform: none; } 32% { transform: translate(9px, -9px) rotate(12deg); } 40%, 52% { transform: translate(11px, -9px) rotate(12deg); } 80% { transform: none; } }
+    @keyframes dp-toast-r { 0%, 100% { transform: none; } 32% { transform: translate(-9px, -9px) rotate(-12deg); } 40%, 52% { transform: translate(-11px, -9px) rotate(-12deg); } 80% { transform: none; } }
+    @keyframes dp-clink { 0% { opacity: 0; transform: scale(.2); } 30% { opacity: 1; transform: scale(1.1) rotate(20deg); } 100% { opacity: 0; transform: scale(.6) rotate(45deg); } }
+  </style>
   <rect width="360" height="200" fill="url(#bg)"/>
-  <circle cx="180" cy="90" r="90" fill="#ffc46b" opacity=".22" filter="url(#blur8)"/>
+  <circle class="dp-warm" cx="180" cy="90" r="90" fill="#ffc46b" opacity=".22" filter="url(#blur8)"/>
   <g fill="#ffc890" opacity=".6" filter="url(#halo)">
     <g transform="translate(50 104) scale(0.78)">
       <ellipse cx="0" cy="-34" rx="17" ry="21"/>
@@ -76,27 +96,32 @@
   <ellipse cx="230" cy="172" rx="22" ry="7" fill="#fbf6ec" stroke="#c9a45c" stroke-width="1"/>
   <ellipse cx="300" cy="172" rx="22" ry="7" fill="#fbf6ec" stroke="#c9a45c" stroke-width="1"/>
   <path d="M81 146 L95 146 L93 158 Q88 162 83 158Z" fill="#dfeaf4" fill-opacity=".35" stroke="#dfeaf4" stroke-opacity=".7"/>
-  <path d="M83 153 L93 153 L92 158 Q88 161 84 158Z" fill="#b3221b" filter="url(#glow)"/>
+  <path class="dp-wine" style="--n:0" d="M83 153 L93 153 L92 158 Q88 161 84 158Z" fill="#b3221b" filter="url(#glow)"/>
   <line x1="88" y1="161" x2="88" y2="170" stroke="#dfeaf4" stroke-opacity=".7"/>
   <ellipse cx="88" cy="170" rx="5" ry="1.5" fill="#dfeaf4" fill-opacity=".7"/>
-  <path d="M151 146 L165 146 L163 158 Q158 162 153 158Z" fill="#dfeaf4" fill-opacity=".35" stroke="#dfeaf4" stroke-opacity=".7"/>
-  <path d="M153 153 L163 153 L162 158 Q158 161 154 158Z" fill="#b3221b" filter="url(#glow)"/>
-  <line x1="158" y1="161" x2="158" y2="170" stroke="#dfeaf4" stroke-opacity=".7"/>
-  <ellipse cx="158" cy="170" rx="5" ry="1.5" fill="#dfeaf4" fill-opacity=".7"/>
-  <path d="M195 146 L209 146 L207 158 Q202 162 197 158Z" fill="#dfeaf4" fill-opacity=".35" stroke="#dfeaf4" stroke-opacity=".7"/>
-  <path d="M197 153 L207 153 L206 158 Q202 161 198 158Z" fill="#b3221b" filter="url(#glow)"/>
-  <line x1="202" y1="161" x2="202" y2="170" stroke="#dfeaf4" stroke-opacity=".7"/>
-  <ellipse cx="202" cy="170" rx="5" ry="1.5" fill="#dfeaf4" fill-opacity=".7"/>
+  <g class="dp-glass l">
+    <path d="M151 146 L165 146 L163 158 Q158 162 153 158Z" fill="#dfeaf4" fill-opacity=".35" stroke="#dfeaf4" stroke-opacity=".7"/>
+    <path class="dp-wine" style="--n:1" d="M153 153 L163 153 L162 158 Q158 161 154 158Z" fill="#b3221b" filter="url(#glow)"/>
+    <line x1="158" y1="161" x2="158" y2="170" stroke="#dfeaf4" stroke-opacity=".7"/>
+    <ellipse cx="158" cy="170" rx="5" ry="1.5" fill="#dfeaf4" fill-opacity=".7"/>
+  </g>
+  <g class="dp-glass r">
+    <path d="M195 146 L209 146 L207 158 Q202 162 197 158Z" fill="#dfeaf4" fill-opacity=".35" stroke="#dfeaf4" stroke-opacity=".7"/>
+    <path class="dp-wine" style="--n:2" d="M197 153 L207 153 L206 158 Q202 161 198 158Z" fill="#b3221b" filter="url(#glow)"/>
+    <line x1="202" y1="161" x2="202" y2="170" stroke="#dfeaf4" stroke-opacity=".7"/>
+    <ellipse cx="202" cy="170" rx="5" ry="1.5" fill="#dfeaf4" fill-opacity=".7"/>
+  </g>
   <path d="M265 146 L279 146 L277 158 Q272 162 267 158Z" fill="#dfeaf4" fill-opacity=".35" stroke="#dfeaf4" stroke-opacity=".7"/>
-  <path d="M267 153 L277 153 L276 158 Q272 161 268 158Z" fill="#b3221b" filter="url(#glow)"/>
+  <path class="dp-wine" style="--n:3" d="M267 153 L277 153 L276 158 Q272 161 268 158Z" fill="#b3221b" filter="url(#glow)"/>
   <line x1="272" y1="161" x2="272" y2="170" stroke="#dfeaf4" stroke-opacity=".7"/>
   <ellipse cx="272" cy="170" rx="5" ry="1.5" fill="#dfeaf4" fill-opacity=".7"/>
   <path d="M180 150 L180 104 M160 116 Q180 128 200 116 M160 116 L160 106 M200 116 L200 106" fill="none" stroke="#e6c783" stroke-width="3"/>
-  <circle cx="160" cy="98" r="14.4" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
-  <path d="M160 89.9 C164.5 96.2 163.6 101.6 160 102.5 C156.4 101.6 155.5 96.2 160 89.9Z" fill="#ffd27a" filter="url(#glow)"/>
-  <circle cx="180" cy="96" r="16" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
-  <path d="M180 87 C185 94 184 100 180 101 C176 100 175 94 180 87Z" fill="#ffd27a" filter="url(#glow)"/>
-  <circle cx="200" cy="98" r="14.4" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
-  <path d="M200 89.9 C204.5 96.2 203.6 101.6 200 102.5 C196.4 101.6 195.5 96.2 200 89.9Z" fill="#ffd27a" filter="url(#glow)"/>
+  <circle class="dp-halo" style="--n:0" cx="160" cy="98" r="14.4" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
+  <path class="dp-flame" style="--n:0" d="M160 89.9 C164.5 96.2 163.6 101.6 160 102.5 C156.4 101.6 155.5 96.2 160 89.9Z" fill="#ffd27a" filter="url(#glow)"/>
+  <circle class="dp-halo" style="--n:1" cx="180" cy="96" r="16" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
+  <path class="dp-flame" style="--n:1" d="M180 87 C185 94 184 100 180 101 C176 100 175 94 180 87Z" fill="#ffd27a" filter="url(#glow)"/>
+  <circle class="dp-halo" style="--n:2" cx="200" cy="98" r="14.4" fill="#ffb86a" opacity=".35" filter="url(#blur8)"/>
+  <path class="dp-flame" style="--n:2" d="M200 89.9 C204.5 96.2 203.6 101.6 200 102.5 C196.4 101.6 195.5 96.2 200 89.9Z" fill="#ffd27a" filter="url(#glow)"/>
+  <path class="dp-clink" d="M180 134 L181.3 139.7 L187 141 L181.3 142.3 L180 148 L178.7 142.3 L173 141 L178.7 139.7Z" fill="#fff8e0" filter="url(#glow)" opacity="0"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

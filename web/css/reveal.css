@@ -22,7 +22,7 @@
 .reveal-art .frame-photo::after { content: ""; position: absolute; inset: 0; background: #fff6dc; pointer-events: none;
   animation: flash .9s ease-out both; }  /* the flash of the flip, as opacity: animating a filter redraws the picture every frame */
 .reveal-art .art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: flip .9s cubic-bezier(.2,.7,.2,1) both; }
-.reveal-art .stamp { font-size: 22px; padding: 2px 10px; border-width: 3px; animation: thump .35s .75s cubic-bezier(.3,1.6,.5,1) both; }
+.reveal-art .stamp { font-size: 22px; padding: 2px 10px; border-width: 3px; }  /* stamped down, and the photograph turned over, in verdict.css */
 .stamp.innocent { color: var(--ink-green); border-color: var(--ink-green); }
 .stamp.guilty { color: var(--ink-red); border-color: var(--ink-red); }
 .reveal-body { padding: 30px 28px 24px 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
@@ -34,113 +34,460 @@
 .outcome { font-size: 18px; }
 .outcome b { font: 22px var(--typed); margin-right: 6px; }
 .reveal .btn { align-self: flex-start; margin-top: 8px; }
+/* the book found in the guest's room (reveal.js rewardHtml): it comes in brown paper, tied and sealed, which falls open
+   as the card settles, and the lamp catches the cover */
+.reward { display: flex; gap: 14px; align-items: center; padding: 10px 12px; border-left: 3px solid #a8843e;
+  background: radial-gradient(ellipse 120px 90% at 42px 50%, rgba(255,210,130,.34), transparent), rgba(90,70,40,.08);
+  animation: rise .5s .5s ease-out both; }
+.reward .gift { position: relative; flex: none; display: block; overflow: hidden; padding: 3px 4px 6px; margin: -3px -4px -6px; }
+.reward .covers { --w: 58px; display: flex; }
+.reward .covers img { box-shadow: 0 4px 9px rgba(60,30,0,.45); }
+.reward .title, .reward .by { animation: fade-in .5s 1.5s ease-out both; }  /* named as the paper falls open */
+.reward .wrap { --twine: rgba(244,232,206,.95); position: absolute; top: 0; bottom: 0; left: 0; width: 50%; z-index: 1;
+  background: linear-gradient(90deg, transparent calc(100% - 2px), var(--twine) 0),
+    linear-gradient(transparent calc(38% - 1px), var(--twine) 0 calc(38% + 1.5px), transparent 0),
+    linear-gradient(140deg, rgba(255,255,255,.18), transparent 35%, rgba(0,0,0,.12) 70%),
+    repeating-linear-gradient(100deg, rgba(90,58,20,.09) 0 1px, transparent 1px 3px), #b88e58;
+  animation: unwrap .7s 1.35s cubic-bezier(.5,0,.75,0) both; }
+.reward .wrap.right { left: 50%; right: 0; width: auto; animation-name: unwrap-right;
+  background: linear-gradient(90deg, var(--twine) 1px, transparent 0),
+    linear-gradient(transparent calc(38% - 1px), var(--twine) 0 calc(38% + 1.5px), transparent 0),
+    linear-gradient(220deg, rgba(255,255,255,.14), transparent 35%, rgba(0,0,0,.14) 70%),
+    repeating-linear-gradient(80deg, rgba(90,58,20,.09) 0 1px, transparent 1px 3px), #b48a54; }
+.reward .wrap.right::before { content: "?"; position: absolute; left: 0; top: 38%; display: grid; place-items: center; width: 22px; height: 22px;
+  transform: translate(-50%, -50%) rotate(-12deg); border-radius: 48% 52% 46% 54%; color: #5a0e08; font: 700 12px/1 Cinzel, Georgia, serif;
+  background: radial-gradient(circle at 38% 32%, #e8644e, #aa2618 52%, #6a1009); box-shadow: 0 1px 2px rgba(0,0,0,.5); }  /* the seal */
+.reward .gift::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent 38%, rgba(255,248,226,.6) 50%, transparent 62%); animation: reward-glint 1s 2s ease-in-out both; }
+@keyframes unwrap { to { opacity: 0; transform: translateX(-70%) rotate(-18deg); } }
+@keyframes unwrap-right { to { opacity: 0; transform: translateX(70%) rotate(18deg); } }
+@keyframes reward-glint { to { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) {
+  .reward .wrap, .reward .gift::after { display: none; }
+  .reward .title, .reward .by { animation: none; }
+}
+.reward .t { display: block; font: 12px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--paper-muted); }
+.reward .title { display: block; font-weight: 600; font-size: 17px; line-height: 1.2; }
+.reward .by { display: block; font-style: italic; color: var(--paper-muted); font-size: 15px; }
+.reward p { margin: 4px 0 0; font-size: 15px; line-height: 1.35; }
 .reveal .clue-icon { position: absolute; right: 10px; bottom: 30px; font-size: 44px; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
 .facts { margin: 0; padding-left: 18px; font-size: 17px; }
 .facts li { margin: 4px 0; }
 
-/* the round's opening card: the scene above a typed sheet */
-.intro { position: relative; width: 620px; max-width: 100%; max-height: calc(100vh - 32px); overflow: auto; animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
-.intro-art { position: relative; aspect-ratio: 360 / 200; background: #000; border-bottom: 3px solid #cfb482; }
-.intro-art img { width: 100%; height: 100%; display: block; }
-.intro-art::after { content: ""; position: absolute; inset: 0; background: #000; pointer-events: none; animation: dawn 1.4s ease-out both; }
-.intro-medal { position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%); width: 52px; height: 52px; border-radius: 50%;
-  display: grid; place-items: center; font: 26px/1 system-ui, sans-serif; background: radial-gradient(circle at 40% 35%, #f4dca0, #a8843e 70%);
-  border: 2px solid #5a4420; box-shadow: 0 4px 14px rgba(0,0,0,.5); z-index: 1; }
+/* the round's opening card: the scene above a typed sheet. It opens as the night arrives (intro.js showIntro, which
+   sets when each part comes): night falls over the whole screen, the night's moon waxes to its phase and its numeral
+   is struck like a clock; then the night lifts off the card, which rises over the event's scene laid out large and dim
+   behind it; its scene comes out of the dark and to life (each scene's file styles its own life under .ev-live); the
+   event's name is typed; the medal is struck; the papers are laid down one by one. A click or Enter completes it at once. */
+.modal:has(> .intro)::before { content: ""; position: absolute; inset: 0; pointer-events: none; animation: fade-in .5s ease-out both;
+  background: radial-gradient(ellipse 75% 65% at 50% 42%, rgba(12,16,34,.3), rgba(1,1,4,.8)); }
+.intro { position: relative; width: 620px; max-width: 100%; max-height: calc(100vh - 32px); overflow: auto;
+  animation: nt-in .5s calc(var(--dawn, 0ms) - 150ms) cubic-bezier(.2,.8,.2,1) both; }
+.intro-backdrop { position: fixed; inset: -40px; z-index: -1; pointer-events: none; background: #05060c center / cover no-repeat;
+  filter: blur(14px) brightness(.42) saturate(.85); animation: fade-in 1s var(--dawn, 0ms) ease-out both; }  /* the event's scene, behind the card */
+.intro-art { position: relative; aspect-ratio: 360 / 200; background: #000; border-bottom: 3px solid #cfb482; container-type: inline-size; }
+.intro-scene { position: absolute; inset: 0; overflow: hidden; }
+.intro-art img, .intro-scene svg { width: 100%; height: 100%; display: block; }
+.intro-scene svg { animation: nt-settle 1.9s var(--dawn) cubic-bezier(.2,.6,.3,1) both; }  /* the camera settles as the light comes */
+.intro-art::after { content: ""; position: absolute; inset: 0; background: #05060c; pointer-events: none; animation: nt-dawn .8s var(--dawn, 0ms) ease-out both; }
+.nightfall { position: fixed; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: min(4vmin, 34px);
+  pointer-events: none; animation: fade-in .3s ease-out both, nt-lift .6s var(--dawn) ease-in forwards;
+  background: radial-gradient(1.3px 1.3px at 12% 22%, rgba(240,236,220,.7), transparent) 0 0 / 260px 220px,
+    radial-gradient(1px 1px at 68% 64%, rgba(240,236,220,.55), transparent) 0 0 / 260px 220px,
+    radial-gradient(1.5px 1.5px at 38% 82%, rgba(240,236,220,.45), transparent) 0 0 / 330px 300px,
+    radial-gradient(1px 1px at 84% 14%, rgba(240,236,220,.6), transparent) 0 0 / 330px 300px,
+    radial-gradient(ellipse 62% 56% at 50% 46%, #171d3a, #05060d 74%); }  /* a night sky over the whole screen */
+.nightfall > * { animation: nt-out .4s var(--dawn) ease-in forwards; }
+.nf-moon { width: min(15vmin, 132px); height: min(15vmin, 132px); overflow: visible; filter: drop-shadow(0 0 min(2.2vmin, 20px) rgba(240,214,150,.45));
+  animation: fade-in .35s 40ms ease-out both, nt-out .4s var(--dawn) ease-in forwards; }
+.nf-moon .disc, .nf-moon .shade { fill: #17161d; }
+.nf-moon .half, .nf-moon .glow { fill: #f2e4bd; }
+.nf-moon .rim { fill: none; stroke: rgba(230,199,131,.6); stroke-width: .3; }
+.nf-moon .shade, .nf-moon .glow { transform-box: fill-box; transform-origin: center; }
+.nf-moon .shade { animation: nt-shade var(--t-shade) 120ms ease-in-out both; }
+.nf-moon .glow { animation: nt-glow var(--t-glow) calc(120ms + var(--t-shade)) ease-out both; }
+.nf-numeral { display: flex; gap: .03em; font: 700 min(21vmin, 190px)/1 Cinzel, Georgia, serif; color: #efd9a0; text-shadow: 0 0 .3em rgba(240,200,120,.45); }
+.nf-numeral span { position: relative; animation: nt-toll .3s calc(var(--strike) + var(--i) * var(--gap)) cubic-bezier(.3,1.5,.5,1) both; }
+.nf-numeral span::after { content: ""; position: absolute; left: 50%; top: 50%; width: 1em; height: 1em; margin: -.5em 0 0 -.5em; border-radius: 50%;
+  border: .03em solid rgba(240,214,150,.8); opacity: 0; animation: nt-ring .8s calc(var(--strike) + 40ms + var(--i) * var(--gap)) ease-out both; }
+.intro-medal { position: absolute; left: calc(50% - 26px); bottom: -26px; width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center; font: 26px/1 system-ui, sans-serif;
+  background: linear-gradient(115deg, transparent 42%, rgba(255,250,228,.8) 50%, transparent 58%) 0 0 / 300% 100% no-repeat,
+    radial-gradient(circle at 40% 35%, #f4dca0, #a8843e 70%);
+  border: 2px solid #5a4420; box-shadow: 0 4px 14px rgba(0,0,0,.5); z-index: 1;
+  animation: nt-mint .6s calc(var(--dawn) + 150ms) cubic-bezier(.3,.9,.4,1.1) both, nt-glint .7s calc(var(--dawn) + 800ms) ease-in-out both; }
+.intro-medal::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid rgba(240,214,150,.9); opacity: 0; pointer-events: none;
+  animation: nt-ring .7s calc(var(--dawn) + 640ms) ease-out both; }
 .intro-body { padding: 36px 34px 26px; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
-.intro-body h2 { margin: 0; font: 34px var(--typed); letter-spacing: .08em; text-transform: uppercase; }
+.intro-body > * { animation: nt-rise .4s var(--at, 0ms) cubic-bezier(.2,.8,.3,1) both; }
+.intro-body > .morning-clue { animation-name: nt-slip; }  /* the papers laid down on the sheet, the clue first */
+.intro-body > .traces { animation-name: nt-slip-right; }
+.intro .traces li { animation: nt-ink .35s calc(var(--at) + 220ms + var(--i) * 80ms) ease-out both; }
+.intro .kicker .intro-moon { width: 13px; height: 13px; margin-right: 7px; vertical-align: -1px; }
+.intro-moon .disc { fill: rgba(43,33,24,.08); stroke: var(--paper-muted); stroke-width: .8; }
+.intro-moon .lit { fill: #a8843e; }
+.intro-body h2 { margin: 0; font: 34px var(--typed); letter-spacing: .08em; text-transform: uppercase; animation: none; }
+.intro-body h2 .tw { display: inline-block; white-space: nowrap; }  /* a word; its letters typed one by one */
+.intro-said { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }  /* the name for screen readers */
+.intro-body h2 .tl { display: inline-block; animation: nt-type .16s calc(var(--type) + var(--k) * var(--letter)) ease-out both; }
+@keyframes nt-in { from { opacity: 0; transform: translateY(26px) scale(.96) rotate(-.6deg); } 40% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes nt-settle { from { transform: scale(1.07); } to { transform: none; } }
+@keyframes nt-dawn { from { opacity: 1; } to { opacity: 0; } }
+@keyframes nt-out { to { opacity: 0; transform: translateY(-7vmin) scale(.9); } }
+@keyframes nt-lift { to { opacity: 0; visibility: hidden; } }
+@keyframes nt-shade { from { transform: scaleX(1); } to { transform: scaleX(var(--shade)); } }
+@keyframes nt-glow { from { transform: scaleX(0); } to { transform: scaleX(var(--glow)); } }
+@keyframes nt-toll { from { opacity: 0; transform: scale(2.3); } 45% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes nt-ring { from { opacity: .85; transform: scale(.4); } to { opacity: 0; transform: scale(2.3); } }
+@keyframes nt-mint { from { opacity: 0; transform: translateY(-46px) scale(1.8) rotateY(540deg); } 35% { opacity: 1; }
+  78% { transform: translateY(2px) scale(.94) rotateY(0deg); } to { opacity: 1; transform: none; } }
+@keyframes nt-glint { from { background-position: 100% 0, 0 0; } to { background-position: 0 0, 0 0; } }
+@keyframes nt-type { from { opacity: 0; transform: translateY(-.2em) scale(1.25); } 40% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes nt-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes nt-slip { from { opacity: 0; transform: translate(-14px, -16px) rotate(-3deg) scale(1.05); } 50% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes nt-slip-right { from { opacity: 0; transform: translate(14px, -16px) rotate(2.4deg) scale(1.05); } 50% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes nt-ink { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .modal:has(> .intro)::before, .intro-body > *, .intro-body h2 .tl, .intro .traces li, .intro-medal,
+  .intro-medal::after, .intro-scene svg, .intro-backdrop { animation: none; }
+  .intro-scene svg * { animation: none !important; }  /* over each scene's own style */
+  .nightfall { display: none; }
+}
 .intro-body .flavor { font-size: 18px; margin: 0; max-width: 480px; }
 .intro-body .meaning { margin: 0; max-width: 500px; font-size: 16px; }
-.intro-body .ev-steps { width: 100%; max-width: 500px; margin: 0; text-align: left; }  /* the event's group and what it does */
-.intro-body .ev-steps dd { font-size: 16px; }
-/* last night's traces: a typed slip under the event */
-.traces { width: 100%; max-width: 500px; margin: 2px 0 0; padding: 10px 14px; text-align: left; background: rgba(90,70,40,.07);
-  border-left: 3px solid #a8843e; }
-.traces-head { font: 12px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--paper-muted); margin-bottom: 4px; }
-.traces ul { margin: 0; padding: 0; list-style: none; font-size: 15px; line-height: 1.4; }
-.traces li { display: flex; gap: 8px; margin: 3px 0; }
-.traces li.quiet { font-style: italic; color: var(--paper-muted); }
-.traces.many { max-width: 560px; }
-.traces.many ul { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 14px; font-size: 14px; line-height: 1.3; }  /* many traces: two columns */
-.trace-icon { flex: none; width: 20px; text-align: center; }
-.traces p { margin: 0; font-size: 15px; line-height: 1.4; }
+/* last night's traces (night.js tracesHtml) under a typed head: on the first night the kinds of trace as evidence tags,
+   later the night's traces as slips laid down one by one (as tags on a card that also carries a clue) */
+.traces { width: 100%; max-width: 520px; margin: 2px 0 0; text-align: left; }
+.traces-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font: 12px var(--typed); letter-spacing: .14em;
+  text-transform: uppercase; color: var(--paper-muted); }
+.traces-head::before, .traces-head::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(168,132,62,.8)); }
+.traces-head::after { background: linear-gradient(90deg, rgba(168,132,62,.8), transparent); }
+.traces ul { margin: 0; padding: 0; list-style: none; font-size: 15px; line-height: 1.38; }
+.traces p { margin: 0; font-size: 15.5px; line-height: 1.4; text-align: center; }
+.traces .trace-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px 8px; margin: 0 -10px; padding: 7px 0;
+  filter: drop-shadow(0 1px 1.2px rgba(60,40,10,.4)); }  /* the shadow of each tag's shape */
+.trace-tag { --tilt: -1.2deg; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 20px; font: 12.5px/1.25 var(--typed);
+  letter-spacing: .02em; color: var(--paper-ink); transform: rotate(var(--tilt));
+  background: linear-gradient(rgba(255,252,240,.35), rgba(120,90,40,.06)),
+    radial-gradient(circle at 10px 50%, transparent 2.3px, #8f7034 2.6px 3.6px, #ecd9a6 3.9px);  /* manila, with a brass eyelet */
+  clip-path: polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 50%); }
+.trace-tag:nth-child(3n+2) { --tilt: .9deg; }
+.trace-tag:nth-child(3n) { --tilt: -.3deg; }
+.trace-tag .trace-icon { font-size: 14px; line-height: 1; }
+.trace-slips { display: grid; gap: 7px; }
+.trace-slip { --tilt: -.35deg; display: flex; gap: 10px; align-items: center; padding: 6px 12px 6px 7px; background: #fcf8ec;
+  box-shadow: 0 1px 2.5px rgba(60,40,10,.28), 0 0 0 1px rgba(168,132,62,.16); transform: rotate(var(--tilt)); }
+.trace-slip:nth-child(even) { --tilt: .3deg; }
+.trace-slip .trace-icon { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; line-height: 1;
+  border: 2px solid transparent; box-shadow: 0 0 0 1px rgba(90,68,32,.4);
+  background: radial-gradient(circle at 40% 32%, #fffdf6, #efe0bb) padding-box, linear-gradient(150deg, #f6e2a8, #b8954c 50%, #7a5c2a) border-box; }
+.trace-name { margin-right: 3px; font: 11.5px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-red); }
+.traces li.quiet { justify-content: center; padding: 8px 14px; font-style: italic; color: var(--paper-muted); text-align: center;
+  border: 1px dashed rgba(106,90,68,.45); }
+.traces.many { max-width: 580px; }
+.traces.many ul { grid-template-columns: 1fr 1fr; gap: 7px 10px; font-size: 14px; line-height: 1.32; }  /* many traces: two columns */
+.traces.many .trace-slip { align-items: flex-start; }
 .intro-body .recap { margin: 4px 0 0; padding-top: 10px; border-top: 1px dashed var(--paper-line); color: var(--paper-muted); font-size: 15px; max-width: 500px; }
 .intro .btn { margin-top: 6px; font-size: 14px; padding: 8px 20px; }
+/* the event on the card (events.js nightKindHtml): an index card, the kind of night as its label with the kind's icon in a
+   medallion over a red rule, then what the event means, its first sentence as the lead; the nights about seats draw the
+   table, and once the card is down the look travels from seat to seat, or the hands join */
+.ev-kind { width: 100%; max-width: 520px; padding: 6px 20px 12px; text-align: left; background: #fcf8ec;
+  box-shadow: 0 1px 3px rgba(60,40,10,.22), 0 0 0 1px rgba(168,132,62,.2); }
+.ev-kind-label { display: flex; align-items: center; gap: 11px; margin: 0 -20px 10px; padding: 0 20px 6px;
+  border-bottom: 1px solid rgba(178,58,42,.45); }
+.ev-kind-medal { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; font: 16px/1 system-ui, sans-serif;
+  border: 3px solid transparent; box-shadow: 0 0 0 1px rgba(90,68,32,.55), 0 2px 4px rgba(60,40,10,.3);
+  background: radial-gradient(circle at 40% 32%, #fffdf6, #efe0bb) padding-box,
+    linear-gradient(150deg, #f6e2a8, #b8954c 50%, #7a5c2a) border-box; }  /* a cream enamel in a brass rim */
+.ev-kind-name { font: 14px/1.25 var(--typed); letter-spacing: .15em; text-transform: uppercase; color: var(--paper-ink); }
+.ev-kind-text { margin: 0; font-size: 17.5px; line-height: 1.45; }
+.ev-lead { font-weight: 600; }
+.ev-fig { margin: 10px 0 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ev-table { display: flex; align-items: flex-end; gap: 12px; padding: 0 14px 6px;
+  background: linear-gradient(#a07e48, #6a4c26) bottom / 100% 4px no-repeat; }  /* the edge of the long table under the place cards */
+.ev-pair, .ev-trio { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 38px; column-gap: 18px; padding-top: 23px; }
+.ev-glance, .ev-hands { position: absolute; left: 0; top: 0; width: 100%; height: 24px; overflow: visible; }
+.ev-seat { display: grid; place-items: center; height: 26px; font: 13px/1 var(--typed); color: var(--paper-ink); background: #fffaf0;
+  border: 1px solid #cdb88c; box-shadow: 0 1px 2px rgba(60,40,10,.25); }
+.ev-seat.who { border-color: #a8843e; background: linear-gradient(#fbefc9, #efdba8); }
+.ev-more { align-self: flex-end; line-height: 26px; color: var(--paper-muted); letter-spacing: .12em; }
+.ev-fig figcaption { font-style: italic; font-size: 15px; line-height: 1.3; color: var(--paper-muted); text-align: center; }
+.ev-arc { fill: none; stroke: var(--paper-muted); stroke-width: 1.3; stroke-dasharray: 2.6 2.4; stroke-linecap: round; }
+.ev-head { fill: none; stroke: var(--paper-muted); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.ev-eye path { fill: #fcf8ec; stroke: var(--paper-ink); stroke-width: 1.1; }
+.ev-eye circle { fill: var(--paper-ink); }
+.ev-hands path { fill: none; stroke: #a8843e; stroke-width: 1.6; stroke-linecap: round; }
+.ev-hands circle { fill: #cfb482; stroke: #8a6a2e; stroke-width: 1; }
+.intro .ev-glance { animation: ev-look .55s calc(var(--at) + 420ms) ease-out both; }
+.intro .ev-more + .ev-pair .ev-glance { animation-delay: calc(var(--at) + 680ms); }
+.intro .ev-hands { animation: ev-join .6s calc(var(--at) + 420ms) ease-out both; }
+/* the traces laid down: each tag dropped, each slip slid onto the sheet, one after another (--i, intro.js choreograph) */
+.intro .traces .trace-tag { animation: tr-tag .4s calc(var(--at) + 240ms + var(--i) * 90ms) cubic-bezier(.2,.8,.3,1.2) both; }
+.intro .traces .trace-slip { animation: tr-slip .45s calc(var(--at) + 240ms + var(--i) * 110ms) cubic-bezier(.2,.8,.3,1) both; }
+@keyframes ev-look { from { opacity: 0; clip-path: inset(0 0 0 75%); } 30% { opacity: 1; } to { opacity: 1; clip-path: inset(0); } }
+@keyframes ev-join { from { opacity: 0; clip-path: inset(0 50%); } 30% { opacity: 1; } to { opacity: 1; clip-path: inset(0); } }
+@keyframes tr-tag { from { opacity: 0; transform: translateY(-12px) rotate(calc(var(--tilt) * -4)) scale(1.15); } 60% { opacity: 1; }
+  to { opacity: 1; transform: rotate(var(--tilt)); } }
+@keyframes tr-slip { from { opacity: 0; transform: translate(10px, -10px) rotate(calc(var(--tilt) + 2.5deg)) scale(1.04); } 55% { opacity: 1; }
+  to { opacity: 1; transform: rotate(var(--tilt)); } }
+@media (prefers-reduced-motion: reduce) {
+  .intro .ev-glance, .intro .ev-hands, .intro .traces .trace-tag, .intro .traces .trace-slip { animation: none; }
+}
 
 /* the prologue: a telegram, then the briefing */
-.prologue { width: 680px; max-width: 100%; max-height: calc(100vh - 32px); overflow: auto; padding: 34px 40px 26px; animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
-.prologue h2 { margin: 0 0 4px; font: 32px var(--typed); letter-spacing: .08em; text-transform: uppercase; text-align: center; }
-.prologue .kicker { text-align: center; }
-.telegram { margin: 16px auto 18px; max-width: 520px; padding: 14px 18px; background: #f7eecf; border: 1px solid #cdb88c; transform: rotate(-.8deg);
+/* the case papers: the telegram, the guests and the conspiracy, on a wide sheet in large type */
+.prologue { width: min(1060px, 100%); max-height: calc(100vh - 32px); overflow: auto; padding: 36px clamp(22px, 4vw, 54px) 26px;
+  animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
+.prologue h2 { margin: 2px 0 6px; font: 700 clamp(30px, 4vw, 44px)/1.1 Cinzel, Georgia, serif; letter-spacing: .08em; text-transform: uppercase;
+  text-align: center; }
+.prologue h2::after { content: ""; display: block; width: min(320px, 60%); height: 9px; margin: 10px auto 0;
+  background: radial-gradient(circle, var(--paper-ink) 0 3px, transparent 3.5px) center / 9px 9px no-repeat,
+    linear-gradient(var(--paper-ink), var(--paper-ink)) center / 100% 1px no-repeat; opacity: .55; }
+.prologue .kicker { text-align: center; font-size: 14px; letter-spacing: .2em; }
+.telegram { margin: 18px auto 22px; max-width: 700px; padding: 18px 26px; font-size: 18px; line-height: 1.6; background: #f7eecf; border: 1px solid #cdb88c; transform: rotate(-.8deg);
   box-shadow: 0 3px 8px rgba(0,0,0,.25); font: 15px/1.6 var(--typed); letter-spacing: .03em; }
-.telegram .head { display: flex; justify-content: space-between; font-size: 11px; color: var(--paper-muted); border-bottom: 1px solid #cdb88c; margin-bottom: 8px; padding-bottom: 4px; }
-.prologue p { margin: 0 0 10px; font-size: 17px; }
+.telegram .head { display: flex; justify-content: space-between; font-size: 13px; color: var(--paper-muted); border-bottom: 1px solid #cdb88c; margin-bottom: 8px; padding-bottom: 4px; }
+.prologue p { margin: 0 auto 12px; max-width: 820px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; }
 .prologue ol { margin: 6px 0 12px; padding-left: 22px; font-size: 16px; }
 .prologue li { margin: 5px 0; }
-.prologue .sig { font: 26px var(--hand); text-align: right; margin: 6px 0 0; }
+.prologue .sig { font: 32px var(--hand); text-align: right; margin: 8px 0 0; }
 .prologue .nav, .film .nav, .closing .nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 18px; }
 .prologue .dots i, .film .dots i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--paper-muted); margin: 0 3px; }
 .prologue .dots i.on { background: var(--paper-muted); }
 
 /* the conspiracy's crimes: the prologue's dossier, and the charge on a reveal card */
-.dossier { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 10px 18px; margin: 12px 0 14px; }
-.suspect { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 1.35; }
-.suspect .art { width: 42px; height: 55px; flex: none; object-fit: cover; border: 3px solid #f4eddc; box-shadow: 0 1px 3px rgba(0,0,0,.35); transform: rotate(-2deg); }
-.suspect b, .charge b { display: block; font: 13px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-red); margin-bottom: 2px; }
+/* the conspiracy: an index card from Hollis's file per role, a red tab with its name */
+.dossier { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 18px 22px; margin: 18px 0 18px; }
+.suspect { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 0 16px; align-items: start; padding: 0 16px 14px 14px;
+  background: linear-gradient(90deg, transparent 13px, rgba(190,60,50,.35) 13px 14px, transparent 14px),
+    repeating-linear-gradient(transparent 0 25px, rgba(90,110,160,.16) 25px 26px) 0 40px, #fbf7ec;
+  box-shadow: 0 2px 6px rgba(0,0,0,.18), 0 0 0 1px rgba(160,130,80,.25); }
+.suspect:nth-child(odd) { transform: rotate(-.5deg); }
+.suspect:nth-child(even) { transform: rotate(.6deg); }
+.suspect > b { grid-column: 1 / -1; justify-self: start; margin: 0 0 12px -14px; padding: 7px 16px 6px; font: 15px var(--typed); letter-spacing: .14em;
+  text-transform: uppercase; color: #fbf7ec; background: linear-gradient(#a8312a, #8a2420); box-shadow: 0 2px 3px rgba(0,0,0,.2); }
+.s-photo { padding: 5px 5px 14px; background: #f4eddc; box-shadow: 0 2px 5px rgba(0,0,0,.3); transform: rotate(-2.5deg); }
+.suspect:nth-child(even) .s-photo { transform: rotate(2deg); }
+.s-photo .art { display: block; width: clamp(62px, 6vw, 76px); height: auto; aspect-ratio: 200 / 262; object-fit: cover; }
+.suspect p { margin: 0; max-width: none; font-size: clamp(16px, 1.45vw, 18px); line-height: 1.45; }
+/* the guests in the case papers: all sixteen alike */
+/* the guests: a dinner place card each, the photograph clipped on, all sixteen alike */
+.guestlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 292px), 1fr)); gap: 16px 18px; margin: 18px 0 8px; }
+.guest { position: relative; display: flex; gap: 14px; align-items: flex-start; padding: 12px 14px 12px 12px; font-size: clamp(15.5px, 1.35vw, 17px);
+  line-height: 1.38; background: linear-gradient(#fbf6e8, #f3ead2); box-shadow: 0 2px 5px rgba(0,0,0,.16), inset 0 0 0 1px rgba(168,132,62,.35),
+    inset 0 0 0 4px #fbf6e8, inset 0 0 0 5px rgba(168,132,62,.28); }
+.g-photo { position: relative; flex: none; padding: 4px 4px 12px; background: #f4eddc; box-shadow: 0 2px 4px rgba(0,0,0,.3); transform: rotate(-2deg); }
+.guest:nth-child(even) .g-photo { transform: rotate(1.8deg); }
+.g-photo::before { content: ""; position: absolute; top: -9px; left: 12px; width: 9px; height: 24px; border: 2px solid #9a9a9a; border-radius: 6px;
+  border-bottom-color: transparent; }  /* the paper clip */
+.g-photo .art { display: block; width: clamp(56px, 5vw, 66px); height: auto; aspect-ratio: 200 / 262; object-fit: cover; }
+.guest b { display: block; font: 600 clamp(16px, 1.5vw, 18.5px)/1.15 Cinzel, Georgia, serif; letter-spacing: .04em; }
+.guest small { display: block; margin: 2px 0 5px; font: italic 15px "EB Garamond", Georgia, serif; color: var(--paper-muted); }
+.g-rel { display: block; }
+.charge b { display: block; font: 13px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-red); margin-bottom: 2px; }
 .charge { margin: 0; font-size: 15px; line-height: 1.4; border-left: 3px solid var(--ink-red); padding-left: 10px; }
 .charge.truth { border-left-color: var(--ink-green); }
 .charge.truth b { color: var(--ink-green); }
 .charge.sealed { border-left-color: var(--paper-muted); }
 .charge.sealed b { color: var(--paper-muted); }
 
-/* the films: one scene at a time, the camera slowly moving in, the caption underneath */
-.film { width: min(920px, 100%, calc((100vh - 240px) * 1.8)); max-height: calc(100vh - 32px); overflow: auto; padding: 0 0 18px;
-  background: #0c0a08; color: #e8dcc0; border: 1px solid #3a2e20; box-shadow: 0 24px 70px rgba(0,0,0,.7); }
-.film.fresh { animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
-.film-frame { position: relative; aspect-ratio: 360 / 200; overflow: hidden; background: #000; }
-.film-pan { width: 100%; height: 100%; animation: push-in var(--scene) linear both; }
-.film-pan img { width: 100%; height: 100%; display: block; animation: fade-in 1s ease-out both; }
-.film-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.12); }
+/* the films: full screen, like a picture house. The picture covers the screen, centred on the scene's focus as far as
+   the picture reaches (film.js sets --ratio, --fx and --fy on .film-frame); the caption is a subtitle over a soft dark
+   gradient at the bottom (it comes in phrase by phrase, film.css), and the buttons under it fade away while nothing
+   moves (.idle, film.js); Skip and the bar of the time left stay. A screen taller than wide shows the picture as a band
+   across it, with the subtitle under it (the end of this section). */
+.film { position: fixed; inset: 0; overflow: hidden; background: #000; color: #efe6d2; --pad: clamp(16px, 3vw, 44px); }
+body:has(> #modal.open > .film), body:has(> #modal.open > .chapter-card) { overflow: hidden; }  /* no page scrollbar beside them */
+.film.fresh { animation: fade-in .45s ease-out both; }
+.film.verdict.fresh { animation-duration: .2s; }  /* the doors or the cellar's come at once */
+.film-frame { position: absolute; inset: 0; overflow: hidden; background: #000; container-type: size; }
+.film-pan, .film-ghost { --art-w: max(100cqw, 100cqh * var(--ratio, 1.8)); --art-h: max(100cqh, 100cqw / var(--ratio, 1.8));
+  position: absolute; width: var(--art-w); height: var(--art-h);
+  left: clamp(100cqw - var(--art-w), 50cqw - var(--fx, .5) * var(--art-w), 0px); top: clamp(100cqh - var(--art-h), 50cqh - var(--fy, .5) * var(--art-h), 0px); }
+.film-pan { animation: push-in var(--scene) linear both; }
+.film-cam img { width: 100%; height: 100%; display: block; }  /* a picture not drawn into the page (also the scene going out); film.css fades it in */
+.film-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; height: 3px; background: rgba(255,255,255,.1); }
 .film-bar i { display: block; height: 100%; background: #cfb482; transform-origin: 0 50%; animation: fill var(--scene) linear both; }
 .film.paused .film-pan, .film.paused .film-bar i { animation-play-state: paused; }
-.film .film-skip { position: absolute; top: 12px; right: 12px; font: 13px var(--typed); letter-spacing: .06em; color: #e8dcc0;
-  background: rgba(0,0,0,.45); border: 1px solid rgba(232,220,192,.35); border-radius: 4px; padding: 5px 12px; cursor: pointer; }
+.film .film-skip { position: absolute; top: max(14px, env(safe-area-inset-top)); right: max(14px, env(safe-area-inset-right)); z-index: 3;
+  font: 13px var(--typed); letter-spacing: .06em; color: #efe6d2; background: rgba(0,0,0,.5); border: 1px solid rgba(232,220,192,.35);
+  border-radius: 4px; padding: 6px 13px; cursor: pointer; }
 .film .film-skip:hover { border-color: #cfb482; }
-.film .film-caption { margin: 18px 30px 6px; min-height: 4.5em; font-size: 19px; line-height: 1.5; font-style: italic; animation: fade-in 1.2s .4s ease-out both; }
-.film .nav { margin: 8px 30px 0; }
-.film .btn { color: #e8dcc0; border-color: #5a4a34; background: rgba(255,255,255,.04); }
+/* the subtitle, and the buttons under it */
+.film-foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: flex; flex-direction: column; align-items: center;
+  padding: clamp(70px, 18vh, 200px) var(--pad) max(clamp(14px, 3vh, 30px), env(safe-area-inset-bottom)); pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.8) 38%, rgba(0,0,0,.48) 68%, transparent); }
+.film .film-caption { width: min(100%, 44em); margin: 0; font-size: clamp(17px, .9vw + 9px, 27px); line-height: 1.45; font-style: italic;
+  text-align: center; text-wrap: pretty; color: #f7efdc; text-shadow: 0 1px 2px rgba(0,0,0,.95), 0 0 16px rgba(0,0,0,.7); }
+.film-caption .film-title { display: flex; align-items: center; gap: .7em; width: fit-content; margin: 0 auto .55em; font: .62em/1.3 var(--typed);
+  font-style: normal; letter-spacing: .24em; text-transform: uppercase; color: #e6c783; }  /* a scene's heading, in How to play and the Advice */
+.film-caption .film-title::before, .film-caption .film-title::after { content: ""; width: 2.6em; height: 1px; background: linear-gradient(90deg, transparent, currentColor); }
+.film-caption .film-title::after { background: linear-gradient(90deg, currentColor, transparent); }
+.film .nav { display: grid; grid-template-columns: 1fr auto 1fr; width: 100%; margin-top: clamp(10px, 2.4vh, 24px); pointer-events: auto;
+  transition: opacity .5s ease; }  /* the dots in the middle of the screen */
+.film.idle:not(.paused) .nav { opacity: 0; pointer-events: none; }
+.film .nav > :first-child { justify-self: start; }
+.film .nav > span:last-child { display: flex; gap: 8px; justify-self: end; }
+.film .btn { color: #efe6d2; border-color: rgba(232,220,192,.3); background: rgba(12,10,8,.55); }
+.film .btn:hover { border-color: #cfb482; }
 .film .btn.primary { color: #1b140a; background: linear-gradient(#d8b46a, #a8843e); border-color: #b08a44; }
-.film .dots i { border-color: #8a7a60; }
+.film .dots i { border-color: rgba(232,220,192,.55); }
 .film .dots i.on { background: #cfb482; border-color: #cfb482; }
-.film-caption .film-title { display: block; margin-bottom: 4px; font: 14px var(--typed); font-style: normal; letter-spacing: .1em;
-  text-transform: uppercase; color: #cfb482; }  /* the tip's heading in the Advice film */
-/* the guest's own photograph pinned over the scene of the decision, stamped */
-.film-photo { position: absolute; left: 6%; top: 9%; width: 16%; padding: 5px 5px 18px; background: #f4eddc; transform: rotate(-4deg);
-  box-shadow: 0 8px 20px rgba(0,0,0,.65); animation: drop-in .7s .3s cubic-bezier(.2,.7,.2,1) both; }
-.film-photo.right { left: auto; right: 6%; top: 15%; transform: rotate(4deg); animation-name: drop-in-right; }  /* below the Skip button */
+/* the guest's own photograph pinned over the scene of the decision (and the two in the drawing room), stamped; sized to
+   the screen and placed on it, clear of the Skip button and the subtitle */
+.film-photo { --pw: clamp(84px, min(15cqw, 27cqh), 270px); position: absolute; left: 6%; top: 10%; width: var(--pw);
+  padding: calc(var(--pw) * .034) calc(var(--pw) * .034) calc(var(--pw) * .12); container-type: inline-size; background: #f4eddc;
+  transform: rotate(-4deg); box-shadow: 0 calc(var(--pw) * .05) calc(var(--pw) * .13) rgba(0,0,0,.65); animation: drop-in .7s .3s cubic-bezier(.2,.7,.2,1) both; }
+.film-photo.right { left: auto; right: 6%; top: max(15%, 64px); transform: rotate(4deg); animation-name: drop-in-right; }  /* below the Skip button */
 @keyframes drop-in-right { from { opacity: 0; transform: translateY(-24px) rotate(10deg); } to { opacity: 1; transform: rotate(4deg); } }
 .film-photo .art { display: block; width: 100%; aspect-ratio: 200 / 262; object-fit: cover; }
-.film-photo .stamp { font: clamp(9px, 1.7vw, 17px) var(--typed); padding: 1px 6px; border-width: 2px; animation: thump .35s 1.2s cubic-bezier(.3,1.6,.5,1) both; }
+.film-photo .stamp { font: clamp(9px, 13cqw, 34px) var(--typed); padding: .06em .35em; border-width: max(2px, .11em); animation: thump .35s 1.2s cubic-bezier(.3,1.6,.5,1) both; }
 @keyframes drop-in { from { opacity: 0; transform: translateY(-24px) rotate(-10deg); } to { opacity: 1; transform: rotate(-4deg); } }
+/* a short screen on its side (a phone): a smaller subtitle and buttons */
+@media (max-height: 500px) and (min-aspect-ratio: 1/1) {
+  .film-foot { padding: 64px var(--pad) 9px; }
+  .film .film-caption { font-size: 15.5px; line-height: 1.4; }
+  .film .nav { margin-top: 7px; }
+  .film .nav .btn { padding: 4px 10px; font-size: 12.5px; }
+  .film .film-skip { top: 10px; right: 10px; padding: 4px 10px; font-size: 12px; }
+}
+/* a screen taller than wide: the picture as a band across the top of it, leaving the subtitle its room (and no taller than
+   2:3), fading into the dark below; the subtitle right under the picture, the buttons at the bottom of the screen */
+@media (max-aspect-ratio: 1/1) {
+  .film-frame { bottom: auto; height: min(160vw, 100% - 300px); }
+  .film-frame::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(transparent 72%, rgba(0,0,0,.6) 87%, #000); }
+  .film-foot { top: auto; min-height: calc(100% - min(160vw, 100% - 300px) + 34px); justify-content: flex-start;
+    padding: 0 var(--pad) max(14px, env(safe-area-inset-bottom)); background: linear-gradient(transparent, #000 34px); }  /* grows up over the picture when it must */
+  .film .film-caption { font-size: clamp(16px, 4.4vw, 21px); }
+  .film .nav { margin-top: auto; padding-top: 12px; }
+  .film .film-skip { top: max(10px, env(safe-area-inset-top)); right: 10px; padding: 5px 11px; font-size: 12.5px; }
+  .film-photo { --pw: clamp(100px, 30cqw, 200px); top: max(10%, 52px); }
+}
 
-/* the closing card: every guest, by how their part in the case ended */
-.closing { width: 820px; max-width: 100%; max-height: calc(100vh - 32px); overflow: auto; padding: 30px 36px 24px; animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
-.closing h2 { margin: 0; font: 32px var(--typed); letter-spacing: .08em; text-transform: uppercase; text-align: center; }
-.closing .kicker { text-align: center; }
-.final-score { text-align: center; font: 54px/1 var(--typed); margin: 8px 0 14px; }
-.final-score span { font-size: 22px; color: var(--paper-muted); margin-left: 6px; }
-.verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px 18px; }
-.verdicts h3 { margin: 0 0 6px; font: 13px var(--typed); letter-spacing: .1em; text-transform: uppercase; border-bottom: 2px solid; padding-bottom: 3px; }
-.verdicts .bad h3 { color: var(--ink-red); }
-.verdicts .good h3 { color: var(--ink-green); }
-.verdict { display: flex; gap: 8px; align-items: center; margin: 5px 0; font-size: 15px; line-height: 1.2; }
-.verdict .art { width: 32px; height: 42px; flex: none; object-fit: cover; border: 2px solid #f4eddc; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
-.verdict small { display: block; font: 11px var(--typed); letter-spacing: .06em; text-transform: uppercase; }
-.verdict small.bad { color: var(--ink-red); }
-.verdict small.good { color: var(--ink-green); }
-.verdicts .none { margin: 4px 0; font-style: italic; color: var(--paper-muted); }
-.closing .nav { flex-wrap: wrap; }
+/* the closing card: the next morning's newspaper (finale.js showClosing), spinning in as newspapers do in films. Its
+   headline and the medal follow the score; the page scrolls under its buttons when the window is short. */
+.closing { --rule: #3a2c1e; --news-muted: #5c4c36; display: flex; flex-direction: column; width: min(1120px, 100%); max-height: calc(100vh - 32px);
+  background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,250,232,.6), transparent 70%), linear-gradient(172deg, #f0e7cd, #e2d4b0);
+  box-shadow: 0 30px 80px rgba(0,0,0,.75); animation: news-spin 1s cubic-bezier(.3,.6,.4,1) both; }
+.news { min-height: 0; overflow: auto; padding: 16px 30px 28px; -webkit-mask: linear-gradient(#000 calc(100% - 26px), transparent);
+  mask: linear-gradient(#000 calc(100% - 26px), transparent); }  /* the page fades under the buttons */
+.masthead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; }
+.paper-name { font: 700 clamp(28px, 4.2vw, 46px)/1 Cinzel, Georgia, serif; letter-spacing: .04em; white-space: nowrap; }
+.news-ear { justify-self: start; padding: 3px 8px; border: 1px solid var(--rule); font: 10.5px/1.45 var(--typed); letter-spacing: .1em; text-transform: uppercase;
+  text-align: center; }
+.news-ear:last-child { justify-self: end; }
+.dateline { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 14px; margin-top: 8px; padding: 3px 0 2px; border-top: 4px double var(--rule);
+  border-bottom: 1px solid var(--rule); font: 11.5px var(--typed); letter-spacing: .14em; text-transform: uppercase; }
+.closing .headline { margin: 12px 0 4px; font: 600 clamp(36px, 5.4vw, 54px)/1 "EB Garamond", Georgia, serif; letter-spacing: .005em; text-transform: uppercase; text-align: center;
+  text-wrap: balance; }
+.news-top { display: grid; grid-template-columns: 260px minmax(0, 1fr) 290px; gap: 0 22px; }
+.news-deck { grid-column: 1 / -1; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); font: italic 19px/1.3 "EB Garamond", Georgia, serif;
+  text-align: center; text-wrap: balance; }
+/* the front-page photograph, printed in halftone */
+.news-photo { position: relative; margin: 0; }
+.news-photo img { display: block; width: 100%; aspect-ratio: 360 / 200; object-fit: cover; border: 1px solid var(--rule);
+  filter: grayscale(1) sepia(.45) contrast(.95) brightness(1.2); }
+.news-photo::after { content: ""; position: absolute; left: 0; top: 0; width: 100%; aspect-ratio: 360 / 200; pointer-events: none;
+  background: radial-gradient(circle, rgba(30,20,10,.16) .5px, transparent 1.1px) 0 0 / 2.5px 2.5px; mix-blend-mode: multiply; }
+.news-photo figcaption { margin-top: 5px; font-size: 13.5px; line-height: 1.3; font-style: italic; color: var(--news-muted); }
+.news-byline { margin: 0 0 4px; font: 11px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--news-muted); }
+.news-story { margin: 0; font-size: 15.5px; line-height: 1.42; text-align: justify; hyphens: auto; }
+.news-story::first-letter { float: left; margin: 5px 6px 0 0; font: 700 50px/.8 Cinzel, Georgia, serif; }
+/* section heads between rules, as in a newspaper */
+.news h3 { margin: 0 0 8px; padding: 3px 0 2px; border-top: 2px solid var(--rule); border-bottom: 1px solid var(--rule); font: 600 14px "EB Garamond", Georgia, serif;
+  letter-spacing: .2em; text-transform: uppercase; text-align: center; }
+.news h3 span { margin-left: 10px; font-style: italic; font-weight: 400; letter-spacing: .02em; text-transform: none; color: var(--news-muted); }
+.news section { margin-top: 16px; }
+/* the Yard's verdict: the score on a medal of the rank's metal (the Rules tab's ladder), and Hollis's word in ink */
+.news-top .yard { display: grid; grid-template-columns: auto minmax(0, 1fr); align-content: start; align-items: center; gap: 0 12px; margin: 0;
+  padding-left: 24px; border-left: 1px solid var(--rule); }
+.yard h3 { grid-column: 1 / -1; }
+.rank-medal { position: relative; display: grid; justify-items: center; padding: 4px 0 34px; }
+.rank-medal .ribbon { position: absolute; top: 64px; width: 64px; height: 70px;
+  background: linear-gradient(90deg, #7a1c1c 0 28%, #ecdcae 28% 38%, #1f2c5c 38% 62%, #ecdcae 62% 72%, #7a1c1c 72%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 75% 84%, 50% 100%, 25% 84%, 0 100%); box-shadow: 0 2px 4px rgba(0,0,0,.3); }
+.rank-medal .face { position: relative; width: 108px; height: 108px; border-radius: 50%; display: grid; place-content: center; color: #3a2a08;
+  background: radial-gradient(circle at 36% 30%, #fff5cc, #e6c46c 38%, #b88e30 70%, #7a5a1a);
+  box-shadow: inset 0 0 0 4px rgba(255,248,220,.35), inset 0 0 0 6px rgba(90,60,10,.4), 0 6px 14px rgba(0,0,0,.4);
+  outline: 1.5px dashed rgba(70,45,5,.35); outline-offset: -13px; text-shadow: 0 1px 0 rgba(255,250,225,.5); }
+.rank-medal b { font: 700 46px/1 Cinzel, Georgia, serif; }
+.rank-medal small { font: 11px var(--typed); letter-spacing: .14em; text-transform: uppercase; }
+.closing.r1 .face { color: #2a2a28; background: radial-gradient(circle at 36% 30%, #ffffff, #dcdcd6 38%, #a4a49c 70%, #66665e); }
+.closing.r2 .face { color: #3a1c08; background: radial-gradient(circle at 36% 30%, #fbdcbc, #d89a64 38%, #a0602c 70%, #5e3414); }
+.closing.r3 .face { color: #fbe9e0; text-shadow: 0 1px 1px rgba(0,0,0,.4); outline-color: rgba(255,220,210,.35);
+  background: radial-gradient(circle at 36% 30%, #e07a80, #b4404a 38%, #7a1a24 70%, #4a0a12); }
+.hollis { margin: 0 0 10px; padding-right: 6px; font: 600 22px/1.05 var(--hand); color: #24325e; transform: rotate(-3deg); text-wrap: pretty; }
+.hollis span { display: block; margin-top: 6px; text-align: right; font-size: 20px; }
+.hollis span::before { content: "— "; }
+/* night by night: a column per night, the moon waxing to full; whom you cleared and arrested, ticked or crossed */
+.night-grid { display: grid; grid-template-columns: auto repeat(var(--n), minmax(0, 1fr)); }
+.night-col { display: grid; grid-template-rows: auto 44px 44px; border-left: 1px solid rgba(58,44,30,.3); }
+.night-col.night-labels { border-left: 0; }
+.night-col .night-moon { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 0 4px 6px; }
+.night-col .night-moon svg { width: 24px; height: 24px; }
+.night-col .disc { fill: #2a2018; stroke: #2a2018; stroke-width: .8; }
+.night-col .lit { fill: #fbf3dc; }
+.night-col .night-moon b { font: 700 14px/1.1 Cinzel, Georgia, serif; }
+.night-col .night-moon em { min-height: 1.2em; font-size: 13px; line-height: 1.15; color: var(--news-muted); text-align: center; }
+.night-col.last { background: rgba(255,250,232,.45); }
+.night-call { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2px 6px; text-align: center;
+  border-top: 1px dotted rgba(58,44,30,.45); }
+.night-call b { font: 600 16px/1.1 "EB Garamond", Georgia, serif; }
+.night-call small { font: 9.5px/1.3 var(--typed); letter-spacing: .06em; text-transform: uppercase; }
+.night-call small.bad { color: var(--ink-red); }
+.night-call small.good { color: var(--ink-green); }
+.night-call i { position: absolute; top: 3px; right: 5px; font: 700 21px/1 var(--hand); }
+.night-call.hit i { color: var(--ink-green); }
+.night-call.miss i { color: var(--ink-red); }
+.night-call.miss { background: rgba(200,60,40,.09); }
+.night-col.night-labels .night-call { align-items: flex-end; padding: 0 10px 0 0; font: 11px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--news-muted); }
+/* the conspiracy unmasked: a photograph and the charge for each, in newspaper columns */
+.mugs { columns: 3 250px; column-gap: 24px; column-rule: 1px solid rgba(58,44,30,.3); }
+.mug { display: flow-root; break-inside: avoid; margin-bottom: 12px; font-size: 14px; line-height: 1.32; }
+.mugshot { position: relative; float: left; margin: 2px 10px 2px 0; padding: 3px 3px 9px; background: #f7f0de; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.mugshot .art { display: block; width: 44px; height: 58px; object-fit: cover; filter: grayscale(.6) sepia(.3); }
+.mug b { font: 600 16px "EB Garamond", Georgia, serif; }
+.mug small { margin-left: 4px; font: 10.5px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-red); }
+.mug p { margin: 2px 0 3px; }
+.mug em { display: block; font: 10.5px var(--typed); letter-spacing: .08em; text-transform: uppercase; font-style: normal; color: var(--news-muted); }
+.mug em span { color: var(--ink-red); }
+/* a conspirator you cleared: stamped At large across the photograph, like the board's polaroids */
+.fate { position: absolute; left: 50%; top: 42%; padding: 0 3px; border: 3px double var(--ink-red); border-radius: 2px; transform: translate(-50%, -50%) rotate(-14deg);
+  background: rgba(247,240,222,.88); color: var(--ink-red); font: 700 9.5px/1.3 var(--typed); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap;
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+/* the books won, in a lamp-lit bookcase with a plank under every row (rows of 86px, planks of 12px); the last
+   night's with a bookmark */
+.closing-books { text-align: center; }
+.mini-shelf { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 12px 10px; min-height: 110px; padding: 14px 16px 12px;
+  background: repeating-linear-gradient(transparent 0 86px, #b07e4c 86px 89px, #8a5c36 89px 91px, #6e4426 91px 95px, #4c2c14 95px 98px) 0 14px / 100% 98px,
+    radial-gradient(ellipse 60% 90% at 50% 0%, rgba(255,204,128,.42), rgba(255,180,100,.08) 65%, transparent 85%), linear-gradient(#3e2612, #1e1208);
+  border: 4px solid #5a3a20; border-bottom: 0; box-shadow: inset 0 10px 14px -4px rgba(0,0,0,.75), inset 8px 0 10px -6px rgba(0,0,0,.8), inset -8px 0 10px -6px rgba(0,0,0,.8); }
+.shelved { position: relative; display: flex; align-items: flex-end; height: 86px; }
+.mini-shelf .covers { --w: 48px; }
+.mini-shelf .covers img { box-shadow: 4px 3px 8px rgba(0,0,0,.65); }
+.shelved.fresh::after { content: ""; position: absolute; top: -6px; right: 8px; width: 9px; height: 30px; background: linear-gradient(90deg, #8a1810, #c8321f 50%, #8a1810);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); }
+.shelved.lost .covers img { filter: grayscale(1) brightness(.6) contrast(.9); }
+.lost-mark { position: absolute; left: 50%; top: 46%; padding: 0 4px; border: 2px solid #d8402e; transform: translate(-50%, -50%) rotate(-16deg);
+  background: rgba(20,10,6,.4); color: #f0604a; font: 700 10px/1.3 var(--typed); letter-spacing: .1em; text-transform: uppercase;
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }  /* as on the Rewards tab's shelf */
+.closing-books p { margin: 10px 0 0; font-style: italic; font-size: 16.5px; }
+.closing .nav { flex: none; flex-wrap: wrap; margin: 0; padding: 12px 30px 14px; border-top: 1px solid var(--rule); background: #e4d7b5;
+  box-shadow: 0 -6px 12px -8px rgba(0,0,0,.4); }
 .closing .nav span { display: flex; gap: 8px; flex-wrap: wrap; }
 .closing .nav .btn { white-space: nowrap; }
+/* the paper's entrance: the spin, then the medal struck and the marks of each night pencilled in */
+@keyframes news-spin { from { opacity: 0; transform: rotate(-540deg) scale(.05); } 12% { opacity: 1; }
+  65% { transform: rotate(-10deg) scale(.88); } to { opacity: 1; transform: none; } }
+@keyframes strike { from { opacity: 0; transform: scale(2.2) rotate(-25deg); } to { opacity: 1; transform: none; } }
+.closing .rank-medal { animation: strike .45s .95s cubic-bezier(.3,1.5,.5,1) both; }
+.closing .hollis { animation: fade-in .8s 1.3s ease-out both; }
+.closing .night-call i { animation: fade-in .3s calc(1.1s + var(--i, 0) * 90ms) ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .closing, .closing .rank-medal, .closing .hollis, .closing .night-call i { animation: none; }
+}
 @keyframes push-in { from { transform: scale(1); } to { transform: scale(1.09); } }
 @keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
@@ -152,8 +499,9 @@
 @keyframes dawn { from { opacity: .8; } to { opacity: 0; } }
 @keyframes thump { from { opacity: 0; transform: translate(-50%, -50%) rotate(-16deg) scale(2.2); } to { opacity: 1; transform: translate(-50%, -50%) rotate(-16deg) scale(1); } }
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-art .art, .reveal-art .stamp, .intro, .prologue, .film.fresh, .film-caption, .film-photo, .film-photo .stamp, .closing { animation: none; }
-  .film-pan, .film-pan img { animation: none; }
+  .reveal, .reveal-art .art, .reveal-art .stamp, .reward, .intro, .prologue, .film.fresh, .film-caption, .film-photo, .film-photo .stamp, .closing { animation: none; }
+  .film-pan, .film-cam img { animation: none; }
+  .film .nav { transition: none; }
   .reveal-art .frame-photo::after, .intro-art::after { display: none; }
   .card, .folder-slide { transition: none; }
 }
@@ -163,23 +511,24 @@
 .morning-clue .clue-mark { font-size: 26px; line-height: 1; }
 .morning-clue .facts { margin: 6px 0 0; }
 
-/* How to play (howto.js): an exhibit pinned over each scene, below the Skip button, drawn with the board's own
-   marks (folder.css .smp-*, .signcard, .rankladder); sized to the film's frame */
-.film.howto .film-frame { container-type: inline-size; }
-.exhibit { --ink: var(--paper-ink); --muted: #574832; --line: var(--paper-line); position: absolute; right: 5%; top: 17%; z-index: 1;
-  width: clamp(150px, 34cqw, 300px); padding: 24px 12px 12px; background: linear-gradient(170deg, #f8f0de, #e8dab8); color: var(--paper-ink);
-  font-size: clamp(10px, 1.65cqw, 15px); line-height: 1.3; text-align: center; transform: rotate(2.5deg);
+/* How to play (howto.js): an exhibit pinned over each scene, drawn with the board's own marks (folder.css .smp-*,
+   .signcard, .rankladder); sized to the screen, on the right, in the middle of the picture above the subtitle (film.js
+   --sub-top) and below the Skip button */
+.exhibit { --ink: var(--paper-ink); --muted: #574832; --line: var(--paper-line); position: absolute; right: max(5%, 24px);
+  top: calc(min(100%, var(--sub-top, 75%)) / 2 + 22px); translate: 0 -50%; z-index: 2;
+  width: clamp(140px, min(28cqw, 46cqh), 340px); padding: 2em .85em .85em; background: linear-gradient(170deg, #f8f0de, #e8dab8); color: var(--paper-ink);
+  font-size: clamp(9px, min(1.3cqw, 2.2cqh), 17px); line-height: 1.3; text-align: center; transform: rotate(2.5deg);
   box-shadow: 0 12px 26px rgba(0,0,0,.65); animation: exhibit-in .7s .35s cubic-bezier(.2,.7,.2,1) both; }
 .exhibit::before { content: ""; position: absolute; top: 7px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff9a8a, #b3221b 55%, #5a0e0a); box-shadow: 0 2px 3px rgba(0,0,0,.5); }
 @keyframes exhibit-in { from { opacity: 0; transform: translateY(-26px) rotate(9deg); } to { opacity: 1; transform: rotate(2.5deg); } }
 .ex-label { position: absolute; top: 7px; left: 10px; font: .72em var(--typed); letter-spacing: .12em; text-transform: uppercase; color: #8a6a44; }
 .exhibit p { margin: 7px 0 0; font-style: italic; }
-.ex-guests { display: flex; justify-content: center; align-items: center; gap: 4px; }
-.ex-thumb .art { display: block; width: clamp(18px, 3.6cqw, 34px); aspect-ratio: 200 / 262; object-fit: cover; border: 2px solid #f4eddc;
+.ex-guests { display: flex; justify-content: center; align-items: center; gap: .25em; }
+.ex-thumb .art { display: block; width: 2em; aspect-ratio: 200 / 262; object-fit: cover; border: 2px solid #f4eddc;
   box-shadow: 0 1px 3px rgba(0,0,0,.4); }
 .ex-guests.two { gap: 12px; }
-.ex-guests.two .art { width: clamp(30px, 6.5cqw, 60px); }
+.ex-guests.two .art { width: 3.6em; }
 .ex-guests.two b { font: 700 2.2em var(--typed); color: var(--ink-red); }
 .ex-list { margin: 0; padding: 0; list-style: none; text-align: left; }
 .ex-list li { margin: 4px 0; }
@@ -202,6 +551,7 @@
 .ex-role.sealed { font: 1em/1.6 var(--typed); letter-spacing: .1em; text-transform: uppercase; color: #ff9a8a; }
 .ex-search small { font: italic 1em "EB Garamond", Georgia, serif; color: var(--muted); }
 .ex-kinds { display: flex; justify-content: center; gap: 6px; }
+.ex-kinds + .ex-kinds { margin-top: 6px; }  /* the second half's nights */
 .ex-kinds span { display: grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 50%; font: 1.3em/1 system-ui, sans-serif;
   background: radial-gradient(circle at 35% 30%, #fff6d8, #e6c783 60%, #a8843e); box-shadow: 0 2px 4px rgba(0,0,0,.35); }
 .ex-tabs { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
@@ -215,11 +565,14 @@
 .exhibit .rankladder { gap: 5px; margin: 0; }
 .exhibit .rankladder li { justify-content: center; padding: 0; background: none; box-shadow: none; }
 .exhibit .rankladder b { min-width: 5em; height: 2.1em; font-size: 1.05em; }
-@container (max-width: 520px) {  /* a phone's film: smaller, and clear of the Skip button */
-  .exhibit { top: 54px; right: 3%; width: 140px; padding: 8px 8px 7px; font-size: 9px; }
+@container (max-width: 520px) or (max-height: 460px) {  /* a phone's film: smaller, without the label and the pin */
+  .exhibit { padding: 8px 8px 7px; }
   .exhibit::before, .ex-label { display: none; }
   .ex-tabs span { padding: 1px 8px; }
   .exhibit .signcard { padding: 3px 6px; margin-bottom: 3px; }
+}
+@container (max-width: 520px) {  /* upright: in the picture's top corner, below the Skip button */
+  .exhibit { top: 52px; right: 3%; translate: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .exhibit { animation: none; }

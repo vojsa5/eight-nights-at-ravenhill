@@ -38,6 +38,10 @@ class Rules:
     event_rounds: tuple = (2, 3, 4, 5, 6, 7)
     event_pool: tuple = ("Blackout", "Dinner Party", "Inquest", "Séance", "Notebook", "Footprints")
     grouped_events: bool = True  # events come group by group (events.GROUPS); False: in any order
+    # each night's group, an index into events.GROUPS, repeating in a longer game (keep in step with web/js/events.js NIGHTS)
+    night_groups: tuple = (0, 1, 1, 3, 0, 2, 2, 3)
+    shuffle_groups: bool = False  # a group's events take its nights in random order, not in the order of events.GROUPS
+    lovers_agree: bool = True  # on a day with both tips, the two Lovers always share at least one (advice.py agree)
 
     @property
     def n_bad(self):

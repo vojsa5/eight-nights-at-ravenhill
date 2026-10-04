@@ -1,6 +1,6 @@
-// What happened last night: the traces the conspirators' night work left in the house, shown on each
+// What happened last night: the traces the night work of the guilty left in the house, shown on each
 // night's opening card. The server says which roles worked that night (ravenhill/server/state.py
-// night_traces), never who holds them; once a conspirator is out of the house, their trace stops.
+// night_traces), never who holds them; once a culprit is out of the house, their trace stops.
 import { ui } from "./state.js";
 
 // role -> [icon, the traces, one of which is told each night, the trace in a word or two]
@@ -58,22 +58,28 @@ function pick(list, round, role) {
   return list[h % list.length];
 }
 
+// A trace as an evidence tag: its icon and its name, and the night's trace in full on hover.
+const tagHtml = (r, told = "") => `<li class="trace-tag"${told && ` title="${told}"`}><span class="trace-icon">${TRACES[r][0]}</span>${TRACES[r][2]}</li>`;
+
 // The traces of night `round`, for its opening card. On the first night everyone is still in the house, so
-// the card only says what to look for. `compact` (a card that also carries a clue): many traces in one line,
-// each told in full on hover.
+// the card only says what to look for, each kind of trace as a tag. Later nights lay down a slip per trace;
+// `compact` (a card that also carries a clue): many traces as tags, each told in full on hover.
 export function tracesHtml(round, blackout, compact = false) {
   const roles = (ui.S.traces || {})[round];
   if (!roles) return "";
   if (round === 1) {
-    const kinds = Object.keys(TRACES).filter((r) => ui.S.roster.includes(r)).map((r) => `${TRACES[r][0]} ${TRACES[r][2]}`).join(", ");
-    return `<div class="traces"><div class="traces-head">Traces of the night</div><p>Every night the conspirators' work leaves
-      traces in the house: ${kinds}. Watch for them each morning. When one stops, that conspirator is out of the house.</p></div>`;
+    const kinds = Object.keys(TRACES).filter((r) => ui.S.roster.includes(r)).map((r) => tagHtml(r)).join("");
+    return `<div class="traces first"><div class="traces-head">Traces of the night</div><p>Every night the guilty go about their
+      business, and it leaves traces in the house:</p><ul class="trace-tags">${kinds}</ul>
+      <p class="traces-note">Watch for them each morning. When one stops, that culprit is out of the house.</p></div>`;
   }
   if (compact && roles.length >= 4) {
-    const items = roles.map((r) => `<span title="${pick(TRACES[r][1], round, r)}">${TRACES[r][0]} ${TRACES[r][2]}</span>`).join(" · ");
-    return `<div class="traces compact"><div class="traces-head">Last night at Ravenhill</div><p>${items}</p></div>`;
+    const tags = roles.map((r) => tagHtml(r, pick(TRACES[r][1], round, r))).join("");
+    return `<div class="traces compact"><div class="traces-head">Last night at Ravenhill</div><ul class="trace-tags">${tags}</ul></div>`;
   }
-  const lines = roles.length ? roles.map((r) => `<li><span class="trace-icon">${TRACES[r][0]}</span>${pick(TRACES[r][1], round, r)}</li>`)
+  const lines = roles.length ? roles.map((r) => `<li class="trace-slip"><span class="trace-icon">${TRACES[r][0]}</span>
+      <span class="trace-told"><b class="trace-name">${TRACES[r][2]}</b> ${pick(TRACES[r][1], round, r)}</span></li>`)
     : [`<li class="quiet">${blackout ? DARK : QUIET}</li>`];
-  return `<div class="traces${lines.length >= 4 ? " many" : ""}"><div class="traces-head">Last night at Ravenhill</div><ul>${lines.join("")}</ul></div>`;
+  return `<div class="traces${lines.length >= 4 ? " many" : ""}"><div class="traces-head">Last night at Ravenhill</div>
+    <ul class="trace-slips">${lines.join("")}</ul></div>`;
 }

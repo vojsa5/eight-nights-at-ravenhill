@@ -1,0 +1,128 @@
+/* The opening's four chapters (chapters.js): each chapter's title card, the chapter bar over every scene and page, and
+   each chapter's own look, so that a player can tell at a glance what they are watching: the story is a film (as every
+   film is, reveal.css), the case papers are papers, How to play is a manual (the picture in blueprint blue under a grid,
+   the subtitle typed) and the advice is Inspector Hollis's notes (handwritten on a notepaper card, signed). */
+
+/* the chapter bar: a step for each chapter, the current one lit; at the top left of a film, at the head of a paper */
+.chapters { display: flex; flex-wrap: wrap; gap: 6px; font: 11px/1 var(--typed); letter-spacing: .08em; text-transform: uppercase; }
+.ch-step { display: inline-flex; align-items: center; gap: 7px; padding: 4px 11px 4px 4px; border: 1px solid rgba(232,220,192,.24); border-radius: 999px;
+  background: rgba(0,0,0,.5); color: rgba(239,230,210,.72); font: inherit; letter-spacing: inherit; text-transform: inherit; white-space: nowrap; }
+.ch-step b { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid currentColor; font: 700 10px/1 Cinzel, Georgia, serif; }
+button.ch-step:hover { color: #f6eedb; border-color: #cfb482; }
+.ch-step.on { color: #1b140a; background: linear-gradient(#e6c783, #b8924a); border-color: #d8b46a; }
+.film .chapters, .chapter-card .chapters { position: absolute; z-index: 3; top: max(14px, env(safe-area-inset-top)); left: max(14px, env(safe-area-inset-left));
+  max-width: calc(100% - 260px); }
+.film .chapters { position: fixed; pointer-events: auto; }  /* it sits with the subtitle (film.js), but shows at the top of the screen */
+.chapter-card .film-skip { position: absolute; top: max(14px, env(safe-area-inset-top)); right: max(14px, env(safe-area-inset-right)); z-index: 3;
+  font: 13px var(--typed); letter-spacing: .06em; color: #efe6d2; background: rgba(0,0,0,.5); border: 1px solid rgba(232,220,192,.35);
+  border-radius: 4px; padding: 6px 13px; cursor: pointer; }
+.chapter-card .film-skip:hover { border-color: #cfb482; }
+/* on the case papers: the bar and the Skip at the head of the sheet, in its ink */
+.paper-chapters { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin: -14px -16px 20px; padding-bottom: 12px;
+  border-bottom: 1px dashed var(--paper-line); }
+.prologue .ch-step { background: rgba(255,255,255,.4); color: var(--paper-muted); border-color: var(--paper-line); }
+.prologue button.ch-step:hover { color: var(--paper-ink); border-color: #a8843e; }
+.prologue .ch-step.on { color: #1b140a; background: linear-gradient(#e6c783, #c9a45c); border-color: #b08a44; }
+.ch-skip { margin-left: auto; padding: 5px 11px; border: 1px solid var(--paper-line); border-radius: 4px; background: rgba(255,255,255,.4);
+  font: 12px var(--typed); letter-spacing: .04em; color: var(--paper-muted); cursor: pointer; white-space: nowrap; }
+.ch-skip:hover { color: var(--paper-ink); border-color: #a8843e; }
+
+/* a chapter's title card, full screen: "Chapter III", the chapter's name, a line on what it holds, Next; it goes on by
+   itself when the bar at the bottom has run */
+.chapter-card { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(22px, 5vh, 46px);
+  padding: 76px 24px 56px; overflow: hidden; text-align: center; color: #efe6d2; background: #050403; animation: fade-in .35s ease-out both; }
+.ch-title { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: min(900px, 100%); }
+.ch-num { display: flex; align-items: center; gap: 14px; font: 13px var(--typed); letter-spacing: .42em; text-transform: uppercase; color: #cfb482;
+  animation: ch-in .6s .1s ease-out both; }
+.ch-num::before, .ch-num::after { content: ""; width: 46px; height: 1px; background: currentColor; opacity: .6; }
+.ch-title h2 { margin: 0; font: 700 clamp(36px, 6.4vw, 84px)/1.05 Cinzel, Georgia, serif; letter-spacing: .05em; animation: ch-title .9s .2s cubic-bezier(.2,.7,.2,1) both; }
+.ch-title p { margin: 0; font: italic clamp(17px, 1.7vw, 25px)/1.35 "EB Garamond", Georgia, serif; color: rgba(239,230,210,.8); animation: ch-in .7s .65s ease-out both; }
+.chapter-card > .btn { padding: 9px 26px; font-size: 15px; animation: ch-in .5s .95s ease-out both; }
+@keyframes ch-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes ch-title { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+/* the story: a picture house's title, gold out of the dark */
+.chapter-card.ch-story { background: radial-gradient(ellipse 70% 60% at 50% 46%, #241a0f, #050403 76%); }
+.ch-story .ch-title h2 { background: linear-gradient(#f6e3b0, #c9a45c 80%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,.6)); }
+/* the case papers: a typed sheet on the desk */
+.chapter-card.ch-papers { background: radial-gradient(ellipse 80% 70% at 50% 42%, #3d2817, #120a05 78%); }
+.ch-papers .ch-title { padding: clamp(26px, 5vh, 40px) clamp(26px, 6vw, 60px); color: var(--paper-ink); transform: rotate(-1.4deg);
+  background: repeating-linear-gradient(transparent 0 25px, rgba(90,110,160,.1) 25px 26px), linear-gradient(#f1e7cc, #e4d4b0);
+  box-shadow: 0 26px 70px rgba(0,0,0,.65); }
+.ch-papers .ch-num { color: var(--ink-red); }
+.ch-papers .ch-title h2 { font: clamp(30px, 5.2vw, 62px)/1.1 var(--typed); letter-spacing: .08em; text-transform: uppercase; }
+.ch-papers .ch-title p { color: var(--paper-muted); }
+/* How to play: a page of the manual, in blueprint */
+.chapter-card.ch-howto { color: #e8f1fb;
+  background: linear-gradient(rgba(160,205,250,.08) 1px, transparent 1px) -1px -1px / 32px 32px, linear-gradient(90deg, rgba(160,205,250,.08) 1px, transparent 1px) -1px -1px / 32px 32px,
+    linear-gradient(rgba(160,205,250,.14) 1px, transparent 1px) -1px -1px / 160px 160px, linear-gradient(90deg, rgba(160,205,250,.14) 1px, transparent 1px) -1px -1px / 160px 160px,
+    radial-gradient(ellipse at 50% 45%, #174573, #0a2039 80%); }
+.ch-howto .ch-title { padding: clamp(24px, 5vh, 38px) clamp(24px, 5vw, 54px); border: 1px solid rgba(190,220,250,.55); }
+.ch-howto .ch-title::before, .ch-howto .ch-title::after { content: ""; position: absolute; width: 14px; height: 14px; border: 2px solid #e8f1fb; }  /* the corners' marks */
+.ch-howto .ch-title::before { left: -8px; top: -8px; border-width: 2px 0 0 2px; }
+.ch-howto .ch-title::after { right: -8px; bottom: -8px; border-width: 0 2px 2px 0; }
+.ch-howto .ch-num { color: #9cc7ef; }
+.ch-howto .ch-title h2 { font: clamp(30px, 5.4vw, 66px)/1.1 var(--typed); letter-spacing: .1em; text-transform: uppercase; }
+.ch-howto .ch-title p { font: clamp(15px, 1.4vw, 20px)/1.4 var(--typed); color: rgba(220,236,252,.82); }
+/* the advice: Inspector Hollis's note, signed */
+.chapter-card.ch-advice { background: radial-gradient(ellipse 80% 70% at 50% 42%, #33241a, #0b0704 78%); }
+.ch-advice .ch-title { align-items: flex-start; gap: 6px; padding: clamp(26px, 5vh, 40px) clamp(30px, 6vw, 64px) clamp(46px, 8vh, 64px) clamp(52px, 8vw, 84px);
+  text-align: left; color: #262a4c; transform: rotate(-2deg); box-shadow: 0 26px 70px rgba(0,0,0,.65);
+  background: linear-gradient(90deg, transparent clamp(36px, 6vw, 62px), rgba(196,64,64,.45) 0 calc(clamp(36px, 6vw, 62px) + 2px), transparent 0),
+    repeating-linear-gradient(transparent 0 33px, rgba(70,100,170,.28) 33px 34px) 0 14px, #f7f0dd; }
+.ch-advice .ch-title::after { content: "Hollis"; content: "Hollis" / ""; position: absolute; right: clamp(22px, 4vw, 40px); bottom: clamp(10px, 2vh, 16px);
+  font: 700 clamp(26px, 3vw, 36px) var(--hand); transform: rotate(-6deg); }
+.ch-advice .ch-num { color: #8a6a44; letter-spacing: .3em; }
+.ch-advice .ch-num::before { display: none; }
+.ch-advice .ch-title h2 { font: 700 clamp(40px, 6.4vw, 80px)/1 var(--hand); letter-spacing: 0; }
+.ch-advice .ch-title p { font: clamp(22px, 2.3vw, 32px)/1.2 var(--hand); font-style: normal; color: #262a4c; }
+
+/* How to play's look: the picture in blueprint blue under a fine grid and a drawing's frame, the subtitle typed */
+.film.howto .film-frame::before, .film.howto .film-frame::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.film.howto .film-frame::before { background: #1d4f88; mix-blend-mode: color; opacity: .6; }
+.film.howto .film-frame::after { inset: 12px; border: 1px solid rgba(180,215,250,.3);
+  background: linear-gradient(rgba(170,210,250,.08) 1px, transparent 1px) -1px -1px / 40px 40px, linear-gradient(90deg, rgba(170,210,250,.08) 1px, transparent 1px) -1px -1px / 40px 40px; }
+.film.howto .film-foot { background: linear-gradient(to top, rgba(4,14,28,.94), rgba(4,14,28,.82) 38%, rgba(4,14,28,.5) 68%, transparent); }
+.film.howto .film-caption { font-family: var(--typed); font-style: normal; font-size: clamp(15px, .72vw + 8px, 23px); line-height: 1.55; color: #e6eff9; }
+.film.howto .film-caption .film-title { font-size: .7em; color: #9cc7ef; }
+
+/* the advice's look: each tip a note in Hollis's hand on a sheet of notepaper, signed */
+.film.tips-film .film-foot { background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.4) 50%, transparent); }
+.film.tips-film .film-caption { position: relative; width: min(100%, 30em); padding: .8em 1.4em 1.7em 2.7em; text-align: left;
+  font: 500 clamp(20px, 1vw + 11px, 31px)/1.3 var(--hand); color: #262a4c; text-shadow: none; transform: rotate(-1deg);
+  background: repeating-linear-gradient(transparent 0 calc(1.3em - 1px), rgba(70,100,170,.3) calc(1.3em - 1px) 1.3em) content-box,
+    linear-gradient(90deg, transparent 1.9em, rgba(196,64,64,.45) 0 calc(1.9em + 2px), transparent 0), #f7f0dd;
+  background-clip: content-box, border-box, border-box; box-shadow: 0 16px 40px rgba(0,0,0,.6); }
+.film.tips-film .film-caption::after { content: "Hollis"; content: "Hollis" / ""; position: absolute; right: 1em; bottom: .2em; font: 700 1.05em var(--hand);
+  transform: rotate(-6deg); }
+.film.tips-film .film-caption .film-title { margin: 0 0 .15em; font: 700 1.1em/1.3 var(--hand); letter-spacing: .01em; text-transform: none; color: #8a1f1f;
+  text-decoration: underline 2px rgba(138,31,31,.5); text-underline-offset: .18em; }
+.film.tips-film .film-caption .film-title::before, .film.tips-film .film-caption .film-title::after { display: none; }
+.film.tips-film .film-caption .ph { animation-name: film-ink; }  /* ink, not light */
+@keyframes film-ink { from { opacity: 0; } }
+
+/* a short screen on its side */
+@media (max-height: 500px) and (min-aspect-ratio: 1/1) {
+  .chapter-card { padding: 58px 20px 40px; gap: 18px; }
+  .film.tips-film .film-caption { width: min(100%, 36em); font-size: 18px; padding: .6em 1.2em 1.4em 2.6em; }
+}
+/* a screen taller than wide: the bar under the subtitle, just above the buttons (at the bottom of a title card); on a
+   narrow one only the current chapter keeps its name */
+@media (max-aspect-ratio: 1/1) {
+  .film .chapters { position: static; max-width: none; justify-content: center; margin-top: auto; padding-top: 12px; }
+  .film .chapters + .nav { margin-top: 10px; padding-top: 0; }
+  .chapter-card .chapters { top: auto; bottom: max(18px, env(safe-area-inset-bottom)); left: 0; right: 0; max-width: none; justify-content: center; }
+  .chapter-card { padding: 64px 18px 70px; }
+  .film.howto .film-frame::after { inset: 8px 8px 0; border-bottom: 0;
+    background: linear-gradient(transparent 72%, rgba(0,0,0,.6) 87%, #000), linear-gradient(rgba(170,210,250,.08) 1px, transparent 1px) -1px -1px / 40px 40px,
+      linear-gradient(90deg, rgba(170,210,250,.08) 1px, transparent 1px) -1px -1px / 40px 40px; }
+  .film.tips-film .film-caption { padding: .7em 1em 1.4em 2.3em; font-size: clamp(17px, 4.6vw, 23px);
+    background-position: 0 0, -.4em 0, 0 0; }
+}
+@media (max-width: 520px) {
+  .ch-step:not(.on) { padding-right: 4px; }
+  .ch-step:not(.on) span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-card, .ch-num, .ch-title h2, .ch-title p, .chapter-card > .btn { animation: none; }
+}

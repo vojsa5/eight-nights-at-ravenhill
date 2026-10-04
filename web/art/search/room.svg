@@ -77,5 +77,10 @@
   <path d="M212 120 C222 128 234 140 236 154 C238 164 240 170 248 174 L240 176 C232 170 230 162 228 152 C226 142 218 132 206 124Z" fill="#7a2a30"/>
   <path d="M232 144 L227 146 M235 156 L229 157 M239 168 L233 168" stroke="#c8a060" stroke-width="1.2"/>
   <path d="M104 176 C112 168 130 170 138 176 C134 182 112 184 104 176Z" fill="#4a5a7a" opacity=".85"/>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <g data-fx="glow" data-at="86 84" data-r="44" data-tone="lamp"/>
+  <path class="lf-glint" style="--d:-2.53s" d="M182 121 L182.7 125.3 L187 126 L182.7 126.7 L182 131 L181.3 126.7 L177 126 L181.3 125.3Z" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="182 122" data-r="58" data-tone="right"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

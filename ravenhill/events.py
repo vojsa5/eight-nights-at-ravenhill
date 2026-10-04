@@ -1,12 +1,13 @@
 """Round events: which round gets which event, and what each event allows.
 
-The nights run in cycles of the four GROUPS, in their order: night I is the first group's, night II
-the second's, and so on, and night V starts the next cycle. Each group fills its nights with its events
-in cycle order (First Impressions always first, on night I; the others in random order), and the last
-group's second night is the last night, which has no event. Only nights in Rules.event_rounds (and
-night I for First Impressions) get an event; with Rules.grouped_events off, the events drawn from
-Rules.event_pool come in any order. The last round has no event. In a Notebook round
-the game opens one guest's notebook for the player; Footprints name two guests, at least one of them guilty.
+Every night belongs to one of the four GROUPS, as Rules.night_groups sets, and each group's nights take its
+events in the order they are listed there. So the standard game always runs: I First Impressions, II the
+Notebook, III the Footprints, IV the Blackout, V the Séance, VI the Dinner Party, VII the Inquest, and VIII
+the last night, which belongs to the last group and has no event. Only nights in Rules.event_rounds (and
+night I for First Impressions) get an event; with Rules.shuffle_groups a group's events come in random
+order, and with Rules.grouped_events off, the events drawn from Rules.event_pool come in any order on any
+night. In a Notebook round the game opens one guest's
+notebook for the player; Footprints name two guests, at least one of them guilty.
 (The Interview, where the player questions one guest again, is kept for rule variants.)
 The game (game.py) and the advice (advice.py) ask this module what the round's event allows.
 """
@@ -27,7 +28,7 @@ EVENTS = {
 }
 
 
-# The kinds of night, in the order they come round in each cycle (keep in step with web/js/events.js GROUPS).
+# The kinds of night (keep in step with web/js/events.js GROUPS); Rules.night_groups says which night is which.
 # The last night, which has no event, belongs to the last group.
 GROUPS = (
     ("The guests learn something", ("First Impressions", "Séance")),
@@ -47,17 +48,20 @@ def schedule(rng, rules):
         for rnd, event in zip(rounds, rng.sample(list(rules.event_pool), min(len(rounds), len(rules.event_pool)))):
             events[rnd] = event
         return events
-    open_nights = set(rounds)
+    open_nights = sorted(set(rounds) - set(events))  # night I may be First Impressions' already
     for g, (_, members) in enumerate(GROUPS):
         pool = [e for e in members if e in rules.event_pool]
-        rng.shuffle(pool)
-        if g == 0 and rules.first_impressions:  # night I, already set
-            nights = [n for n in range(len(GROUPS) + 1, rules.rounds + 1, len(GROUPS)) if n in open_nights]
-        else:
-            nights = [n for n in range(g + 1, rules.rounds + 1, len(GROUPS)) if n in open_nights]
+        if rules.shuffle_groups:
+            rng.shuffle(pool)
+        nights = [n for n in open_nights if night_group(rules, n) == g]
         for n, event in zip(nights, pool):
             events[n] = event
     return events
+
+
+def night_group(rules, night):
+    """The group a night belongs to, an index into GROUPS."""
+    return rules.night_groups[(night - 1) % len(rules.night_groups)]
 
 
 def first_impressions(game):
@@ -108,6 +112,11 @@ def before_night(game, event):
 def allows_investigations(event):
     """In a Blackout nobody investigates."""
     return event != "Blackout"
+
+
+def single_tip(event):
+    """Does the day's advice name only one side (whom to clear, or whom to arrest)?"""
+    return event in ("Dinner Party", "Inquest")
 
 
 def trim_advice(event, a):

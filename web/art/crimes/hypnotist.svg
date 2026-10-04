@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="black">
+  <title>In the strongroom by candlelight, Lord Edmund stares with blank eyes at a silver watch swinging before his face, and holds out his late wife's pearls</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#1e2636"/>
+      <stop offset="1" stop-color="#040508"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="48%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc070" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#ffc070" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="face" gradientUnits="userSpaceOnUse" x1="166" y1="54" x2="196" y2="114">
+      <stop offset="0" stop-color="#2e2834"/>
+      <stop offset=".48" stop-color="#94604c"/>
+      <stop offset="1" stop-color="#f6c292"/>
+    </linearGradient>
+    <linearGradient id="hand" gradientUnits="userSpaceOnUse" x1="0" y1="110" x2="0" y2="150">
+      <stop offset="0" stop-color="#8a6458"/>
+      <stop offset="1" stop-color="#e8b088"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset=".2" stop-color="#5a5c68"/>
+      <stop offset="1" stop-color="#b8b6b4"/>
+    </linearGradient>
+    <radialGradient id="wall" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#6a6070" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#6a6070" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the strongroom: its steel door standing open, iron shelves of deed boxes -->
+  <path d="M24 14H100V200H24Z" fill="#141a26"/>
+  <path d="M30 20H94V200H30Z" fill="#06080c"/>
+  <path d="M30 20L8 8V200H30Z" fill="#232b3c"/>
+  <g fill="#3a4458"><circle cx="30" cy="60" r="3"/><circle cx="30" cy="100" r="3"/><circle cx="30" cy="140" r="3"/></g>
+  <circle cx="18" cy="104" r="7" fill="none" stroke="#4a5468" stroke-width="2"/>
+  <g fill="#10141e" stroke="#2a3244" stroke-width="1.2">
+    <path d="M262 30H352V34H262ZM262 78H352V82H262ZM262 126H352V130H262Z"/>
+  </g>
+  <g fill="#0c0f16">
+    <rect x="268" y="50" width="26" height="28"/><rect x="298" y="56" width="22" height="22"/><rect x="324" y="48" width="26" height="30"/>
+    <rect x="270" y="100" width="24" height="26"/><rect x="300" y="96" width="28" height="30"/>
+  </g>
+  <g fill="#2a3448"><rect x="276" y="62" width="10" height="3"/><rect x="304" y="66" width="10" height="3"/><rect x="332" y="60" width="10" height="3"/><rect x="277" y="110" width="10" height="3"/><rect x="309" y="108" width="10" height="3"/></g>
+  <!-- the candle lights the wall behind him and throws his shadow up it -->
+  <ellipse cx="230" cy="110" rx="150" ry="110" fill="url(#wall)"/>
+  <path d="M40 200C40 152 66 124 96 112C84 98 80 76 88 56C98 30 146 22 162 46C174 66 168 92 152 108C182 120 200 150 200 200Z" fill="#030407" opacity=".7" filter="url(#soft)"/>
+  <!-- the candlelight on him -->
+  <ellipse cx="200" cy="120" rx="110" ry="80" fill="url(#pool)"/>
+  <!-- in the films (css/film.css) his head sways ever so slightly; he never blinks -->
+  <g class="lf-entranced" style="transform-box:view-box;transform-origin:180px 132px">
+    <!-- tailcoat, white waistcoat, wing collar, white tie -->
+    <path d="M86 200C90 162 116 140 150 133L180 131L210 133C244 140 270 162 274 200Z" fill="#0b0c12"/>
+    <path d="M150 133C142 150 140 176 142 200H160L174 150ZM210 133C218 150 220 176 218 200H200L186 150Z" fill="#1c2030"/>
+    <path d="M152 134C146 150 144 172 145 196" fill="none" stroke="#4a5470" stroke-width="1"/>
+    <path d="M162 132H198L194 160L186 200H174L166 160Z" fill="#b8ac98"/>
+    <path d="M171 132H189L187 200H173Z" fill="#d6cbb8"/>
+    <path d="M166 160L180 152L194 160" fill="none" stroke="#a89a84" stroke-width=".8"/>
+    <circle cx="180" cy="146" r="1.1" fill="#d8c8a0"/><circle cx="180" cy="160" r="1.1" fill="#d8c8a0"/><circle cx="180" cy="174" r="1.1" fill="#d8c8a0"/>
+    <path d="M166 106H194L196 124H164Z" fill="#e8b48a"/>
+    <path d="M164 119L180 126L196 119L198 133L180 136L162 133Z" fill="#f4ecdc"/>
+    <path d="M170 128L176 124L176 133ZM190 128L184 124L184 133Z" fill="#f0e8d6"/>
+    <path d="M167 128L179 131L167 135ZM193 128L181 131L193 135Z" fill="#fbf4e6"/>
+    <rect x="177.5" y="129" width="5" height="4.5" rx="1" fill="#e8dcc6"/>
+    <!-- head: ears, white hair swept back, the face lit from below -->
+    <ellipse cx="156" cy="86" rx="4.5" ry="8" fill="#8a6050"/>
+    <ellipse cx="204" cy="86" rx="4.5" ry="8" fill="#c08868"/>
+    <path d="M155 76C151 60 160 48 168 46C171 44 175 44.5 177 45.5C179 44.5 183 44.5 185 45.5C188 44.5 194 46 196 48C204 52 209 62 205 76L199 64C192 58 168 58 161 64Z" fill="url(#hair)"/>
+    <path d="M167 58C165 54 163 51 160 49M172.5 56.5C171.5 52 170 49 168 47M178.5 56V46.5M184 56.5C185 52 186.5 49 188.5 47.5M190 58C192 54 195 51 198 50" fill="none" stroke="#c8c6c2" stroke-width=".7" opacity=".55"/>
+    <path d="M155 78C150 70 152 62 158 60C156 66 158 72 162 74ZM205 78C210 70 208 62 202 60C204 66 202 72 198 74Z" fill="#cfccc6"/>
+    <path d="M158 72C157 60 166 54 180 54C194 54 203 60 202 72C203 86 203 98 199 106C195 113 188 117 180 117C172 117 165 113 161 106C157 98 157 86 158 72Z" fill="url(#face)"/>
+    <path d="M163 101C163 106 165 110 168 112M197 101C197 106 195 110 192 112M158.5 78L155.5 76.5M158.5 81L155.5 81.5M201.5 78L204.5 76.5M201.5 81L204.5 81.5M174 115C177 116 183 116 186 115" fill="none" stroke="#a06a50" stroke-width=".7"/>
+    <path d="M166 63C174 61 186 61 194 63M168 67.5C176 66 184 66 192 67.5" fill="none" stroke="#3a3040" stroke-width=".7" opacity=".7"/>
+    <path d="M157.5 78C157.5 92 159 101 162.5 107" fill="none" stroke="#7a8cb0" stroke-width=".8" opacity=".5"/>
+    <ellipse cx="193" cy="104" rx="10" ry="12" fill="#ffc890" opacity=".22" filter="url(#glow)"/>
+    <!-- the wide, glazed eyes; the swinging watch shows small in them -->
+    <path d="M159 73C163 68 169 67 174 70M186 70C191 67 197 68 201 73" fill="none" stroke="#e8e2d8" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="168" cy="80" rx="6" ry="4.6" fill="#ece4d6"/>
+    <ellipse cx="192" cy="80" rx="6" ry="4.6" fill="#f2eadc"/>
+    <circle cx="168" cy="80" r="3" fill="#90a2b2" stroke="#4a5a6c" stroke-width=".7"/>
+    <circle cx="192" cy="80" r="3" fill="#90a2b2" stroke="#4a5a6c" stroke-width=".7"/>
+    <circle cx="168" cy="80" r=".7" fill="#141820"/><circle cx="192" cy="80" r=".7" fill="#141820"/>
+    <path d="M163.5 78.5C165.5 76.5 170.5 76.5 172.5 78.5M187.5 78.5C189.5 76.5 194.5 76.5 196.5 78.5" fill="none" stroke="#fff" stroke-width=".6" opacity=".7"/>
+    <g class="lf-follow" fill="#fff8e6">
+      <circle cx="168" cy="82" r="1"/><circle cx="192" cy="82" r="1"/>
+    </g>
+    <path d="M162.5 85.5C166 87.5 170 87.5 173.5 85.5M186.5 85.5C190 87.5 194 87.5 197.5 85.5" fill="none" stroke="#8a5a48" stroke-width=".7"/>
+    <!-- nose, nostrils, the white moustache, the slack mouth -->
+    <path d="M177.5 79C176.5 87 173 93 174 97C176 99.5 184 99.5 186 97C187 93 183.5 87 182.5 79Z" fill="#c08a6a"/>
+    <path d="M174 97C176 99.5 184 99.5 186 97C185 95 182 94.5 180 94.5C178 94.5 175 95 174 97Z" fill="#f0bc90"/>
+    <ellipse cx="177.5" cy="97.5" rx="1.3" ry=".8" fill="#3a2018"/><ellipse cx="182.5" cy="97.5" rx="1.3" ry=".8" fill="#3a2018"/>
+    <path d="M172 94C169 98 168 101 168 104M188 94C191 98 192 101 192 104" fill="none" stroke="#a06a50" stroke-width=".8"/>
+    <ellipse cx="180" cy="107.5" rx="3.6" ry="2" fill="#2a1412"/>
+    <path d="M180 99C174 98 166 100 162 107C167 106 172 106.5 176 104L180 102.5L184 104C188 106.5 193 106 198 107C194 100 186 98 180 99Z" fill="#f2eee4"/>
+    <path d="M166 105C170 104 174 103 178 101.5M182 101.5C186 103 190 104 194 105" fill="none" stroke="#c8c0b0" stroke-width=".6"/>
+  </g>
+  <!-- his hand holding out his late wife's pearls on the open palm -->
+  <path d="M106 200C108 178 114 158 121 142L143 144C137 162 132 182 132 200Z" fill="#0b0c12"/>
+  <ellipse cx="132" cy="140" rx="11.5" ry="4.8" fill="#efe6d2"/>
+  <path d="M122 139C121 134 122 131 124 129H140C142 131 143 134 142 139C138 141 126 141 122 139Z" fill="#d89a76"/>
+  <path d="M122.5 128.5C121.5 124 122 119 124 117.5C125.5 116.5 127 117.5 127 119.5L127.5 126ZM127.5 126.5C127 121 127.5 116 129.5 115C131 114.5 132.5 115.5 132.5 117.5L132.5 126ZM132.5 126C132.5 120.5 133.5 116 135.5 115.5C137 115 138 116.5 138 118.5L137.5 126.5ZM137.5 127C137.5 122.5 138.5 119.5 140 119C141.5 119 142.5 120.5 142 122L141.5 128.5Z" fill="url(#hand)"/>
+  <path d="M127 119V126M132.5 117.5V126M138 118.5V126.5" stroke="#6a4a40" stroke-width=".6"/>
+  <ellipse cx="132" cy="129" rx="10.5" ry="3.4" fill="#eab48e"/>
+  <path d="M122 131C118 129 115 125 115.5 121.5C116 119.5 118 119.5 119 121C120 124 121.5 126.5 124 128Z" fill="#c88a68"/>
+  <g class="lf-swing" style="transform-box:view-box;transform-origin:142px 130px">
+    <path d="M124.5 128.5Q131 125.5 140 129.5M140.5 133V150A3.5 3.5 0 0 0 147.5 150V132" fill="none" stroke="#efe6d6" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 3.2"/>
+    <path d="M140 136V149M143.5 153.5" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-dasharray="0 3.2" opacity=".8"/>
+    <path class="lf-glint" style="--d:-1.2s" d="M147 146L147.5 149.5L151 150L147.5 150.5L147 154L146.5 150.5L143 150L146.5 149.5Z" fill="#fffbe8" opacity="0"/>
+  </g>
+  <!-- his other hand, carrying the chamberstick that lights him -->
+  <path d="M254 200C252 178 246 160 240 150L220 152C224 166 228 184 228 200Z" fill="#0b0c12"/>
+  <ellipse cx="231" cy="152" rx="11" ry="4.5" fill="#efe6d2"/>
+  <path d="M221 146C221 141 225 139 231 139C237 139 241 141 241 146V150C241 153 237 154 231 154C225 154 221 153 221 150Z" fill="url(#hand)"/>
+  <path d="M226 141V152M231 140.5V153M236 141V152" stroke="#7a5244" stroke-width=".7"/>
+  <ellipse cx="234" cy="140" rx="15" ry="3.6" fill="#8a6a30"/>
+  <ellipse cx="234" cy="139" rx="13" ry="2.7" fill="#c89a48"/>
+  <circle cx="249" cy="141" r="3" fill="none" stroke="#a07a34" stroke-width="1.4"/>
+  <rect x="231" y="122" width="6" height="17" fill="#ece0c4"/>
+  <path d="M231 122H237" stroke="#fff6e0"/>
+  <circle cx="234" cy="112" r="18" fill="#ffb050" opacity=".3" filter="url(#soft)"/>
+  <path class="lf-flame" d="M234 109C238 115 238 119 234 122C230 119 230 115 234 109Z" fill="#ffd27a" filter="url(#glow)"/>
+  <g data-fx="glow" data-at="234 116" data-r="40" data-tone="candle"/>
+  <!-- the silver watch on its long chain, swung from a gloved hand above -->
+  <g class="lf-pendulum" style="transform-box:view-box;transform-origin:180px 5px">
+    <path d="M180 5V88" stroke="#c8ccd6" stroke-width=".9" stroke-dasharray="1.6 .8"/>
+    <circle cx="180" cy="98" r="11" fill="#e8ecf4" opacity=".18" filter="url(#glow)"/>
+    <circle cx="180" cy="87.5" r="2.2" fill="none" stroke="#c8ccd6" stroke-width="1.2"/>
+    <circle cx="180" cy="98" r="8.6" fill="#a8acb8" stroke="#e4e8f0" stroke-width="1.4"/>
+    <circle cx="180" cy="98" r="7" fill="#f6f0e2"/>
+    <path d="M180 91.5V93M180 103V104.5M173.5 98H175M185 98H186.5M183 92.5L182.5 93.5M186 95L185 96M186 101L185 100M183 103.5L182.5 102.5M177 103.5L177.5 102.5M174 101L175 100M174 95L175 96M177 92.5L177.5 93.5" stroke="#5a4c34" stroke-width=".6"/>
+    <path d="M180 98V93.5M180 98L183.5 99" stroke="#2a1c0c" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M175 92.5C176.5 91 178 90.5 180 90.5" fill="none" stroke="#ffe8c0" stroke-width=".9" opacity=".8"/>
+    <path class="lf-glint" style="--d:-2.5s" d="M184.5 89L185.2 92.3L188.5 93L185.2 93.7L184.5 97L183.8 93.7L180.5 93L183.8 92.3Z" fill="#fffbe8" opacity="0"/>
+  </g>
+  <path d="M166 0C166 4 169 7 173 8L178.5 9.5C180 10 181.5 9.5 182 8.5L184 6C188 5.5 193 3.5 194 0Z" fill="#08080b"/>
+  <path d="M170 3C172 5.5 175 6.5 178 7M183.5 6.5C182 5.5 181 4 181 2" fill="none" stroke="#3a3a46" stroke-width=".7"/>
+  <!-- where the flashback lays the guest's photograph, over the one who did it -->
+  <g data-fx="guest" data-at="130 62"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

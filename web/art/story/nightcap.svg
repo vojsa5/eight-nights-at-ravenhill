@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="iris" data-cut-at="36% 66%">
   <title>The nightcap on its tray: a gloved hand tips a vial into the brandy while a second figure keeps watch</title>
   <defs>
     <radialGradient id="bg" cx="40%" cy="55%" r="80%">
@@ -24,9 +24,11 @@
   <rect x="262" y="36" width="54" height="120" fill="#3a2a30" opacity=".55"/>
   <path d="M289 60 m-9 0 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0" fill="#060406"/>
   <path d="M272 156 C272 88 306 88 306 156Z" fill="#060406"/>
-  <path d="M294 116 C298 112 303 116 299 121 L294 126 L289 121 C285 116 290 112 294 116Z" fill="#e0567a" opacity=".75" filter="url(#glow)"/>
+  <!-- in the films (css/film.css): the watcher's heart beats, the candle flickers, the hand shakes, the drops fall into the brandy -->
+  <path class="lf-heart" d="M294 116 C298 112 303 116 299 121 L294 126 L289 121 C285 116 290 112 294 116Z" fill="#e0567a" opacity=".75" filter="url(#glow)"/>
   <!-- candlelight on the tray -->
   <circle cx="130" cy="140" r="60" fill="#ffb060" opacity=".16" filter="url(#soft)"/>
+  <g data-fx="glow" data-at="128 138" data-r="62" data-tone="candle"/>
   <!-- silver tray -->
   <ellipse cx="130" cy="160" rx="78" ry="14" fill="#8a8a94"/>
   <ellipse cx="130" cy="157" rx="74" ry="11" fill="#b8b8c4"/>
@@ -41,13 +43,17 @@
   <rect x="128.5" y="148" width="3" height="6" fill="#d8d0c8" opacity=".5"/>
   <ellipse cx="130" cy="155" rx="10" ry="2" fill="#d8d0c8" opacity=".5"/>
   <!-- the gloved hand and its vial -->
-  <path d="M176 70 C190 64 214 66 232 72 L238 88 C220 84 200 86 186 92 C176 96 166 92 164 84 C162 78 168 73 176 70Z" fill="#141014"/>
-  <path d="M164 84 C160 90 162 96 170 96 L178 94" fill="none" stroke="#141014" stroke-width="7" stroke-linecap="round"/>
-  <g transform="rotate(-38 158 92)">
-    <rect x="150" y="80" width="10" height="24" rx="3" fill="#6ad8a0" opacity=".55" stroke="#9ae8c0" stroke-opacity=".7"/>
-    <rect x="151.5" y="74" width="7" height="7" rx="1" fill="#2a2024"/>
+  <g class="lf-tremble" style="transform-box:view-box;transform-origin:236px 80px">
+    <path d="M176 70 C190 64 214 66 232 72 L238 88 C220 84 200 86 186 92 C176 96 166 92 164 84 C162 78 168 73 176 70Z" fill="#141014"/>
+    <path d="M164 84 C160 90 162 96 170 96 L178 94" fill="none" stroke="#141014" stroke-width="7" stroke-linecap="round"/>
+    <g transform="rotate(-38 158 92)">
+      <rect x="150" y="80" width="10" height="24" rx="3" fill="#6ad8a0" opacity=".55" stroke="#9ae8c0" stroke-opacity=".7"/>
+      <rect x="151.5" y="74" width="7" height="7" rx="1" fill="#2a2024"/>
+    </g>
   </g>
-  <path d="M146 104 C142 110 140 116 140 122" stroke="#7af0b0" stroke-width="1.6" fill="none" stroke-dasharray="2 4" filter="url(#glow)"/>
-  <circle cx="140" cy="128" r="1.8" fill="#7af0b0" filter="url(#glow)"/>
+  <path class="lf-pour" d="M146 104 C142 110 140 116 140 122" stroke="#7af0b0" stroke-width="1.6" fill="none" stroke-dasharray="2 4" filter="url(#glow)"/>
+  <circle class="lf-drop" cx="140" cy="128" r="1.8" fill="#7af0b0" filter="url(#glow)"/>
+  <ellipse class="lf-ripple" cx="140" cy="134.4" rx="8" ry="1.7" fill="none" stroke="#ffe2a8" stroke-width=".7" opacity="0"/>
+  <ellipse class="lf-ripple" style="--d:.24s" cx="140" cy="134.4" rx="8" ry="1.7" fill="none" stroke="#9af0c0" stroke-width=".6" opacity="0"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

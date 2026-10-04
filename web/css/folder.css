@@ -9,10 +9,11 @@
 .folder-slide { position: absolute; top: 0; right: 0; bottom: 0; width: min(600px, 46vw); transform: translateX(100%);
   transition: transform .3s ease; will-change: transform; }
 .desk.folder-open .folder-slide { transform: none; }
-.folder-tabs { position: absolute; right: 100%; top: 36px; display: flex; flex-direction: column; gap: 6px; }
-.folder-tabs button { writing-mode: vertical-rl; transform: rotate(180deg); padding: 16px 10px; border: 1px solid #b89a60; border-left: 0;
+/* the eight tabs shrink a little with the window's height, so the last one stays on screen (responsive.css: shorter windows) */
+.folder-tabs { position: absolute; right: 100%; top: 28px; display: flex; flex-direction: column; gap: 5px; }
+.folder-tabs button { writing-mode: vertical-rl; transform: rotate(180deg); padding: clamp(9px, 1.5vh, 16px) 10px; border: 1px solid #b89a60; border-left: 0;
   border-radius: 0 8px 8px 0; background: linear-gradient(90deg, #cfb482, #e4cf9e); color: #3a2a14;
-  font: 14px var(--typed); letter-spacing: .12em; text-transform: uppercase; box-shadow: -3px 3px 8px rgba(0,0,0,.35); }
+  font: clamp(12px, 1.5vh, 14px) var(--typed); letter-spacing: .1em; text-transform: uppercase; box-shadow: -3px 3px 8px rgba(0,0,0,.35); }
 .folder-tabs button:hover { background: linear-gradient(90deg, #d8bf8e, #efdcae); }
 .folder-tabs button.active { background: var(--paper); border-color: var(--paper-line); }
 .desk:not(.folder-open) .folder-tabs button.active { background: linear-gradient(90deg, #cfb482, #e4cf9e); }
@@ -40,6 +41,9 @@ table.grid { border-collapse: collapse; width: 100%; }
 .grid thead th { position: sticky; top: -14px; z-index: 2; background: var(--paper); box-shadow: inset 0 -1px 0 var(--line); border-bottom: 0; }
 .grid thead th.wit { z-index: 3; }
 .grid .wit { position: sticky; left: -18px; z-index: 1; background: var(--paper); }
+.grid tr:not(.gone) td.wit { cursor: pointer; }  /* a witness's name picks them on the board */
+.grid tr:not(.gone) td.wit:hover { background: #f3e4bd; }
+.grid tr.picked td.wit { background: #ecd28e; box-shadow: inset 4px 0 0 #a8843e; }  /* the guest picked on the board */
 .grid thead th.cur { color: var(--ink); background: #ecd28e; box-shadow: inset 0 -2px 0 #a8843e; }
 .grid tr.group th { padding: 14px 4px 5px; font-size: 12.5px; letter-spacing: .12em; color: var(--ink); border-bottom: 2px solid var(--line); }
 .grid tr.group th span { position: sticky; left: 0; }
@@ -83,17 +87,327 @@ table.grid { border-collapse: collapse; width: 100%; }
 .tag.bad { background: var(--soft-bad); color: var(--bad); }
 .tag.good { background: var(--soft-good); color: var(--good); }
 
-/* Case file */
-.chron { display: flex; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--line); }
-.chron .art { width: 46px; height: 60px; flex: none; border: 3px solid #f4eddc; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
-.chron .t { font: 13px var(--typed); letter-spacing: .1em; color: var(--muted); text-transform: uppercase; margin-bottom: 2px; }
-.chron .ok, .chron .no { display: inline-block; margin-left: 4px; padding: 0 6px; border: 1px solid; border-radius: 3px; font: 700 13px/18px system-ui, sans-serif; }
-.chron .ok { background: var(--soft-good); }
-.chron .no { background: var(--soft-bad); }
-.chron.clue .clue-mark { width: 46px; text-align: center; font-size: 24px; flex: none; }
+/* Case file: a docket with the running tally, then a page per night, newest on top. Reports are index cards with
+   the guest's photograph clipped on and stamped as on the board (board.css .stamp); clues are exhibits: a notebook
+   page taped in, an evidence tag. Margin notes are in pencil (Caveat). */
+.casefile { --pencil: #34405e; padding-bottom: 6px;
+  --clip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 44'%3E%3Cpath d='M5 14V34A3 3 0 0 0 11 34V8A5 5 0 0 0 1 8V36A7 7 0 0 0 15 36V12' fill='none' stroke='%23707070' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M5 14V34A3 3 0 0 0 11 34V8A5 5 0 0 0 1 8V36A7 7 0 0 0 15 36V12' fill='none' stroke='%23e6e6e6' stroke-width='.7' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.cf-hand { font: 700 19px/1.15 var(--hand); color: var(--pencil); }
+.cf-stamp { display: inline-block; padding: 1px 6px; border: 3px double; border-radius: 3px; font: 700 12px var(--typed); letter-spacing: .08em;
+  text-transform: uppercase; white-space: nowrap; -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.cf-stamp.save, .cf-stamp.good { color: var(--ink-green); }
+.cf-stamp.eliminate, .cf-stamp.bad { color: var(--ink-red); }
+/* the docket: the case's cover, with a tile per count (the Rules tab's .glance) */
+.cf-docket { position: relative; display: block; padding: 12px 14px 10px; color: var(--paper-ink); border: 1px solid #b89a60; border-radius: 2px;
+  background: linear-gradient(172deg, #ecd9a9, #dcc28a); box-shadow: 0 2px 6px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.4); }
+.cf-docket::before { content: ""; position: absolute; top: 9px; left: -5px; width: 24px; height: 4px; border-radius: 2px; transform: rotate(-38deg);
+  background: linear-gradient(#e8e8e8, #8a8a8a); box-shadow: 0 1px 1px rgba(0,0,0,.35); }  /* a staple */
+.cf-kicker { display: block; padding-right: 120px; font: 11px/1.4 var(--typed); letter-spacing: .12em; text-transform: uppercase; color: #6a5434; }
+.cf-docket h3 { margin: 3px 0 0; font: 700 23px/1.1 Cinzel, Georgia, serif; letter-spacing: .04em; color: var(--paper-ink); }
+.cf-place { display: block; font: italic 15px "EB Garamond", Georgia, serif; color: #574832; }
+.cf-status { position: absolute; top: 16px; right: 14px; padding: 2px 9px; border: 3px double; transform: rotate(6deg); background: none;
+  font: 700 13px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: #5e4a2c;
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.cf-status.closed { color: var(--ink-red); transform: rotate(-6deg); }
+.cf-tally { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin: 12px 0 0; }
+.cf-tile { --side: #c9a45c; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px 8px; text-align: center;
+  background: #fbf6ea; border-top: 3px solid var(--side); box-shadow: 0 1px 3px rgba(0,0,0,.25); transform: rotate(-1deg); }
+.cf-tile:nth-child(even) { transform: rotate(1.1deg); }
+.cf-tile.bad { --side: var(--ink-red); }
+.cf-tile.good { --side: var(--ink-green); }
+.cf-tile b { font: 700 25px/1.05 Cinzel, Georgia, serif; color: var(--ink); white-space: nowrap; }
+.cf-tile b i { margin: 0 4px; font: italic 400 14px "EB Garamond", Georgia, serif; color: var(--muted); }
+.cf-tile.wrong.some b { color: var(--ink-red); }
+.cf-tile span { font: 10.5px/1.25 var(--typed); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.cf-pips { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; max-width: 96px; margin-top: 3px; }
+.cf-pips i { width: 9px; height: 9px; border: 1.5px solid var(--side); border-radius: 50%; }
+.cf-pips i.on { background: var(--side); }
+.cf-pips i.off { background: linear-gradient(135deg, transparent 40%, var(--side) 40% 60%, transparent 60%); }  /* a mistake, struck through */
+.cf-note { display: block; margin: 8px 6px 0 auto; width: max-content; max-width: 100%; transform: rotate(-2deg); }
+/* a night's page: its moon, numeral and event, kept in view while its entries scroll by */
+.cf-night { margin-top: 18px; }
+.cf-date { position: sticky; top: -14px; z-index: 4; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 9px; padding: 8px 0 6px;
+  background: var(--paper); border-bottom: 2px solid var(--paper-ink); }
+.cf-date svg { width: 28px; height: 28px; flex: none; }
+.cf-date .disc { fill: #2a2438; stroke: #6a5a40; stroke-width: .7; }
+.cf-date .lit { fill: #efe2b4; }
+.cf-date h3 { margin: 0; font: 700 21px/1 Cinzel, Georgia, serif; letter-spacing: .06em; color: var(--ink); white-space: nowrap; }
+.cf-tonight { padding: 0 6px; border: 2px solid var(--ink-red); transform: rotate(-5deg); color: var(--ink-red); font: 700 11px/16px var(--typed);
+  letter-spacing: .12em; text-transform: uppercase; -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.cf-event { margin-left: auto; padding: 2px 9px; border: 1px dashed var(--paper-muted); background: rgba(255,255,255,.35); white-space: nowrap;
+  font: 12.5px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+.cf-event span { margin-right: 5px; font-family: system-ui, sans-serif; letter-spacing: 0; }
+.cf-blank { margin: 14px 0 4px; padding: 14px 16px; border: 1.5px dashed var(--line); background: rgba(255,255,255,.3); font-style: italic; color: var(--muted); }
+.cf-entry { margin: 16px 0; }
+.cf-form { display: block; font: 11px/1.4 var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+/* a report: an index card, its photograph clipped on, its side stamped across and the point marked in pencil */
+.cf-report { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 16px; min-height: 124px; padding: 10px 134px 12px 14px;
+  background: repeating-linear-gradient(transparent 0 21px, rgba(90,110,160,.13) 21px 22px) 0 10px, #fbf7ec;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 5px 12px rgba(60,40,10,.12); transform: rotate(-.35deg); }
+/* the card's red rule under its typed head, out to the card's right edge */
+.cf-report .cf-form { margin-right: -134px; padding: 0 134px 4px 0; border-bottom: 1px solid rgba(190,60,50,.45); }
+.cf-entry:nth-child(even) .cf-report { margin: 0 -3px 0 5px; transform: rotate(.3deg); }  /* a loose stack, not a neat column */
+.cf-report.hl { background-color: #fbefc8; box-shadow: 0 0 0 2px #a8843e, 0 6px 14px rgba(60,40,10,.2); }
+.cf-photo { position: relative; align-self: start; width: 74px; margin-top: 2px; padding: 4px 4px 14px; background: linear-gradient(172deg, #f8f2e4, #ebe1ca);
+  box-shadow: 0 2px 5px rgba(0,0,0,.35); transform: rotate(-3deg); }
+.cf-entry:nth-child(even) .cf-photo { transform: rotate(2.5deg); }
+.cf-photo .art { display: block; width: 100%; aspect-ratio: 200 / 262; object-fit: cover; background: #111; }
+.cf-photo::before { content: ""; position: absolute; top: -12px; left: 9px; z-index: 2; width: 12px; height: 33px; background: var(--clip) 0 0 / 100% 100% no-repeat;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)); }
+.cf-photo .cf-stamp { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%) rotate(-16deg); padding: 0 3px; border-width: 2.5px;
+  background: rgba(244,237,220,.82); font-size: 10.5px; letter-spacing: .04em; }
+.cf-body { min-width: 0; }
+.cf-report h4 { margin: 9px 0 0; font: 400 15px/1.2 "EB Garamond", Georgia, serif; color: var(--muted); }
+.cf-name { font: 700 27px/1 var(--hand); color: var(--ink); }
+.cf-report h4 small { margin: 0 4px 0 5px; font: 12px var(--typed); }
+.cf-report h4 em { white-space: nowrap; }
+.cf-role, .cf-charge { margin: 6px 0 0; }
+.cf-role { display: flex; flex-wrap: wrap; align-items: center; }
+.cf-role > span:first-child, .cf-charge > span { display: inline-block; flex: none; min-width: 50px; margin-right: 8px; font: 10.5px var(--typed); font-style: normal;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.cf-role b { font: 15px var(--typed); letter-spacing: .05em; text-transform: uppercase; color: var(--ink); }
+.cf-charge { font: italic 14.5px/1.35 "EB Garamond", Georgia, serif; color: var(--ink-red); }
+/* a sealed role: a blacked-out line under a red SEALED stamp */
+.cf-sealed { position: relative; display: inline-block; width: 124px; height: 15px; font-size: 0;
+  background: linear-gradient(176deg, #2a211a, #120d09); box-shadow: 0 0 1px #2a211a; }
+.cf-sealed::after { content: "Sealed"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-5deg); padding: 0 7px;
+  border: 2px solid var(--ink-red); background: #fbf7ec; color: var(--ink-red); font: 700 11.5px/15px var(--typed); letter-spacing: .16em;
+  text-transform: uppercase; -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.cf-oops { margin: 7px 0 0; color: var(--ink-red); transform: rotate(-1.5deg); transform-origin: left; }
+.cf-stamp.side { position: absolute; right: 16px; top: 56%; transform: translateY(-50%) rotate(-9deg); padding: 3px 10px; border-width: 4px;
+  font-size: 19px; letter-spacing: .14em; mix-blend-mode: multiply; }
+.cf-grade { position: absolute; top: 5px; right: 12px; display: grid; place-items: center; min-width: 40px; height: 32px; padding: 0 5px;
+  border: 2px solid; border-radius: 52% 46% 55% 44% / 58% 50% 46% 42%; transform: rotate(-8deg); font: 700 22px/1 var(--hand); }
+.cf-grade.ok { color: var(--ink-green); }
+.cf-grade.no { color: var(--ink-red); }
+/* exhibits: a notebook page taped in, an evidence tag, a typed transcript */
+.cf-exhibit { position: relative; padding: 10px 14px 12px; }
+.cf-exhibit p:not(.cf-hand) { margin: 4px 0 0; font-size: 15.5px; line-height: 1.35; }
+.cf-notebook { margin: 0 6px 0 18px; padding-left: 42px; transform: rotate(.5deg);
+  background: radial-gradient(circle at 14px 50%, #e3d2ae 0 4.5px, transparent 5px) 0 6px / 28px 24px repeat-y,
+    linear-gradient(90deg, transparent 32px, rgba(190,60,50,.42) 32px 33px, transparent 33px),
+    repeating-linear-gradient(transparent 0 23px, rgba(90,110,160,.18) 23px 24px) 0 8px, #fdfbf3;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 4px 10px rgba(60,40,10,.1); }
+.cf-notebook::before { content: ""; position: absolute; top: -9px; left: 50%; width: 76px; height: 20px; transform: translateX(-50%) rotate(-3deg);
+  background: rgba(222,208,150,.75); box-shadow: 0 1px 2px rgba(0,0,0,.15); }  /* tape */
+.cf-notebook ul { margin: 6px 0 0; padding: 0 0 0 16px; list-style: "– "; font: 500 21px/1.2 var(--hand); color: #23305a; }
+.cf-notebook li + li { margin-top: 3px; }
+.cf-prints { --cut: 14px; margin: 0 26px 0 4px; padding-left: 50px; transform: rotate(-.6deg);
+  background: radial-gradient(circle at 24px 50%, #efe4c8 0 5px, #9a7a44 5.5px 8.5px, transparent 9px), linear-gradient(172deg, #ecd9a9, #dcc28a);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut)); }
+.cf-entry:has(> .cf-prints) { filter: drop-shadow(0 2px 3px rgba(60,40,10,.3)); }
+.cf-prints .cf-form { color: #6a5434; }
+.cf-pair { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 8px 0 2px; }
+.cf-pair > .cf-hand { color: #6a5434; }
+.cf-mini { display: inline-flex; align-items: center; gap: 7px; }
+.cf-mini .art { width: 34px; height: 45px; object-fit: cover; border: 3px solid #f4eddc; box-shadow: 0 1px 3px rgba(0,0,0,.35); transform: rotate(-3deg); }
+.cf-transcript { background: repeating-linear-gradient(transparent 0 21px, rgba(90,110,160,.13) 21px 22px), #fbf7ec; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+/* a guest named in a clue (folder.js whoChip): as the Testimony tab's chips, lit by the board */
+.chip.cf-who { display: inline; min-width: 0; margin: 0; padding: 0 2px; border: 0; border-bottom: 1.5px dotted currentColor; border-radius: 2px;
+  background: rgba(255,255,255,.5); font: inherit; color: var(--ink); white-space: nowrap; }
+.chip.cf-who small { font: 11px var(--typed); color: var(--muted); }
+.chip.cf-who.good { color: var(--ink-green); background: var(--soft-good); }
+.chip.cf-who.bad { color: var(--ink-red); background: var(--soft-bad); }
+.chip.cf-who:hover, .chip.cf-who.hl { background: #efd896; }
+/* the newest entry is filed as you look: it slides in and its stamps come down (paused under a card) */
+.cf-new { animation: cf-file .6s .15s cubic-bezier(.2,.8,.3,1) both; }
+.cf-new .cf-stamp { animation: cf-thump .3s .65s cubic-bezier(.3,1.5,.6,1) both; }
+@keyframes cf-file { from { opacity: 0; translate: 18px -14px; rotate: 2.5deg; } }
+@keyframes cf-thump { from { opacity: 0; scale: 1.9; } }
+body:has(#modal.open, #title:not([hidden]), .reading) :is(.cf-new, .cf-new .cf-stamp) { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .cf-new, .cf-new .cf-stamp { animation: none; }
+}
+@media (max-width: 700px) {
+  .cf-kicker { padding-right: 0; }
+  /* the status stamp in the flow, under the address */
+  .cf-docket { display: flex; flex-wrap: wrap; align-items: center; }
+  .cf-docket > :not(.cf-status, .cf-note) { flex: 1 0 100%; }
+  .cf-status { position: static; margin: 8px 0 0 2px; }
+  .cf-note { flex: 1; min-width: 0; width: auto; margin: 10px 2px 0 14px; text-align: right; }
+  .cf-tally { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cf-report { min-height: 0; padding-right: 12px; column-gap: 12px; }
+  .cf-report .cf-form { margin-right: -12px; padding-right: 54px; }  /* clear of the pencilled point */
+  .cf-photo { width: 60px; }
+  .cf-stamp.side { position: static; grid-column: 2; justify-self: end; margin: 2px 4px 0 0; transform: rotate(-7deg); font-size: 15px; }  /* under the text */
+}
 .ok { color: var(--save); font-weight: 700; }
 .no { color: var(--elim); font-weight: 700; }
 .noinfo { color: var(--muted); font-style: italic; }
+
+/* Rewards (folder.js rewardsHtml): a bookcase under a picture lamp, with a slot for every book in the house. A book found
+   stands face out with its spine in 3D and opens large on a click (.bookview); those still hidden wait as parcels with a
+   wax seal, and a mistake's slot is stamped Lost. A cover (.covers, books.js) is used on the cards too; a pair of books
+   lies one over the other, as on a shelf. Sizes follow --bw, a book's width, from the bookcase's own width. */
+.covers { --w: 64px; position: relative; display: inline-flex; align-items: flex-start; }
+.covers img { display: block; width: var(--w); height: auto; border-radius: 1px 3px 3px 1px; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
+.covers.two img + img { margin: calc(var(--w) * .18) 0 0 calc(var(--w) * -.55); transform: rotate(6deg); }
+.bookcase { --bw: min(17cqw, 76px); container-type: inline-size; position: relative; margin: 4px 0 14px; padding: 33px 10px 10px;
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(90deg, rgba(0,0,0,.28), transparent 3%, transparent 97%, rgba(0,0,0,.28)),
+    linear-gradient(rgba(255,226,180,.16), transparent 5px, transparent 22px, rgba(0,0,0,.22) 24px, transparent 30px),
+    repeating-linear-gradient(90deg, rgba(40,18,4,.18) 0 1px, transparent 1px 6px, rgba(255,226,180,.05) 6px 7px, transparent 7px 15px),
+    linear-gradient(#7c4e2a, #5a361a);
+  box-shadow: 0 14px 22px -8px rgba(40,22,8,.6), inset 0 1px 0 rgba(255,220,170,.35), inset 0 -2px 0 rgba(0,0,0,.35); }
+/* a brass plate on the cornice: how many books are yours */
+.bc-plaque { position: absolute; top: 6px; left: 50%; z-index: 1; display: flex; align-items: center; gap: 6px; padding: 0 9px;
+  transform: translateX(-50%); border-radius: 2px; background: linear-gradient(#f6e2aa, #c9a45c 52%, #9a7432); color: #3a2608;
+  font: 700 15px/21px Cinzel, Georgia, serif; white-space: nowrap; text-shadow: 0 1px 0 rgba(255,244,210,.6);
+  box-shadow: 0 1px 2px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,250,228,.75), inset 0 -1px 0 rgba(90,60,20,.45); }
+.bc-plaque small { font: 10.5px var(--typed); letter-spacing: .1em; text-transform: uppercase; }
+.bc-plaque::before, .bc-plaque::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #c9a45c, #4a3008); }
+.bookcase.full .bc-plaque { box-shadow: 0 0 16px 4px rgba(255,214,140,.65), inset 0 1px 0 rgba(255,250,228,.75), inset 0 -1px 0 rgba(90,60,20,.45); }
+.bc-note { margin: -4px 0 12px; text-align: center; font: 600 italic 17px "EB Garamond", Georgia, serif; color: var(--gold-2); }
+/* the back of the case, warm under the lamp at the top and dark in the lower corners */
+.shelves { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: radial-gradient(ellipse 72% 46% at 50% 0%, rgba(255,204,128,.52), rgba(255,180,100,.12) 60%, transparent 85%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.24) 0 2px, rgba(255,220,170,.04) 2px 3px, transparent 3px 12.5%),
+    linear-gradient(#3e2612, #1e1208);
+  box-shadow: inset 0 10px 14px -4px rgba(0,0,0,.75), inset 7px 0 10px -6px rgba(0,0,0,.8), inset -7px 0 10px -6px rgba(0,0,0,.8); }
+.shelves::before { content: ""; position: absolute; top: -4px; left: 50%; z-index: 3; width: 32%; height: 10px; transform: translateX(-50%);
+  border-radius: 2px 2px 10px 10px; background: linear-gradient(#fbecc0, #c9a04a 40%, #6a4a14);
+  box-shadow: 0 3px 5px rgba(0,0,0,.55), 0 8px 26px 6px rgba(255,214,140,.38); }  /* the picture lamp */
+.shelves::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,214,150,.13), transparent 70%),
+    radial-gradient(ellipse 115% 95% at 50% 0%, transparent 52%, rgba(12,5,0,.4)); }
+.slot { position: relative; display: flex; align-items: flex-end; justify-content: center; height: calc(var(--bw) * 1.74 + 26px);
+  padding: 0 2px 14px; }
+.slot:hover, .slot:focus-within { z-index: 3; }  /* a book taken up comes out of the shade */
+.slot::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px;
+  background: linear-gradient(#b07e4c 0 3px, #8a5c36 3px 5px, #6e4426 5px, #4c2c14); box-shadow: 0 6px 8px -3px rgba(0,0,0,.7); }  /* the plank */
+/* a little brass label on the plank: the night the book was found or lost */
+.lip { position: absolute; bottom: 1px; left: 50%; z-index: 1; min-width: 22px; padding: 0 4px; transform: translateX(-50%);
+  background: linear-gradient(#f4e8cc, #d6c294); color: #3a2a14; font: 9px/9px var(--typed); letter-spacing: .06em; text-align: center;
+  box-shadow: 0 0 0 1px #9a7a3a, 0 1px 1px rgba(0,0,0,.5); }
+/* a book (or a parcel) in 3D: the cover turned a little, the spine at its left edge */
+.tome { position: relative; z-index: 1; display: block; width: calc(var(--bw) * var(--size, 1)); padding: 0; border: 0;
+  background: none; cursor: pointer; margin-bottom: -2px; }
+.tome-3d { --turn: 27deg; position: relative; display: block; transform-style: preserve-3d; transform-origin: 50% 100%;
+  transform: perspective(520px) translateY(var(--lift, 0)) rotateY(var(--turn)) rotateX(var(--tip, 0deg)) rotateZ(var(--lean, 0deg));
+  transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.slot:nth-child(4n+2) .tome-3d { --turn: 23deg; }
+.slot:nth-child(4n+3) .tome-3d { --turn: 20deg; }
+.slot:nth-child(4n) .tome-3d { --turn: 17deg; }
+.tome-3d .spine { position: absolute; top: 0; bottom: 0; right: 100%; width: calc(var(--bw) * var(--size, 1) * .2); transform-origin: 100% 50%;
+  transform: rotateY(-90deg); background: linear-gradient(90deg, rgba(0,0,0,.4), rgba(255,240,210,.12) 45%, rgba(0,0,0,.3)), var(--cover) 0 0 / auto 100%, #3a2a1a; }
+.tome .face { position: relative; display: block; overflow: hidden; border-radius: 1px 2px 2px 1px; box-shadow: 8px 6px 10px rgba(0,0,0,.6); }
+.tome .face img { display: block; width: 100%; height: auto; }
+.tome .face::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(0,0,0,.35), rgba(255,255,255,.14) 3%, transparent 7%, transparent 82%, rgba(255,236,200,.1)); }  /* the hinge */
+.tome:hover .tome-3d, .tome:focus-visible .tome-3d { --lift: -8px; --turn: 4deg; --tip: -8deg; }
+.tome:focus-visible { outline: none; }
+.tome:focus-visible .face { outline: 2px solid #f6e2aa; outline-offset: 3px; }
+/* the Lunatic's pair: the second leans in front of the first, as on the shelf at home */
+.tome.two { margin-right: calc(var(--bw) * .3); }
+.tome.two .tome-3d + .tome-3d { position: absolute; left: 42%; bottom: -5px; width: 100%; --turn: 8deg; --lean: 4deg; }
+.tome.two:hover .tome-3d + .tome-3d, .tome.two:focus-visible .tome-3d + .tome-3d { --turn: 0deg; --lean: 6deg; }
+/* the book won last: a ribbon across its corner, and now and then a glint of the lamp */
+.new-ribbon { position: absolute; top: 9%; right: -36%; z-index: 1; width: 100%; transform: rotate(40deg); text-align: center;
+  background: linear-gradient(#d84a38, #9a1e14); color: #fff0cc; font: calc(var(--bw) * .14)/1.65 var(--typed); letter-spacing: .16em;
+  text-transform: uppercase; box-shadow: 0 1px 4px rgba(0,0,0,.55); border-block: 1px dashed rgba(255,222,180,.55); }
+.tome.fresh .face::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent 35%, rgba(255,246,220,.5) 50%, transparent 65%); animation: glint 6s 1s ease-in-out infinite; }
+@keyframes glint { 0% { transform: translateX(-120%); } 22%, 100% { transform: translateX(120%); } }
+/* a book still hidden: wrapped in brown paper, tied with twine and sealed; all alike but for their size */
+.parcel { --twine: rgba(244,232,206,.92); width: calc(var(--bw) * var(--size, 1)); aspect-ratio: 1 / 1.55; margin-bottom: -2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent calc(50% - 1.5px), var(--twine) 0 calc(50% + 1px), transparent 0),
+    linear-gradient(transparent calc(38% - 1.5px), var(--twine) 0 calc(38% + 1px), transparent 0),
+    linear-gradient(140deg, rgba(255,255,255,.16), transparent 30%, rgba(0,0,0,.1) 60%, rgba(255,255,255,.06) 75%, rgba(0,0,0,.18)),
+    repeating-linear-gradient(100deg, rgba(90,58,20,.08) 0 1px, transparent 1px 3px), #b88e58;
+  box-shadow: 8px 6px 10px rgba(0,0,0,.55); }
+.parcel .spine { background: linear-gradient(transparent calc(38% - 1.5px), var(--twine) 0 calc(38% + 1px), transparent 0),
+  linear-gradient(90deg, #6a4622, #8e6638 50%, #6a4622); }
+.parcel .seal { position: absolute; left: 50%; top: 38%; display: grid; place-items: center; width: calc(var(--bw) * .34); aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(-12deg); border-radius: 48% 52% 46% 54%; color: #5a0e08; font: 700 calc(var(--bw) * .2)/1 Cinzel, Georgia, serif;
+  font-style: normal; background: radial-gradient(circle at 38% 32%, #e8644e, #aa2618 52%, #6a1009); text-shadow: 0 1px 0 rgba(255,150,130,.5);
+  box-shadow: 0 1px 2px rgba(0,0,0,.6), inset 0 0 0 calc(var(--bw) * .03) rgba(80,6,2,.3); }
+/* a mistake: before the end the parcel stays shut, gone grey; at the end the book itself, greyed. Both stamped Lost. */
+.parcel.lost { --twine: transparent; background: radial-gradient(ellipse at 50% 110%, rgba(20,12,6,.55), transparent 65%),
+  repeating-linear-gradient(100deg, rgba(0,0,0,.06) 0 1px, transparent 1px 3px), #7e7466; }
+.parcel.lost .spine { background: linear-gradient(90deg, #4a443a, #605848 50%, #4a443a); }
+.parcel.lost .seal { color: #000; background: radial-gradient(circle at 38% 32%, #6a6460, #2a2624 55%, #121010); text-shadow: none; }
+.tome.lost .face img, .tome.lost .spine { filter: grayscale(1) brightness(.7) contrast(.9); }
+.lost-stamp { position: absolute; left: 50%; bottom: 44%; z-index: 4; padding: 0 5px; transform: translateX(-50%) rotate(-16deg); border: 2px solid #d8402e;
+  color: #e8503a; background: rgba(20,10,6,.35); font: 700 calc(var(--bw) * .2)/1.25 var(--typed); letter-spacing: .1em; text-transform: uppercase;
+  pointer-events: none; -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+/* the reading list: a date stamp for the night, the title, and whose room it was in */
+.readlist { margin: 0 0 14px; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.readlist li { border-bottom: 1px dashed var(--line); }
+.readlist button { display: flex; align-items: center; gap: 12px; width: 100%; padding: 7px 6px; border: 0; background: none; color: var(--ink); text-align: left; }
+.readlist button:hover, .readlist button:focus-visible { background: rgba(255,255,255,.4); }
+.rl-night { flex: none; width: 88px; padding: 1px 0; white-space: nowrap; border: 2px solid #5b3f8c; border-radius: 3px; color: #5b3f8c; font: 12px/1.3 var(--typed);
+  letter-spacing: .08em; text-align: center; text-transform: uppercase; transform: rotate(-3deg); -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.rl-text { min-width: 0; font-size: 16px; line-height: 1.25; }
+.rl-text b { font-weight: 600; font-size: 17px; }
+.rl-text i { color: var(--muted); }
+.rl-text small { display: block; margin-top: 2px; font: 11.5px var(--typed); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.readlist li.lost .rl-night { color: var(--bad); border-color: var(--bad); }
+.readlist li.lost b { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--bad); }
+/* a book open large over the folder: an open book, its cover as the plate on the left page */
+.bookview { position: absolute; inset: 0; z-index: 6; display: grid; padding: 20px 16px 34px; overflow: auto; overscroll-behavior: contain; }
+.bv-backdrop { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(70,44,20,.8), rgba(14,8,4,.94)); cursor: zoom-out; }
+.bv-book { --page: #f8f0dc; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); width: min(540px, 100% - 14px);
+  margin: auto; padding: 26px 0 14px; border-radius: 3px; animation: bv-open .5s cubic-bezier(.2,.7,.2,1) both;
+  background: linear-gradient(90deg, #e6d6b2, var(--page) 5%, var(--page) 41%, #e8d9b6 45.6%, #bfa676 45.8%, #e8d9b6 46%, var(--page) 50%, var(--page) 96%, #e6d6b2);
+  box-shadow: 0 1px 0 #ece0c2, 0 3px 0 #d8c69e, 0 5px 0 #e6d8b6, 0 7px 0 #cdb98c, 0 0 0 7px #5e1e14, 0 10px 0 7px #44140c, 0 30px 60px rgba(0,0,0,.7); }
+.bv-plate { display: grid; place-items: center; padding: 6px 22px 10px 26px; }
+.bv-plate .covers { --w: 170px; }
+.bv-plate .covers.two { --w: 128px; padding-right: 40px; }
+.bv-plate .covers img { border: 1px solid rgba(60,40,10,.25); box-shadow: 0 1px 0 #fff, 0 12px 20px rgba(60,40,10,.45); }
+.bv-plate .covers img:first-child { transform: rotate(-1.5deg); }
+.bv-book.lost .covers img { filter: grayscale(1) brightness(.85); }
+.bv-text { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 4px 30px 8px 30px; }
+.bv-kicker { font: 11.5px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.rules .bv-text h3 { margin: 2px 0 0; font: 600 26px/1.1 "EB Garamond", Georgia, serif; letter-spacing: 0; text-transform: none; }
+.bv-text .by { font-style: italic; font-size: 17px; color: var(--muted); }
+.rules .bv-line { margin: 10px 0 0; font-size: 17px; line-height: 1.4; }
+.bv-line::first-letter { float: left; margin: 5px 3px 0 0; font: 700 2.5em/.8 Cinzel, Georgia, serif; color: #7a2418; }
+.rules .bv-from { margin: 8px 0 0; font: 12px/1.5 var(--typed); letter-spacing: .03em; color: var(--muted); }
+.bv-stamp { align-self: flex-end; margin: 14px 4px 0 0; padding: 3px 10px; border: 3px double #5b3f8c; color: #5b3f8c;
+  font: 700 14px var(--typed); letter-spacing: .1em; text-transform: uppercase; transform: rotate(-7deg);
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; animation: bv-stamp .35s .45s cubic-bezier(.3,1.6,.5,1) both; }
+.bv-book.lost .bv-stamp { color: var(--bad); border-color: var(--bad); }
+.bv-stamp.read { color: var(--ink-green); border-color: var(--ink-green); }  /* the day you finished it, as a library's date stamp */
+.bv-ribbon { position: absolute; top: -9px; left: calc(45.8% + 9px); width: 12px; height: calc(100% + 34px); pointer-events: none;
+  background: linear-gradient(90deg, #7a1410, #c0301f 50%, #7a1410); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,.35)); }  /* the bookmark */
+.bv-nav { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 10px; padding: 0 16px;
+  font: 12px var(--typed); letter-spacing: .1em; color: var(--muted); }
+.bv-nav span { margin-left: auto; }  /* the count beside ›, clear of the gutter */
+.bv-step { width: 32px; height: 32px; padding: 0 0 3px; border: 1px solid var(--line); border-radius: 50%; background: rgba(255,255,255,.55);
+  font: 24px/1 "EB Garamond", Georgia, serif; color: var(--ink); }
+.bv-step:hover:not(:disabled) { border-color: var(--ink); background: #fff; }
+.bv-step:disabled { opacity: .3; cursor: default; }
+.bv-close { position: absolute; top: 2px; right: 6px; padding: 0 6px; border: 0; background: none; font: 28px/1 Georgia, serif; color: var(--muted); }
+.bv-close:hover { color: var(--ink); }
+.bv-close:focus-visible, .bv-step:focus-visible { outline: 2px solid #5b3f8c; outline-offset: 1px; border-radius: 50%; }
+@keyframes bv-open { from { opacity: 0; transform: translateY(18px) scale(.95); } to { opacity: 1; transform: none; } }
+@keyframes bv-stamp { from { opacity: 0; transform: rotate(-7deg) scale(1.8); } to { opacity: 1; transform: rotate(-7deg); } }
+@container (min-width: 640px) {
+  .shelves { grid-template-columns: repeat(8, minmax(0, 1fr)); }  /* a wide case (a phone on its side): two rows of eight */
+}
+@media (max-height: 500px) {
+  .bookview { padding: 10px 12px 14px; }
+  .bv-book { padding-top: 16px; }
+  .bv-plate .covers { --w: 120px; }
+  .bv-plate .covers.two { --w: 96px; }
+  .rules .bv-text h3 { font-size: 22px; }
+}
+@media (max-width: 700px) {
+  .bookview { padding: 14px 12px 30px; }
+  .bv-book { grid-template-columns: minmax(0, 1fr); padding-top: 22px; background: var(--page); }
+  .bv-plate { padding: 4px 20px 6px; }
+  .bv-plate .covers { --w: 128px; }
+  .bv-plate .covers.two { --w: 100px; }
+  .bv-text { padding: 6px 22px 4px; }
+  .rules .bv-text h3 { font-size: 23px; }
+  .bv-ribbon { left: 24px; height: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tome-3d { transition: none; }
+  .tome.fresh .face::before { display: none; }
+  .bv-book, .bv-stamp { animation: none; }
+}
 
 /* Theory: your notes as three piles of slips, each pile's header a stamp with pips for the guests left to find */
 .theory { --guilty: #9e1b1b; --innocent: #2a6a3c; --unsure: #6a5a44; }
@@ -248,10 +562,6 @@ table.grid { border-collapse: collapse; width: 100%; }
 .role-steps dt { font: 11px/16px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .role-steps dd { margin: 0; font-size: 14.5px; line-height: 1.35; color: var(--ink); }
 .role-steps .seen dt { color: var(--side); }
-details.spare { margin-top: 26px; padding: 10px 12px 12px; border: 1px dashed var(--line); background: rgba(255,255,255,.22); }
-details.spare summary { cursor: pointer; font: 16px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
-details.spare summary span { margin-left: 8px; font: italic 15px "EB Garamond", Georgia, serif; letter-spacing: 0; text-transform: none; color: var(--muted); }
-details.spare[open] summary { margin-bottom: 4px; }
 .rules h4 { margin: 14px 0 6px; font: 14px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 /* Events: the case's nights as medals on a thread, then a card per event */
 .nights { position: relative; display: flex; justify-content: space-between; margin: 6px 0 20px; padding: 0 2px; list-style: none; }
@@ -264,7 +574,6 @@ details.spare[open] summary { margin-bottom: 4px; }
 .nights .past .medal { filter: sepia(.4) saturate(.7); }
 .nights .now .medal { box-shadow: 0 0 0 3px #f2d27a, 0 0 16px rgba(242,210,122,.95); }
 .nights .now .n { color: var(--ink); font-weight: 700; }
-.nights .unknown .medal { background: #f3ead2; border: 2px dashed var(--muted); color: var(--muted); font: 700 17px var(--typed); box-shadow: none; }
 .nights a:hover .medal { transform: translateY(-2px); }
 .evcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
 .evcard { scroll-margin-top: 12px; background: #fbf6ea; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
@@ -333,8 +642,9 @@ details.spare[open] summary { margin-bottom: 4px; }
 .dayclock .clock { float: right; margin-left: 8px; font: 12px var(--typed); letter-spacing: .06em; color: var(--muted); }
 .dayclock h4 { margin: 0 0 2px; font: 14px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
 .dayclock p { margin: 0; font-size: 14.5px; line-height: 1.35; }
-/* the eight nights: a column per kind of night, each night with its moon; the last one is the drawing room */
+/* the eight nights in two halves of four: their kinds over them, each night with its moon; the last one is the drawing room */
 .nightgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 12px 0; }
+.nightgrid + .nightgrid { margin-top: 18px; }
 .ng-kind { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 2px 2px 6px; text-align: center; border-bottom: 2px solid var(--line); }
 .ng-kind span { font: 19px/1 system-ui, sans-serif; }
 .ng-kind b { font: 11px/1.2 var(--typed); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
@@ -431,10 +741,156 @@ details.spare[open] summary { margin-bottom: 4px; }
 .evkinds .role-steps { gap: 8px; }
 .evgroup-head { display: flex; align-items: center; gap: 8px; }
 .evgroup-head .step-icon { font-size: 18px; }
+.evgroup-head small { margin-left: auto; font: 12px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .evtext .ev-steps { margin-top: 8px; }
-/* Events timeline: each night's kind under its numeral, a night whose event the schedule already settles, and the
-   gap where the second cycle of the kinds begins */
+/* Events timeline: each night's kind under its numeral, a night still to come, and the gap where the second half begins */
 .nights .kind { font-size: 12px; line-height: 1; opacity: .75; }
 .nights .expected .medal { border: 2px dashed var(--gold, #c9a45c); opacity: .85; }
-.nights .unknown .medal { font: 17px/1 system-ui, sans-serif; }
-.nights .cycle { margin-left: 14px; }
+.nights .half { margin-left: 14px; }
+
+/* Crimes (crimes.js): a notice pinned at the head of the board, then a card per crime: its scene as a sepia photograph on an
+   index card, and pinned over the photograph a polaroid per culprit, tied to the scene's pin with red string once unmasked
+   (a dashed thread while unknown). The polaroids and the string use the photograph's own units (360 × 200: crimes.js PIN,
+   slotPin), so they stay in place at any width. The stamps are worn rubber, as in the Case file. */
+.crimes { --pencil: #34405e; padding-bottom: 6px; }
+.cr-head { position: relative; margin: 4px 2px 0; padding: 15px 18px 12px; text-align: center; color: var(--paper-ink); border: 1px solid #b89a60;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.55), transparent 70%), #f4ead0;
+  box-shadow: 0 2px 6px rgba(0,0,0,.22), inset 0 0 0 5px #f4ead0, inset 0 0 0 7px rgba(58,44,30,.55), inset 0 0 0 8px #f4ead0, inset 0 0 0 9px rgba(58,44,30,.3); }
+.cr-head::before, .cr-head::after, .cr-pin, .cr-polaroid::before, .cr-alibi-photo::before { content: ""; position: absolute; width: 13px; height: 13px; border-radius: 50%;
+  --head: #e0574a; --rim: #8e1c16; --deep: #460806;
+  background: radial-gradient(circle at 34% 28%, rgba(255,255,240,.95) 0 7%, transparent 22%), radial-gradient(circle at 40% 36%, var(--head), var(--rim) 62%, var(--deep));
+  box-shadow: 1.5px 3px 2.5px rgba(0,0,0,.5), inset -1px -1.5px 1.5px rgba(0,0,0,.35); }  /* push pins, as on the board */
+.cr-head::before, .cr-head::after { top: 8px; }
+.cr-head::before { left: 12px; }
+.cr-head::after { right: 12px; }
+.cr-kicker { display: block; font: 11px/1.4 var(--typed); letter-spacing: .16em; text-transform: uppercase; color: #6a5434; }
+.cr-head h3 { margin: 4px 0 3px; font: 700 26px/1.1 Cinzel, Georgia, serif; letter-spacing: .05em; color: var(--paper-ink); }
+.cr-head h3 span { white-space: nowrap; }
+.cr-head h3 i { margin: 0 4px; font-style: normal; color: var(--ink-red); }
+.cr-sub { margin: 0 auto; max-width: 31em; font: italic 15px/1.35 "EB Garamond", Georgia, serif; color: #574832; }
+.cr-progress { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 6px 14px; margin: 11px 0 0; padding-top: 9px;
+  border-top: 1px solid rgba(58,44,30,.35); font: 12px/1.3 var(--typed); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+.cr-progress > span { display: flex; flex-direction: column; align-items: center; }
+.cr-progress > span > span:first-child { white-space: nowrap; }
+.cr-progress b { margin-right: 4px; font: 700 25px/1 Cinzel, Georgia, serif; vertical-align: -2px; }
+.cr-progress > i { align-self: center; font-style: normal; color: var(--muted); }
+.cr-pips { --side: var(--ink-red); display: flex; justify-content: center; gap: 3px; margin-top: 5px; }
+.cr-pips.crime { --side: var(--ink-green); }
+.cr-pips i { width: 10px; height: 10px; border: 1.5px solid var(--side); border-radius: 50%; }
+.cr-pips i.on { background: var(--side); }
+.cr-pips i.off { background: linear-gradient(135deg, transparent 40%, var(--side) 40% 60%, transparent 60%); }  /* walked free, struck through */
+.cr-sealed, .cr-closed { margin: 10px 0 0; font: 700 18px/1.2 var(--hand); color: var(--ink-red); transform: rotate(-1deg); }
+.cr-closed { color: var(--pencil); }
+.cr-wax { display: inline-block; width: 21px; height: 21px; margin-right: 8px; vertical-align: -5px; border-radius: 48% 52% 46% 54%; transform: rotate(-12deg);
+  background: radial-gradient(circle at 38% 32%, #e8644e, #aa2618 52%, #6a1009); box-shadow: 0 1px 2px rgba(0,0,0,.5), inset 0 0 0 2px rgba(80,6,2,.3); }
+/* the cards: one column, or two in a wide folder with the shared crime across both, its photograph beside its text */
+.cr-board { container-type: inline-size; margin-top: 18px; }
+.cr-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+@container (min-width: 470px) {
+  .cr-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 16px; }
+  .cr-card.pair { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; align-items: start; }
+  .cr-card.pair .cr-body { padding-top: 0; }
+}
+.cr-card { position: relative; min-width: 0; padding: 13px 13px 12px; background: #fbf7ec; transform: rotate(-.4deg);
+  box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 5px 12px rgba(60,40,10,.12); }
+.cr-card:nth-child(even) { transform: rotate(.45deg); }
+.cr-card:has([data-row].hl) { background-color: #fbefc8; box-shadow: 0 0 0 2px #a8843e, 0 6px 14px rgba(60,40,10,.2); }  /* its culprit under the mouse on the board */
+/* the scene: a photograph with a white border, in sepia, darker at its edges */
+.cr-photo { position: relative; aspect-ratio: 360 / 200; background: #2a2016; transform: rotate(-.8deg);
+  box-shadow: 0 0 0 5px #f8f2e4, 0 0 0 6px rgba(120,90,40,.25), 0 5px 12px 4px rgba(0,0,0,.28); }
+.cr-card:nth-child(even) .cr-photo { transform: rotate(.9deg); }
+.cr-scene, .cr-photo::after { position: absolute; inset: 0; pointer-events: none; }
+.cr-scene { background: 50% 50% / cover no-repeat; filter: sepia(.6) saturate(.85) contrast(1.03); }
+.cr-photo::after { content: ""; z-index: 1; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(30,18,6,.45)); }
+.cr-pin { left: 50%; top: 6.5%; z-index: 3; margin: -6.5px 0 0 -6.5px; }
+.cr-strings { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.cr-strings path { fill: none; stroke-width: 1.7; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.cr-strings .tied { stroke: var(--string-red); filter: drop-shadow(1px 2px 1px rgba(0,0,0,.45)); }
+.cr-strings .loose { stroke: rgba(244,232,206,.7); stroke-width: 1.2; stroke-dasharray: 3 4; }
+/* a culprit's polaroid, k places from the photograph's right edge (crimes.js slotPin); its sizes are shares of the photograph's width */
+.cr-polaroid { --k: 0; position: absolute; top: 29%; right: calc(3.33% + var(--k) * 26.67%); z-index: 3; width: 24%; padding: 1.11% 1.11% 0;
+  background: linear-gradient(172deg, #f8f2e4, #ebe1ca); box-shadow: 0 3px 7px rgba(0,0,0,.55);
+  transform: rotate(calc(4deg - var(--k) * 7deg)); transform-origin: 50% 3%; }
+.cr-polaroid::before { left: 50%; top: -5px; z-index: 1; width: 11px; height: 11px; margin-left: -5.5px; }
+.cr-polaroid.unknown::before { --head: #e6c063; --rim: #8a6420; --deep: #4a3410; }  /* gold while nobody knows, as on the board */
+.cr-polaroid .art { display: block; width: 100%; aspect-ratio: 200 / 262; object-fit: cover; background: #111; }
+.cr-polaroid.caught .art { filter: sepia(.35); }
+.cr-polaroid.away .art { filter: grayscale(.8) brightness(.8); }
+.cr-cap { display: block; padding: 1px 2px 3px; overflow: hidden; text-align: center; text-overflow: ellipsis; white-space: nowrap;
+  font: 700 15px/1.1 var(--hand); color: #2b2118; }
+.cr-polaroid.unknown .cr-cap { color: var(--muted); }
+.cr-polaroid.hl { box-shadow: 0 0 0 3px #efd896, 0 4px 10px rgba(0,0,0,.55); }
+/* the stamps: Solved (or Unsolved once the case is closed) across the scene, Got away across a culprit who walked free */
+.cr-stamp { position: absolute; z-index: 4; padding: 1px 9px; border: 4px double; border-radius: 3px; background: rgba(251,247,236,.86); pointer-events: none;
+  font: 700 21px var(--typed); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.cr-stamp.solved, .cr-stamp.unsolved { left: 6%; top: 50%; transform: rotate(-13deg); color: var(--ink-green); }
+.cr-stamp.unsolved { padding: 0 7px; font-size: 16px; transform: rotate(-9deg); color: #5e4a2c; }
+.cr-card.pair :is(.cr-stamp.solved, .cr-stamp.unsolved) { left: 3%; top: 62%; font-size: 14px; }  /* clear of the pair's polaroids */
+.cr-stamp.away { left: 50%; top: 40%; padding: 0 2px; border-width: 2.5px; transform: translate(-50%, -50%) rotate(-24deg); color: var(--ink-red);
+  font-size: 9.5px; letter-spacing: .03em; }
+/* the card's text: its typed number, its title, what was done, and who did it */
+.cr-body { min-width: 0; padding: 15px 2px 0; }
+.cr-form { display: block; padding-bottom: 3px; border-bottom: 1px solid rgba(190,60,50,.45); font: 11px/1.4 var(--typed); letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); }
+.cr-card h4 { margin: 6px 0 0; font: 700 18px/1.15 Cinzel, Georgia, serif; letter-spacing: .02em; color: var(--ink); }
+.cr-text { margin: 5px 0 0; font-size: 15px; line-height: 1.38; }
+.cr-who { margin: 9px 0 0; padding: 7px 0 0; list-style: none; border-top: 1px dashed var(--line); }
+.cr-who li { font-size: 14.5px; line-height: 1.3; color: var(--muted); }
+.cr-who li + li { margin-top: 6px; }
+.cr-who b { font: 700 22px/1 var(--hand); color: var(--ink); }
+.cr-who small { margin: 0 2px; font: 11px var(--typed); }
+.cr-who em { white-space: nowrap; }
+.cr-who .unknown { font: 700 19px/1.15 var(--hand); color: var(--pencil); }
+.cr-when { display: inline-block; margin: 3px 0 0 2px; padding: 0 6px; border: 2px solid; border-radius: 2px; transform: rotate(-2deg);
+  font: 10.5px/16px var(--typed); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap;
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.cr-who .caught .cr-when { color: var(--ink-green); }
+.cr-who .away .cr-when { color: var(--ink-red); }
+/* the culprit unmasked by the latest decision is pinned up as you look, and a crime it solves is stamped (paused under a card) */
+.cr-polaroid.fresh { animation: cr-pin-up .5s .15s cubic-bezier(.2,.8,.3,1.2) both; }
+.cr-new .cr-stamp.solved { animation: cf-thump .3s .75s cubic-bezier(.3,1.5,.6,1) both; }
+@keyframes cr-pin-up { from { opacity: 0; translate: 0 -18px; scale: 1.25; } }
+body:has(#modal.open, #title:not([hidden]), .reading) :is(.cr-polaroid.fresh, .cr-new .cr-stamp) { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .cr-polaroid.fresh, .cr-new .cr-stamp.solved { animation: none; }
+}
+@media (max-width: 700px) {
+  .cr-head { padding: 15px 12px 12px; }
+  .cr-head h3 { font-size: 22px; }
+  .cr-progress > i { display: none; }  /* the two counts one above the other */
+}
+/* Replay (crimes.js replayHtml): a right call's flashback again; it looks like the tour's button beside the folder's title */
+.cr-replay { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px; padding: 3px 12px 3px 4px; border: 1px solid #a8843e;
+  border-radius: 999px; background: rgba(255,255,255,.55); color: var(--paper-ink); font: 12px var(--typed); letter-spacing: .08em;
+  text-transform: uppercase; white-space: nowrap; }
+.cr-replay b { display: inline-grid; place-items: center; width: 20px; height: 20px; padding-left: 2px; border-radius: 50%;
+  background: linear-gradient(#d8b46a, #a8843e); color: #1b140a; font-size: 9px; box-shadow: inset 0 0 0 1px #b08a44; }
+.cr-replay:hover, .cr-replay:focus-visible { border-color: var(--paper-ink); background: #fbf3df; }
+.cr-replay:focus-visible { outline: 2px solid #a8843e; outline-offset: 2px; }
+/* the innocent rightly cleared: an index card each with a green rule, the guest's photograph pinned on in green */
+.cr-cleared { margin-top: 30px; }
+.cr-cleared-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding-bottom: 6px; border-bottom: 2px solid var(--paper-ink); }
+.cr-cleared-head h3 { margin: 0; font: 700 20px/1.15 Cinzel, Georgia, serif; letter-spacing: .04em; color: var(--ink); }
+.cr-cleared-head .count { margin-left: auto; font: 12px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.cr-none { margin: 14px 0 4px; padding: 14px 16px; border: 1.5px dashed var(--line); background: rgba(255,255,255,.3); font-style: italic; color: var(--muted); }
+.cr-alibis { display: grid; gap: 16px; margin-top: 16px; }
+.cr-alibi { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 12px; padding: 12px; transform: rotate(.35deg);
+  background: linear-gradient(90deg, var(--ink-green) 0 3px, transparent 3px), #fbf7ec; box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 5px 12px rgba(60,40,10,.12); }
+.cr-alibi:nth-child(even) { transform: rotate(-.4deg); }
+.cr-alibi.hl { background-color: #fbefc8; box-shadow: 0 0 0 2px #a8843e, 0 6px 14px rgba(60,40,10,.2); }  /* the guest under the mouse on the board */
+.cr-alibi-photo { position: relative; align-self: start; margin-top: 4px; padding: 3px 3px 11px; background: linear-gradient(172deg, #f8f2e4, #ebe1ca);
+  box-shadow: 0 2px 5px rgba(0,0,0,.35); transform: rotate(-3deg); }
+.cr-alibi-photo::before { left: 50%; top: -5px; z-index: 1; width: 11px; height: 11px; margin-left: -5.5px; --head: #5fb07c; --rim: #22603a; --deep: #0c2e18; }
+.cr-alibi-photo .art { display: block; width: 100%; aspect-ratio: 200 / 262; object-fit: cover; background: #111; filter: sepia(.35); }
+.cr-alibi-body { min-width: 0; }
+.cr-alibi .cr-form { border-bottom-color: rgba(42,106,60,.4); }
+.cr-alibi h4 { margin: 5px 0 0; font: 400 14px/1.2 "EB Garamond", Georgia, serif; color: var(--muted); }
+.cr-alibi h4 b { font: 700 22px/1 var(--hand); color: var(--ink); }
+.cr-alibi h4 small { margin: 0 2px; font: 11px var(--typed); }
+.cr-alibi h4 em { white-space: nowrap; }
+.cr-alibi-role { margin: 5px 0 0; font: 600 15px/1.25 "EB Garamond", Georgia, serif; color: var(--ink-green); }
+.cr-alibi-role span { font: 12px var(--typed); letter-spacing: .08em; text-transform: uppercase; }
+.cr-alibi-role i { margin: 0 6px; font-style: normal; color: var(--muted); }
+.cr-alibi-text { margin: 4px 0 0; font-size: 14.5px; line-height: 1.35; }
+.cr-alibi .cr-replay { margin-top: 8px; }

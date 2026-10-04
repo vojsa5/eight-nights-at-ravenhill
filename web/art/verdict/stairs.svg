@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="pull" data-cut-at="50% 44%">
+  <title>The cellar stairs going down between stone walls to an arched oak door, lit by a lantern held up from the top, two long shadows going down ahead of it</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="80%">
+      <stop offset="0" stop-color="#1c1e24"/>
+      <stop offset="1" stop-color="#030304"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="55%" cy="45%" r="75%">
+      <stop offset=".45" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".9"/>
+    </radialGradient>
+    <linearGradient id="wallL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1a1714"/>
+      <stop offset="1" stop-color="#0c0b0a"/>
+    </linearGradient>
+    <linearGradient id="wallR" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#4a3a2a"/>
+      <stop offset=".55" stop-color="#2a221a"/>
+      <stop offset="1" stop-color="#0e0c0a"/>
+    </linearGradient>
+    <linearGradient id="oak" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#4a2c14"/>
+      <stop offset="1" stop-color="#1c1009"/>
+    </linearGradient>
+    <radialGradient id="flame" cx="50%" cy="60%" r="60%">
+      <stop offset="0" stop-color="#fff2b8"/>
+      <stop offset=".5" stop-color="#ffb040"/>
+      <stop offset="1" stop-color="#b85a10"/>
+    </radialGradient>
+    <path id="shadow" d="M-9 0 L-6 -44 L-10 -46 L-13 -76 C-13 -82 -9 -84 -5 -85 C-8 -88 -8 -96 0 -97 C8 -96 8 -88 5 -85 C9 -84 13 -82 13 -76 L10 -46 L6 -44 L9 0 H2 L0 -40 L-2 0Z"/>
+    <clipPath id="steps"><path d="M30 200 L159.6 118.3 H200.4 L330 200Z"/></clipPath>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the vault over the stair, and the two walls going down to the door -->
+  <path d="M148.7 0 H211.3 L200 38 Q180 26 160 38Z" fill="#060606"/>
+  <path d="M0 0 H148.7 L160 38 V118.3 L30 200 H0Z" fill="url(#wallL)"/>
+  <path d="M360 0 H211.3 L200 38 V118.3 L330 200 H360Z" fill="url(#wallR)"/>
+  <g fill="none" stroke="#000" stroke-opacity=".38" stroke-width=".7">
+    <path d="M160 46 L144.5 0 M160 58 L135.5 0 M160 70 L120.5 0 M160 82 L89.9 0 M160 94 L0 2.8 M160 106 L0 110.8"/>
+    <path d="M154 30 V44 M146 36 V64 M150 52 V64 M134 28 V66 M120 50 V84 M140 76 V88 M104 64 V92 M70 40 V82 M150 88 V100 M120 92 V104 M80 96 V108 M30 92 V110 M152 102 V110 M110 116 V128 M60 120 V136"/>
+  </g>
+  <g fill="none" stroke="#000" stroke-opacity=".32" stroke-width=".7">
+    <path d="M200 46 L215.5 0 M200 58 L224.5 0 M200 70 L239.5 0 M200 82 L270.1 0 M200 94 L360 2.8 M200 106 L360 110.8"/>
+    <path d="M206 30 V44 M214 36 V64 M210 52 V64 M226 28 V66 M240 50 V84 M220 76 V88 M256 64 V92 M290 40 V82 M210 88 V100 M240 92 V104 M280 96 V108 M330 92 V110 M208 102 V110 M250 116 V128 M300 120 V136"/>
+  </g>
+  <path d="M200 38 V118.3 L330 200" fill="none" stroke="#e8b070" stroke-opacity=".18"/>
+  <!-- the arched door at the bottom, a cold line of light under it -->
+  <path d="M157 118.3 V66 A23 23 0 0 1 203 66 V118.3Z" fill="#26262c"/>
+  <path d="M157 66 A23 23 0 0 1 203 66" fill="none" stroke="#3a3a42" stroke-width="2.4" stroke-dasharray="7 1.5"/>
+  <path d="M162 118.3 V68 A18 18 0 0 1 198 68 V118.3Z" fill="url(#oak)"/>
+  <path d="M171 52 V118 M180 50 V118 M189 52 V118" stroke="#120a05" stroke-width=".9"/>
+  <g fill="#0b0b0d"><rect x="162" y="70" width="36" height="3"/><rect x="162" y="90" width="36" height="3"/><rect x="162" y="110" width="36" height="3"/></g>
+  <rect x="190" y="97" width="5" height="7" rx=".8" fill="#0e0e10" stroke="#34343a" stroke-width=".7"/>
+  <path d="M192.5 103 L190 107.5" stroke="#4a4a52" stroke-width="1.2" stroke-linecap="round"/>
+  <path class="lf-glint" style="--d:-1.2s" d="M190 104 L190.6 106.4 L193 107 L190.6 107.6 L190 110 L189.4 107.6 L187 107 L189.4 106.4Z" fill="#fff4d8" opacity="0"/>
+  <path class="lf-hum" d="M162 117.6 H198" stroke="#9ab8e8" stroke-opacity=".75" stroke-width="1.1" filter="url(#glow)"/>
+  <!-- the steps -->
+  <path d="M30 200 L68.9 175.5 Q180 186.6 291.1 175.5 L330 200Z" fill="#3e3329"/>
+  <path d="M68.9 175.5 Q180 186.6 291.1 175.5 L256.9 153.9 Q180 161.6 103.1 153.9Z" fill="#5a4a38"/>
+  <path d="M103.1 153.9 Q180 161.6 256.9 153.9 L238.8 142.5 Q180 148.4 121.2 142.5Z" fill="#4c3e30"/>
+  <path d="M121.2 142.5 Q180 148.4 238.8 142.5 L227.6 135.4 Q180 140.2 132.4 135.4Z" fill="#3f3429"/>
+  <path d="M132.4 135.4 Q180 140.2 227.6 135.4 L220 130.6 Q180 134.6 140 130.6Z" fill="#342b23"/>
+  <path d="M140 130.6 Q180 134.6 220 130.6 L214.5 127.1 Q180 130.6 145.5 127.1Z" fill="#2b241e"/>
+  <path d="M145.5 127.1 Q180 130.6 214.5 127.1 L210.3 124.5 Q180 127.5 149.7 124.5Z" fill="#241e19"/>
+  <path d="M149.7 124.5 Q180 127.5 210.3 124.5 L207 122.4 Q180 125.1 153 122.4Z" fill="#1e1a16"/>
+  <path d="M153 122.4 Q180 125.1 207 122.4 L204.4 120.8 Q180 123.2 155.6 120.8Z" fill="#191613"/>
+  <path d="M155.6 120.8 Q180 123.2 204.4 120.8 L202.2 119.4 Q180 121.6 157.8 119.4Z" fill="#161411"/>
+  <path d="M157.8 119.4 Q180 121.6 202.2 119.4 L200.4 118.3 Q180 120.3 159.6 118.3Z" fill="#13110f"/>
+  <path d="M103.1 153.9 Q180 161.6 256.9 153.9 L249.3 149.1 Q180 156.1 110.7 149.1Z M121.2 142.5 Q180 148.4 238.8 142.5 L234.1 139.5 Q180 144.9 125.9 139.5Z M132.4 135.4 Q180 140.2 227.6 135.4 L224.4 133.4 Q180 137.9 135.6 133.4Z M140 130.6 Q180 134.6 220 130.6 L217.7 129.2 Q180 132.9 142.3 129.2Z M145.5 127.1 Q180 130.6 214.5 127.1 L212.7 126 Q180 129.3 147.3 126Z M149.7 124.5 Q180 127.5 210.3 124.5 L208.9 123.6 Q180 126.5 151.1 123.6Z M153 122.4 Q180 125.1 207 122.4 L205.9 121.7 Q180 124.3 154.1 121.7Z M155.6 120.8 Q180 123.2 204.4 120.8 L203.5 120.2 Q180 122.6 156.5 120.2Z M157.8 119.4 Q180 121.6 202.2 119.4 L201.5 118.9 Q180 121.1 158.5 118.9Z" fill="#000" opacity=".55"/>
+  <path d="M68.9 175.5 Q180 186.6 291.1 175.5 M103.1 153.9 Q180 161.6 256.9 153.9 M121.2 142.5 Q180 148.4 238.8 142.5 M132.4 135.4 Q180 140.2 227.6 135.4 M140 130.6 Q180 134.6 220 130.6 M145.5 127.1 Q180 130.6 214.5 127.1 M149.7 124.5 Q180 127.5 210.3 124.5 M153 122.4 Q180 125.1 207 122.4 M155.6 120.8 Q180 123.2 204.4 120.8 M157.8 119.4 Q180 121.6 202.2 119.4" fill="none" stroke="#e0b070" stroke-opacity=".7" stroke-width="1"/>
+  <path d="M30 200 L160 118.3 M330 200 L200 118.3" stroke="#000" stroke-opacity=".6" stroke-width="1.4"/>
+  <!-- the handrail on the right wall -->
+  <path d="M200 86 L291 -2" stroke="#0a0806" stroke-width="2.2"/>
+  <path d="M200 85 L291 -3" stroke="#e8b070" stroke-opacity=".35" stroke-width=".6"/>
+  <path d="M214 74 V79 M238 50 V58 M270 19 V30" stroke="#0a0806" stroke-width="1.4"/>
+  <!-- a cobweb in the vault's corner -->
+  <g fill="none" stroke="#b8b0a0" stroke-opacity=".22" stroke-width=".4">
+    <path d="M148.7 0 L136 14 M148.7 0 L128 6 M148.7 0 L142 18"/><path d="M134 9 Q140 9 141 4 M138 13 Q142 10 145 7"/>
+  </g>
+  <!-- the two going down ahead of the lantern: only their shadows, stretched down the steps towards the door and
+       broken at every step -->
+  <g clip-path="url(#steps)" fill="#000" opacity=".6">
+    <g class="lf-descend">
+      <g class="lf-stride">
+        <use href="#shadow" transform="matrix(.7 0 .14 .72 164 202)"/>
+      </g>
+      <g class="lf-stride" style="--d:.45s">
+        <use href="#shadow" transform="matrix(.85 0 .2 .68 195 204)"/>
+      </g>
+    </g>
+  </g>
+  <!-- the lantern, held up from the top of the stairs, swinging with each step -->
+  <g class="lf-near">
+    <circle cx="252" cy="46" r="40" fill="#ff9a3a" opacity=".22" filter="url(#soft)"/>
+    <g data-fx="glow" data-at="252 46" data-r="70" data-tone="lamp"/>
+    <g data-fx="motes" data-at="226 80" data-r="40"/>
+    <g class="lf-bob" style="transform-box:view-box;transform-origin:252px 8px">
+      <path d="M240 -4 H264 V6 C264 11 260 13 256 13 H248 C244 13 240 11 240 6Z" fill="#0c0a0a"/>
+      <path d="M244 5 H260 M244 9 H259" stroke="#2c2622" stroke-width=".6"/>
+      <path d="M249 12 C248 16 250 19 252 19 C254 19 256 16 255 12" fill="none" stroke="#0c0a0a" stroke-width="2.2"/>
+      <path d="M252 19 V22" stroke="#0c0a0a" stroke-width="1.4"/>
+      <path d="M243 30 L261 30 L257 22 L247 22Z" fill="#141416"/>
+      <rect x="244" y="30" width="16" height="22" fill="url(#flame)" filter="url(#glow)"/>
+      <path d="M244 30 V52 M252 30 V52 M260 30 V52" stroke="#141416" stroke-width="1.4"/>
+      <ellipse class="lf-flame" cx="252" cy="42" rx="2.2" ry="3.8" fill="#fffbe8"/>
+      <rect x="242" y="52" width="20" height="4" fill="#141416"/>
+    </g>
+  </g>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

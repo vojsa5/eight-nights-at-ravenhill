@@ -3,15 +3,14 @@
 @media (max-height: 800px) and (min-width: 701px) {
   .board-wrap { padding-top: 10px; padding-bottom: 12px; }
   .board { --tall: calc(100vh - 84px); --frame: 10px; }
-  .note { --note-room: 245px; padding: 20px 18px 14px; gap: 6px; }
-  .phase { font-size: 30px; margin: 2px 0; }
-  .pick .mini { width: 38px; height: 50px; }
-  .folder-tabs { top: 14px; gap: 3px; }  /* all six tabs fit in a 600px-tall window */
-  .folder-tabs button { padding: 9px 8px; font-size: 12.5px; }
+  .note { --note-room: 245px; }
+  .folder-tabs { top: 14px; gap: 3px; }  /* all eight tabs fit, down to the 640px rule below */
+  .folder-tabs button { padding: clamp(3px, calc(1.6vh - 6px), 7px) 7px; font-size: clamp(11px, calc(1.9vh - 1px), 12.5px); letter-spacing: .08em; }
   .intro-art { aspect-ratio: 360 / 120; }
   .intro-art img { object-fit: cover; }
   .intro-body { padding: 30px 28px 16px; gap: 6px; }
-  .intro-body .traces { padding: 7px 12px; }
+  .intro-body .ev-kind { padding-bottom: 10px; }
+  .intro-body .trace-slip { padding-top: 4px; padding-bottom: 4px; }
   .intro-body .recap { padding-top: 6px; }
 }
 
@@ -25,9 +24,23 @@
   .board { --room: calc(100vw - 88px); }
   .props { display: none; }  /* the board takes the whole width */
 }
+/* Short windows below the full layout: the eight tabs pack tighter, and on narrow ones they sit higher, so even the
+   last one stays on screen (the 1100px rule above would put them 92px down). */
+@media (max-height: 640px) and (min-width: 701px) {
+  .folder-tabs { top: 10px; gap: 2px; }
+  .folder-tabs button { padding: clamp(3px, calc(1vh - 2px), 4px) 6px; font-size: clamp(10px, calc(1.9vh - 1px), 11px); letter-spacing: .05em; }
+}
+@media (max-width: 1100px) and (max-height: 800px) and (min-width: 701px) {
+  .folder-tabs { top: 60px; }
+}
+
 /* Phones, upright or on their side (a short window): the phone layout. */
 @media (max-width: 700px), (max-height: 500px) {
   .traces.many ul { grid-template-columns: 1fr; }  /* one column of traces on phones */
+  .ev-kind { padding: 6px 14px 10px; }  /* the event's index card a little tighter */
+  .ev-kind-label { gap: 9px; margin: 0 -14px 8px; padding: 0 14px 6px; }
+  .ev-kind-name { font-size: 12.5px; letter-spacing: .12em; }
+  .ev-kind-text { font-size: 16.5px; }
   .film .dots i { width: 5px; height: 5px; margin: 0 1.5px; }  /* a long film's many dots on one line */
   /* the header in three short rows: the title; the nights and the score; the buttons */
   .casebar { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px 10px; padding: 8px 12px; }
@@ -43,11 +56,9 @@
   .pips .now { width: 18px; height: 18px; }
   /* films and the case papers: controls on one line, a little less padding */
   .film .nav, .prologue .nav { gap: 6px; }
-  .film .nav { margin: 6px 12px 0; }
   .film .nav > span:last-child { display: flex; gap: 6px; }
   .film .btn, .prologue .nav .btn { padding: 6px 10px; font-size: 12.5px; white-space: nowrap; }
   .film .dots { min-width: 0; overflow: hidden; white-space: nowrap; text-align: center; }
-  .film .film-caption { margin: 12px 16px 4px; font-size: 16.5px; min-height: 0; }
   .prologue { padding: 24px 18px 18px; }
   .prologue h2 { font-size: 26px; }
   /* the night's opening card */
@@ -57,7 +68,7 @@
   .intro-body h2 { font-size: 26px; }
   .board-wrap { padding: 12px 12px 90px; }
   .board { width: 100%; height: auto; min-height: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 12px; }
-  .strings { display: none; }
+  .strings, .extra { display: none; }  /* nor room on the cork for the clipping, the ticket and the map */
   .note .prompt small { display: none; }  /* "Point at a photograph to see its string": no strings on phones */
   .card { position: relative; width: auto; transform: rotate(var(--tilt)) !important; left: auto !important; top: auto !important; }
   .note { position: relative; left: auto; top: auto; transform: none; width: auto; grid-column: 1 / -1; order: -1; margin: 10px 0 6px; }
@@ -67,19 +78,21 @@
   .folder-body { transition: none; }
   .folder-tabs { position: fixed; left: 0; right: 0; bottom: 0; top: auto; flex-direction: row; gap: 0; }
   .folder-tabs button { writing-mode: horizontal-tb; transform: none; flex: 1; border-radius: 8px 8px 0 0; padding: 12px 2px; font-size: 10px;
-    letter-spacing: .02em; white-space: nowrap; }  /* the tabs stay on one line at 360px */
+    letter-spacing: .02em; white-space: nowrap; }  /* the eight tabs stay on one line at 360px, */
+  .folder-tabs button[data-short] { font-size: 0; letter-spacing: 0; }  /* the longer names shortened (index.html data-short) */
+  .folder-tabs button[data-short]::after { content: attr(data-short); font-size: 10px; letter-spacing: .02em; }
   .desk.folder-open .folder-body { position: fixed; left: 0; right: 0; top: 0; bottom: 44px; height: auto; }
   .rolegrid { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px 8px; }  /* three roles to a row */
   .tpiles { grid-template-columns: 1fr; }  /* the Theory tab's piles one above another, their slips side by side */
   .tpile { min-height: 0; }
   .tlist { flex-direction: row; flex-wrap: wrap; }
   .tslip { width: calc(50% - 3px); }
-  .reveal { grid-template-columns: 1fr; }
-  .reveal-art { margin: 18px auto 0; width: 60%; }
+  .reveal { grid-template-columns: 1fr; max-height: calc(100vh - 32px); overflow-y: auto; }  /* a card with a book scrolls */
+  .reveal-art { margin: 18px auto 0; width: 52%; }
 }
 
-/* Phones on their side: the header in one row, eight photographs to a row, and the films and cards with
-   the picture beside the text rather than above it. */
+/* Phones on their side: the header in one row, eight photographs to a row, and the cards with the picture
+   beside the text rather than above it (the films fill the screen, reveal.css). */
 @media (max-height: 500px) and (min-width: 701px) {
   .casebar { grid-template-columns: auto auto 1fr auto; padding: 6px 12px; }
   .casebar .brand, .case-actions { grid-column: auto; }
@@ -90,17 +103,13 @@
   .board-wrap { padding: 10px 12px 60px; }
   .board { grid-template-columns: repeat(11, 1fr); gap: 8px; }  /* the case note on the left, the photographs in two rows of eight */
   .note { grid-column: 1 / span 3; grid-row: 1 / span 2; margin: 0; align-self: start; }
-  .film { width: min(900px, 100%); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: 1fr auto;
-    padding: 0; align-items: center; }
-  .film-frame { grid-row: 1 / span 2; align-self: stretch; aspect-ratio: auto; min-height: 220px; }
-  .film .film-caption { margin: 12px 14px 4px; font-size: 15px; }
-  .film .nav { margin: 0 12px 12px; }
   .intro { width: min(860px, 100%); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); }
   .intro-art { aspect-ratio: auto; border-bottom: none; border-right: 3px solid #cfb482; }
   .intro-art img { object-fit: cover; object-position: 50% 40%; }
   .intro-body h2 { font-size: 22px; }
   .intro-body .flavor { font-size: 15px; }
-  .intro-body .ev-steps dd, .traces ul, .traces p { font-size: 13.5px; }
+  .intro-body .ev-kind-text { font-size: 15px; }
+  .traces ul, .traces p, .traces.many ul { font-size: 13.5px; }
   .intro-medal { bottom: auto; top: 12px; left: auto; right: -26px; transform: none; }
   .intro-body { padding: 18px 20px 16px 36px; overflow: auto; }
   .reveal { grid-template-columns: minmax(0, 36%) 1fr; }
@@ -108,3 +117,89 @@
   .reveal-body { padding: 16px 18px; }
 }
 
+
+/* The closing newspaper (reveal.css): smaller type in short windows; on phones one column, the nights as rows. */
+@media (max-height: 800px) and (min-width: 701px) {
+  .news { padding-top: 14px; }
+  .paper-name { font-size: min(38px, 4.2vw); }
+  .dateline { margin-top: 6px; }
+  .closing .headline { margin-top: 10px; font-size: min(42px, 5.4vw); }
+}
+@media (max-width: 1000px) and (min-width: 701px) {  /* the photograph beside the verdict, the story under both */
+  .news-top { grid-template-columns: minmax(0, 1fr) 250px; }
+  .news-photo { grid-row: 2; }
+  .news-top .yard { grid-row: 2; grid-column: 2; }
+  .news-lead { grid-row: 3; grid-column: 1 / -1; margin-top: 12px; }
+  .news-story { columns: 2 220px; column-gap: 22px; column-rule: 1px solid rgba(58,44,30,.3); }
+}
+@media (max-width: 700px) {
+  .news { padding: 14px 14px 26px; }
+  .masthead { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .paper-name { grid-column: 1 / -1; grid-row: 1; font-size: 26px; white-space: normal; text-align: center; }
+  .news-ear { font-size: 9.5px; padding: 2px 6px; }
+  .dateline { justify-content: center; font-size: 10px; letter-spacing: .1em; }
+  .dateline span:nth-child(2) { display: none; }
+  .closing .headline { font-size: 30px; line-height: 1.05; }
+  .news-top { display: flex; flex-direction: column; }
+  .news-lead { display: contents; }  /* the verdict between the deck and the story */
+  .news-deck { order: 1; font-size: 17px; }
+  .news-top .yard { order: 2; margin-bottom: 14px; padding-left: 0; border-left: 0; justify-content: center; }
+  .news-photo { order: 3; margin-bottom: 12px; }
+  .news-byline { order: 4; }
+  .news-story { order: 5; font-size: 15.5px; text-align: left; }
+  .news h3 span { display: block; margin: 0; }
+  .night-grid { grid-template-columns: minmax(0, 1fr); }
+  .night-col { grid-template-columns: 70px minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto; border-left: 0; border-top: 1px dotted rgba(58,44,30,.45); }
+  .night-col.night-labels { border-top: 0; }
+  .night-col .night-moon { justify-content: center; padding: 4px 2px; }
+  .night-col .night-moon em { font-size: 11.5px; }
+  .night-col.night-labels .night-call { align-items: center; padding: 0 0 4px; }
+  .night-call { min-height: 52px; border-top: 0; border-left: 1px dotted rgba(58,44,30,.45); }
+  .mini-shelf { gap: 12px 10px; padding: 14px 10px 12px; }
+  .mini-shelf .covers { --w: 46px; }
+  .mugs { columns: auto; }
+  .closing .nav { justify-content: center; padding: 10px 12px 12px; }
+  .closing .nav .btn { padding: 6px 10px; font-size: 13px; }
+}
+
+/* The case note (board.css) a size smaller: in short windows, where it has 245px of height, and on phones; on a phone
+   on its side it stands 206px wide beside the photographs, so everything on it shrinks again. */
+@media (max-height: 800px) and (min-width: 701px), (max-width: 700px) {
+  .note { gap: 6px; padding: 10px 13px; }
+  .note .note-head { padding: 3px 20px 2px; }
+  .note .kicker { font-size: 11.5px; }
+  .note .event { padding: 2px 11px 1px; font-size: 10px; }
+  .note :is(.phase, .closed) { padding: 7px 0 5px; font-size: min(28px, 9.5cqw); }
+  .note .closed { font-size: min(21px, 7.4cqw); }
+  .note > .prompt, .note .pick { padding: 5px 10px 6px; }
+  .note .hint { font-size: 12.5px; line-height: 1.22; }
+  .note .goal { font-size: 11.5px; line-height: 1.32; }
+  .note:has(> .prompt small) { padding-bottom: 27px; }
+  .note .prompt small { top: calc(100% + 6px); font-size: min(14px, 6cqw); }
+  .note .pick .mini { width: 36px; height: 47px; }
+  .note .btn.press { padding: 6px 16px 5px; font-size: 11.5px; }
+  .note .final { font-size: 28px; }
+}
+@media (max-width: 700px), (max-height: 500px) {
+  .note:has(> .prompt small) { padding-bottom: 10px; }  /* no pointer on phones */
+}
+@media (max-height: 500px) and (min-width: 701px) {
+  .note { gap: 4px; padding: 9px; border-radius: 9px; }
+  .note .note-head { padding: 2px 14px 1px; }
+  .note .kicker { gap: 5px; font-size: min(10px, 5.4cqw); letter-spacing: .12em; }
+  .note .moon { width: 13px; height: 13px; }
+  .note .event { padding: 2px 8px 1px; font-size: 9px; letter-spacing: .08em; }
+  .note :is(.phase, .closed) { padding: 5px 0 3px; font-size: 21px; letter-spacing: .18em; text-indent: .18em; }
+  .note .closed { font-size: 14px; }
+  .note > .prompt, .note .pick { padding: 4px 8px; }
+  .note .hint { font-size: 11.5px; }
+  .note .goal { font-size: 10.5px; }
+  .note .pick { gap: 8px; }
+  .note .pick .mini { width: 28px; height: 37px; }
+  .note .pick-name { font-size: 12px; }
+  .note .pick-job { font-size: 12px; }
+  .note .pick .prompt { font-size: 10px; }
+  .note .btn.press { margin-top: 2px; padding: 4px 10px 3px; font-size: 10px; letter-spacing: .05em; }
+  .note .final { font-size: 22px; }
+  .note > .btn:not(.press) { min-width: 0; padding: 4px 12px 3px; font-size: 11px; }
+}

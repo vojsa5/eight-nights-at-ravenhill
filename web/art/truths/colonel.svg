@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="leak">
+  <title>South Africa, long ago: two young officers raise their tin mugs to each other by the camp fire at dusk on the veldt, and a campaign medal hangs from the tent pole</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#121226"/>
+      <stop offset=".32" stop-color="#3a2446"/>
+      <stop offset=".5" stop-color="#8a3a3c"/>
+      <stop offset=".58" stop-color="#d8703c"/>
+      <stop offset=".62" stop-color="#f4a656"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="50%" cy="48%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".82"/>
+    </radialGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff0c0"/>
+      <stop offset=".5" stop-color="#ffd27a"/>
+      <stop offset="1" stop-color="#ff9a4a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a140e"/>
+      <stop offset=".3" stop-color="#120806"/>
+      <stop offset="1" stop-color="#060303"/>
+    </linearGradient>
+    <radialGradient id="fire" cx="50%" cy="80%" r="60%">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset=".5" stop-color="#ff8a2a"/>
+      <stop offset="1" stop-color="#8a2008" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+  <!-- the sky at dusk: the sun going down, clouds drifting, the first stars (in the films) -->
+  <g class="lf-far">
+    <rect width="360" height="200" fill="url(#sky)"/>
+    <circle cx="240" cy="120" r="40" fill="#ffb060" opacity=".4" filter="url(#soft)"/>
+    <circle cx="240" cy="118" r="17" fill="url(#sun)"/>
+    <g class="lf-cloud" fill="#f0906a" opacity=".55">
+      <path d="M150 88 C180 85 230 86 272 89 C230 91 182 91 150 88Z"/>
+      <path d="M212 98 C240 96 280 97 318 100 C282 101 244 101 212 98Z" opacity=".7"/>
+      <path d="M40 72 C70 69 108 70 140 73 C106 75 70 75 40 72Z" opacity=".5"/>
+    </g>
+    <g fill="#f4eee0">
+      <circle class="lf-twinkle" cx="60" cy="18" r=".8"/>
+      <circle class="lf-twinkle" style="--d:.9s" cx="150" cy="10" r=".7"/>
+      <circle class="lf-twinkle" style="--d:1.7s" cx="232" cy="24" r=".9"/>
+      <circle class="lf-twinkle" style="--d:.4s" cx="318" cy="14" r=".7"/>
+      <circle cx="98" cy="36" r=".5"/><circle cx="276" cy="40" r=".5"/><circle cx="190" cy="30" r=".4"/>
+    </g>
+    <path d="M18 118 L34 104 L90 102 L106 118Z M120 118 C130 114 142 114 150 118Z" fill="#3a1e2e"/>
+  </g>
+  <!-- the veldt, the acacias, the camp: bell tents, one lit by a lantern, the flag -->
+  <rect x="0" y="118" width="360" height="82" fill="url(#ground)"/>
+  <g fill="#0c0606">
+    <path d="M300 118 L302 92 C296 84 288 82 280 82 L284 79 C296 79 302 84 304 88 L306 76 L310 76 L309 90 C314 84 322 80 334 81 L336 84 C324 84 316 88 312 94 L310 118Z"/>
+    <path d="M262 78 C276 70 300 68 320 69 C340 68 356 72 362 78 C348 82 330 82 316 81 C298 82 278 82 262 78Z"/>
+    <path d="M139.4 118 L140 108 L136 104.6 L140.6 106.6 L141.6 104.4 L141.4 108 L141 118Z"/>
+    <path d="M124 104.6 C132 102 148 101.6 158 103.6 C150 105.8 132 106 124 104.6Z"/>
+  </g>
+  <g fill="#0e0807">
+    <path d="M48 124 L64 98 L80 124Z"/>
+    <path d="M74 126 L94 92 L114 126Z"/>
+  </g>
+  <path class="lf-flicker" d="M88 125 L94 106 L100 125Z" fill="#ffb060" opacity=".75"/>
+  <path d="M94 92 V88" stroke="#0e0807" stroke-width="1.2"/>
+  <path d="M122 126 V70" stroke="#0e0807" stroke-width="1.2"/>
+  <g class="lf-swing" style="transform-box:view-box;transform-origin:122px 71px">
+    <path d="M122.4 71 C128 69.6 132 72 138 70.6 L138 81 C132 82.4 128 80 122.4 81.4Z" fill="#0e0807"/>
+  </g>
+  <!-- the two officers and their toast; the fire between them (in the films the mugs go up, the fire burns, sparks
+       rise and the smoke drifts) -->
+  <g>
+    <g id="officer" fill="#070404">
+      <path d="M161.5 74.6 C161.5 67 164 63.6 168 63.6 C172 63.6 174.5 67 174.5 74.6Z"/>
+      <path d="M157.4 78.2 C160 75.4 164 74.4 168 74.4 C172 74.4 175.8 75 178 76.6 C174.4 77.8 170.6 77.6 168 77.4 C164 77.4 160.6 78.2 157.4 78.2Z"/>
+      <ellipse cx="168.4" cy="80" rx="4.4" ry="4.8"/>
+      <path d="M172.2 77.6 L174.6 80.8 L172.4 81.6Z M171.6 82 C173 82.4 173.6 83.2 173.2 84.2 L171 84.4Z"/>
+      <path d="M166 83 L171 83 L171 87 L166 87Z"/>
+      <path d="M159 87.6 C162 85.8 174 85.8 177 87.6 L178.4 100 L176.4 108.4 L159.6 108.4 L157.6 100Z"/>
+      <path d="M159.6 108 C156 112 156.4 118.4 160.6 121 L161.2 134 L166 134 L167.6 119 L168.8 119 L170.4 134 L175.4 134 L175.8 121 C180 118.4 180.4 112 176.4 108Z"/>
+    </g>
+    <path d="M159.4 89.4 L156.6 104.6" stroke="#070404" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M159 106 L151.6 125" stroke="#070404" stroke-width="1.3"/>
+    <path d="M176.6 88 L178.4 100 L176.4 108.4 M176.8 109 C179.6 112 179.8 117 175.8 121 M174.5 74.6 C174.5 70 173.4 66.6 171 64.6" fill="none" stroke="#ffb060" stroke-width=".7" opacity=".55"/>
+    <path d="M159.6 104.6 L176.6 104.6" stroke="#2a1810" stroke-width="1.4"/>
+    <g class="lf-toast" style="transform-box:view-box;transform-origin:175px 90px">
+      <path d="M175 90 L182 98 L189 92" fill="none" stroke="#070404" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="188" y="87" width="4.4" height="5" fill="#070404"/>
+      <path d="M182 98 L189 92 M188 87 H192.4" fill="none" stroke="#ffb060" stroke-width=".6" opacity=".6"/>
+    </g>
+  </g>
+  <g transform="translate(386 0) scale(-1 1)">
+    <use href="#officer"/>
+    <path d="M159 106 L151.6 125" stroke="#070404" stroke-width="1.3"/>
+    <path d="M176.6 88 L178.4 100 L176.4 108.4 M176.8 109 C179.6 112 179.8 117 175.8 121 M174.5 74.6 C174.5 70 173.4 66.6 171 64.6" fill="none" stroke="#ffb060" stroke-width=".7" opacity=".55"/>
+    <path d="M159.6 104.6 L176.6 104.6" stroke="#2a1810" stroke-width="1.4"/>
+    <path d="M159.6 93.6 L173.4 96.4 L165.6 104Z" fill="#d6ccb8" opacity=".8"/>
+    <path d="M170 86.4 L173.4 96.4" stroke="#d6ccb8" stroke-width="1.2" opacity=".8"/>
+    <circle cx="174.6" cy="97" r="1.7" fill="#070404"/>
+    <g class="lf-toast" style="transform-box:view-box;transform-origin:175px 90px">
+      <path d="M175 90 L182 98 L189 92" fill="none" stroke="#070404" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="188" y="87" width="4.4" height="5" fill="#070404"/>
+      <path d="M182 98 L189 92 M188 87 H192.4" fill="none" stroke="#ffb060" stroke-width=".6" opacity=".6"/>
+    </g>
+  </g>
+  <circle cx="193" cy="126" r="22" fill="#ff8a2a" opacity=".3" filter="url(#soft)"/>
+  <g stroke="#2a1408" stroke-width="2.2" stroke-linecap="round"><path d="M184 131 L201 127 M186 127 L202 131"/></g>
+  <path class="lf-fire" d="M185 129 C186 120 190 122 191 114 C193 120 195 112 197 108 C198 117 202 120 201 129Z" fill="url(#fire)" filter="url(#glow)"/>
+  <g data-fx="glow" data-at="193 122" data-r="44" data-tone="fire"/>
+  <g data-fx="embers" data-at="193 106" data-r="14"/>
+  <g data-fx="smoke" data-at="194 98" data-r="12"/>
+  <g fill="#0a0505">
+    <path d="M20 160 l3 -9 l2 8 l3 -11 l2 12Z M300 150 l2 -7 l2 6 l3 -9 l2 10Z M240 170 l2 -6 l2 5 l2 -7 l2 8Z M96 146 l2 -6 l2 5 l2 -8 l2 9Z"/>
+  </g>
+  <!-- close to us, the tent flap and the pole, and the medal hanging from it (in the films it turns and glints) -->
+  <g class="lf-near">
+    <path d="M0 0 L44 0 C38 50 40 120 28 200 L0 200Z" fill="#100906"/>
+    <path d="M44 0 C38 50 40 120 28 200" fill="none" stroke="#ffb060" stroke-width=".8" opacity=".3"/>
+    <path d="M0 0 L22 0 C20 60 22 130 14 200 L0 200Z" fill="#070404"/>
+    <path d="M30 40 L36 40" stroke="#5a4a3a" stroke-width="1.4" stroke-linecap="round"/>
+    <g class="lf-swing" style="transform-box:view-box;transform-origin:35px 40px">
+      <path d="M35 40 L31 46 M35 40 L39 46" stroke="#8a7a5a" stroke-width=".6"/>
+      <rect x="29" y="46" width="12" height="15" fill="#b8202a"/>
+      <rect x="31.4" y="46" width="1.6" height="15" fill="#1e2a6a"/>
+      <rect x="34" y="46" width="2" height="15" fill="#e88a2a"/>
+      <rect x="37" y="46" width="1.6" height="15" fill="#1e2a6a"/>
+      <path d="M33 61 L37 61 L36 63 L34 63Z" fill="#c8c8d0"/>
+      <circle cx="35" cy="69" r="6" fill="#c8ccd4" stroke="#8a8e98" stroke-width="1"/>
+      <circle cx="35" cy="69" r="3.6" fill="none" stroke="#9aa0aa" stroke-width=".5"/>
+      <path d="M31.4 66 A4.6 4.6 0 0 1 36 64.4" fill="none" stroke="#fff" stroke-width=".8" opacity=".7"/>
+      <circle class="lf-glint" style="--d:1s" cx="32.6" cy="66.4" r="1.3" fill="#fff8e6" opacity="0"/>
+    </g>
+  </g>
+  <g data-fx="guest" data-at="200 90"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

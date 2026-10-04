@@ -12,9 +12,18 @@
 <link rel="stylesheet" href="css/board.css">
 <link rel="stylesheet" href="css/folder.css">
 <link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/minisim.css">
+<link rel="stylesheet" href="css/film.css">
+<link rel="stylesheet" href="css/verdict.css">
+<link rel="stylesheet" href="css/flashback.css">
+<link rel="stylesheet" href="css/chapters.css">
 <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/title.css">
+<link rel="stylesheet" href="css/reading.css">
+<link rel="stylesheet" href="css/tour.css">
 </head>
 <body>
+<div class="title-screen" id="title" aria-hidden="true"></div>
 <header class="casebar">
   <div class="brand">
     <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="13" r="9" fill="none" stroke="#e6c783" stroke-width="3"/><path d="M20 20 L29 29" stroke="#e6c783" stroke-width="4" stroke-linecap="round"/></svg>
@@ -24,7 +33,7 @@
   <span class="stat">Score <b id="score">0</b></span>
   <span class="spacer"></span>
   <div class="case-actions">
-  <button class="btn ghost" id="briefing" title="Watch how the case began, then the conspiracy, how to play and Inspector Hollis's advice">Story</button>
+  <button class="btn ghost" id="briefing" title="Watch how the case began, then how to play, Inspector Hollis's advice and the case papers">Story</button>
   <button class="btn ghost" id="howto" title="How the game works, as a short film">How to play</button>
   <button class="btn ghost" id="tips" title="Inspector Hollis's advice, one tip at a time">Advice</button>
   <button class="btn primary" id="newgame">New case</button>
@@ -39,15 +48,18 @@
   </section>
   <aside class="folder" id="folder" aria-label="Case folder"><div class="folder-slide">
     <nav class="folder-tabs">
-      <button data-tab="testimony">Testimony</button>
+      <button data-tab="testimony" data-short="Ledger" aria-label="Testimony (ledger)">Testimony</button>
       <button data-tab="theory">Theory</button>
-      <button data-tab="casefile">Case file</button>
+      <button data-tab="casefile" data-short="File" aria-label="Case file">Case file</button>
+      <button data-tab="crimes">Crimes</button>
+      <button data-tab="rewards" data-short="Books" aria-label="Rewards (books)">Rewards</button>
       <button data-tab="roles">Roles</button>
       <button data-tab="events">Events</button>
       <button data-tab="rules">Rules</button>
     </nav>
     <div class="folder-body">
-      <div class="folder-head"><h2 id="folder-title"></h2><button class="folder-close" id="folder-close" title="Close the folder" aria-label="Close the folder">×</button></div>
+      <div class="folder-head"><h2 id="folder-title"></h2><button class="tour-btn" id="tour-btn" hidden title="A short guided tour of this tab"
+        aria-label="How this tab works: a short guided tour"><b aria-hidden="true">▶</b><span class="long" aria-hidden="true">How this tab works</span><span class="short" aria-hidden="true">How it works</span></button><button class="folder-close" id="folder-close" title="Close the folder" aria-label="Close the folder">×</button></div>
       <div class="tabbody" id="tabbody"></div>
     </div>
   </div></aside>

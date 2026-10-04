@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="black">
   <title>The wine cellar at night: one candle on an upturned barrel, a folded blanket on a bare chair, and moonlight through a small barred window high above</title>
   <defs>
     <radialGradient id="bg" cx="46%" cy="55%" r="80%">
@@ -33,6 +33,10 @@
       <circle cx="6" cy="6.5" r="4.2" fill="#050706" stroke="#1a2418"/>
       <circle cx="4.6" cy="5.2" r="1" fill="#c89a50" opacity=".45"/>
     </pattern>
+    <radialGradient id="chill" cx="46%" cy="58%" r="46%">
+      <stop offset="0" stop-color="#03050a" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#03050a" stop-opacity="0"/>
+    </radialGradient>
     <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
       <feGaussianBlur stdDeviation="2" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -41,6 +45,8 @@
     <filter id="haze" x="-30%" y="-10%" width="160%" height="120%"><feGaussianBlur stdDeviation="2.5"/></filter>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- in the story after a mistake (css/verdict.css) the candle gutters and goes out (lf-gutter, lf-wane), a thread of
+       smoke rises from the wick (lf-wisp), and the cellar goes cold (lf-chill) under the moonlight -->
   <!-- vaulted ceiling and stone joints -->
   <path d="M0 0 H360 V72 C320 28 250 16 180 16 C110 16 40 28 0 72Z" fill="#060708"/>
   <path d="M0 72 C40 28 110 16 180 16 C250 16 320 28 360 72" fill="none" stroke="#1c2432" stroke-width="2"/>
@@ -61,20 +67,21 @@
   <path d="M216.5 30 V54 M227 30 V54 M237.5 30 V54" stroke="#07090c" stroke-width="2.6"/>
   <path d="M204 55 H250 L254 62 H200Z" fill="#1a2230"/>
   <!-- candle glow -->
-  <circle cx="162" cy="106" r="46" fill="#ffa030" opacity=".32" filter="url(#soft)"/>
-  <ellipse cx="170" cy="176" rx="70" ry="10" fill="#ff9a30" opacity=".18" filter="url(#soft)"/>
+  <circle class="lf-wane" cx="162" cy="106" r="46" fill="#ffa030" fill-opacity=".32" filter="url(#soft)"/>
+  <ellipse class="lf-wane" cx="170" cy="176" rx="70" ry="10" fill="#ff9a30" fill-opacity=".18" filter="url(#soft)"/>
   <g transform="translate(0 -6)">
     <!-- upturned barrel -->
     <path d="M146 132 C141 150 141 162 146 180 H178 C183 162 183 150 178 132Z" fill="#2a1a0e"/>
     <path d="M154 133 C151 150 151 162 154 180 M170 133 C173 150 173 162 170 180" stroke="#1a1008"/>
     <path d="M144 142 C154 145 170 145 180 142 M143.5 170 C154 173 170 173 180.5 170" fill="none" stroke="#0c0806" stroke-width="3"/>
-    <path d="M146 180 C141 162 141 150 146 132" fill="none" stroke="#ff9a3a" stroke-opacity=".3" stroke-width="1.5"/>
+    <path class="lf-wane" d="M146 180 C141 162 141 150 146 132" fill="none" stroke="#ff9a3a" stroke-opacity=".3" stroke-width="1.5"/>
     <ellipse cx="162" cy="132" rx="16" ry="4" fill="#4a3018"/>
     <!-- the candle -->
     <ellipse cx="162" cy="131" rx="7" ry="2" fill="#6a5a40"/>
     <rect x="159" y="114" width="6" height="17" fill="#e8dcc0"/>
     <path d="M159 116 C158 120 158 123 159.5 124" fill="none" stroke="#fff4dc" stroke-width="1.2"/>
-    <path d="M162 100 C166 106 166 112 162 113 C158 112 158 106 162 100Z" fill="url(#flame)" filter="url(#glow)"/>
+    <path class="lf-gutter" style="transform-origin:50% 100%" d="M162 100 C166 106 166 112 162 113 C158 112 158 106 162 100Z" fill="url(#flame)" filter="url(#glow)"/>
+    <path class="lf-wisp" d="M162 113 C160 108 164.5 104 162 99 C159.5 94 164 90 162.5 84" fill="none" stroke="#a4acbc" stroke-width="1" stroke-linecap="round" opacity="0"/>
     <!-- the chair, and the folded blanket -->
     <g fill="#1e140c">
       <rect x="203" y="102" width="4" height="74"/><rect x="235" y="102" width="4" height="74"/>
@@ -85,8 +92,9 @@
     <path d="M197 139 H227 L234 132 V138 L227 145 C227 151 224 157 220 162 L214 157 L208 162 C203 156 199 150 199 145 H197Z" fill="#5a2c26"/>
     <path d="M197 139 H227 L234 132 H204Z" fill="#76443c"/>
     <path d="M197 142 H227 L234 135 M204 147 C206 153 208 157 208 161 M214 147 V157" fill="none" stroke="#2e1412" stroke-opacity=".8"/>
-    <path d="M204 132 L197 139 V145" fill="none" stroke="#ff9a3a" stroke-opacity=".4" stroke-width="1.2"/>
+    <path class="lf-wane" d="M204 132 L197 139 V145" fill="none" stroke="#ff9a3a" stroke-opacity=".4" stroke-width="1.2"/>
   </g>
+  <rect class="lf-chill" style="--d:2.6s" width="360" height="200" fill="url(#chill)" opacity="0"/>
   <!-- the shaft of moonlight, with the shadows of the bars -->
   <path d="M210 54 L244 54 L230 176 L192 176Z" fill="url(#beam)" filter="url(#haze)"/>
   <path d="M216.5 56 L204 174 M227 56 L214 174 M237.5 56 L224 174" stroke="#030405" stroke-opacity=".35" stroke-width="2" filter="url(#haze)"/>

@@ -2,8 +2,8 @@ Put your own pictures here to replace the built-in portraits in `web/art/roles/`
 
 - A role: name the file after the role, in lower case, e.g. `sleuth.png`, `grifter.webp`. The two Confidants and
   the two Lovers each have their own picture, `confidant-a` / `confidant-b` and `lover-a` / `lover-b`; `confidant` / `lover`
-  is the pair's picture, used when the role is listed without a holder (the Roles tab, under Not in this case), and for both
-  figures if there is no `-a` / `-b` file.
+  is the pair's picture, used when the role is shown without a holder (the crimes in the case papers, the Theory tab's
+  role sheet), and for both figures if there is no `-a` / `-b` file.
 - A guest's own portrait, shown until their role is revealed: name the file after their surname, e.g.
   `ashby.png` or `pryce.jpg`.
 

@@ -25,6 +25,8 @@ class WorldModel:
         self.free = [c for c in range(N_CHARS) if c not in self.fixed]
         self.removed_round = {c: rnd for c, (_, rnd, _) in view.revealed.items()}
         self.base = view.advice                            # the day advice
+        self.first_of = {(a.speaker, a.round): i for i, a in enumerate(view.advice)}  # each guest's day advice, by round
+        self.lovers_agree = rules.lovers_agree
         self.advice = view.advice + view.interviews  # advice-shaped items
         self.n_first = len(view.advice)
         self.notebooks = view.notebooks
@@ -101,7 +103,7 @@ class WorldModel:
         return self._pools[(y, t)]
 
     def _bribable(self, a):
-        return (a.save is not None and events.allows_investigations(self.events.get(a.round))
+        return (a.save is not None and a.round > 1 and events.allows_investigations(self.events.get(a.round))
                 and a.speaker in self._bribe_pool(a.save, a.round))
 
     def _repay_targets(self, a):
@@ -161,6 +163,12 @@ class WorldModel:
                 partner = None
         if role == "Lover" and partner in (a.save, a.eliminate):
             return LOG_TINY  # a Lover never names their partner
+        pair = 0.0
+        if role == "Lover" and partner is not None and a.speaker > partner and full and not second and self.lovers_agree:
+            j = self.first_of.get((partner, t))
+            b = self.advice[j] if j is not None else None
+            if b is not None and b.save is not None and b.eliminate is not None and a.save != b.save and a.eliminate != b.eliminate:
+                pair = LOG_RARE  # the Lovers share a tip on every full day, unless one of them was hypnotised or bribed
         key = calib_key(role, t, partner is not None, self.events.get(t))
         pe, ps, qs, qe = self.calib.get("I|" + key if second else key) or self.calib.get(key, (0.5, 0.5, 0.1, 0.1))
         le = ls = 1.0
@@ -182,7 +190,7 @@ class WorldModel:
         copies_save, copies_elim = self.copies[i]
         copy = (qs if copies_save else 1 - qs) if a.save is not None and not bought else 1.0
         copy *= (qe if copies_elim else 1 - qe) if a.eliminate is not None else 1.0
-        return math.log(le) + math.log(ls) + math.log(copy)
+        return math.log(le) + math.log(ls) + math.log(copy) + pair
 
     def notebook_ll(self, sc, roles):
         """A Notebook result: the kinds of facts say what the role could be, and each fact is
@@ -248,7 +256,7 @@ class WorldModel:
         table = [0.0] * N_CHARS
         for t in range(1, view.round + 1):
             alive = self._alive_at(t)
-            if not events.allows_investigations(self.events.get(t)) or len(alive) < 3 or self.events.get(t) == "Inquest":
+            if t < 2 or not events.allows_investigations(self.events.get(t)) or len(alive) < 3 or self.events.get(t) == "Inquest":
                 continue
             saves = {a.speaker: a.save for a in self._round_advice(t)}
             for y in alive:

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 262" width="200" height="262">
-  <title>Paymaster</title>
+  <title>Paymaster: fifty pounds held out to a footman's glove, a penknife and Lord Edmund's ledger with its pages cut out</title>
   <defs>
     <radialGradient id="bg" cx="50%" cy="36%" r="78%">
       <stop offset="0" stop-color="#1d3a28"/>
@@ -44,33 +44,47 @@
     <path d="M68 82 C68 50 132 50 132 82 Z"/>
   </g>
   <ellipse cx="111" cy="111" rx="3" ry="1.6" fill="#f4dca0" filter="url(#glow)"/>
-  <g transform="rotate(-34 64 226)">
+  <g transform="rotate(-24 64 226)">
     <rect x="30" y="176" width="46" height="26" rx="2" fill="#d4e6b8" stroke="#5a7a40" stroke-width="1.2"/>
-    <ellipse cx="53" cy="189" rx="8" ry="6" fill="none" stroke="#5a7a40" stroke-width="1"/>
     <rect x="34" y="180" width="38" height="18" rx="1" fill="none" stroke="#8aa870" stroke-width=".8"/>
   </g>
-  <g transform="rotate(-20 64 226)">
+  <g transform="rotate(-10 64 226)">
     <rect x="30" y="176" width="46" height="26" rx="2" fill="#d4e6b8" stroke="#5a7a40" stroke-width="1.2"/>
-    <ellipse cx="53" cy="189" rx="8" ry="6" fill="none" stroke="#5a7a40" stroke-width="1"/>
     <rect x="34" y="180" width="38" height="18" rx="1" fill="none" stroke="#8aa870" stroke-width=".8"/>
   </g>
-  <g transform="rotate(-6 64 226)">
+  <g transform="rotate(4 64 226)" filter="url(#glow)">
     <rect x="30" y="176" width="46" height="26" rx="2" fill="#d4e6b8" stroke="#5a7a40" stroke-width="1.2"/>
-    <ellipse cx="53" cy="189" rx="8" ry="6" fill="none" stroke="#5a7a40" stroke-width="1"/>
     <rect x="34" y="180" width="38" height="18" rx="1" fill="none" stroke="#8aa870" stroke-width=".8"/>
-  </g>
-  <g transform="rotate(8 64 226)">
-    <rect x="30" y="176" width="46" height="26" rx="2" fill="#d4e6b8" stroke="#5a7a40" stroke-width="1.2"/>
     <ellipse cx="53" cy="189" rx="8" ry="6" fill="none" stroke="#5a7a40" stroke-width="1"/>
-    <rect x="34" y="180" width="38" height="18" rx="1" fill="none" stroke="#8aa870" stroke-width=".8"/>
+    <text x="53" y="192.6" font-size="10" font-weight="bold" text-anchor="middle" fill="#3e5a2a" font-family="Georgia, serif">£</text>
+    <text x="38" y="186" font-size="4.6" fill="#3e5a2a" font-family="Georgia, serif">50</text>
+    <text x="64" y="196" font-size="4.6" fill="#3e5a2a" font-family="Georgia, serif">50</text>
   </g>
-  <ellipse cx="152" cy="236" rx="16" ry="5" fill="#c9a24a" stroke="#f4dca0" stroke-width="1"/>
-  <ellipse cx="152" cy="229" rx="16" ry="5" fill="#c9a24a" stroke="#f4dca0" stroke-width="1"/>
-  <ellipse cx="152" cy="222" rx="16" ry="5" fill="#c9a24a" stroke="#f4dca0" stroke-width="1"/>
-  <ellipse cx="152" cy="215" rx="16" ry="5" fill="#c9a24a" stroke="#f4dca0" stroke-width="1"/>
-  <ellipse cx="152" cy="208" rx="16" ry="5" fill="#c9a24a" stroke="#f4dca0" stroke-width="1"/>
-  <ellipse cx="152" cy="201" rx="16" ry="5" fill="#c9a24a" stroke="#f4dca0" stroke-width="1"/>
-  <ellipse cx="152" cy="201" rx="16" ry="5" fill="#f4dca0" filter="url(#glow)"/>
-  <path d="M166.0,184.0 L167.4,188.6 L172.0,190.0 L167.4,191.4 L166.0,196.0 L164.6,191.4 L160.0,190.0 L164.6,188.6Z" fill="#fff6d0" filter="url(#glow)"/>
+  <path d="M-4 168 L8 170 L9 186 L-4 188 Z" fill="#1c2a44"/>
+  <path d="M7 169.5 L10 170 L11 186 L8 186.5 Z" fill="#c9a24a"/>
+  <path d="M10 171 C16 168 24 170 30 172 C34 173 34 176 30 176.5 L22 176 C25 178 25 181 21 181.5 C24 183 22 186 18 185.5 C14 188 11 186 10 185 Z" fill="#ece8dc" filter="url(#glow)"/>
+  <g transform="rotate(-6 150 228)">
+    <path d="M118 210 L150 214 L182 210 L182 246 L150 250 L118 246 Z" fill="#5a2a1a"/>
+    <path d="M121 212 L150 216 L150 247 L121 243 Z" fill="#e8dcb8"/>
+    <path d="M128 213 V244 M141 214.6 V245.6" stroke="#b3221b" stroke-width=".8"/>
+    <path d="M122 220 L149 223.5 M122 226 L149 229.5 M122 232 L149 235.5 M122 238 L149 241.5" stroke="#8a7a58" stroke-width=".6"/>
+    <path d="M150 216 L156 215.3 L153.5 219 L156.5 223 L153.5 227 L156.5 231 L153.5 235 L156.5 239 L153.5 243 L156 246.4 L150 247 Z" fill="#e8dcb8"/>
+  </g>
+  <g transform="rotate(-36 168 232)" filter="url(#glow)">
+    <rect x="150" y="229" width="20" height="6" rx="2.5" fill="#6a4426"/>
+    <rect x="167" y="229" width="3" height="6" fill="#c9a24a"/>
+    <path d="M170 229.6 L192 230.6 L188 234.4 L170 234.4 Z" fill="#dfe6ea"/>
+    <path d="M171 230 L191 231" stroke="#ffffff" stroke-width=".8"/>
+  </g>
+  <g transform="rotate(16 162 186)" filter="url(#glow)">
+    <rect x="152" y="174" width="20" height="25" fill="#e8dcb8"/>
+    <path d="M156 174 V199" stroke="#b3221b" stroke-width=".7"/>
+    <path d="M153 180 H171 M153 185 H171 M153 190 H171 M153 195 H171" stroke="#8a7a58" stroke-width=".5"/>
+  </g>
+  <g transform="rotate(-18 180 160)" opacity=".85">
+    <rect x="172" y="150" width="16" height="20" fill="#e8dcb8"/>
+    <path d="M175 150 V170" stroke="#b3221b" stroke-width=".6"/>
+    <path d="M173 155 H187 M173 160 H187 M173 165 H187" stroke="#8a7a58" stroke-width=".5"/>
+  </g>
   <rect width="200" height="262" fill="url(#vig)"/>
 </svg>

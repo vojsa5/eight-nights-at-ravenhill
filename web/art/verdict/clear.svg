@@ -73,5 +73,9 @@
   <circle cx="172" cy="131" r="1.6" fill="#b4b6c4"/>
   <path d="M188 150 H194 V153 H188Z M148 150 H154 V153 H148Z" fill="#d8dce8" opacity=".8"/>
   <path d="M194 130 C190 124 198 120 194 112 M197 128 C194 122 201 118 198 110" fill="none" stroke="#fff4e0" stroke-opacity=".5" stroke-width="1.2" filter="url(#glow)"/>
+  <!-- in the films (css/film.css): steam off the pot, dust turning in the window's light, the warm corridor -->
+  <g data-fx="steam" data-at="195 128" data-r="6"/>
+  <g data-fx="motes" data-at="166 122" data-r="40"/>
+  <g data-fx="glow" data-at="282 112" data-r="32" data-tone="lamp"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

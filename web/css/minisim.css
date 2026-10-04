@@ -1,0 +1,103 @@
+/* How to play's case in miniature (minisim.js): a larger exhibit, a small cork board with five photographs, the
+   strings, stamps and counts of the real board (board.css .badge, .stamp, .photo .rl). Every step animates only what
+   it changes, delayed by --d to fit the scene; each element's own style is its end state, so with less motion
+   asked for a scene simply shows how it ends. */
+.exhibit.minisim { top: 45%; width: clamp(220px, min(36cqw, 58cqh), 470px); padding: 1.9em .8em .65em; transform: rotate(-1.2deg);
+  animation-name: ms-in; }  /* where every scene's subtitle leaves it, so the board stays put from scene to scene */
+.exhibit.minisim.cont { animation: none; }  /* the same board, scene after scene */
+@keyframes ms-in { from { opacity: 0; transform: translateY(-26px) rotate(6deg); } to { opacity: 1; transform: rotate(-1.2deg); } }
+.ms-board { position: relative; aspect-ratio: 100 / 80; border-radius: 3px; background: var(--cork-grain, none),
+  linear-gradient(135deg, var(--cork), var(--cork-dark)); box-shadow: inset 0 0 12px rgba(0,0,0,.45); }
+.ms-foot { display: flex; justify-content: space-between; margin-top: .5em; padding: 0 .2em; font: 1em var(--typed); letter-spacing: .08em;
+  text-transform: uppercase; color: #6a4a14; }
+.ms-foot b { font: 700 1.15em Cinzel, Georgia, serif; letter-spacing: .02em; color: #3a2a14; }
+.ms-tick { position: relative; display: inline-grid; }
+.ms-tick b { grid-area: 1 / 1; }
+.ms-tick .was { opacity: 0; }
+.ms-tick .was.now { animation: ms-was .5s var(--d) both; }
+.ms-tick .is.now { animation: ms-is .5s var(--d) both; }
+@keyframes ms-was { from { opacity: 1; } to { opacity: 0; translate: 0 -.6em; } }
+@keyframes ms-is { from { opacity: 0; translate: 0 .6em; } }
+
+/* the strings, under the photographs, from the adviser's to the one they advise on */
+.ms-strings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ms-strings path { fill: none; stroke-width: .85; stroke-linecap: round; stroke-dasharray: 1 1; filter: drop-shadow(0 .5px .4px rgba(0,0,0,.5)); }
+.ms-strings .s { stroke: var(--string-green); }
+.ms-strings .e { stroke: var(--string-red); }
+.ms-strings path.now { animation: ms-draw .7s var(--d) ease-out both; }
+@keyframes ms-draw { from { stroke-dashoffset: 1; } }
+.ms-strings .lit { stroke-width: 1.5; filter: drop-shadow(0 0 1.4px #fff3c0) drop-shadow(0 0 2.5px #f2d27a); }  /* the Sleuth's: the truth */
+.ms-strings .lit.now { animation: ms-lit .8s var(--d) ease-out both; }
+@keyframes ms-lit { from { stroke-width: .85; filter: none; } }
+.ms-strings .lie { opacity: .3; }  /* the Forger's: lies */
+.ms-strings .lie.now { animation: ms-lie 1s var(--d) ease-in both; }
+@keyframes ms-lie { from { opacity: 1; } }
+
+/* the photographs */
+.ms-card { position: absolute; z-index: 1; width: 18%; padding: .7% .7% 0; translate: -50% -50%; rotate: var(--r); container-type: inline-size;
+  background: linear-gradient(172deg, #f8f2e4, #ebe1ca); box-shadow: 0 3px 7px rgba(0,0,0,.5); }
+.ms-card .photo { display: block; perspective: 300px; overflow: visible; background: none; box-shadow: none; }
+.ms-flip { position: absolute; inset: 0; transform-style: preserve-3d; }
+.ms-face { position: absolute; inset: 0; overflow: hidden; background: #111; backface-visibility: hidden; }
+.ms-face .art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
+.ms-face.back { transform: rotateY(180deg); }
+.ms-flip.turned { transform: rotateY(180deg); }
+.ms-flip.turned.now { animation: ms-turn 1s var(--d) ease-in-out both; }
+@keyframes ms-turn { from { transform: none; } }
+.ms-card .rl { font-size: clamp(9px, 21cqw, 20px); }
+.ms-card.bad .rl { color: var(--ink-red); }
+.ms-nm { display: block; padding: .1em 0 .05em; font: 700 1.25em/1.1 var(--hand); color: #2b2118; }
+.ms-card .badge { top: 2px; left: 2px; z-index: 1; font-size: clamp(9px, 17cqw, 15px); }
+.ms-card .badge.now { animation: ms-pop .45s var(--d) cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes ms-pop { from { opacity: 0; scale: .2; } }
+.ms-card .stamp { top: 33%; z-index: 2; font-size: clamp(8px, 17cqw, 16px); }
+.ms-card .stamp.now { animation: card-stamp .42s var(--d) cubic-bezier(.5,0,.75,0) both; }  /* board.css */
+
+/* each guest in turn, as they testify; the one you pick; what the Sleuth's truth tells you about the others */
+.ms-card.speak.now { animation: ms-speak var(--len) var(--d) ease-in-out both; }
+@keyframes ms-speak { 12%, 80% { scale: 1.12; z-index: 3; box-shadow: 0 0 0 2px #f2d27a, 0 0 16px rgba(242,210,122,.75), 0 6px 12px rgba(0,0,0,.5); } }
+.ms-card.pick.now { animation: ms-pick 1.5s calc(var(--d) - .5s) ease-in-out both; }
+@keyframes ms-pick { 30%, 75% { scale: 1.12; z-index: 3; box-shadow: 0 0 0 2px #f2d27a, 0 0 16px rgba(242,210,122,.75), 0 6px 12px rgba(0,0,0,.5); } }
+.ms-card.ok { box-shadow: 0 0 0 2px var(--string-green), 0 0 12px rgba(47,122,74,.8), 0 3px 7px rgba(0,0,0,.5); }
+.ms-card.sus { box-shadow: 0 0 0 2px var(--string-red), 0 0 12px rgba(179,34,27,.85), 0 3px 7px rgba(0,0,0,.5); }
+.ms-card.ok.now, .ms-card.sus.now { animation: ms-mark .7s var(--d) ease-out both; }
+@keyframes ms-mark { from { box-shadow: 0 3px 7px rgba(0,0,0,.5); } 50% { scale: 1.1; } }
+
+/* the reading glass that makes the call */
+.ms-hand { position: absolute; z-index: 4; width: 26%; translate: -22% -42%; rotate: -32deg; opacity: 0; pointer-events: none;
+  filter: drop-shadow(3px 6px 4px rgba(0,0,0,.55)); animation: ms-hand 2.6s var(--d) ease-in-out both; }
+@keyframes ms-hand {
+  0% { opacity: 0; translate: 90% 120%; }
+  12% { opacity: 1; }
+  42% { translate: -22% -42%; scale: 1; }
+  50% { scale: .86; }
+  58%, 78% { opacity: 1; translate: -22% -42%; scale: 1; }
+  100% { opacity: 0; translate: 40% 60%; }
+}
+
+/* a right call's point, and a mistake's sealed role */
+.ms-plus { position: absolute; z-index: 5; left: 50%; top: -6%; translate: -50% 0; opacity: 0; font: 700 1.6em Cinzel, Georgia, serif;
+  color: #f2d27a; text-shadow: 0 1px 2px #000, 0 0 8px rgba(0,0,0,.6); }
+.ms-plus.now { animation: ms-plus 1.8s var(--d) ease-out both; }
+@keyframes ms-plus { 0% { opacity: 0; translate: -50% 40%; } 20%, 65% { opacity: 1; } 100% { opacity: 0; translate: -50% -90%; } }
+.ms-sealed { position: absolute; z-index: 3; left: 50%; top: 52%; translate: -50% 0; display: flex; flex-direction: column; align-items: center;
+  white-space: nowrap; }
+.ms-sealed b { padding: 0 .35em; background: rgba(244,237,220,.95); font: 700 1em var(--typed); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-red); }
+.ms-sealed span { padding: .1em .45em; background: linear-gradient(#2a2420, #14100c); font: .75em var(--typed); letter-spacing: .1em; text-transform: uppercase;
+  color: #ff9a8a; }
+.ms-sealed.now { animation: ms-pop .5s var(--d) cubic-bezier(.3,1.6,.5,1) both; }
+
+/* paused, the board holds still with the film */
+.film.paused .minisim, .film.paused .minisim * { animation-play-state: paused; }
+
+@container (max-width: 520px) {  /* upright: across the top of the picture, below the Skip button */
+  .exhibit.minisim { top: 52px; translate: none; left: 3%; right: 3%; width: auto; max-width: 420px; margin: 0 auto; padding: 8px 8px 6px;
+    font-size: 12px; }
+}
+@container (max-height: 460px) and (min-width: 521px) {  /* a phone on its side */
+  .exhibit.minisim { width: clamp(200px, 60cqh, 300px); font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .minisim, .minisim * { animation: none !important; }
+}

@@ -28,6 +28,16 @@
       <feGaussianBlur stdDeviation="8"/>
     </filter>
   </defs>
+  <style>
+    /* its life on the night's opening card (intro.js inlines it as .ev-live): the prints appear one by one from the
+       library window to the terrace door, which closes on its light; the lamplight on the snow wavers */
+    .ev-live .fp { animation: fp-print .35s calc(var(--dawn, 0ms) + 100ms + var(--n) * 85ms) ease-out both; }
+    .ev-live .fp-door { transform-origin: 332px 110px; animation: fp-door 1.5s calc(var(--dawn, 0ms) - 100ms) ease-in-out both; }
+    .ev-live .fp-spill { animation: fp-waver 2.3s ease-in-out 6 alternate; }
+    @keyframes fp-print { from { opacity: 0; } 40% { opacity: 1; } }
+    @keyframes fp-door { 0%, 70% { opacity: .8; transform: scaleX(1); } 96% { opacity: .8; transform: scaleX(.04); } 100% { opacity: 0; transform: scaleX(0); } }
+    @keyframes fp-waver { 0% { opacity: 1; } 45% { opacity: .78; } 70% { opacity: .95; } 100% { opacity: .85; } }
+  </style>
   <rect width="360" height="200" fill="url(#bg)"/>
   <circle cx="292" cy="34" r="16" fill="#eef2ff" filter="url(#glow)"/>
   <circle cx="292" cy="34" r="40" fill="#cfd8f0" opacity=".12" filter="url(#soft)"/>
@@ -78,49 +88,50 @@
   <rect x="26" y="112" width="62" height="6" fill="#e8eef8"/>
   <path d="M300 140 L300 78 C300 66 336 66 336 78 L336 140 Z" fill="#12141c"/>
   <path d="M304 140 L304 80 C304 72 332 72 332 80 L332 140 Z" fill="#1c2030"/>
+  <path class="fp-door" d="M304 140 L304 80 C304 72 332 72 332 80 L332 140 Z" fill="#ffcf7a" opacity="0"/>
   <rect x="0" y="136" width="360" height="64" fill="url(#snow)"/>
-  <ellipse cx="58" cy="140" rx="70" ry="24" fill="url(#spill)"/>
-  <g transform="translate(92.0 146.2) rotate(-8.0) scale(0.75)">
+  <ellipse class="fp-spill" cx="58" cy="140" rx="70" ry="24" fill="url(#spill)"/>
+  <g class="fp" style="--n:0" transform="translate(92.0 146.2) rotate(-8.0) scale(0.75)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(113.0 160.0) rotate(-6.6) scale(0.80)">
+  <g class="fp" style="--n:1" transform="translate(113.0 160.0) rotate(-6.6) scale(0.80)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(134.0 157.1) rotate(-5.2) scale(0.84)">
+  <g class="fp" style="--n:2" transform="translate(134.0 157.1) rotate(-5.2) scale(0.84)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(155.0 169.8) rotate(-3.8) scale(0.89)">
+  <g class="fp" style="--n:3" transform="translate(155.0 169.8) rotate(-3.8) scale(0.89)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(176.0 163.1) rotate(-2.4) scale(0.93)">
+  <g class="fp" style="--n:4" transform="translate(176.0 163.1) rotate(-2.4) scale(0.93)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(197.0 172.9) rotate(-1.0) scale(0.97)">
+  <g class="fp" style="--n:5" transform="translate(197.0 172.9) rotate(-1.0) scale(0.97)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(218.0 161.0) rotate(0.4) scale(1.02)">
+  <g class="fp" style="--n:6" transform="translate(218.0 161.0) rotate(0.4) scale(1.02)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(239.0 167.5) rotate(1.8) scale(1.06)">
+  <g class="fp" style="--n:7" transform="translate(239.0 167.5) rotate(1.8) scale(1.06)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(260.0 151.0) rotate(3.2) scale(1.11)">
+  <g class="fp" style="--n:8" transform="translate(260.0 151.0) rotate(3.2) scale(1.11)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(281.0 155.4) rotate(4.6) scale(1.16)">
+  <g class="fp" style="--n:9" transform="translate(281.0 155.4) rotate(4.6) scale(1.16)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>
-  <g transform="translate(302.0 136.0) rotate(6.0) scale(1.20)">
+  <g class="fp" style="--n:10" transform="translate(302.0 136.0) rotate(6.0) scale(1.20)">
     <ellipse cx="0" cy="0" rx="7" ry="3.4" fill="#7a8ca8" opacity=".75"/>
     <ellipse cx="-9" cy="0" rx="3.2" ry="2.6" fill="#7a8ca8" opacity=".75"/>
   </g>

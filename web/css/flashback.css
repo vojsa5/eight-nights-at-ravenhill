@@ -1,0 +1,166 @@
+/* The longer story after a decision (reveal.js): an arrest walks the guest from the hall down to the cellar, and a
+   right call ends on a flashback of what the guest did that night, in the look of a memory. The moving parts of the
+   hall and the stairs (art/verdict/) and of the crimes (art/crimes/, which the opening film shows too) are lf-*
+   classes, as in film.css. */
+
+/* the hall: the long-case clock ticks, a guest leans to whisper to the next */
+.film-layer .lf-tick { animation: lf-tick 1s ease-in-out infinite alternate; }
+.film-layer .lf-lean { transform-origin: 50% 100%; animation: lf-lean 7s ease-in-out var(--d, 0s) infinite; }
+@keyframes lf-tick { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+@keyframes lf-lean { 0%, 30%, 100% { transform: none; } 42%, 70% { transform: rotate(2.5deg); } }
+
+/* the cellar stairs: the lantern swings with each step, and the long shadows of the two going down ahead of it
+   step on down towards the door */
+.film-layer .lf-bob { animation: lf-bob 1.8s ease-in-out infinite; }
+.film-layer .lf-descend { transform-origin: 50% 0; animation: lf-descend var(--scene) linear both; }
+.film-layer .lf-stride { transform-origin: 50% 100%; animation: lf-stride .9s ease-in-out var(--d, 0s) infinite; }
+@keyframes lf-bob { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes lf-descend { to { transform: translate(-3px, -6px) scale(.9); } }
+@keyframes lf-stride { 0%, 100% { transform: none; } 50% { transform: translateY(1.6px) scaleY(.985); } }
+
+/* the crimes of the birthday night (art/crimes/), in the order of the evening: the opening film shows them, and a right
+   arrest replays the guest's own as a flashback */
+
+/* the eavesdropper at the library door (crimes/eavesdropper.svg), on a 10s round: the safe's dial turns left, right,
+   left a click at a time, each click runs to the door as rings of sound, the one listening leans in and writes each
+   number down on a cigarette paper, and at the end of the round the dial is spun back */
+.film-layer .lf-dial { animation: lf-dial 10s linear infinite; }
+.film-layer .lf-twist { animation: lf-twist 10s ease-in-out infinite; }
+.film-layer .lf-heard { animation: lf-heard 10s steps(1) infinite; }
+.film-layer .lf-click { animation: lf-click .5s ease-out var(--d, 0s) infinite backwards; }
+.film-layer .lf-hark { animation: lf-hark 10s ease-in-out infinite; }
+.film-layer .lf-jot { animation: lf-jot 10s ease-in-out infinite; }
+@keyframes lf-dial { 0%, 10% { transform: none; } 11.2%, 15% { transform: rotate(-20deg); } 16.2%, 20% { transform: rotate(-40deg); }
+  21.2%, 25% { transform: rotate(-60deg); } 26.2%, 35% { transform: rotate(-80deg); } 36.2%, 40% { transform: rotate(-60deg); }
+  41.2%, 45% { transform: rotate(-40deg); } 46.2%, 55% { transform: rotate(-20deg); } 56.2%, 60% { transform: rotate(-40deg); }
+  61.2%, 65% { transform: rotate(-60deg); } 66.2%, 86% { transform: rotate(-80deg); animation-timing-function: ease-in-out; } 94%, 100% { transform: none; } }
+@keyframes lf-twist { 0%, 9% { transform: none; } 26%, 34% { transform: rotate(-4deg); } 46%, 54% { transform: rotate(2deg); }
+  66%, 86% { transform: rotate(-4deg); } 94%, 100% { transform: none; } }
+@keyframes lf-heard { 0% { opacity: 0; } 9.5% { opacity: 1; } 30% { opacity: 0; } 34.5% { opacity: 1; } 50% { opacity: 0; } 54.5% { opacity: 1; } 70% { opacity: 0; } }
+@keyframes lf-click { 0% { opacity: 0; transform: translateX(3px); } 18% { opacity: 1; } 75%, 100% { opacity: 0; transform: translateX(-4px); } }
+@keyframes lf-hark { 0%, 6% { transform: rotate(-1.6deg); } 9%, 27% { transform: none; } 30%, 32% { transform: rotate(-.9deg); } 35%, 47% { transform: none; }
+  50%, 52% { transform: rotate(-.9deg); } 55%, 67% { transform: none; } 70%, 72% { transform: rotate(-.9deg); } 75%, 84% { transform: none; }
+  92%, 100% { transform: rotate(-1.6deg); } }
+@keyframes lf-jot { 0%, 28% { transform: translateX(-22.3px); } 32%, 48% { transform: translateX(-14.1px); } 52%, 68% { transform: translateX(-8.6px); }
+  72%, 90% { transform: none; } 95%, 100% { transform: translateX(-22.3px); } }
+
+/* the gold-mine shares over the port: a gloved hand slides the certificate across the table and lets go; the cheque's
+   signature writes itself (pathLength="1") while the hand and pen follow it and lift; now and then a sheen runs over
+   the certificate's gilt border */
+.film-layer .lf-slide { animation: lf-slide 2.6s .3s both; }
+.film-layer .lf-push { animation: lf-push 2.6s .3s both; }
+.film-layer .lf-sign { stroke-dasharray: 1; animation: lf-sign 2.4s linear 1.5s both; }
+.film-layer .lf-scrawl { animation: lf-scrawl 2.4s linear 1.5s both; }
+.film-layer .lf-sheen { animation: lf-sheen 5s ease-in-out var(--d, 3.9s) infinite; }
+@keyframes lf-slide { from { transform: translate(-18px, 2px); animation-timing-function: cubic-bezier(.25,.6,.3,1); } 55%, to { transform: none; } }
+@keyframes lf-push { from { transform: translate(-18px, 2px); animation-timing-function: cubic-bezier(.25,.6,.3,1); } 55%, 70% { transform: none; animation-timing-function: ease-in-out; }
+  to { transform: translate(-8px, 1px); } }
+@keyframes lf-sign { from { stroke-dashoffset: 1; } 80%, to { stroke-dashoffset: 0; } }
+@keyframes lf-scrawl { 0% { transform: translate(-32px, 1.4px); } 5% { transform: translate(-30.3px, -4.1px); } 10% { transform: translate(-28.1px, -2px); }
+  15% { transform: translate(-28.2px, .5px); } 20% { transform: translate(-24.1px, 0); } 25% { transform: translate(-20.5px, 0); }
+  30% { transform: translate(-17.5px, 1px); } 35% { transform: translate(-14.5px, 1.8px); } 40% { transform: translate(-12.6px, -3px); }
+  45% { transform: translate(-12px, .3px); } 50% { transform: translate(-9.6px, 1.7px); } 55% { transform: translate(-7.7px, .7px); }
+  60% { transform: translate(-6.3px, -3.5px); } 65% { transform: translate(-6px, 1.9px); } 70% { transform: translate(-4.8px, -3.8px); }
+  75% { transform: translate(-4.3px, 1.1px); } 80% { transform: none; animation-timing-function: ease-out; } to { transform: translate(3px, -6px); } }
+@keyframes lf-sheen { 0% { transform: none; } 28%, 100% { transform: translateX(150px); } }
+
+/* the paymaster by the study door (crimes/paymaster.svg), on a 6.5s round: the bundle of notes comes out of the dark
+   and is pressed into the hand the footman holds open behind his back; his fingers close on it, the empty black glove
+   goes back into the dark, and the hand opens again for the next bundle. The top note flutters as it is held out */
+.film-layer .lf-proffer { animation: lf-proffer 6.5s ease-in-out infinite; }
+.film-layer .lf-take { animation: lf-take 6.5s ease-in-out infinite; }
+.film-layer .lf-handed { animation: lf-handed 6.5s linear infinite; }
+.film-layer .lf-received { animation: lf-received 6.5s linear infinite; }
+.film-layer .lf-flutter { animation: lf-flutter 1.3s ease-in-out infinite; }
+.film-layer .lf-clasp { animation: lf-clasp 6.5s ease-in-out infinite; }
+@keyframes lf-proffer { 0% { transform: translate(-14px, -3px); } 14%, 30% { transform: none; } 38%, 41% { transform: translateY(8px); } 54%, 90% { transform: translate(-16px, -2px); } 100% { transform: translate(-14px, -3px); } }
+@keyframes lf-take { 0%, 41% { transform: none; } 50%, 80% { transform: translate(5px, 1px); } 90%, 100% { transform: none; } }
+@keyframes lf-handed { 0%, 41% { opacity: 1; } 43%, 88% { opacity: 0; } 92%, 100% { opacity: 1; } }
+@keyframes lf-received { 0%, 41% { opacity: 0; } 43%, 82% { opacity: 1; } 90%, 100% { opacity: 0; } }
+@keyframes lf-flutter { 0%, 100% { transform: none; } 30% { transform: skewY(-7deg) scaleX(.96); } 55% { transform: skewY(2deg); } 78% { transform: skewY(-3deg) scaleX(.99); } }
+@keyframes lf-clasp { 0%, 41% { transform: none; } 47%, 82% { transform: scaleX(.42); } 90%, 100% { transform: none; } }
+
+/* the hypnotist's watch (crimes/hypnotist.svg): the silver watch swings on its chain before Lord Edmund's eyes, 2.4s a
+   swing, and its small reflection swings with it in his eyes; his head sways ever so slightly, a beat behind */
+.film-layer .lf-pendulum { animation: lf-pendulum 2.4s ease-in-out infinite alternate; }
+.film-layer .lf-follow { animation: lf-follow 2.4s ease-in-out infinite alternate; }
+.film-layer .lf-entranced { animation: lf-entranced 4.8s ease-in-out -1.4s infinite alternate; }
+@keyframes lf-pendulum { from { transform: rotate(-18deg); } to { transform: rotate(18deg); } }
+@keyframes lf-follow { from { transform: translateX(1.4px); } to { transform: translateX(-1.4px); } }
+@keyframes lf-entranced { from { transform: rotate(-.7deg); } to { transform: rotate(.7deg); } }
+
+/* the Lovers' nightcap: the door to the passage, held ajar, opens a little wider and closes again */
+.film-layer .lf-peek { animation: lf-peek 9s ease-in-out 1.4s infinite; }
+@keyframes lf-peek { 0%, 12%, 80%, 100% { transform: none; } 24%, 62% { transform: translateX(2.6px); } }
+
+/* the stolen will: a gloved hand lifts the will off the side table; then light grows under the door, feet stop outside,
+   and the hand starts; the candle beyond the door keeps flickering */
+.film-layer .lf-lift { animation: lf-lift 4.2s .5s both; }
+.film-layer .lf-nearing { animation: lf-nearing 4s both, lf-flicker 3.4s steps(1) 4s infinite; }
+.film-layer .lf-feet { animation: lf-feet 4s ease-out both; }
+@keyframes lf-lift { from { transform: translate(4px, 16px); animation-timing-function: ease-in-out; } 38%, 72% { transform: none; animation-timing-function: cubic-bezier(.2,1.6,.4,1); }
+  78%, to { transform: translate(2px, -3px); } }
+@keyframes lf-nearing { 0%, 55% { opacity: .3; } 85%, to { opacity: 1; } }
+@keyframes lf-feet { 0%, 62% { opacity: 0; transform: translateX(-18px); } 85%, to { opacity: 1; transform: none; } }
+
+/* the cut wire: the shears, drawn just open on the wire, open wider and snap shut (each half by its own --open and
+   --shut), the spark drawn at the cut flashes and flickers out, and the cut ends spring apart and fall (each by its
+   own --fall, about its own end) */
+.film-layer .lf-snip { animation: lf-snip 2.4s ease-in both; }
+.film-layer .lf-snap { animation: lf-snap 2.4s linear both; }
+.film-layer .lf-droop { animation: lf-droop 2.4s ease-in-out both; }
+@keyframes lf-snip { 0% { transform: rotate(var(--open)); } 30% { transform: rotate(calc(var(--open) * .8)); }
+  44% { transform: rotate(calc(var(--open) * .72)); } 48% { transform: rotate(calc(var(--shut) * 1.2)); } 56%, 100% { transform: rotate(var(--shut)); } }
+@keyframes lf-snap { 0%, 47% { opacity: 0; } 48% { opacity: 1; } 51% { opacity: .5; } 54% { opacity: .95; } 59% { opacity: .3; }
+  63% { opacity: .7; } 68% { opacity: .15; } 72%, 100% { opacity: 0; } }
+@keyframes lf-droop { 0%, 47% { transform: none; } 58% { transform: rotate(calc(var(--fall) * 1.14)); }
+  70% { transform: rotate(calc(var(--fall) * .94)); } 82% { transform: rotate(calc(var(--fall) * 1.02)); } 100% { transform: rotate(var(--fall)); } }
+
+/* the guest's photograph laid where the picture's data-fx="guest" mark is (film.js places the mark with the picture, so
+   the photograph follows the crop on every screen): alone in the middle of the hall, or coming through the flashback
+   over the figure who did it; kept whole on the screen and clear of the subtitle (film.js --sub-top). Where the browser
+   cannot anchor, or the picture has no mark, in the middle of the frame */
+.film-pan .fx-guest { anchor-name: --guest; }
+.film-photo.at-guest { --pw: clamp(76px, min(13cqw, 24cqh), 236px); left: 50%; top: min(46%, var(--sub-top, 100%) - var(--pw) * .78);
+  translate: -50% -50%; transform: rotate(-2deg);
+  animation: guest-in 1s .7s cubic-bezier(.2,.7,.2,1) both; }
+@supports (anchor-name: --guest) {
+  .film-photo.at-guest { position-anchor: --guest; left: clamp(var(--pw) * .62, anchor(center, 50%), 100% - var(--pw) * .62);
+    top: clamp(var(--pw) * .78, anchor(center, 46%), min(100%, var(--sub-top, 100%)) - var(--pw) * .78); }
+}
+@keyframes guest-in { from { opacity: 0; transform: translateY(8%) scale(.9); } to { opacity: 1; transform: rotate(-2deg); } }
+
+/* a flashback looks like a memory: the picture drains to sepia as it comes in (a wash of colour over it, blended by
+   hue: the one blended layer), fades like an old print, the dark closes in at the edges, and the edges flare now and
+   then as if the film were scorching in the gate. The second scene, the guest's last words, holds the look, and their
+   photograph comes through the picture like a double exposure. */
+.memory, .memory i { position: absolute; inset: 0; pointer-events: none; }
+.memory::before, .memory::after { content: ""; position: absolute; inset: 0; }
+.memory .tint { background: #9a6a36; mix-blend-mode: color; opacity: 0; animation: memory-drain 1.8s .15s ease-in-out both; }
+.memory::before { background: #4a3218; opacity: 0; animation: memory-fade 1.8s .15s ease-in-out both; }
+.memory::after { background: radial-gradient(ellipse 72% 70% at 50% 46%, transparent 52%, rgba(26,14,6,.82)); }
+.memory .burn { opacity: 0; animation: memory-burn 5.3s steps(1) 1.4s infinite;
+  background: radial-gradient(ellipse 14% 55% at 0 42%, rgba(255,214,150,.75), rgba(255,138,52,.32) 45%, transparent 75%); }
+.memory .burn.r { animation-duration: 6.7s; animation-delay: 3.1s;
+  background: radial-gradient(ellipse 12% 48% at 100% 60%, rgba(255,214,150,.7), rgba(255,138,52,.3) 45%, transparent 75%); }
+.memory.held .tint { animation: none; opacity: .82; }
+.memory.held::before { animation: none; opacity: .22; }
+@keyframes memory-drain { to { opacity: .82; } }
+@keyframes memory-fade { to { opacity: .22; } }
+@keyframes memory-burn { 0% { opacity: 0; } 9% { opacity: .9; } 11% { opacity: .35; } 13% { opacity: 1; } 17% { opacity: .5; } 22% { opacity: 0; }
+  61% { opacity: .55; } 63% { opacity: 0; } }
+.film-photo.recalled { filter: sepia(.55); animation: recall 2.6s .9s ease-in-out both; }
+@keyframes recall { from { opacity: 0; transform: rotate(-2deg) scale(1.06); } 60% { opacity: .9; } to { opacity: .94; transform: rotate(-2deg); } }
+.film.paused .memory .burn { animation-play-state: paused; }
+/* the last words keep the picture as it was, without its cut again; a search picture standing in for a role's own scene
+   (a role of the rule variants) keeps its torch for the search */
+.film-frame:has(> .memory.held) .film-pan > .film-cam { animation: none; }
+.film-frame:has(> .memory.held) .film-ghost { animation-duration: 1.2s; }
+.film-frame:has(> .memory.held) .film-look .leak, .film.verdict .film-frame:has(> .memory) .fx-found { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .film-photo.at-guest, .memory .tint, .memory::before { animation: none; }
+  .memory .tint { opacity: .82; }
+  .memory::before { opacity: .22; }
+  .memory .burn { display: none; }
+}

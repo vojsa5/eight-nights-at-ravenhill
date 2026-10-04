@@ -13,6 +13,7 @@
       <stop offset="0" stop-color="#6a82a8"/>
       <stop offset="1" stop-color="#2a3a58"/>
     </linearGradient>
+    <clipPath id="pane"><rect x="214" y="24" width="96" height="112" rx="44"/></clipPath>
     <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
       <feGaussianBlur stdDeviation="2" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -22,10 +23,27 @@
   <!-- window full of snow -->
   <rect x="214" y="24" width="96" height="112" rx="44" fill="url(#win)" opacity=".7"/>
   <path d="M262 24 L262 136 M214 80 L310 80" stroke="#07090e" stroke-width="5"/>
-  <g fill="#f0f4fa">
-    <circle cx="230" cy="44" r="1.4"/><circle cx="246" cy="62" r="1.1"/><circle cx="280" cy="40" r="1.5"/><circle cx="296" cy="58" r="1.1"/>
-    <circle cx="226" cy="96" r="1.3"/><circle cx="250" cy="112" r="1.6"/><circle cx="274" cy="96" r="1.2"/><circle cx="300" cy="104" r="1.5"/>
-    <circle cx="238" cy="124" r="1.1"/><circle cx="288" cy="122" r="1.3"/><circle cx="268" cy="54" r="1"/><circle cx="240" cy="80" r="1"/>
+  <!-- in the films (css/film.css) the snow falls past the window, and falls thicker as the scene goes on (each fall
+       has a copy of itself above the window, so that it can go round) -->
+  <g clip-path="url(#pane)">
+    <g class="lf-fall">
+      <g id="flakes" fill="#f0f4fa">
+        <circle cx="230" cy="44" r="1.4"/><circle cx="246" cy="62" r="1.1"/><circle cx="280" cy="40" r="1.5"/><circle cx="296" cy="58" r="1.1"/>
+        <circle cx="226" cy="96" r="1.3"/><circle cx="250" cy="112" r="1.6"/><circle cx="274" cy="96" r="1.2"/><circle cx="300" cy="104" r="1.5"/>
+        <circle cx="238" cy="124" r="1.1"/><circle cx="288" cy="122" r="1.3"/><circle cx="268" cy="54" r="1"/><circle cx="240" cy="80" r="1"/>
+      </g>
+      <use href="#flakes" y="-112"/>
+    </g>
+    <g class="lf-thicken" opacity="0">
+      <g class="lf-fall fast">
+        <g id="more" fill="#e8eef8">
+          <circle cx="222" cy="30" r=".9"/><circle cx="236" cy="70" r="1"/><circle cx="258" cy="36" r=".8"/><circle cx="262" cy="88" r="1.1"/>
+          <circle cx="284" cy="66" r=".9"/><circle cx="304" cy="84" r="1"/><circle cx="218" cy="110" r="1"/><circle cx="292" cy="30" r=".8"/>
+          <circle cx="248" cy="128" r=".9"/><circle cx="276" cy="114" r="1"/><circle cx="306" cy="128" r=".8"/><circle cx="230" cy="58" r=".8"/>
+        </g>
+        <use href="#more" y="-112"/>
+      </g>
+    </g>
   </g>
   <path d="M214 124 C240 116 280 118 310 112 L310 136 L214 136Z" fill="#dfe6f2" opacity=".55"/>
   <!-- hall table -->
@@ -37,8 +55,10 @@
   <rect x="106" y="72" width="8" height="68" fill="#0a0908"/>
   <path d="M100 58 L120 58 L118 72 L102 72Z" fill="#0a0908"/>
   <path d="M104 58 C104 50 116 50 116 58Z" fill="#141210"/>
-  <path d="M116 96 C134 100 140 120 136 150 C134 164 128 170 126 178" fill="none" stroke="#0a0908" stroke-width="1.6"/>
-  <rect x="120" y="176" width="12" height="18" rx="4" fill="#0a0908" transform="rotate(-12 126 185)"/>
+  <g class="lf-swing" style="transform-box:view-box;transform-origin:116px 96px">
+    <path d="M116 96 C134 100 140 120 136 150 C134 164 128 170 126 178" fill="none" stroke="#0a0908" stroke-width="1.6"/>
+    <rect x="120" y="176" width="12" height="18" rx="4" fill="#0a0908" transform="rotate(-12 126 185)"/>
+  </g>
   <!-- the cord to the wall, cut -->
   <path d="M110 140 C120 150 150 150 168 146 C176 144 180 142 186 140" fill="none" stroke="#0a0908" stroke-width="2"/>
   <path d="M198 136 C204 134 208 128 212 118" fill="none" stroke="#0a0908" stroke-width="2"/>
@@ -46,12 +66,18 @@
     <path d="M186 140 L189 137 M186 140 L190 141 M186 140 L188 143"/>
     <path d="M198 136 L195 133 M198 136 L194 137 M198 136 L196 139"/>
   </g>
-  <circle cx="192" cy="138" r="2.2" fill="#ffe0a0" opacity=".8" filter="url(#glow)"/>
+  <!-- the line's last sparks, then it goes dead (in the films) -->
+  <circle class="lf-dying" cx="192" cy="138" r="2.2" fill="#ffe0a0" opacity=".8" filter="url(#glow)"/>
+  <g class="lf-sparks" stroke="#fff4c0" stroke-width=".7" stroke-linecap="round" opacity="0">
+    <path d="M193 136.5 L196.5 131.5 M194 138.5 L199 139.5 M191 136.5 L189 131.8 M192.5 140 L194 144.5"/>
+  </g>
+  <g data-fx="glow" data-at="192 138" data-r="34" data-tone="spark"/>
   <!-- the shears left behind -->
   <g fill="none" stroke="#9a9aa6" stroke-width="2.4" stroke-linecap="round">
     <path d="M164 136 L190 128"/>
     <path d="M164 132 L190 132"/>
   </g>
+  <circle class="lf-glint" style="--d:2s" cx="183" cy="130.2" r="1.1" fill="#f4f6ff" opacity="0"/>
   <circle cx="160" cy="137" r="4" fill="none" stroke="#6a6a74" stroke-width="2"/>
   <circle cx="160" cy="130" r="4" fill="none" stroke="#6a6a74" stroke-width="2"/>
   <rect width="360" height="200" fill="url(#vig)"/>

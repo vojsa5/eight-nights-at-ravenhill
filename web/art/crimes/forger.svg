@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="pull" data-cut-at="53% 40%">
+  <title>The library at ten past eleven: beside Lord Edmund's armchair a gloved hand lifts the new will from the side table, a forgery in the pocket, as light grows under the door</title>
+  <defs>
+    <radialGradient id="bg" cx="52%" cy="38%" r="80%">
+      <stop offset="0" stop-color="#2a2640"/>
+      <stop offset="1" stop-color="#040308"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="52%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="ember" cx="0%" cy="70%" r="70%">
+      <stop offset="0" stop-color="#ff7a3a" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#ff7a3a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="amber" cx="50%" cy="60%" r="60%">
+      <stop offset="0" stop-color="#ffb040"/>
+      <stop offset="1" stop-color="#8a4a10"/>
+    </radialGradient>
+    <linearGradient id="spill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd890" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#ffd890" stop-opacity="0"/>
+    </linearGradient>
+    <path id="sig" d="M0 8 C1 2 3 -2 6 -1 C9 0 6 5 2 5 C5 5 7 8 9 9 C10 9.5 10 6 12 6 C14 6 13 9 15 9 C16 9 17 6 18 6 C18.5 7 18.5 9 19.5 9 C21 9 21 6 22.5 6.5 C23 7 22 9 24 9 C25 9 25 6 26.5 6.5 C27 7 27 9 28 9 C29 9 30 1 31 0 C31.5 0 31 8 31.5 9 C32 7 34 6 34.5 9 C35 9 36 6 36 6 C36 7 36 9 37 9 C38 9 39 0 40 0 C40.5 1 39.5 8 40.5 9 C41 9 42 0 43 0 C43.5 1 42.5 8 44 9 C46 10 48 8 50 6"/>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- panelled wall, floor, the low fire's glow from the left -->
+  <rect y="104" width="360" height="48" fill="#15131f"/>
+  <path d="M8 112 H60 V144 H8Z M70 112 H122 V144 H70Z M262 112 H314 V144 H262Z M324 112 H376 V144 H324Z" fill="none" stroke="#211e30" stroke-width="1.2"/>
+  <rect y="150" width="360" height="50" fill="#0c0a12"/>
+  <path d="M40 157 L320 157 L352 200 L8 200Z" fill="#1a1020"/>
+  <path d="M52 161 L308 161 L334 196 L26 196Z" fill="none" stroke="#2c1a2a" stroke-width="1.5"/>
+  <rect width="200" height="200" fill="url(#ember)"/>
+  <g data-fx="glow" data-at="0 150" data-r="110" data-tone="fire"/>
+  <!-- the safe in the wall, standing open -->
+  <rect x="128" y="30" width="42" height="40" rx="2" fill="#1c1c22" stroke="#3a3a44" stroke-width="2"/>
+  <rect x="134" y="36" width="30" height="28" fill="#030304"/>
+  <path d="M128 30 L114 24 L114 76 L128 70Z" fill="#2a2a32" stroke="#3a3a44" stroke-width="1.2"/>
+  <circle cx="121" cy="50" r="4.5" fill="#141418" stroke="#8a7a50" stroke-width="1.2"/>
+  <!-- the door to the hall: someone is coming down with a candle (in the films the light grows and feet stop outside) -->
+  <rect x="232" y="18" width="44" height="132" fill="#0e0c14"/>
+  <rect x="236" y="22" width="36" height="58" fill="none" stroke="#1c1926" stroke-width="1.2"/>
+  <rect x="236" y="88" width="36" height="56" fill="none" stroke="#1c1926" stroke-width="1.2"/>
+  <g class="lf-nearing">
+    <rect x="229" y="18" width="3" height="132" fill="#ffcc78" opacity=".55"/>
+    <rect x="232" y="148.5" width="44" height="2" fill="#ffd890" filter="url(#glow)"/>
+    <path d="M232 150.5 L276 150.5 L292 162 L220 162Z" fill="url(#spill)"/>
+  </g>
+  <g class="lf-feet" fill="#0e0c14"><rect x="246" y="148" width="6" height="3"/><rect x="256" y="148" width="6" height="3"/></g>
+  <!-- a bookcase by the fire -->
+  <rect y="14" width="24" height="138" fill="#100c12"/>
+  <g fill="#3a1e18"><rect x="2" y="24" width="4" height="22"/><rect x="7" y="28" width="5" height="18"/><rect x="14" y="22" width="4" height="24"/><rect x="2" y="60" width="6" height="20"/><rect x="10" y="56" width="4" height="24"/><rect x="16" y="62" width="5" height="18"/><rect x="4" y="94" width="5" height="22"/><rect x="12" y="98" width="6" height="18"/></g>
+  <path d="M0 47 H24 M0 81 H24 M0 117 H24" stroke="#1e1418" stroke-width="2"/>
+  <!-- the wing chair from behind, and Lord Edmund's hand hanging over its arm -->
+  <path d="M34 156 L34 164 M118 156 L118 164" stroke="#120608" stroke-width="4"/>
+  <path d="M28 158 L28 60 C28 44 40 36 58 36 L84 36 C97 36 105 42 107 53 C115 55 120 63 120 73 L120 102 L132 102 C140 102 145 107 145 114 C145 121 140 126 133 126 L128 126 L128 158Z" fill="#260c11"/>
+  <path d="M107 53 C115 55 120 63 120 73 L120 102 L110 102 L110 62Z" fill="#1a080c"/>
+  <g fill="#12050a"><circle cx="46" cy="58" r="1.2"/><circle cx="68" cy="56" r="1.2"/><circle cx="90" cy="58" r="1.2"/><circle cx="57" cy="72" r="1.2"/><circle cx="79" cy="72" r="1.2"/><circle cx="46" cy="86" r="1.2"/><circle cx="68" cy="86" r="1.2"/><circle cx="90" cy="86" r="1.2"/><circle cx="57" cy="100" r="1.2"/><circle cx="79" cy="100" r="1.2"/></g>
+  <path d="M28 132 L128 132" stroke="#12050a" stroke-width="1.2"/>
+  <path class="lf-firelit" d="M28 150 L28 60 C28 44 40 36 58 36" fill="none" stroke="#ff8a4a" stroke-opacity=".45" stroke-width="1.6"/>
+  <path d="M58 36 L84 36 C97 36 105 42 107 53 C115 55 120 63 120 73" fill="none" stroke="#7a7aa8" stroke-opacity=".3" stroke-width="1"/>
+  <circle cx="133" cy="114" r="7.5" fill="#30121a" stroke="#401a24" stroke-width="1"/>
+  <path d="M84 102 C100 100 116 100 126 102 L128 112 C116 112 100 112 86 114Z" fill="#4a1216"/>
+  <path d="M84 102 C100 100 116 100 126 102 L126.4 104.5 C114 103 100 103 86 105Z" fill="#7a2a2a" opacity=".7"/>
+  <path d="M125 100.5 L131 101 L131.5 113 L126 112.5Z" fill="#ece0c8"/>
+  <path d="M131 102 C136 103 139 107 139.5 112 C140 117 139 122 137 127 C136 130 133 130 133.5 127 L134.5 121 C133 124 131 125 130.5 122.5 L131 113Z" fill="#c08a66"/>
+  <path d="M131 102 C135.5 103 138.5 106.5 139.3 111" fill="none" stroke="#e6b896" stroke-width=".9"/>
+  <path d="M134.5 121 L135.5 115 M137 127 L137.6 118" stroke="#8a5a40" stroke-width=".6"/>
+  <!-- the side table: the brandy glass, the clock at ten past eleven, where the will lay -->
+  <path d="M178 118 L182 118 L183 156 L177 156Z" fill="#1e120c"/>
+  <path d="M180 154 L166 166 M180 154 L194 166 M180 154 L180 168" stroke="#1e120c" stroke-width="2.4" stroke-linecap="round"/>
+  <ellipse cx="180" cy="117" rx="34" ry="6" fill="#2e1a10"/>
+  <ellipse cx="180" cy="115.5" rx="34" ry="5.5" fill="#3e2416"/>
+  <path class="lf-firelit" d="M146.5 117 C149 119.5 158 121.8 170 122.4" fill="none" stroke="#ff9a5a" stroke-opacity=".45" stroke-width="1"/>
+  
+  <path d="M152 100 C148 106 151 113 158 113 C165 113 168 106 164 100Z" fill="#d8d0c8" opacity=".25" stroke="#e8e0d8" stroke-opacity=".55"/>
+  <path d="M150.5 107 C151.5 111 154 113 158 113 C162 113 164.5 111 165.5 107Z" fill="url(#amber)"/>
+  <circle class="lf-glint" style="--d:-1.4s" cx="153.5" cy="103" r="1.1" fill="#fff4dc" opacity="0"/>
+  <rect x="198" y="102" width="13" height="12" rx="1" fill="#8a6a30"/>
+  <rect x="197" y="100.5" width="15" height="2" fill="#b08a40"/>
+  <path d="M202 100.5 C202 97.5 207 97.5 207 100.5" fill="none" stroke="#b08a40" stroke-width="1"/>
+  <circle cx="204.5" cy="108" r="4.2" fill="#e8e0cc"/>
+  <path d="M204.5 108 L203.3 105.5 M204.5 108 L207.8 106.1" stroke="#1a1428" stroke-width=".8" stroke-linecap="round"/>
+  <!-- the new will, lifted by a gloved hand (in the films it comes up off the table, and the hand starts at the step) -->
+  <g class="lf-lift">
+    <g transform="translate(188 78) rotate(-10)">
+      <rect x="-30" y="-17" width="56" height="34" fill="#efe4c8"/>
+      <path class="lf-firelit" d="M-30 -17 L-30 17" stroke="#ff9a5a" stroke-opacity=".5" stroke-width="1"/>
+      <text x="-2" y="-8" text-anchor="middle" font-family="Georgia, serif" font-size="5.2" font-style="italic" fill="#3a2a18">Last Will &amp; Testament</text>
+      <path d="M-24 -2 L20 -2 M-24 3 L20 3 M-24 8 L4 8" stroke="#8a7658" stroke-width=".6"/>
+      <path d="M11 12 L9 19 M17 12 L19 19" stroke="#9e1b1b" stroke-width="1.8"/>
+      <circle cx="14" cy="10" r="4.2" fill="#9e1b1b" filter="url(#glow)"/>
+      <ellipse class="lf-glint" style="--d:1.2s" cx="12.6" cy="8.6" rx="1.5" ry=".9" fill="#ffd8c8" opacity="0"/>
+    </g>
+    <path d="M230 68 C262 52 302 38 364 22 L364 58 C312 68 274 82 239 91Z" fill="#0a0808"/>
+    <path d="M214 68.5 C222 63.5 232 64 237.5 70 L240 86 C234 91 224 91.5 217 87.5Z" fill="#1e1a24"/>
+    <path d="M219.5 73 L208.5 77.5" stroke="#1e1a24" stroke-width="4" stroke-linecap="round"/>
+    <path d="M224 68 C226 70 226 73 224.5 75 M230 68.5 C232 70.5 232 73.5 230.5 75.5" fill="none" stroke="#2e262c" stroke-width=".7"/>
+    <path d="M208 75.6 L218 71.4 C218.5 68 223 64.5 228 64.3 C232 64.3 235.5 66.2 237.5 69.5 M230.5 65.8 C262 50.5 302 36.5 364 20.5" fill="none" stroke="#ffcc88" stroke-opacity=".4" stroke-width=".7"/>
+  </g>
+  <!-- the culprit's coat in the foreground, the forgery in its pocket -->
+  <g class="lf-near">
+    <path d="M298 98 C290 130 284 168 280 204 L364 204 L364 92Z" fill="#08070c"/>
+    <path d="M298 98 C290 130 284 168 280 204" fill="none" stroke="#6a72a0" stroke-opacity=".35" stroke-width="1"/>
+    <g transform="translate(300 108) rotate(8)">
+      <rect x="-14" y="-12" width="40" height="30" fill="#e2d8bc"/>
+      <use href="#sig" transform="translate(-10 -6) scale(.6)" fill="none" stroke="#1a1428" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18" cy="6" r="3.6" fill="#8a1818"/>
+    </g>
+    <path d="M286 122 L330 116 L332 126 C318 130 300 132 288 134Z" fill="#100e16"/>
+    <path d="M286 122 L330 116" stroke="#2a2636" stroke-width="1"/>
+    <circle cx="292" cy="160" r="2.4" fill="#16141e" stroke="#2e2a3c"/>
+  </g>
+  <!-- where the flashback lays the guest's photograph, over the one who did it -->
+  <g data-fx="guest" data-at="232 84"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

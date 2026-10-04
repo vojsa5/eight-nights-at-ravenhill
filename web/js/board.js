@@ -2,9 +2,11 @@
 // guest's testimony, and the case note in the middle. The polaroids are built once and then patched:
 // rebuilding them made the browser redraw all sixteen portraits on every mouse move.
 import { TOOLS, morningClueLine } from "./clues.js";
-import { EVENTS, eventOf, namesArrest, namesClear } from "./events.js";
-import { ROMAN } from "./format.js";
+import { EVENTS, LAST_NIGHT, eventOf, namesArrest, namesClear } from "./events.js";
+import { ROMAN, moonSvg } from "./format.js";
 import { artSrc, portrait } from "./portrait.js";
+import { RELATIONS } from "./guests.js";
+import { sharedCase } from "./shared.js";
 import { $, currentVotes, inDrawingRoom, patch, ui } from "./state.js";
 
 const NOTE_ICONS = ["?", "✕", "✓"];
@@ -26,6 +28,12 @@ const TICK = "M58 96C64 104 71 113 77 126C89 99 103 78 125 54";  // over the pho
 const WASH = `<rect class="wash" x="19" y="18.2" width="90" height="117.9"/>`;
 const pencil = (d, dx, dy) => `<path class="ink" pathLength="1" d="${d}"/><path class="ink thin" pathLength="1" d="${d}" transform="translate(${dx} ${dy})"/>`;
 const SCRAWLS = { 1: WASH + pencil(RING, 1.5, -1.2), 2: WASH + pencil(TICK, -1.2, 1.4) };
+
+// Things pinned up on the cork besides the guests: at most three, each in a corner of the board the polaroids leave
+// free (and left out where none is): [picture in art/board/, its width : height, tilt].
+const EXTRAS = [["clipping", 132 / 184, -4], ["ticket", 200 / 116, 5], ["map", 176 / 136, 3], ["telegram", 196 / 134, -3]];
+const CORNERS = [[0, 0], [1, 0], [0, 1], [1, 1]];  // (0 left or top, 1 right or bottom)
+const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // 16 seats clockwise from the top along a rounded rectangle (a superellipse), spaced evenly in polaroid
 // sizes: a step down counts CARD_H times less than a step across, as the polaroids are that much taller.
@@ -63,16 +71,36 @@ function layout(width, height, note) {
   return { h, card: lo, seats: seatsFor(lo) };
 }
 
-let note = null, strings = null, cards = [];  // cards[id] = { el, img, over, cap }
+// Where an extra fits in a corner: [x, y, width] in board units and the share of its full size, as large as the box
+// between the board's corner and the nearest polaroid (or the note) allows, up to about a polaroid's size; null if less
+// than 3/4 of a polaroid's width fits.
+function cornerSpot(ratio, [cx, cy], noteBox) {
+  const w = geo.card, m = 1.2, e = 1.5;  // a margin round each polaroid and the note; the gap to the frame
+  const fx = (x) => (cx ? 100 - x : x), fy = (y) => (cy ? geo.h - y : y);  // seen from the corner as the top left
+  const boxes = geo.seats.map(([x, y]) => [x - w / 2, y - (w * CARD_H) / 2 - w * 0.12, x + w / 2, y + (w * CARD_H) / 2])
+    .concat([noteBox]).map(([l, t, r, b]) => [Math.min(fx(l), fx(r)) - m, Math.min(fy(t), fy(b)) - m, Math.max(fx(l), fx(r)) + m]);
+  const most = Math.min(w * 1.45, w * 1.25 * ratio);
+  let best = null;
+  for (let W = 2; W <= 50; W += 0.5) {
+    const H = Math.min(geo.h / 2, ...boxes.filter(([l, , r]) => l < e + W && r > e).map(([, t]) => t)) - e;
+    const iw = Math.min(W, H * ratio, most);
+    if (H > 0 && (!best || iw > best.iw)) best = { iw, W, H };
+  }
+  return best && best.iw >= w * 0.75 ? [fx(e + best.W / 2), fy(e + best.H / 2), best.iw, best.iw / most] : null;
+}
+
+let note = null, strings = null, cards = [], extras = [];  // cards[id] = { el, img, over, cap }
 
 function build() {
   const board = $("board");
-  board.innerHTML = `<div class="note"></div><svg class="strings" preserveAspectRatio="none" aria-hidden="true"></svg>`
-    + ui.S.chars.map((c) => `<div class="card" data-c="${c.id}" style="--tilt:${tilt(c.id)}deg">
+  board.innerHTML = EXTRAS.map(([name, , turn]) => `<img class="extra" src="art/board/${name}.svg" alt="" aria-hidden="true" style="--tilt:${turn}deg">`).join("")
+    + `<div class="note"></div><svg class="strings" preserveAspectRatio="none" aria-hidden="true"></svg>`
+    + ui.S.chars.map((c) => `<div class="card" data-c="${c.id}" style="--tilt:${tilt(c.id)}deg" tabindex="0" role="button" aria-label="${c.name}, the ${c.profession}">
         <div class="frame"><span class="pin"></span><div class="photo"><img class="art" alt=""><span class="over"></span></div>
         <div class="cap"></div><span class="scrawl"></span></div></div>`).join("");
   note = board.querySelector(".note");
   strings = board.querySelector(".strings");
+  extras = [...board.querySelectorAll(".extra")];
   cards = [...board.querySelectorAll(".card")].map((el) => ({ el, img: el.querySelector("img"), over: el.querySelector(".over"),
     cap: el.querySelector(".cap"), scrawl: el.querySelector(".scrawl") }));
   place();
@@ -88,6 +116,23 @@ function place() {
   cards.forEach(({ el }, id) => {
     el.style.left = `${geo.seats[id][0]}%`;
     el.style.top = `${(geo.seats[id][1] / geo.h) * 100}%`;
+  });
+  // the extras take the corners in turn, whichever fits its corner best first, until three are up
+  const px = (board.clientWidth || 500) / 100, nw = note.offsetWidth / px / 2, nh = room / px / 2;
+  const noteBox = [50 - nw, geo.h / 2 - nh, 50 + nw, geo.h / 2 + nh], spots = [], placed = {}, taken = new Set();
+  EXTRAS.forEach(([, ratio], i) => CORNERS.forEach((corner, k) => {
+    const spot = cornerSpot(ratio, corner, noteBox);
+    if (spot) spots.push([i, k, spot]);
+  }));
+  spots.sort((a, b) => b[2][3] - a[2][3]).forEach(([i, k, spot]) => {
+    if (placed[i] || taken.has(k) || taken.size === 3) return;
+    placed[i] = spot;
+    taken.add(k);
+  });
+  extras.forEach((el, i) => {
+    const spot = placed[i];
+    el.hidden = !spot;
+    if (spot) Object.assign(el.style, { left: `${spot[0]}%`, top: `${(spot[1] / geo.h) * 100}%`, width: `${spot[2]}%` });
   });
 }
 
@@ -108,11 +153,50 @@ export function renderBoard() {
     if (card.img.getAttribute("src") !== src) card.img.src = src;
     if (card.img.alt !== alt) card.img.alt = alt;
     patch(card.over, overlayHtml(c, votes));
-    patch(card.cap, `<span class="nm" title="${c.name}, ${c.profession}"><small>${c.id}</small>${c.short}</span>`);
+    patch(card.cap, `<span class="nm" title="${c.name}, the ${c.profession}. ${RELATIONS[c.short] || ""}"><small>${c.id}</small>${c.short}</span>`);
     patch(card.scrawl, scrawlHtml(c));  // its own element, so the drawing plays only when the note changes
   });
+  stampsDue();
   renderFocus();
 }
+
+// The stamps come down with a thump when the board is next in view, not behind the film, a card, the reading screen
+// or the opening screen: the phase on the note each time it changes (the next night too), and CLEARED or ARRESTED on
+// the photograph of a guest just sent away.
+let phaseKey = null, phaseDue = false, gone = null;
+const goneDue = new Set();
+
+function stampsDue() {
+  const S = ui.S, key = `${S.id} ${S.finished ? "closed" : `${S.round} ${S.phase} ${inDrawingRoom()}`}`;
+  if (key !== phaseKey) {
+    phaseKey = key;
+    phaseDue = true;
+  }
+  const out = S.chars.filter((c) => !c.alive).map((c) => c.id);
+  if (gone) out.filter((id) => !gone.has(id)).forEach((id) => goneDue.add(id));
+  gone = new Set(out);
+  queueMicrotask(putDown);  // a decision renders the board first and opens its film right after
+}
+
+const covered = () => document.body.classList.contains("title-open") || $("modal").classList.contains("open")
+  || !!document.querySelector("body > .reading")
+  || ($("desk").classList.contains("folder-open") && matchMedia("(max-width: 1100px), (max-height: 500px)").matches);  // the folder over it
+
+function putDown() {
+  if ((!phaseDue && !goneDue.size) || !cards.length || covered()) return;
+  if (!reducedMotion()) {
+    if (phaseDue) {
+      note.querySelector(".phase, .closed")?.classList.add("thump");
+      note.animate([{ translate: "0 0" }, { translate: "0 3px", offset: 0.4 }, { translate: "0 0" }], { duration: 300, delay: 160, easing: "ease-out" });
+    }
+    goneDue.forEach((id) => cards[id]?.over.querySelector(".stamp")?.classList.add("thump"));
+  }
+  phaseDue = false;
+  goneDue.clear();
+}
+new MutationObserver(putDown).observe($("modal"), { attributes: true, attributeFilter: ["class"] });
+new MutationObserver(putDown).observe($("desk"), { attributes: true, attributeFilter: ["class"] });
+new MutationObserver(putDown).observe(document.body, { attributes: true, attributeFilter: ["class"], childList: true });
 
 // Only what follows the mouse: the focused guest's strings and the polaroids they name.
 export function renderFocus() {
@@ -120,15 +204,32 @@ export function renderFocus() {
   if (!S || !cards.length) return;
   const focus = ui.hoverRow ?? ui.hoverChar ?? ui.selected;
   const focusAdvice = focus !== null && !S.finished ? S.advice.find((a) => a.round === S.round && a.speaker === focus) : null;
+  const before = strings._html;
   patch(strings, stringsSvg(focus));
+  if (strings._html !== before && focus !== hung) sway();  // another guest's strings, not the same ones laid out again
+  hung = focus;
   S.chars.forEach((c) => {
     const cls = cardClasses(c, focusAdvice);
     if (cards[c.id].el.className !== cls) cards[c.id].el.className = cls;
   });
 }
 
+// New strings drop from taut into their sag and settle, as string pinned up would. Only their curve moves, and only for
+// a moment; browsers that cannot animate a path's shape simply show them hanging.
+const SWAYS = !!window.CSS?.supports?.("d", "path('M0 0')");
+let hung = null;  // whose strings are up
+function sway() {
+  if (!SWAYS || reducedMotion()) return;
+  strings.querySelectorAll("path").forEach((p) => {
+    const [x1, y1, mx, my, x2, y2] = p.getAttribute("d").match(/-?[\d.]+(e-?\d+)?/g).map(Number), mid = (y1 + y2) / 2;
+    const at = (k) => ({ d: `path("M${x1} ${y1} Q${mx} ${mid + k * (my - mid)} ${x2} ${y2}")` });
+    p.animate([at(0.15), { ...at(1.22), offset: 0.45 }, { ...at(0.93), offset: 0.75 }, at(1)], { duration: 750, easing: "ease-out" });
+  });
+}
+
 // The focused guest's advice this round (solid) and advice about them (dashed): red to arrest, green to clear.
-// Each string gets a darker copy underneath as its shadow (much cheaper to draw than a CSS drop-shadow).
+// Each string gets a darker copy underneath as its shadow (much cheaper to draw than a CSS drop-shadow), and the
+// solid ones a fine pale line along their top, where the lamp catches the thread.
 function stringsSvg(focus) {
   const S = ui.S;
   if (focus === null || S.finished) return "";
@@ -141,14 +242,15 @@ function stringsSvg(focus) {
       else if (target === focus) lines.push([a.speaker, focus, `in ${kind}`]);
     }
   });
-  const paths = lines.map(([from, to, cls]) => {
+  const path = ([from, to, cls]) => {
     const [x1, y1] = seat(from), [x2, y2] = seat(to);
     const dy = PIN_DY * geo.card, p1 = [x1, y1 + dy], p2 = [x2, y2 + dy];
     const sag = 3 + Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) * 0.08;
     const mx = (p1[0] + p2[0]) / 2, my = (p1[1] + p2[1]) / 2 + sag;
     return `<path class="${cls}" d="M${p1[0]} ${p1[1]} Q${mx} ${my} ${p2[0]} ${p2[1]}"/>`;
-  }).join("");
-  return paths && `<g class="shade" transform="translate(0 .45)">${paths}</g>${paths}`;
+  };
+  const paths = lines.map(path).join(""), glint = lines.filter(([, , cls]) => cls.startsWith("out")).map(path).join("");
+  return paths && `<g class="shade" transform="translate(0 .45)">${paths}</g>${paths}<g class="glint" transform="translate(0 -.1)">${glint}</g>`;
 }
 
 function cardClasses(c, focusAdvice) {
@@ -198,30 +300,34 @@ function scrawlHtml(c) {
 
 // How a closed case is judged: [the share of decisions you must get right, the verdict]. The Rules tab shows them too.
 export const RANKS = [[1, "Flawless. Scotland Yard would like a word about a job."], [0.8, "A keen judge of character."],
-  [0.6, "Not bad, but some conspirators are still smiling."], [0, "The conspirators raise a glass to you."]];
+  [0.6, "Not bad, but some culprits are still smiling."], [0, "The guilty raise a glass to you."]];
+
+// The case note is a mahogany plaque screwed to the cork (css/board.css): the night engraved on a brass plate, the event
+// on an enamel tag, the phase on an enamel sign, and the orders, or the guest picked, on a card in a brass frame.
+const noteHead = (night) => `<div class="note-head">${night}</div>`;
+// the night's event, which opens its card again
+const eventTag = (icon, name, title) => `<button class="event" data-action="intro" title="${title}"><span>${icon}</span> ${name}</button>`;
 
 function noteHtml() {
   const S = ui.S;
   if (S.finished) {
     const n = S.history.length, s = S.score;
     const line = RANKS.find(([share]) => s >= share * n)[1];
-    return `<div class="closed">Case closed</div><div class="final">${s}<span>/ ${n}</span></div>
-      <div class="prompt">${line}</div><button class="btn primary" data-action="new-game">Take another case</button>
-      <button class="btn" data-action="finale">Watch the ending</button>`;
+    return `${noteHead(moonSvg(1, "moon"))}<div class="closed">Case closed</div><div class="final">${s}<span>/ ${n}</span></div>
+      <div class="prompt">${line}</div>${sharedCase ? "" : `<button class="btn primary" data-action="new-game">Take another case</button>`}
+      <button class="btn${sharedCase ? " primary" : ""}" data-action="finale">Watch the ending</button>`;
   }
   const a = S.phase, event = eventOf(S.round), accuse = inDrawingRoom();
-  let h = `<div class="kicker">Night ${ROMAN[S.round]} of ${ROMAN[S.rounds]}</div>`;
-  if (event) h += `<button class="event" data-action="intro" title="${EVENTS[event][3]}"><span>${EVENTS[event][0]}</span> ${event}</button>`;
-  if (accuse) h += `<button class="event" data-action="intro" title="Name the guilty one; the other goes free."><span>🌕</span> The drawing room</button>`;
+  let h = noteHead(`<div class="kicker">${moonSvg(S.round / S.rounds, "moon")}Night ${ROMAN[S.round]} of ${ROMAN[S.rounds]}</div>`);
+  if (event) h += eventTag(EVENTS[event][0], event, EVENTS[event][3]);
+  if (accuse) h += eventTag(LAST_NIGHT[0], "The drawing room", "Name the guilty one; the other goes free.");
   h += `<div class="phase ${accuse ? "eliminate" : a}">${accuse ? "Accuse" : a === "save" ? "Clear" : "Arrest"}</div>`;
   if (accuse && ui.selected === null) {
-    h += `<div class="prompt">Two remain, and nobody advises any more.<br>Name the one you believe is guilty; the other goes free.
-      +1 for each you judge right.<br><small>Point at a photograph to choose.</small></div>`;
+    h += `<div class="prompt"><span class="hint">Two remain, and nobody advises any more.</span><span class="goal">Name the one you
+      believe is guilty; the other goes free. +1 for each you judge right.</span><small>Point at a photograph to choose.</small></div>`;
   } else if (accuse) {
     const c = S.chars[ui.selected];
-    h += `<div class="pick">${portrait(c.name, "mini", c.portrait)}<div><div class="pick-name">${c.name}</div>
-      <div class="pick-job">${c.profession}</div></div></div>
-      <button class="btn eliminate" data-action="accuse">Accuse ${c.name}</button>`;
+    h += `${pickHtml(c, "")}<button class="btn press eliminate" data-action="accuse">Accuse ${c.name}</button>`;
   } else if (ui.selected === null) {
     const quiet = !S.advice.some((x) => x.round === S.round);
     const alive = S.chars.filter((c) => c.alive).length;
@@ -229,17 +335,19 @@ function noteHtml() {
       : event ? morningClueLine(S, S.round) || EVENTS[event][4]
       : quiet ? "Only two remain, and no one can advise any more." : "";
     const goal = a === "save" ? "Clear one guest of suspicion. +1 if they are innocent." : "Make an arrest. +1 if they are guilty.";
-    h += `<div class="prompt">${hint ? hint + "<br>" : ""}${goal}<br><small>Point at a photograph to see its string.</small></div>`;
+    h += `<div class="prompt">${hint ? `<span class="hint">${hint}</span>` : ""}<span class="goal">${goal}</span><small>Point at a photograph to see its string.</small></div>`;
   } else {
     const c = S.chars[ui.selected], v = currentVotes()[ui.selected] || { s: 0, e: 0 };
-    h += `<div class="pick">${portrait(c.name, "mini", c.portrait)}<div><div class="pick-name">${c.name}</div>
-      <div class="pick-job">${c.profession}</div>
-      <div class="prompt">${v.s} advise clearing · ${v.e} advise arresting</div></div></div>
-      <button class="btn ${a}" data-action="act">${a === "save" ? "Clear" : "Arrest"} ${c.name}</button>
+    h += `${pickHtml(c, `<div class="prompt">${v.s} advise clearing · ${v.e} advise arresting</div>`)}
+      <button class="btn press ${a}" data-action="act">${a === "save" ? "Clear" : "Arrest"} ${c.name}</button>
       ${Object.keys(TOOLS).filter((t) => TOOLS[t][3] === event).map((t) => `<div class="tools">${toolButton(t)}</div>`).join("")}`;
   }
   return h;
 }
+
+// The guest picked, their photograph clipped to the note.
+const pickHtml = (c, more) => `<div class="pick"><span class="pick-photo">${portrait(c.name, "mini", c.portrait)}</span><div>
+  <div class="pick-name">${c.name}</div><div class="pick-job">${c.profession}</div>${more}</div></div>`;
 
 function toolButton(tool) {
   const [icon, label, help] = TOOLS[tool], ok = ui.S.toolReady[tool];

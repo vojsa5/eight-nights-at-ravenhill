@@ -85,5 +85,10 @@
     <path d="M10 -2.2 L0 0 L10 2.2Z" fill="#e8c89a"/>
     <path d="M3.5 -.8 L0 0 L3.5 .8Z" fill="#2a2a2a"/>
   </g>
+  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
+       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <g data-fx="glow" data-at="114 52" data-r="36" data-tone="lamp"/>
+  <path class="lf-glint" style="--d:-2.53s" d="M218 83 L218.7 87.3 L223 88 L218.7 88.7 L218 93 L217.3 88.7 L213 88 L217.3 87.3Z" fill="#fffbe8" opacity="0"/>
+  <g data-fx="found" data-at="212 116" data-r="62" data-tone="right"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

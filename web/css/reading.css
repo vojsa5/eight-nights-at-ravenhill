@@ -1,0 +1,59 @@
+/* The reading screen (reading.js): the book won, under a reading lamp, until the player has finished it. It covers the
+   game (z 95: under the opening screen, over the cards). The seal is held down until its ring closes (--hold). */
+.reading { position: fixed; inset: 0; z-index: 95; display: grid; place-items: center; padding: 16px; overflow: auto;
+  background: radial-gradient(ellipse 70% 60% at 38% 30%, rgba(255,200,120,.22), transparent 70%),
+    radial-gradient(ellipse at 50% 120%, #1a0f07, transparent 60%), linear-gradient(#0b0705, #160d07);
+  animation: fade-in .6s ease-out both; }
+.rd-lamp { position: absolute; left: 34%; top: -40px; width: 180px; height: 120px; border-radius: 0 0 90px 90px / 0 0 60px 60px;
+  background: linear-gradient(#2a4a32, #16281b); box-shadow: 0 30px 120px 40px rgba(255,205,130,.18); opacity: .9; pointer-events: none; }
+.rd-card { position: relative; display: grid; grid-template-columns: auto minmax(0, 420px); gap: 34px; align-items: center; max-width: 820px;
+  padding: 34px 38px; color: var(--paper-ink); animation: unfold .7s cubic-bezier(.2,.7,.2,1) both;
+  background: repeating-linear-gradient(transparent 0 25px, rgba(90,110,160,.1) 25px 26px), var(--paper); box-shadow: 0 30px 80px rgba(0,0,0,.75); }
+.rd-book { position: relative; transform: rotate(-3deg); filter: drop-shadow(0 18px 22px rgba(0,0,0,.45)); }
+.rd-book .covers { --w: clamp(150px, 22vw, 220px); }
+.rd-book .covers.two { --w: clamp(120px, 17vw, 170px); }
+.rd-ribbon { position: absolute; top: -6px; right: 22%; width: 14px; height: 64%; background: linear-gradient(90deg, #7a1414, #a52222 50%, #7a1414);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 90%, 0 100%); box-shadow: 0 2px 4px rgba(0,0,0,.4); }
+.rd-stamp { position: absolute; left: 50%; top: 46%; padding: 4px 18px; font: 34px var(--typed); letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-green); border: 4px solid var(--ink-green); background: rgba(240,232,210,.55); opacity: 0;
+  transform: translate(-50%, -50%) rotate(-14deg) scale(2.2); -webkit-mask: var(--worn); mask: var(--worn); }
+.reading.done .rd-stamp { animation: thump .35s cubic-bezier(.3,1.6,.5,1) forwards; }
+.rd-text { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.rd-kicker { font: 12px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: var(--paper-muted); }
+.rd-text h2 { margin: 0; font: 34px var(--typed); letter-spacing: .06em; text-transform: uppercase; }
+.rd-title { margin: 0; font-size: 22px; line-height: 1.25; }
+.rd-title span { display: block; font-size: 16px; font-style: italic; color: var(--paper-muted); }
+.rd-text p { margin: 0; font-size: 16.5px; line-height: 1.45; }
+.rd-text .rd-more { font-size: 15px; color: var(--paper-muted); }
+.rd-done, .rd-notyet { font: 14px var(--typed); letter-spacing: .06em; border-radius: 4px; padding: 9px 18px; cursor: pointer; }
+.rd-done { margin-top: 6px; color: #1b140a; border: 1px solid #b08a44; background: linear-gradient(#d8b46a, #a8843e); }
+.rd-notyet { color: var(--paper-ink); border: 1px solid var(--paper-line); background: rgba(255,255,255,.4); }
+.rd-confirm { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 4px; padding: 12px 14px; border-left: 3px solid #a8843e;
+  background: rgba(90,70,40,.08); }
+.rd-confirm[hidden] { display: none; }
+.rd-confirm p { flex-basis: 100%; font-size: 15px; }
+/* the wax seal: hold it down and the ring closes */
+.rd-seal { --hold: 1600ms; position: relative; width: 74px; height: 74px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; touch-action: none;
+  -webkit-user-select: none; user-select: none; background: radial-gradient(circle at 38% 32%, #c8302a, #8a1414 60%, #5a0a0a);
+  box-shadow: 0 3px 8px rgba(0,0,0,.45), inset 0 -3px 6px rgba(0,0,0,.35); transition: transform .15s; }
+.rd-seal span { font: 700 30px/74px Cinzel, Georgia, serif; color: rgba(255,220,200,.8); text-shadow: 0 -1px 0 rgba(0,0,0,.5); }
+.rd-seal svg { position: absolute; inset: -9px; width: calc(100% + 18px); height: calc(100% + 18px); transform: rotate(-90deg); pointer-events: none; }
+.rd-seal circle { fill: none; stroke-width: 3; }
+.rd-seal .track { stroke: rgba(90,70,40,.22); }
+.rd-seal .ring { stroke: #a8843e; stroke-dasharray: 119.4; stroke-dashoffset: 119.4; stroke-linecap: round; }
+.rd-seal.holding { transform: scale(.94); }
+.rd-seal.holding .ring { stroke-dashoffset: 0; transition: stroke-dashoffset var(--hold) linear; }
+.rd-seal:focus-visible { outline: 3px solid #a8843e; outline-offset: 12px; }
+@media (max-width: 700px) {
+  .rd-card { grid-template-columns: 1fr; justify-items: center; gap: 18px; padding: 24px 20px; }
+  .rd-text { align-items: center; text-align: center; }
+  .rd-confirm { justify-content: center; }
+  .rd-book .covers { --w: 130px; }
+  .rd-book .covers.two { --w: 104px; }
+  .rd-text h2 { font-size: 26px; }
+  .rd-lamp { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading, .rd-card { animation: none; }
+  .reading.done .rd-stamp { animation: none; opacity: 1; transform: translate(-50%, -50%) rotate(-14deg); }
+}

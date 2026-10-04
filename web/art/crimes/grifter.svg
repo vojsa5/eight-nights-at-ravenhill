@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="leak" data-cut-at="31% 14%">
+  <title>Over the port by candlelight, a gloved hand slides a gilt-edged gold-mine share certificate across the table while Lord Edmund signs a cheque, beside a lump of gleaming ore</title>
+  <defs>
+    <radialGradient id="bg" cx="34%" cy="16%" r="85%">
+      <stop offset="0" stop-color="#40341a"/>
+      <stop offset="1" stop-color="#050403"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="50%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a1c0e"/>
+      <stop offset="1" stop-color="#160a05"/>
+    </linearGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc878" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#ffc878" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="port" cx="40%" cy="35%" r="75%">
+      <stop offset="0" stop-color="#d8404e"/>
+      <stop offset="1" stop-color="#4a0810"/>
+    </radialGradient>
+    <radialGradient id="gold" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#fff0a0"/>
+      <stop offset=".5" stop-color="#e0a830"/>
+      <stop offset="1" stop-color="#7a5010"/>
+    </radialGradient>
+    <radialGradient id="shade" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#000" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff6c8" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#fffbe8"/>
+      <stop offset="1" stop-color="#fff6c8" stop-opacity="0"/>
+    </linearGradient>
+    <path id="sig" pathLength="1" d="M0 8 C1 2 3 -2 6 -1 C9 0 6 5 2 5 C5 5 7 8 9 9 C10 9.5 10 6 12 6 C14 6 13 9 15 9 C16 9 17 6 18 6 C18.5 7 18.5 9 19.5 9 C21 9 21 6 22.5 6.5 C23 7 22 9 24 9 C25 9 25 6 26.5 6.5 C27 7 27 9 28 9 C29 9 30 1 31 0 C31.5 0 31 8 31.5 9 C32 7 34 6 34.5 9 C35 9 36 6 36 6 C36 7 36 9 37 9 C38 9 39 0 40 0 C40.5 1 39.5 8 40.5 9 C41 9 42 0 43 0 C43.5 1 42.5 8 44 9 C46 10 48 8 50 6"/>
+    <g id="cert">
+      <rect width="112" height="68" fill="#efe4c4"/>
+      <rect x="4" y="4" width="104" height="60" fill="none" stroke="#c89a38" stroke-width="2.2"/>
+      <rect x="8" y="8" width="96" height="52" fill="none" stroke="#b08a30" stroke-width=".7"/>
+      <g fill="#c89a38"><circle cx="4" cy="4" r="3.5"/><circle cx="108" cy="4" r="3.5"/><circle cx="4" cy="64" r="3.5"/><circle cx="108" cy="64" r="3.5"/></g>
+    </g>
+    <clipPath id="rim">
+      <path clip-rule="evenodd" d="M2.9 2.9 H109.1 V65.1 H2.9Z M5.1 5.1 V62.9 H106.9 V5.1Z M7.6 7.6 H104.4 V60.4 H7.6Z M8.4 8.4 V59.6 H103.6 V8.4Z"/>
+      <circle cx="4" cy="4" r="3.5"/><circle cx="108" cy="4" r="3.5"/><circle cx="4" cy="64" r="3.5"/><circle cx="108" cy="64" r="3.5"/>
+      <circle cx="22" cy="52" r="7.5"/>
+    </clipPath>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the dining table, cloth drawn for the port -->
+  <circle cx="112" cy="26" r="48" fill="#ffc060" opacity=".22" filter="url(#soft)"/>
+  <rect y="66" width="360" height="134" fill="url(#wood)"/>
+  <rect y="66" width="360" height="2" fill="#4a2414"/>
+  <ellipse cx="176" cy="106" rx="156" ry="50" fill="url(#pool)"/>
+  <ellipse cx="112" cy="92" rx="9" ry="7" fill="#ffc070" opacity=".16"/>
+  <ellipse cx="236" cy="92" rx="11" ry="6" fill="#a01c28" opacity=".28"/>
+  <!-- in the films (film.css + lf-slide, lf-push, lf-sign, lf-scrawl, lf-sheen): the certificate is slid across,
+       Lord Edmund signs the cheque, a sheen runs over the gilt, the candles burn, the ore and the glass glint -->
+  <!-- the candelabrum -->
+  <path d="M101 84 L123 84 L118 78 L106 78Z" fill="#6a6a76"/>
+  <path d="M110.5 78 L113.5 78 L113 52 L111 52Z" fill="#a8a8b4"/>
+  <ellipse cx="112" cy="63" rx="3" ry="2" fill="#a8a8b4"/>
+  <path d="M97 46 C97 56 127 56 127 46 M112 52 L112 40" fill="none" stroke="#a8a8b4" stroke-width="2.2"/>
+  <g fill="#c8c8d4"><rect x="94" y="44" width="6" height="2.5"/><rect x="109" y="38" width="6" height="2.5"/><rect x="124" y="44" width="6" height="2.5"/></g>
+  <g fill="#efe4c8"><rect x="95.5" y="30" width="3" height="14"/><rect x="110.5" y="23" width="3" height="15"/><rect x="125.5" y="30" width="3" height="14"/></g>
+  <g fill="#ffd27a" filter="url(#glow)">
+    <ellipse class="lf-flame" style="--d:-.6s" cx="97" cy="26.5" rx="1.5" ry="3"/>
+    <ellipse class="lf-flame" cx="112" cy="19.5" rx="1.6" ry="3.2"/>
+    <ellipse class="lf-flame" style="--d:-1.1s" cx="127" cy="26.5" rx="1.5" ry="3"/>
+  </g>
+  <g data-fx="glow" data-at="112 24" data-r="46" data-tone="candle"/>
+  <!-- the decanter of port and a glass -->
+  <path d="M223 84 L249 84 C251.5 72 250 60 243.5 54 L241.5 42 L230.5 42 L228.5 54 C222 60 220.5 72 223 84Z" fill="#e8e0f0" fill-opacity=".1" stroke="#f4ecff" stroke-opacity=".45" stroke-width=".8"/>
+  <path d="M223.6 82.5 L248.4 82.5 C250.4 73 249.6 66 247 61 L225 61 C222.4 66 221.6 73 223.6 82.5Z" fill="url(#port)"/>
+  <path d="M230 46 L242 46 M230.5 49 L241.5 49" stroke="#f4ecff" stroke-opacity=".35" stroke-width=".7"/>
+  <rect x="234" y="38" width="4" height="4" fill="#d8d0e0" opacity=".35"/>
+  <circle cx="236" cy="34" r="5" fill="#d8d0e0" fill-opacity=".18" stroke="#f4ecff" stroke-opacity=".45" stroke-width=".7"/>
+  <path d="M226.5 65 C225 71 225 77 226.5 81" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.2"/>
+  <path class="lf-glint" style="--d:-1.6s" d="M246 61 L246.7 64.8 L250.5 65.5 L246.7 66.2 L246 70 L245.3 66.2 L241.5 65.5 L245.3 64.8Z" fill="#fff4f0" opacity="0"/>
+  <path d="M259 78 C258 86 261 91 266 91 C271 91 274 86 273 78Z" fill="#e8e0f0" fill-opacity=".12" stroke="#f4ecff" stroke-opacity=".45" stroke-width=".7"/>
+  <path d="M259.4 82 C259.6 87 262 90.6 266 90.6 C270 90.6 272.4 87 272.6 82Z" fill="url(#port)"/>
+  <rect x="265.4" y="91" width="1.2" height="8" fill="#d8d0e0" opacity=".5"/>
+  <ellipse cx="266" cy="99.5" rx="5" ry="1.4" fill="#d8d0e0" opacity=".45"/>
+  <!-- Lord Edmund's cigar on its tray, smoking -->
+  <ellipse cx="312" cy="100" rx="13" ry="3.5" fill="#8a8a96"/>
+  <path d="M300 99 L320 96.5" stroke="#5a3a1e" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="321" cy="96.4" r="1.2" fill="#ff8a3a" filter="url(#glow)"/>
+  <g data-fx="smoke" data-at="322 84" data-r="12"/>
+  <!-- the lump of "ore", passed round the table -->
+  <circle cx="174" cy="70" r="20" fill="#ffd060" opacity=".22" filter="url(#soft)"/>
+  <g transform="translate(157 56) scale(.6) translate(-248 -124)">
+    <path d="M248 160 L252 136 L268 124 L290 128 L304 144 L300 162 L276 170Z" fill="#453a28"/>
+    <path d="M252 136 L268 124 L290 128 L278 144 L260 148Z" fill="#62523a"/>
+    <path d="M290 128 L304 144 L300 162 L286 154 L278 144Z" fill="#2c2619"/>
+    <g fill="url(#gold)" filter="url(#glow)">
+      <path d="M262 138 L272 131 L279 139 L269 146Z"/>
+      <path d="M284 148 L293 143 L296 155 L286 158Z"/>
+      <path d="M276 127 L286 129 L282 135Z"/>
+    </g>
+  </g>
+  <g class="lf-twinkle" fill="#fff6c0" filter="url(#glow)">
+    <path d="M173 54 L174.3 59.7 L180 61 L174.3 62.3 L173 68 L171.7 62.3 L166 61 L171.7 59.7Z"/>
+    <path d="M185 64 L185.7 66.3 L188 67 L185.7 67.7 L185 70 L184.3 67.7 L182 67 L184.3 66.3Z"/>
+  </g>
+  <!-- the share certificate, slid across the table -->
+  <g class="lf-slide">
+    <g transform="translate(174 108) rotate(-5) scale(.9) translate(-56 -34)">
+      <use href="#cert"/>
+      <text x="56" y="18" text-anchor="middle" font-family="Georgia, serif" font-size="5.4" letter-spacing=".3" fill="#7a5a1c">MATABELE REEF GOLD Co.</text>
+      <path d="M40 21.5 L72 21.5" stroke="#b08a30" stroke-width=".6"/>
+      <ellipse cx="56" cy="32" rx="12" ry="7.5" fill="none" stroke="#b08a30" stroke-width=".9"/>
+      <path d="M47 35 L52 28.5 L55 32 L59 27 L65 35" fill="none" stroke="#8a6a28" stroke-width=".9"/>
+      <path d="M16 42 L46 42 M16 46 L40 46 M66 42 L96 42" stroke="#6a5438" stroke-width=".7"/>
+      <path d="M19 57 L15 66 M25 57 L29 66" stroke="#b01a28" stroke-width="2.4"/>
+      <circle cx="22" cy="52" r="7.5" fill="#e0b040" stroke="#fff0a0" stroke-dasharray="2 1.5" filter="url(#glow)"/>
+      <circle cx="22" cy="52" r="4" fill="#a87a20"/>
+      <g clip-path="url(#rim)">
+        <path class="lf-sheen" d="M-10 -4 L6 -4 L-12 72 L-28 72Z" fill="url(#shine)"/>
+      </g>
+    </g>
+    <path class="lf-glint" d="M145 121.8 L145.9 126.8 L150.9 127.8 L145.9 128.8 L145 133.8 L144.1 128.8 L139.1 127.8 L144.1 126.8Z" fill="#fffbe8" opacity="0"/>
+  </g>
+  <!-- the gloved hand that slides it -->
+  <g class="lf-push">
+    <ellipse cx="136" cy="109" rx="13" ry="5" fill="url(#shade)" opacity=".7"/>
+    <path d="M-8 104 C26 98 72 93 108 92 L110 114 C76 120 32 132 -8 146Z" fill="#0a0806"/>
+    <path d="M52 99 C58 104 62 110 63 118 M20 104 C26 109 28 116 28 126" fill="none" stroke="#1a161a" stroke-width=".9"/>
+    <path d="M100 92.5 C98 99 98 107 101 115" fill="none" stroke="#221c20" stroke-width="1.2"/>
+    <path d="M106 92.5 C116 90.5 124 89.5 131 91.5 L133 111 C124 113 116 113.5 108 113.5Z" fill="#141014"/>
+    <path d="M132 93.5 L145 94.5 M133 98 L148 99 M133 102.5 L146.5 103.5 M132 107 L142.5 108.5 M118 92 C122 89.5 126 88 131.5 88.5" fill="none" stroke="#141014" stroke-width="3.8" stroke-linecap="round"/>
+    <path d="M124 92.5 C126 95 126 97.5 125 100 M127 99.5 C129 101.5 129 104 128 106" fill="none" stroke="#2e262c" stroke-width=".7"/>
+    <path d="M-8 104 C26 98 72 93 107 91.5 C113 89.5 117 88 122 87 C126 86.2 129 86.4 132 86.8 M134 92.4 L144.5 93" fill="none" stroke="#f0b860" stroke-opacity=".4" stroke-width=".7"/>
+  </g>
+  <!-- the cheque, and Lord Edmund signing it -->
+  <rect x="162" y="112" width="66" height="28" fill="#d6e2c4"/>
+  <rect x="164" y="114" width="62" height="24" fill="none" stroke="#7a9a70" stroke-width=".6"/>
+  <path d="M176 112 L176 140" stroke="#7a9a70" stroke-width=".6" stroke-dasharray="1.5 1"/>
+  <path d="M180 120 L204 120 M180 126 L214 126" stroke="#6a8466" stroke-width=".6"/>
+  <path d="M186 134 L224 134" stroke="#6a8466" stroke-width=".5"/>
+  <text x="224" y="121" text-anchor="end" font-family="Georgia, serif" font-size="5.5" fill="#24301e">£10,000</text>
+  <g transform="translate(188 126) scale(.64 .7)"><use class="lf-sign" href="#sig" fill="none" stroke="#141a3a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g class="lf-scrawl">
+    <g transform="translate(220 130.2)">
+      <ellipse cx="26" cy="14" rx="24" ry="9" fill="url(#shade)"/>
+      <path d="M5.9 -4.4 L27.2 -34.7 L23.4 -37.3 L2.1 -7Z" fill="#0c0a10"/>
+      <circle cx="25.3" cy="-36" r="2.3" fill="#0c0a10"/>
+      <path d="M16.5 -27.5 L20.3 -24.9" stroke="#c8a040" stroke-width="1.6"/>
+      <path d="M0 0 L5.5 -4.7 L2.5 -6.7Z" fill="#d8b050"/>
+      <path d="M38 -13 C54 -6 92 8 146 30 L146 66 C104 42 62 20 40 8Z" fill="#4a1216"/>
+      <path d="M38 -13 C54 -6 92 8 146 30 L146 35 C92 13 56 -1 39 -8Z" fill="#7a2a2a" opacity=".7"/>
+      <path d="M33.5 -14 L41 -12 L43 9.5 L35.5 8Z" fill="#ece0c8"/>
+      <path d="M33.5 -14 L41 -12 L41.4 -8 L34 -10Z" fill="#fff6e4"/>
+      <circle cx="38.5" cy="-1" r="1.5" fill="#d8b04a"/>
+      <path d="M15 -18 C22 -21 30 -18 34.5 -13 L36 7 C31 11 26 13.5 21 13 C16 12.5 12.5 9.5 11 6.5 C8.5 5 7 2.5 7.5 0 L12 -10 C12.5 -14 13.5 -16.5 15 -18Z" fill="#c08a66"/>
+      <path d="M16 -16.5 C11.5 -17 8.5 -14.5 6.5 -11.5 L4 -7.8" fill="none" stroke="#c08a66" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M33 -3 C25 -5 15 -7 8 -7 C5 -6.5 4.8 -2.6 7.8 -2 C15 -.5 24 2.5 33 5Z" fill="#d6a07a"/>
+      <path d="M11 6.5 C13 5 16.5 5 18.5 7 M8 0 C10 -1 12.5 -.5 13.5 1 M13 -15 C14.5 -13.5 14.5 -11.5 13 -10" fill="none" stroke="#8a5a40" stroke-width=".7"/>
+      <path d="M3.6 -10 L6.5 -13.5 C8.5 -16.5 11.5 -18.5 15 -18.6 C21 -21 28 -19 33 -14.5" fill="none" stroke="#f0c8a0" stroke-width=".9"/>
+    </g>
+  </g>
+  <!-- where the flashback lays the guest's photograph, over the one who did it -->
+  <g data-fx="guest" data-at="126 90"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>

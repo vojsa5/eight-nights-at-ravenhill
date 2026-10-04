@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" data-cut="leak" data-cut-at="50% 45%">
+  <title>Outside the library door a gloved hand tips a vial wrapped in lace into the brandy on the silver tray, while a second gloved hand holds the door ajar to keep watch</title>
+  <defs>
+    <radialGradient id="bg" cx="48%" cy="44%" r="80%">
+      <stop offset="0" stop-color="#2e1a2e"/>
+      <stop offset="1" stop-color="#050306"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="48%" r="75%">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".88"/>
+    </radialGradient>
+    <radialGradient id="amber" cx="50%" cy="70%" r="65%">
+      <stop offset="0" stop-color="#ffc050"/>
+      <stop offset="1" stop-color="#7a3a0c"/>
+    </radialGradient>
+    <linearGradient id="crack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd890"/>
+      <stop offset=".6" stop-color="#ffb050"/>
+      <stop offset="1" stop-color="#e07a30"/>
+    </linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a1620"/>
+      <stop offset="1" stop-color="#120a0e"/>
+    </linearGradient>
+    <pattern id="paper" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="5" height="12" fill="#fff" opacity=".025"/>
+    </pattern>
+    <pattern id="lace" width="4" height="4" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="none" stroke="#fff" stroke-width=".45"/>
+    </pattern>
+    <path id="drape" d="M218 66 C226 68 236 68 243 65 C244 77 240 91 233 99 C229 89 223 78 218 66Z"/>
+    <path id="wrap" d="M199.5 36 H214.5 V57 C212 55 209.5 58.5 207 56.5 C204.5 58.5 202 55 199.5 57Z"/>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- the passage wall -->
+  <rect width="360" height="92" fill="url(#paper)"/>
+  <path d="M0 92 H104 M182 92 H360" stroke="#1a0e16" stroke-width="3"/>
+  <g fill="none" stroke="#3a2232" stroke-width="1" opacity=".55">
+    <rect x="24" y="100" width="60" height="24"/><rect x="196" y="100" width="60" height="24"/><rect x="268" y="100" width="60" height="24"/>
+  </g>
+  <!-- in the films (css/film.css + the scene's own rules): the library fire flickers through the crack, the door
+       opens a little wider, the pouring hand shakes, the drops fall into the brandy -->
+  <!-- the library door, held ajar: firelight from the library through the crack -->
+  <rect class="lf-firelit" x="104" y="10" width="24" height="120" fill="#ffa850" fill-opacity=".4" filter="url(#soft)"/>
+  <rect class="lf-firelit" x="110" y="16" width="12" height="112" fill="url(#crack)"/>
+  <g data-fx="glow" data-at="116 70" data-r="30" data-tone="fire"/>
+  <g class="lf-peek">
+    <rect x="118" y="16" width="60" height="112" fill="#2c1824"/>
+    <rect x="118" y="16" width="2.5" height="112" fill="#8a5038"/>
+    <g fill="none" stroke="#1a0c14" stroke-width="1.6">
+      <rect x="127" y="24" width="38" height="42"/><rect x="127" y="72" width="38" height="52"/>
+    </g>
+    <path d="M128 25 H164 M128 73 H164" stroke="#4a2c3a" stroke-width=".8"/>
+    <circle cx="127" cy="96" r="3.2" fill="#a8803a"/>
+    <path d="M125 94.5 A3.2 3.2 0 0 1 129 93.5" fill="none" stroke="#ffe0a0" stroke-width=".8"/>
+    <!-- the one keeping watch: a gloved hand round the edge of the door -->
+    <g fill="#0c080c">
+      <rect x="112" y="59.5" width="9" height="4.2" rx="2.1"/><rect x="110.8" y="64.5" width="10" height="4.2" rx="2.1"/>
+      <rect x="111.3" y="69.5" width="9.5" height="4.2" rx="2.1"/><rect x="112.6" y="74.5" width="8.2" height="3.8" rx="1.9"/>
+      <path d="M119 58 C126 56 134 59 138 66 L146 84 C140 90 128 88 122 82 L119 79Z"/>
+      <path d="M134 80 L148 72 L184 128 L154 128Z"/>
+    </g>
+    <path d="M134 80 L148 72 L152 79 L138 87.5Z" fill="#1e141a"/>
+    <path d="M124 76 C128 70 132 64 136 59.5" fill="none" stroke="#0c080c" stroke-width="5" stroke-linecap="round"/>
+    <path d="M120.5 59 C126 57 132 59 136 64" fill="none" stroke="#ffcf80" stroke-width=".8" opacity=".6"/>
+    <path d="M134 80 L154 128" fill="none" stroke="#ffb060" stroke-width=".7" opacity=".25"/>
+  </g>
+  <path d="M104 8 H182 V128 H174 V16 H112 V128 H104Z" fill="#1a0e14"/>
+  <path d="M112 16 H174 V128" fill="none" stroke="#3a2230" stroke-width="1"/>
+  <path d="M104 8 H182" stroke="#4a2c3a" stroke-width="1"/>
+  <!-- the side table -->
+  <rect y="128" width="360" height="72" fill="url(#top)"/>
+  <path d="M0 128 H360" stroke="#5a3a3a" stroke-width=".8" opacity=".7"/>
+  <!-- the candle -->
+  <circle cx="300" cy="80" r="44" fill="#ffb060" opacity=".2" filter="url(#soft)"/>
+  <circle cx="220" cy="120" r="64" fill="#ffb060" opacity=".14" filter="url(#soft)"/>
+  <g data-fx="glow" data-at="300 76" data-r="64" data-tone="candle"/>
+  <ellipse cx="300" cy="138" rx="12" ry="3" fill="#6a5020"/>
+  <rect x="297" y="108" width="6" height="30" fill="#8a6a2a"/>
+  <ellipse cx="300" cy="108" rx="9" ry="2.4" fill="#a8843a"/>
+  <rect x="295.5" y="82" width="9" height="26" fill="#e6d8bc"/>
+  <path class="lf-flame" d="M300 66 C304 73 304 80 300 82 C296 80 296 73 300 66Z" fill="#ffd27a" filter="url(#glow)"/>
+  <!-- silver tray -->
+  <ellipse cx="197" cy="144" rx="96" ry="14" fill="#6a6674"/>
+  <ellipse cx="197" cy="141.5" rx="92" ry="11.5" fill="#b4b0c0"/>
+  <ellipse cx="197" cy="141" rx="82" ry="9" fill="#8c8898"/>
+  <ellipse cx="228" cy="141" rx="40" ry="5" fill="#ffc070" opacity=".22"/>
+  <ellipse cx="140" cy="141" rx="18" ry="3.5" fill="#ffa850" opacity=".2"/>
+  <!-- a rose on the tray, a petal fallen, the vial's cork -->
+  <path d="M112 150 C126 148 140 146 152 146" fill="none" stroke="#2e5a2a" stroke-width="2" stroke-linecap="round"/>
+  <path d="M128 148 C126 142 132 139 138 140 C136 145 132 148 128 148Z" fill="#3a6e30"/>
+  <path d="M152 148 C149 141 154 136 160 137 C167 138 169 145 165 150 C161 154 154 153 152 148Z" fill="#7a0a16"/>
+  <circle cx="160" cy="145" r="6.5" fill="#a01424"/>
+  <path d="M154 143 C156 138 164 137 167 142 C164 140 158 140 156 146Z" fill="#c8303e"/>
+  <path d="M160 145 m-1.6 0 a1.6 1.6 0 1 1 2.6 1.2 a3.4 3.4 0 1 1 -5 -2.8" fill="none" stroke="#50060e" stroke-width=".9"/>
+  <path d="M230 146 C232 142 238 142 239 145 C237 148 232 149 230 146Z" fill="#a01424"/>
+  <rect x="246" y="139" width="7" height="5" rx="1.5" fill="#7a4826" transform="rotate(-20 249 141)"/>
+  <!-- the brandy glass -->
+  <path d="M163 108 C163 122 174 132 192 132 C210 132 221 122 221 108Z" fill="url(#amber)" filter="url(#glow)"/>
+  <ellipse cx="192" cy="108" rx="29" ry="3.4" fill="#ffd890" opacity=".75"/>
+  <path d="M176 84 C164 94 158 114 168 124 C174 130 182 132 192 132 C202 132 210 130 216 124 C226 114 220 94 208 84" fill="#d8d0d8" fill-opacity=".16" stroke="#efe4ec" stroke-opacity=".6"/>
+  <ellipse cx="192" cy="84" rx="16" ry="2.4" fill="none" stroke="#efe4ec" stroke-opacity=".65"/>
+  <path d="M169 98 C166 106 167 115 171 120" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".45"/>
+  <rect x="190.5" y="132" width="3" height="8" fill="#d8d0d8" opacity=".5"/>
+  <ellipse cx="192" cy="141" rx="14" ry="2.6" fill="#d8d0d8" opacity=".5"/>
+  <circle class="lf-glint" style="--d:1.6s" cx="213" cy="92" r="1.3" fill="#fff8e8" opacity="0"/>
+  <!-- the poison running into the brandy -->
+  <path class="lf-pour" d="M191.3 72 C191.6 82 191.8 94 192 104" stroke="#7af0b0" stroke-width="1.6" fill="none" stroke-dasharray="2 4" filter="url(#glow)"/>
+  <circle class="lf-drop" cx="192" cy="102" r="1.8" fill="#7af0b0" filter="url(#glow)"/>
+  <ellipse class="lf-ripple" cx="192" cy="108.4" rx="10" ry="2" fill="none" stroke="#ffe8b0" stroke-width=".7" opacity="0"/>
+  <ellipse class="lf-ripple" style="--d:.24s" cx="192" cy="108.4" rx="10" ry="2" fill="none" stroke="#9af0c0" stroke-width=".6" opacity="0"/>
+  <!-- the pouring hand, the vial half wrapped in a lace handkerchief -->
+  <g class="lf-tremble" style="transform-box:view-box;transform-origin:254px 50px">
+    <use href="#drape" fill="#dccdd6"/><use href="#drape" fill="url(#lace)" opacity=".3"/>
+    <path d="M243 65 C244 77 240 91 233 99 C229 89 223 78 218 66" fill="none" stroke="#f4ecf0" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="0 2.6"/>
+    <path d="M226 70 C229 80 231 88 233 95" fill="none" stroke="#a8969f" stroke-width=".8"/>
+    <path d="M233 88 C234.5 86.5 236.5 87.8 235 89.6 L233 91.4 L231 89.6 C229.5 87.8 231.5 86.5 233 88Z" fill="#b01828"/>
+    <g transform="rotate(50 207 56)">
+      <rect x="202" y="40" width="10" height="28" rx="3" fill="#bff0d8" fill-opacity=".3" stroke="#e4fff2" stroke-width=".9"/>
+      <rect x="203.2" y="58" width="7.6" height="9.5" rx="2" fill="#5ad898" opacity=".85" filter="url(#glow)"/>
+      <rect x="204.5" y="68" width="5" height="7" fill="#bff0d8" fill-opacity=".35" stroke="#e4fff2" stroke-width=".8"/>
+      <rect x="203.5" y="74.5" width="7" height="2.5" rx="1" fill="#e4fff2" opacity=".8"/>
+      <use href="#wrap" fill="#dccdd6"/><use href="#wrap" fill="url(#lace)" opacity=".3"/>
+      <path d="M199.5 57 C202 55 204.5 58.5 207 56.5 C209.5 58.5 212 55 214.5 57" fill="none" stroke="#f4ecf0" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="0 2.4"/>
+      <rect x="200" y="39.5" width="21" height="17" rx="2" fill="#2a1e28"/>
+      <g fill="#141014">
+        <rect x="199.5" y="39.5" width="22" height="4" rx="2"/><rect x="199" y="44" width="22" height="4" rx="2"/>
+        <rect x="199.5" y="48.5" width="21" height="4" rx="2"/><rect x="200.5" y="53" width="20" height="3.6" rx="1.8"/>
+      </g>
+      <path d="M201 41 C203 40.4 205 40.4 207 41 M200.5 45.5 C202.5 44.9 204.5 44.9 206.5 45.5 M201 50 C203 49.4 205 49.4 207 50" fill="none" stroke="#5a4450" stroke-width=".6"/>
+    </g>
+    <path d="M360 0 L360 36 C332 40 296 50 262 62 L252 38 C282 26 320 12 345 0Z" fill="#0c080c"/>
+    <path d="M254 38 C242 36 232 40 226 46 L210 62 C212 71 222 75 232 72 C242 68 250 64 256 62Z" fill="#141014"/>
+    <path d="M250 38 L256 36.5 L266 61 L258 63.5Z" fill="#1e161c"/>
+    <path d="M262 62 C296 50 332 40 360 36" fill="none" stroke="#ffb060" stroke-width="1" opacity=".35"/>
+    <path d="M212 66 C220 73 236 72 252 63" fill="none" stroke="#ffb060" stroke-width=".8" opacity=".4"/>
+  </g>
+  <g data-fx="motes" data-at="146 76" data-r="30"/>
+  <!-- where the flashback lays the guest's photograph, over the one who did it -->
+  <g data-fx="guest" data-at="130 72"/>
+  <rect width="360" height="200" fill="url(#vig)"/>
+</svg>
