@@ -27,7 +27,8 @@ class AuditGame(Game):
         m = self.minds[c]
         if forged:
             s["forgery: total"] += 1
-            if role in NO_ABILITY or role == "Framer" and old_victim in self.alive:
+            lone_lover = role == "Lover" and sum(self.roles[x] == "Lover" for x in self.alive) < 2  # no longer investigates
+            if role in NO_ABILITY or lone_lover or role == "Framer" and old_victim in self.alive:
                 s["forgery: wasted on a character with no ability to spoil"] += 1
             if is_bad(role):
                 s["forgery: hit a bad teammate"] += 1

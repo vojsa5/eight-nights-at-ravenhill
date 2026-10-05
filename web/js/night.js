@@ -80,7 +80,7 @@ export function tracesHtml(round, blackout, compact = false) {
 }
 
 // What a trace's culprit does at night: the Roles tab's words; the Lovers' trace is the two of them meeting.
-const LOVERS = "Each checks one guest, guilty or not. At night they meet, tell each other everything they learned and agree on what to say in the morning.";
+const LOVERS = "Together they check one guest a night, guilty or not, then tell each other everything they know and agree on what to say in the morning. A Lover left alone no longer investigates.";
 const doneAtNight = (r) => `<b class="trace-name">${r === "Lover" ? "The Lovers" : title(r)}</b> ${r === "Lover" ? LOVERS : ROLES[r][1].night}`;
 
 // A click on a trace tells what was done under the traces; a second click on it puts that away.

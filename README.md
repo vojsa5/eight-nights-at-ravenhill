@@ -39,8 +39,9 @@ same link, for example `https://vojsa5.github.io/eight-nights-at-ravenhill/?case
 it, so pick a name nobody would guess (letters, digits, `-` and `_`). It is the only case the site plays: the page
 keeps the SHA-256 of its name (`CASE_SHA256` in `web/js/shared.js`), so the public source does not give the name
 away, and the database takes no second case. A move once made stays made. New case starts the case over as a new
-game, once its seal is held down; every device with the link moves on to it, and the games before stay in the
-database (the first at the case's own level, each later one under `games/<n>`, with `game` naming the current one).
+game, once its seal is held down; every device with the link moves on to it. Only the game in progress is kept: the
+first at the case's own level, each later one under `games/<n>` with `game` naming it, and starting over replaces the
+whole case with the new game.
 When the case moves on in another browser, the page catches up (notes too) as soon as you come back to it; a move
 made on a board that was out of date is not made, and the page catches up instead.
 
@@ -227,7 +228,8 @@ with the case (online for a shared case, else in the browser).
 Every night's opening card says what the night left behind: ink for the Forger, a glass at the wall for the
 Eavesdropper, steamed-open letters for the Mole, banknotes for the Paymaster, whispers in the night while both Lovers
 are free (`night_traces()` in `ravenhill/server/state.py` decides which roles worked, `web/js/night.js` has the texts).
-Only roles whose night work has an effect leave a trace, so the Grifter and the Lunatic leave none. A click on a trace
+Only roles whose night work has an effect leave a trace, so the Grifter and the Lunatic leave none. The Lovers
+investigate together, one guest a night, and a Lover left alone no longer investigates. A click on a trace
 tells what its culprit does at night. It names roles, never guests, and a trace stops once its culprit is out of the
 house; nothing shows after a Blackout. On the last night the two who remain are gathered in the drawing room: you accuse one, the other goes free,
 and a short film of the summing-up (`showDrawingRoom()` in `finale.js`) leads into the ending.

@@ -93,6 +93,8 @@ function abilityHtml(e) {
   if (!f) return "";  // nobody left to look into
   if (role === "Framer") return `<b>Picked</b> ${who(f.target)} to frame.`;
   if (role === "Guest") return `<b>Had a hunch:</b> ${factHtml(f)} ${factMark(f, e)}`;
+  const partner = role === "Lover" && ui.S.chars.find((x) => x.role === "Lover" && x.id !== e.char);
+  if (partner && f.kind === "side") return `<b>Checked</b> ${who(f.target)} together with ${who(partner.id)}: ${looks(f.bad)} ${factMark(f, e)}`;
   const one = (f) => f.kind === "side" ? `<b>Investigated</b> ${who(f.target)}: ${looks(f.bad)} ${factMark(f, e)}`
     : f.kind === "role" ? `<b>Uncovered</b> ${who(f.target)}'s role: ${lower(title(f.role))} ${factMark(f, e)}`
     : f.kind === "count" ? `<b>Counted</b> the guests beside them: ${factHtml(f)} ${factMark(f, e)}`

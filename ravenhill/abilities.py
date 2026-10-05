@@ -10,8 +10,8 @@ from .rules import is_bad, registers_bad
 
 def run_night(game):
     """The Forger, Blackmailer, Paymaster, Hypnotist and Eavesdropper pick their targets first, then everyone
-    acts; the Eavesdropper acts last, so it can copy what its target learned tonight, and last of all the
-    hypnotised guest tells the Hypnotist everything they know."""
+    acts, the two Lovers together; the Eavesdropper acts last, so it can copy what its target learned tonight, and
+    last of all the hypnotised guest tells the Hypnotist everything they know."""
     forged = None
     forger = game.find_alive("Forger")
     if forger is not None:
@@ -40,6 +40,7 @@ def run_night(game):
     for c in sorted(game.alive):
         if c != eavesdropper:
             game.use_ability(c, c == forged)
+    lovers_investigate(game, forged)  # before the Eavesdropper, who may be listening at a Lover's door
     if eavesdropper is not None:
         game.use_ability(eavesdropper, eavesdropper == forged)
     share_between_lovers(game)
@@ -48,6 +49,24 @@ def run_night(game):
         knew = game.minds[hypnotist].snapshot()
         tell(game.minds[subject], game.minds[hypnotist])
         game.jot(hypnotist, "told", by=subject, facts=facts_learned(knew, game.minds[hypnotist]))
+
+
+def lovers_investigate(game, forged):
+    """The Lovers check one guest a night, together, and both learn the result; the Forger spoils it if it went after
+    either of them. A Lover left alone no longer investigates."""
+    pair = [c for c in sorted(game.alive) if game.roles[c] == "Lover"]
+    if len(pair) != 2:
+        return
+    minds = [game.minds[c] for c in pair]
+    unknown = [x for x in sorted(game.alive) if all(x != m.c and x not in m.known and x not in m.roles for m in minds)]
+    knew = [m.snapshot() for m in minds]
+    spoiled = forged in pair
+    if unknown:
+        t = game.rng.choice(unknown)
+        for m in minds:
+            m.known[t] = registers_bad(game.roles[t], m.role) != spoiled
+    for m, before in zip(minds, knew):
+        game.jot(m.c, "ability", facts=facts_learned(before, m), forged=spoiled)
 
 
 def share_between_lovers(game):
@@ -114,7 +133,8 @@ def check_alignment(game, m, others, unknown, forged):
 
 
 def sniff(game, m, others, unknown, forged):
-    """Thug, Mastermind, Copycat and Lover: learn one character's alignment, which is how conspirators find each other."""
+    """Thug, Mastermind and Copycat: learn one character's alignment, which is how conspirators find each other (the
+    Lovers check one together, lovers_investigate)."""
     if unknown:
         t = game.rng.choice(unknown)
         m.known[t] = registers_bad(game.roles[t], m.role) != forged
@@ -203,14 +223,14 @@ def photographer(game, m, others, unknown, forged):
 
 
 # Roles without an entry (Witness, Confidant, Colonel, Possessed, Novelist, Recluse, Grifter, Lunatic, and the Forger,
-# Blackmailer, Paymaster and Hypnotist, who pick their targets in run_night) have no night ability of their own.
+# Blackmailer, Paymaster and Hypnotist, who pick their targets in run_night) have no night ability of their own; the
+# Lovers investigate together (lovers_investigate).
 ABILITIES = {
     "Sleuth": check_alignment,
     "Amateur": check_alignment,
     "Thug": sniff,
     "Mastermind": sniff,
     "Copycat": sniff,
-    "Lover": sniff,
     "Eavesdropper": eavesdropper,
     "Reporter": learn_role,
     "Mole": learn_role,

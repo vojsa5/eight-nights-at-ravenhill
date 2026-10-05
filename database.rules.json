@@ -3,6 +3,7 @@
     "cases": {
       "$case": {
         ".read": true,
+        ".write": "data.exists() && newData.child('game').val() == (data.child('game').exists() ? data.child('game').val() : 0) + 1 && newData.child('games').child(newData.child('game').val() + '').child('seed').exists() && !newData.child('games').child(newData.child('game').val() + '').child('moves').exists() && !newData.child('games').child(newData.child('game').val() + '').child('notes').exists() && !newData.child('games').child(newData.child('game').val() + '').child('read').exists() && !newData.child('seed').exists() && !newData.child('moves').exists() && !newData.child('notes').exists() && !newData.child('read').exists()",
         "seed": {
           ".write": "!data.exists() && !root.child('cases').exists() && $case.matches(/^[A-Za-z0-9_-]{1,64}$/)",
           ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() < 4294967296"
@@ -24,13 +25,12 @@
           }
         },
         "game": {
-          ".write": "newData.exists() && data.parent().child('seed').exists()",
           ".validate": "newData.isNumber() && newData.val() == (data.exists() ? data.val() : 0) + 1 && newData.parent().child('games').child(newData.val() + '').child('seed').exists()"
         },
         "games": {
           "$g": {
+            ".validate": "$g == newData.parent().parent().child('game').val() + ''",
             "seed": {
-              ".write": "!data.exists() && root.child('cases').child($case).child('seed').exists() && newData.parent().parent().parent().child('game').val() + '' == $g",
               ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() < 4294967296"
             },
             "moves": {

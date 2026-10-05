@@ -37,7 +37,7 @@ export const ROLES = {
     "Does the heavy lifting and asks no questions."],
   Eavesdropper: ["bad", { night: "Listens at the door of whoever's advice has looked most reliable, and learns whatever they learned that night, even a forged result.", day: "Lies to save their own skin: accuses whoever looks innocent, above all their own accusers, and clears any guest they know to be guilty." },
     "Every keyhole tells a story."],
-  Lover: ["bad", { start: "Knows who the other Lover is.", night: "Checks one guest: guilty or not? The two Lovers tell each other everything they learn and agree on what to say in the morning.", day: "Lies like any guilty guest, but never names the other Lover, to clear or to arrest. On a day with both tips, the two Lovers share at least one. A bribed or hypnotised Lover says what they must, though." },
+  Lover: ["bad", { start: "Knows who the other Lover is.", night: "Together, the two Lovers check one guest a night: guilty or not? They tell each other everything they know and agree on what to say in the morning. A Lover left alone no longer investigates.", day: "Lies like any guilty guest, but never names the other Lover, to clear or to arrest. On a day with both tips, the two Lovers share at least one. A bribed or hypnotised Lover says what they must, though." },
     "A secret affair is the best alibi."],
   Paymaster: ["bad", { night: "From night II, bribes one guest: whoever accused the Paymaster the day before, otherwise whoever looks most reliable.", day: "Lies. And the guest they bribed advises clearing the Paymaster next morning." },
     "Every man has his price. Most come cheap."],

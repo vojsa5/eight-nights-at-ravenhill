@@ -599,7 +599,8 @@ function houseHtml() {
   const house = (icon, name, text) => `<div class="house"><span class="icon">${icon}</span><div><b>${name}</b><p>${text}</p></div></div>`;
   return `<div class="houserules">
     ${house("👥", "Pairs", `The two Confidants spent the night of the murder together, so each knows the other is innocent and advises clearing them.
-      The two Lovers know each other too: they never name each other, and on a day with both tips they share at least one. A guest
+      The two Lovers know each other too: each night they check one guest together (a Lover left alone no longer investigates), they
+      never name each other, and on a day with both tips they share at least one. A guest
       who is bribed or hypnotised says what they must, though.`)}
     ${house("😠", "Grudges", "Guests are more suspicious of whoever advised arresting them the day before.")}
     ${house("🔒", "Sealed roles", "A guest you misjudged shows only their side until the case is closed, so a mistake teaches you less than a right call.")}

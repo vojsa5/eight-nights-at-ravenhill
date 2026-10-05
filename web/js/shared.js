@@ -42,7 +42,8 @@ async function request(path, method = "GET", body, keepalive = false) {
 const parse = (m) => { try { return JSON.parse(m); } catch (e) { return null; } };
 
 // A case can be started over (New case): its first game is kept at the case's own level, each later one under
-// games/<n>, and `game` says which one the case is on. Every game is kept; the case only ever moves on.
+// games/<n>, and `game` says which one the case is on. Only the game in progress is kept: starting over replaces the
+// whole case with the new game, so a page still showing the old one finds nothing left to add its moves to.
 const gameAt = (game) => (game ? `games/${game}/` : "");
 // where the game shown keeps its notes and books, from its id (pyengine.js names a later game <case>-g<k>)
 const gameOf = (id) => (id && id.startsWith(sharedCase + "-g") ? gameAt(Number(id.slice(sharedCase.length + 2))) : "");
@@ -51,8 +52,8 @@ const gameOf = (id) => (id && id.startsWith(sharedCase + "-g") ? gameAt(Number(i
 // they were saved, without any that is not a move at all; `next` is where the next one goes.
 export async function readCase() {
   const rec = await request("");
-  if (!rec || rec.seed === undefined) return null;
-  const game = Number.isInteger(rec.game) && rec.game > 0 ? rec.game : 0;
+  const game = Number.isInteger(rec?.game) && rec.game > 0 ? rec.game : 0;
+  if (!rec || (rec.seed === undefined && !game)) return null;  // once started over, only the game in progress is left
   const g = game ? (rec.games || {})[game] : rec;
   if (!g || g.seed === undefined) throw new Error("The case file has lost its current game. Try again in a moment.");
   const saved = Array.isArray(g.moves) ? g.moves.map((m, i) => [i, m]) : Object.entries(g.moves || {}).map(([k, m]) => [Number(k), m]);
@@ -66,8 +67,8 @@ export async function readCase() {
 export const startCase = (seed) => request("/seed", "PUT", seed).then((r) => r !== false);
 export const addMoves = (rec, ms) => request("", "PATCH", Object.fromEntries(ms.map((m, i) => [`${gameAt(rec.game)}moves/${rec.next + i}`,
   JSON.stringify(m)]))).then((r) => r !== false);
-// New case: the case moves on to its next game, which is saved with its seed in one go.
-export const startOver = (rec, seed) => request("", "PATCH", { game: rec.game + 1, [`${gameAt(rec.game + 1)}seed`]: seed })
+// New case: the case is replaced by its next game, with nothing but its seed. False when another browser started one first.
+export const startOver = (rec, seed) => request("", "PUT", { game: rec.game + 1, games: { [rec.game + 1]: { seed } } })
   .then((r) => r !== false);
 
 // A book won and finished (reading.js) in the game shown (`id`): when, by book slot. False when another browser marked it first.
