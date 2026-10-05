@@ -35,12 +35,32 @@ def preload_modules(out):
     page.write_text(page.read_text().replace("</head>", links + "</head>", 1))
 
 
+def version_assets(out):
+    """Every file of the page asks for the others under this build's own name (?v=...), so a reload after a deploy
+    never mixes the new page with old scripts the browser still holds (GitHub Pages lets it keep them ten minutes)."""
+    files = sorted(p for p in out.rglob("*") if p.suffix in (".js", ".css", ".html"))
+    v = hashlib.sha256(b"".join(p.read_bytes() for p in files)).hexdigest()[:10]
+    spec = re.compile(r'((?:\bfrom|\bimport)\s*\(?\s*")(\.{1,2}/[\w./-]+\.js)(")')  # import ... from "./x.js", import("./x.js")
+    for js in (out / "js").glob("*.js"):
+        text = spec.sub(rf"\1\2?v={v}\3", js.read_text())
+        if js.name == "pyengine.js":
+            worker = 'new URL("pyworker.js", import.meta.url)'
+            assert worker in text, "pyengine.js no longer starts its worker as expected"
+            text = text.replace(worker, f'new URL("pyworker.js?v={v}", import.meta.url)')
+        js.write_text(text)
+    page = out / "index.html"
+    text = re.sub(r'((?:src|href)="(?:js|css)/[\w.-]+\.(?:js|css))"', rf'\1?v={v}"', page.read_text())
+    page.write_text(spec.sub(rf"\1\2?v={v}\3", text))  # and the inline warm-up's import
+    return v
+
+
 def build(out):
     if out.exists():
         shutil.rmtree(out)
     # the page, without the player's own pictures (only their README)
     shutil.copytree(ROOT / "web", out, ignore=lambda d, names: [n for n in names if Path(d).name == "custom" and n != "README.md"])
     preload_modules(out)
+    version = version_assets(out)
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
         for f in sorted((ROOT / "ravenhill").rglob("*.py")):
@@ -50,7 +70,7 @@ def build(out):
     (out / "py").mkdir()
     (out / "py" / name).write_bytes(data)
     (out / "py" / "manifest.json").write_text(json.dumps({"zip": name}))
-    print(f"built {out} ({name}, {len(data) // 1024} KB of Python)")
+    print(f"built {out} (version {version}; {name}, {len(data) // 1024} KB of Python)")
 
 
 if __name__ == "__main__":
