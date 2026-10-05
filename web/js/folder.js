@@ -8,7 +8,6 @@ import { EVENTS, GROUPS, HALF, LAST_NIGHT, eventGroup, groupStepsHtml, nightEven
 import { ROMAN, moonSvg } from "./format.js";
 import { portrait, roleArt } from "./portrait.js";
 import { CRIMES, ROLES, SIDE, plannedHtml, stepsHtml, stepsLegendHtml, title } from "./roles.js";
-import { sharedCase } from "./shared.js";
 import { $, patch, showInFolder, ui } from "./state.js";
 import { RANKS, noteSvg } from "./board.js";
 import { TRACES } from "./night.js";
@@ -163,7 +162,7 @@ function rewardsHtml() {
       sealed with the guest's role until the case is closed.</p>` : "";
   return `<div class="rules rewards"><div${bookOpen !== null ? " inert" : ""}>
     <p>Every guest has hidden a book in their room. Clear or arrest a guest rightly and you find it:
-    the book is yours, and the case waits while you read it. A mistake loses that guest's book${sharedCase ? ", and this case is the only one" : ""}.</p>
+    the book is yours, and the case waits while you read it. A mistake loses that guest's book.</p>
     <div class="side-head"><h3>Your shelf</h3><span class="count">${counts.join(" · ")}</span></div>
     <div class="bookcase${total && won.length === total ? " full" : ""}"><span class="bc-plaque" aria-hidden="true">${won.length}<small>of</small>${total}</span>
       <div class="shelves">${slots.map((x, i) => slotHtml(x, i, fresh)).join("")}${'<div class="slot"></div>'.repeat((4 - slots.length % 4) % 4)}</div></div>

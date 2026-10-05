@@ -23,6 +23,37 @@
             ".validate": "($slot.matches(/^[a-z]+$/) || $slot.matches(/^[a-z]+-[ab]$/)) && newData.isNumber()"
           }
         },
+        "game": {
+          ".write": "newData.exists() && data.parent().child('seed').exists()",
+          ".validate": "newData.isNumber() && newData.val() == (data.exists() ? data.val() : 0) + 1 && newData.parent().child('games').child(newData.val() + '').child('seed').exists()"
+        },
+        "games": {
+          "$g": {
+            "seed": {
+              ".write": "!data.exists() && root.child('cases').child($case).child('seed').exists() && newData.parent().parent().parent().child('game').val() + '' == $g",
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() < 4294967296"
+            },
+            "moves": {
+              "$n": {
+                ".write": "!data.exists() && data.parent().parent().child('seed').exists()",
+                ".validate": "$n.matches(/^[0-9]{1,2}$/) && newData.isString() && (newData.val().matches(/^\\[\"act\",[0-9]{1,2}\\]$/) || newData.val().matches(/^\\[\"tool\",\"interview\",[0-9]{1,2}\\]$/))"
+              }
+            },
+            "notes": {
+              ".write": "data.parent().child('seed').exists()",
+              ".validate": "newData.isString() && newData.val().length < 4000"
+            },
+            "read": {
+              "$slot": {
+                ".write": "!data.exists() && data.parent().parent().child('seed').exists()",
+                ".validate": "($slot.matches(/^[a-z]+$/) || $slot.matches(/^[a-z]+-[ab]$/)) && newData.isNumber()"
+              }
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
         "$other": {
           ".validate": false
         }

@@ -71,7 +71,7 @@ document.addEventListener("keydown", (e) => {
   if (titleOpen()) {  // the opening screen: Enter or Space presses its button (in, or try again), Escape goes in
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      $("ts-enter")?.click();
+      if (!e.repeat) $("ts-enter")?.click();  // a key still held from the seal (New case) does not go in at once
     } else if (e.key === "Escape") {
       e.preventDefault();
       closeTitle();
@@ -248,7 +248,6 @@ const resume = load("current-game");
 const open = (s) => { setGame(s); reopenFolder(s); render(); maybeShowIntro(); };
 function start() {
   if (sharedCase) {
-    $("newgame").style.display = "none";  // the shared case is the only one
     const openShared = () => api("/api/state?id=" + sharedCase)
       .then((s) => { document.querySelector(".notice")?.remove(); open(s); }).catch((e) => titleFailed(e.message) || notice(e.message, 0));
     if (sharedProblem()) titleFailed(sharedProblem()) || notice(sharedProblem(), 0);

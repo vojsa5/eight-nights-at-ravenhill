@@ -6,6 +6,7 @@ import { playFilm } from "./film.js";
 export const TIPS = [
   ["Know the roles", "Every role gives itself away in its own way. Read the Roles tab carefully: what each one knows from the start, does each night and says each morning.", "story/birthday"],
   ["Catch some on the first morning", "Read the very first testimony closely. Some roles can give themselves away on the first morning, among them the Lunatic and the two Confidants.", "search/lunatic"],
+  ["Honest guests get it wrong too", "Early in the case even the innocent know little, so some of their first tips are honest mistakes. From night II a guest may also be bribed by the Paymaster or hypnotised by the Hypnotist, and then says what they must. One wrong tip does not make a guest guilty.", "search/hypnotist"],
   ["Keep your best witnesses", "Clearing a guest takes them out of the inquiry, and their testimony goes with them. Once you trust a guest who can investigate, keep them in the house and clear them late.", "search/sleuth"],
   ["Arrest the dangerous ones early", "Some of the guilty do harm every night they stay in the house. The sooner they are in the cellar, the cleaner the testimony gets.", "verdict/arrest"],
   ["Read the night's traces", "Every morning's card lists what the night left behind: ink for the Forger, a glass at the wall for the Eavesdropper, a sleepwalker for the Hypnotist, banknotes for the Paymaster, whispers in the night while both Lovers are free.", "story/library"],

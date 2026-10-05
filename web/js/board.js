@@ -6,7 +6,6 @@ import { EVENTS, LAST_NIGHT, eventOf, namesArrest, namesClear } from "./events.j
 import { ROMAN, moonSvg } from "./format.js";
 import { artSrc, portrait } from "./portrait.js";
 import { RELATIONS } from "./guests.js";
-import { sharedCase } from "./shared.js";
 import { $, currentVotes, inDrawingRoom, patch, ui } from "./state.js";
 
 const NOTE_ICONS = ["?", "✕", "✓"];
@@ -314,8 +313,8 @@ function noteHtml() {
     const n = S.history.length, s = S.score;
     const line = RANKS.find(([share]) => s >= share * n)[1];
     return `${noteHead(moonSvg(1, "moon"))}<div class="closed">Case closed</div><div class="final">${s}<span>/ ${n}</span></div>
-      <div class="prompt">${line}</div>${sharedCase ? "" : `<button class="btn primary" data-action="new-game">Take another case</button>`}
-      <button class="btn${sharedCase ? " primary" : ""}" data-action="finale">Watch the ending</button>`;
+      <div class="prompt">${line}</div><button class="btn primary" data-action="new-game">Take another case</button>
+      <button class="btn" data-action="finale">Watch the ending</button>`;
   }
   const a = S.phase, event = eventOf(S.round), accuse = inDrawingRoom();
   let h = noteHead(`<div class="kicker">${moonSvg(S.round / S.rounds, "moon")}Night ${ROMAN[S.round]} of ${ROMAN[S.rounds]}</div>`);

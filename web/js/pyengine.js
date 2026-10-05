@@ -2,7 +2,7 @@
 // same ravenhill package, published next to the page by tools/build_pages.py, in a worker of its own (pyworker.js),
 // so the page stays live while it starts. The routes mirror ravenhill/server/app.py. It plays only the shared case
 // (shared.js), which is kept online.
-import { CLOSED, addMoves, readCase, sharedCase, startCase, theCase } from "./shared.js";
+import { CLOSED, addMoves, readCase, sharedCase, startCase, startOver, theCase } from "./shared.js";
 
 const PYODIDE = "https://cdn.jsdelivr.net/pyodide/v0.29.5/full/";
 
@@ -130,14 +130,16 @@ export async function pyApi(path, body) {
 // is not the case as saved, the state comes back with `stale` and the move asked for is not made. Calls run one at a
 // time, so the engine never holds a move that is not saved yet. The state also brings the notes saved with the case.
 let played = null;  // the record the engine last replayed, as JSON
+let gid = sharedCase;  // the engine's name for the game it holds: the case, and each later game of it apart
 let queue = Promise.resolve();
 
-const key = (seed, moves) => JSON.stringify([seed, moves]);
+const key = (rec, moves = rec.moves) => JSON.stringify([rec.game, rec.seed, moves]);
 const count = (s) => s.history.length + s.interviews.length;
 
 async function replay(rec) {
-  await call("start", sharedCase, rec.seed, JSON.stringify(rec.moves));
-  played = key(rec.seed, rec.moves);
+  gid = rec.game ? `${sharedCase}-g${rec.game}` : sharedCase;
+  await call("start", gid, rec.seed, JSON.stringify(rec.moves));
+  played = key(rec);
 }
 
 async function sync() {
@@ -147,7 +149,7 @@ async function sync() {
     rec = await readCase();
     if (!rec) throw new Error("Could not open the shared case. Try again in a moment.");
   }
-  if (key(rec.seed, rec.moves) !== played) await replay(rec);
+  if (key(rec) !== played) await replay(rec);
   return rec;
 }
 
@@ -162,16 +164,26 @@ function sharedApi(route, body) {
 async function sharedCall(route, body) {
   if (route === "/api/state") {
     const rec = await sync();
-    return withNotes(await call("state", sharedCase), rec);
+    return withNotes(await call("state", gid), rec);
+  }
+  if (route === "/api/new") {  // New case: the case moves on to a new game, in every browser
+    const rec = await sync();
+    if (body.id && body.id !== gid) return { ...withNotes(await call("state", gid), rec), stale: true };  // given up on a game no longer current
+    if (!(await startOver(rec, randomSeed()))) {  // false when another browser started one first
+      const later = await readCase();
+      if (later.game === rec.game) throw new Error("The case file refused a new case: check the database rules (README.md, A shared case).");
+    }
+    const now = await sync();
+    return withNotes(await call("state", gid), now);
   }
   if (route === "/api/act" || route === "/api/tool") {
-    const rec = await sync(), now = await call("state", sharedCase);
-    if (body.n !== count(now)) return { ...withNotes(now, rec), stale: true };
+    const rec = await sync(), now = await call("state", gid);
+    if (body.id !== gid || body.n !== count(now)) return { ...withNotes(now, rec), stale: true };  // a board of another game, or out of date
     const ms = asMoves(route, body);
     let s, saved;
     try {
-      for (const m of ms) s = await call("move", sharedCase, JSON.stringify(m));  // an invalid move fails here, before anything is saved
-      saved = await addMoves(rec.next, ms);
+      for (const m of ms) s = await call("move", gid, JSON.stringify(m));  // an invalid move fails here, before anything is saved
+      saved = await addMoves(rec, ms);
     } catch (e) {
       await replay(rec);  // not saved: take the moves back
       throw e;
@@ -179,11 +191,11 @@ async function sharedCall(route, body) {
     if (!saved) {  // another browser saved a move first
       played = null;  // the engine has made these moves: replay what is saved instead
       const later = await sync();
-      if (later.next === rec.next) throw new Error("The case file refused the move: check the database rules (README.md, A shared case).");
-      return { ...withNotes(await call("state", sharedCase), later), stale: true };
+      if (later.game === rec.game && later.next === rec.next) throw new Error("The case file refused the move: check the database rules (README.md, A shared case).");
+      return { ...withNotes(await call("state", gid), later), stale: true };
     }
-    played = key(rec.seed, [...rec.moves, ...ms]);
+    played = key(rec, [...rec.moves, ...ms]);
     return s;
   }
-  throw new Error("The shared case is the only case: it cannot be started again.");
+  throw new Error("not found");
 }

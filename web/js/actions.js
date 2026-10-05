@@ -12,7 +12,7 @@ import { closeModal, showClue, showReveal } from "./reveal.js";
 import { notesPending, saveNotes as saveSharedNotes, sharedCase } from "./shared.js";
 import { $, notice, patch, ui } from "./state.js";
 import { showTitle, titleFailed, titleOpen, titleReady } from "./title.js";
-import { loadRead, readElsewhere, showReading, unread } from "./reading.js";
+import { holdToConfirm, loadRead, readElsewhere, showReading, unread } from "./reading.js";
 import { loadJSON, store } from "./storage.js";
 
 export function render() {
@@ -35,7 +35,7 @@ let busy = false;      // a decision is on its way: another click would be made 
 let notesSeen = null;  // the shared case's notes as last read or saved here
 
 const count = (S) => S.history.length + S.interviews.length;  // the moves made so far
-const sameCase = (a, b) => JSON.stringify([a.history, a.advice, a.interviews]) === JSON.stringify([b.history, b.advice, b.interviews]);
+const sameCase = (a, b) => JSON.stringify([a.id, a.history, a.advice, a.interviews]) === JSON.stringify([b.id, b.history, b.advice, b.interviews]);
 
 export function setGame(s) {
   ui.S = s;
@@ -62,11 +62,13 @@ function takeNotes(s) {
 
 // The shared case moved on in another browser: show it as it is now. `s` came back instead of the move asked for.
 function catchUp(s) {
+  const fresh = s.id !== ui.S?.id;  // a new case, started in another browser
   closeModal();
   setGame(s);
   readElsewhere();
   render();
-  notice("This case was played on in another browser meanwhile. The board is up to date again.");
+  notice(fresh ? "A new case was started in another browser. This is it."
+    : "This case was played on in another browser meanwhile. The board is up to date again.");
   maybeShowIntro();
 }
 
@@ -92,7 +94,7 @@ function send(path, body) {
 
 // Does a state hold exactly the moves asked for on top of the board shown? In a shared case it can, though the
 // answer said otherwise: the moves were saved, but the answer got lost.
-const madeHere = (s, chars) => count(s) === count(ui.S) + chars.length
+const madeHere = (s, chars) => s.id === ui.S.id && count(s) === count(ui.S) + chars.length
   && chars.every((c, i) => (s.history[ui.S.history.length + i] || {}).char === c);
 
 // The answer to a decision: `done` it, or catch up when the case moved on instead.
@@ -107,28 +109,35 @@ const failed = (chars, done) => (e) => {
     .catch(() => showError(e));
 };
 
-// The case bar's New case: while a case is under way, the first click only asks, and the button says so for a few seconds.
-let asking = 0;
+// The case bar's New case: an open case is only given up once the seal is held down until its ring closes, as a book
+// is marked read (reading.js), so a stray click or tap never throws it away.
 export function askNewGame() {
-  const S = ui.S, button = $("newgame");
-  if (S && !S.finished && S.history.length && !asking) {
-    button.textContent = "Really start over?";
-    asking = setTimeout(() => { asking = 0; button.textContent = "New case"; }, 4000);
-    return;
-  }
-  clearTimeout(asking);
-  asking = 0;
-  button.textContent = "New case";
-  newGame();
+  const S = ui.S;
+  if (!S) return sharedCase ? undefined : newGame();  // the shared case is still opening: there is nothing to start over yet
+  if (S.finished) return newGame();  // a closed case is in the files already
+  $("modal").innerHTML = `<div class="restart" role="dialog" aria-modal="true" aria-labelledby="rs-head">
+    <div class="rd-kicker">Night ${ROMAN[S.round]} of ${ROMAN[S.rounds]} · score ${S.score} of ${S.history.length}</div>
+    <h2 id="rs-head">Start a new case?</h2>
+    <p>This one goes into the files for good, unfinished${sharedCase ? ", and the new case opens on every device with your link" : ""}.
+      If you are sure, press the seal and hold it down until the ring closes.</p>
+    <button class="rd-seal" id="rs-seal" aria-label="Hold down to give up this case and start a new one">
+      <svg viewBox="0 0 44 44" aria-hidden="true"><circle class="track" cx="22" cy="22" r="19"/><circle class="ring" cx="22" cy="22" r="19"/></svg>
+      <span>N</span></button>
+    <button class="btn" id="rs-keep">Keep this case</button></div>`;
+  $("modal").classList.add("open");
+  $("rs-keep").onclick = closeModal;
+  holdToConfirm($("rs-seal"), newGame);
+  $("rs-keep").focus();
 }
 
-// A new case opens on the opening screen, while it loads behind it.
+// A new case opens on the opening screen, while it loads behind it. A shared case moves on to a new game of its own.
 export function newGame() {
-  if (sharedCase) return;  // the shared case is the only one
   closeModal();
   if (!titleOpen()) showTitle(maybeShowIntro);
   const seed = new URLSearchParams(location.search).get("seed");  // for tests only; never shown
-  api("/api/new", { seed }).then((s) => {
+  // the shared case starts over only from the game shown: if it moved on meanwhile, this page catches up instead
+  api("/api/new", { seed, id: ui.S?.id }).then((s) => {
+    if (s.stale) return catchUp(s);
     setGame(s);
     ui.folderOpen = false;  // a new case starts with the folder closed
     store("folder", "");
@@ -183,7 +192,7 @@ function saveNotes() {
   store("guesses-" + ui.S.id, JSON.stringify(ui.guesses));
   if (!sharedCase) return;
   notesSeen = JSON.stringify({ marks: ui.marks, guesses: ui.guesses });
-  saveSharedNotes(notesSeen);
+  saveSharedNotes(ui.S.id, notesSeen);
 }
 
 // Your note on a guest: 0 unsure, 1 guilty, 2 innocent. The board's button cycles through them. A role

@@ -41,36 +41,49 @@ async function request(path, method = "GET", body, keepalive = false) {
 
 const parse = (m) => { try { return JSON.parse(m); } catch (e) { return null; } };
 
-// The case so far, or null before its first visit: { seed, moves, next, notes }. The moves come in the order they
-// were saved, without any that is not a move at all; `next` is where the next one goes.
+// A case can be started over (New case): its first game is kept at the case's own level, each later one under
+// games/<n>, and `game` says which one the case is on. Every game is kept; the case only ever moves on.
+const gameAt = (game) => (game ? `games/${game}/` : "");
+// where the game shown keeps its notes and books, from its id (pyengine.js names a later game <case>-g<k>)
+const gameOf = (id) => (id && id.startsWith(sharedCase + "-g") ? gameAt(Number(id.slice(sharedCase.length + 2))) : "");
+
+// The case so far, or null before its first visit: { game, seed, moves, next, notes, read }. The moves come in the order
+// they were saved, without any that is not a move at all; `next` is where the next one goes.
 export async function readCase() {
   const rec = await request("");
   if (!rec || rec.seed === undefined) return null;
-  const saved = Array.isArray(rec.moves) ? rec.moves.map((m, i) => [i, m]) : Object.entries(rec.moves || {}).map(([k, m]) => [Number(k), m]);
+  const game = Number.isInteger(rec.game) && rec.game > 0 ? rec.game : 0;
+  const g = game ? (rec.games || {})[game] : rec;
+  if (!g || g.seed === undefined) throw new Error("The case file has lost its current game. Try again in a moment.");
+  const saved = Array.isArray(g.moves) ? g.moves.map((m, i) => [i, m]) : Object.entries(g.moves || {}).map(([k, m]) => [Number(k), m]);
   saved.sort((a, b) => a[0] - b[0]);
   const moves = saved.map(([, m]) => (typeof m === "string" ? parse(m) : null)).filter(Array.isArray);
-  const next = Array.isArray(rec.moves) ? rec.moves.length : saved.length ? saved[saved.length - 1][0] + 1 : 0;
-  return { seed: rec.seed, moves, next, notes: rec.notes, read: rec.read };
+  const next = Array.isArray(g.moves) ? g.moves.length : saved.length ? saved[saved.length - 1][0] + 1 : 0;
+  return { game, seed: g.seed, moves, next, notes: g.notes, read: g.read };
 }
 
 // Each returns false when another browser got there first. The moves of one decision are saved together, or not at all.
 export const startCase = (seed) => request("/seed", "PUT", seed).then((r) => r !== false);
-export const addMoves = (n, ms) => request("", "PATCH", Object.fromEntries(ms.map((m, i) => [`moves/${n + i}`, JSON.stringify(m)])))
+export const addMoves = (rec, ms) => request("", "PATCH", Object.fromEntries(ms.map((m, i) => [`${gameAt(rec.game)}moves/${rec.next + i}`,
+  JSON.stringify(m)]))).then((r) => r !== false);
+// New case: the case moves on to its next game, which is saved with its seed in one go.
+export const startOver = (rec, seed) => request("", "PATCH", { game: rec.game + 1, [`${gameAt(rec.game + 1)}seed`]: seed })
   .then((r) => r !== false);
 
-// A book won and finished (reading.js): when, by book slot. False when another browser marked it first.
-export const markRead = (slot, when) => request(`/read/${slot}`, "PUT", when).then((r) => r !== false);
+// A book won and finished (reading.js) in the game shown (`id`): when, by book slot. False when another browser marked it first.
+export const markRead = (id, slot, when) => request(`/${gameOf(id)}read/${slot}`, "PUT", when).then((r) => r !== false);
 
-// The notes change a click at a time: they are saved once the clicking stops, or at once when the page is left.
+// The notes change a click at a time: they are saved once the clicking stops, or at once when the page is left, with
+// the game they were made in.
 let pending = null, timer = null;
 const send = (keepalive) => {
   clearTimeout(timer);
-  const text = pending;
+  const p = pending;
   pending = null;
-  if (text !== null) request("/notes", "PUT", text, keepalive).catch(() => {});  // they stay in this browser either way
+  if (p) request(`/${p.at}notes`, "PUT", p.text, keepalive).catch(() => {});  // they stay in this browser either way
 };
-export function saveNotes(text) {
-  pending = text;
+export function saveNotes(id, text) {
+  pending = { text, at: gameOf(id) };
   clearTimeout(timer);
   timer = setTimeout(() => send(false), 800);
 }

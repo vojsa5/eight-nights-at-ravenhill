@@ -44,6 +44,14 @@
 .rd-seal.holding { transform: scale(.94); }
 .rd-seal.holding .ring { stroke-dashoffset: 0; transition: stroke-dashoffset var(--hold) linear; }
 .rd-seal:focus-visible { outline: 3px solid #a8843e; outline-offset: 12px; }
+
+/* New case while a case is under way (actions.js askNewGame): a small sheet with the same seal to hold down */
+.restart { display: grid; justify-items: center; gap: 12px; width: min(440px, 100%); padding: 28px 26px 22px; text-align: center;
+  background: var(--paper); color: var(--paper-ink); border: 1px solid var(--paper-line); border-radius: 3px; box-shadow: 0 18px 48px rgba(0,0,0,.6); }
+.restart h2 { margin: 0; font: 28px var(--typed); letter-spacing: .06em; text-transform: uppercase; }
+.restart p { margin: 0; font-size: 16.5px; line-height: 1.45; }
+.restart .rd-seal { margin: 10px 0 8px; }
+.restart .btn { color: var(--paper-ink); border-color: var(--paper-line); background: rgba(255,255,255,.45); }
 @media (max-width: 700px) {
   .rd-card { grid-template-columns: 1fr; justify-items: center; gap: 18px; padding: 24px 20px; }
   .rd-text { align-items: center; text-align: center; }

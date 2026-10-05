@@ -9,7 +9,6 @@ import { closeModal } from "./reveal.js";
 import { ROMAN, moonSvg } from "./format.js";
 import { portrait } from "./portrait.js";
 import { CRIMES, TRUTHS, isBadRole, searchArt, title } from "./roles.js";
-import { sharedCase } from "./shared.js";
 import { $, ui } from "./state.js";
 
 const WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
@@ -136,8 +135,8 @@ function showClosing() {
     </div>
     <div class="nav">
       <button class="btn" data-action="finale">↺ Watch the ending again</button>
-      <span><button class="btn${sharedCase ? " primary" : ""}" id="revealOk">Back to the board</button>
-      ${sharedCase ? "" : `<button class="btn primary" data-action="new-game">Take another case</button>`}</span>
+      <span><button class="btn" id="revealOk">Back to the board</button>
+      <button class="btn primary" data-action="new-game">Take another case</button></span>
     </div></div>`;
   $("modal").classList.add("open");
   $("modal").querySelector(".btn.primary").focus();

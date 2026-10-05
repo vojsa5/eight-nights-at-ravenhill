@@ -80,7 +80,7 @@ export function showReading(then) {
 }
 
 // Holding the pointer, Enter or Space on the seal for HOLD_MS confirms; letting go sooner starts over.
-function holdToConfirm(seal, done) {
+export function holdToConfirm(seal, done) {
   let timer = 0;
   const start = (e) => {
     if (e.type === "keydown" && ((e.key !== "Enter" && e.key !== " ") || e.repeat)) return;
@@ -90,7 +90,7 @@ function holdToConfirm(seal, done) {
     timer = setTimeout(() => {
       timer = 0;
       seal.classList.remove("holding");
-      done();
+      if (seal.isConnected) done();  // closed meanwhile (Escape, Keep this case): confirms nothing
     }, HOLD_MS);
   };
   const stop = () => {
@@ -109,7 +109,7 @@ async function finish(slot) {
   const when = Date.now();
   if (sharedCase) {
     try {
-      await markRead(slot, when);  // false when another browser marked it first: read either way
+      await markRead(ui.S.id, slot, when);  // false when another browser marked it first: read either way
     } catch (e) {
       return notice(e.message);
     }
