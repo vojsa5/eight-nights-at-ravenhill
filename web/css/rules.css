@@ -1,0 +1,302 @@
+/* The Rules tab (folder.js rulesHtml): a case briefing under an illustrated header, a contents card, then a section per
+   subject, each numbered on a red seal, with small pictures drawn with the board's own marks (folder.css .smp-*, .signcard).
+   The header, the counts and the contents come in as the tab opens; each picture further down as it scrolls into view. */
+.ruleshero { position: relative; height: 168px; margin: -14px -18px 16px; overflow: hidden; background: #0a0e18; }
+.ruleshero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.ruleshero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 25%, rgba(8,8,14,.88)); }
+.rh-text { position: absolute; left: 18px; right: 18px; bottom: 14px; z-index: 1; }
+.rh-text span { font: 12px var(--typed); letter-spacing: .16em; text-transform: uppercase; color: #c9a45c; }
+.rh-text h2 { margin: 2px 0 0; font: 700 30px/1.1 Cinzel, Georgia, serif; letter-spacing: .04em; color: #f6e3b0; text-shadow: 0 2px 6px rgba(0,0,0,.8); }
+.rh-stamp { position: absolute; top: 16px; right: 16px; z-index: 1; padding: 3px 9px; border: 4px double #e0473a; transform: rotate(9deg);
+  font: 700 14px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: #ff6a58; background: rgba(0,0,0,.25);
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.brief .lede { font-size: 17px; line-height: 1.45; }
+.brief .lede::first-letter { float: left; margin: 5px 8px 0 0; font: 700 48px/.8 Cinzel, Georgia, serif; color: var(--ink-red); }
+.brief .aside { font-size: 15px; color: var(--muted); }
+
+/* the case in four numbers, as cards dealt onto the page */
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 16px 0 4px; }
+.glance .tile { --r: -1deg; padding: 10px 6px 8px; text-align: center; background: #fbf6ea; border-top: 3px solid #c9a45c;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25); transform: rotate(var(--r)); }
+.glance .tile:nth-child(even) { --r: 1.2deg; }
+.glance .ti { display: block; margin-bottom: 3px; font: 20px/1 system-ui, sans-serif; color: #8a6a2a; }
+.glance b { display: block; font: 700 28px/1.1 Cinzel, Georgia, serif; color: var(--ink); }
+.glance b i { margin: 0 4px; font-style: normal; color: var(--muted); }
+.glance span { font: 11.5px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.glance b .rl-count { font: inherit; letter-spacing: 0; text-transform: none; color: inherit; }
+
+/* the contents: a typed index sheet with a red margin, clipped to the page; a line per section, its gist pencilled under it */
+.contents { position: relative; margin: 24px 4px 6px; padding: 12px 14px 10px 50px; transform: rotate(-.4deg);
+  background: repeating-linear-gradient(transparent 0 25px, rgba(90,110,160,.13) 25px 26px) 0 8px, #fbf6ea; box-shadow: 0 1px 4px rgba(0,0,0,.28); }
+.contents::before { content: ""; position: absolute; left: 38px; top: 0; bottom: 0; border-left: 1.5px solid rgba(190,60,50,.5); }
+.contents::after { content: ""; position: absolute; top: -12px; right: 26px; width: 16px; height: 44px; transform: rotate(6deg);  /* a paper clip */
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 44'%3E%3Cpath d='M5.5 13v21a2.5 2.5 0 0 0 5 0V7a4 4 0 0 0-8 0v29a5.5 5.5 0 0 0 11 0V13' fill='none' stroke='%237c7c84' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 100% 100%;
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,.3)); }
+.ct-head { display: block; margin: 0 0 6px; font: 15px var(--typed); font-weight: normal; letter-spacing: .24em; text-transform: uppercase; color: var(--ink); }
+.contents ol { display: grid; grid-auto-flow: column; grid-template-rows: repeat(var(--rows), auto); grid-template-columns: 1fr 1fr; gap: 2px 18px;
+  margin: 0; padding: 0; list-style: none; }
+.contents a { display: grid; grid-template-columns: 30px minmax(0, 1fr); column-gap: 8px; align-items: center; padding: 5px 4px 4px 0;
+  color: var(--ink); text-decoration: none; border-radius: 3px; }
+.contents a i { grid-row: span 2; justify-self: center; display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 3px; border-radius: 13px;
+  background: var(--ink-red); color: #fff4e0; font: 700 11px/1 Cinzel, Georgia, serif; font-style: normal; box-shadow: inset 0 -2px 0 rgba(0,0,0,.25); }
+.contents a b { font: 13.5px/1.2 var(--typed); letter-spacing: .07em; text-transform: uppercase; font-weight: normal; }
+.contents a small { font: 600 16px/1.05 var(--hand); color: #34405e; }  /* pencil, as the Case file's notes */
+.contents a:hover b, .contents a:focus-visible b { color: var(--ink-red); text-decoration: underline; text-underline-offset: 3px; }
+
+/* a section: its number on a red seal, its name typed, a dashed rule, and a way back to the contents */
+.rsec { scroll-margin-top: 4px; }
+.rs-head { display: flex; align-items: center; gap: 10px; margin: 32px 0 10px; }
+.brief h3 { flex: 1; display: flex; align-items: center; gap: 10px; margin: 0; }
+.brief h3::after { content: ""; flex: 1; border-top: 1px dashed var(--line); }
+.brief h3 i { flex: none; display: grid; place-items: center; min-width: 28px; height: 28px; padding: 0 4px; border-radius: 14px;
+  background: var(--ink-red); color: #fff4e0; font: 700 12px/1 Cinzel, Georgia, serif; font-style: normal; letter-spacing: 0;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.25); }
+.rs-up { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--line); border-radius: 50%;
+  font: 13px/1 system-ui, sans-serif; color: var(--muted); text-decoration: none; letter-spacing: 0; }
+.rs-up:hover, .rs-up:focus-visible { color: var(--ink-red); border-color: var(--ink-red); }
+.brief h4 { margin: 0; }
+
+/* I: the four outcomes of a call as a table: the call stamped down the side, the guest's side by its pin across the top */
+.pointtable { margin: 6px auto 14px; border-collapse: separate; border-spacing: 8px 6px; }
+.pointtable th { padding: 0 4px; font: 12px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: normal; }
+.pointtable thead th { padding-bottom: 2px; }
+.pointtable thead .smp-pin { display: inline-block; width: 13px; height: 13px; margin: 0 6px -2px 0; }
+.pointtable tbody th { text-align: right; }
+.pointtable td { min-width: 104px; padding: 6px 10px 5px; text-align: center; background: #fbf6ea; box-shadow: 0 1px 3px rgba(0,0,0,.22); }
+.pointtable thead td { background: none; box-shadow: none; }
+.pointtable td b { display: block; font: 700 25px/1.05 "EB Garamond", Georgia, serif; }
+.pointtable td small { font: 600 15px/1 var(--hand); }
+.pointtable .pt-ok b { color: var(--ink-green); }
+.pointtable .pt-ok { box-shadow: 0 1px 3px rgba(0,0,0,.22), inset 0 3px 0 #c9a45c; }
+.pointtable .pt-no b, .pointtable .pt-no small { color: rgba(87,72,50,.6); }
+.pt-stamp { display: inline-block; padding: 1px 7px; border: 3px double; transform: rotate(-5deg); font: 13px var(--typed); letter-spacing: .1em;
+  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.pt-stamp.cleared { color: var(--ink-green); }
+.pt-stamp.arrested { color: var(--ink-red); transform: rotate(4deg); }
+
+/* the verdicts as a ladder: two wooden rails, and on each rung a plaque with its medal, its verdict and its scores lit
+   on a row of a pip per call */
+.ranks { position: relative; isolation: isolate; display: grid; gap: 10px; margin: 8px 0 0; padding: 4px 26px; list-style: none; }
+.ranks::before, .ranks::after { content: ""; position: absolute; top: -6px; bottom: -6px; z-index: 1; width: 9px; border-radius: 3px;
+  background: linear-gradient(90deg, #5a3418, #a8784a 45%, #6a4424); box-shadow: 0 2px 4px rgba(0,0,0,.35); }
+.ranks::before { left: 6px; }
+.ranks::after { right: 6px; }
+.ranks li { --c: #b8902a; position: relative; }
+.ranks li::before { content: ""; position: absolute; left: -18px; right: -18px; top: 50%; height: 7px; margin-top: -3px;  /* the rung */
+  background: linear-gradient(#a8784a, #5a3418); box-shadow: 0 2px 3px rgba(0,0,0,.3); }
+.rk-plaque { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 4px 12px;
+  padding: 7px 12px 7px 8px; background: #fbf6ea; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.rk-medal { grid-row: span 2; display: grid; place-items: center; min-width: 66px; height: 36px; padding: 0 9px; border-radius: 18px;
+  font: 700 16px Cinzel, Georgia, serif; color: #fff; box-shadow: inset 0 -3px 0 rgba(0,0,0,.2), inset 0 0 0 2px rgba(255,255,255,.25), 0 1px 3px rgba(0,0,0,.35); }
+.rk-line { font-size: 15.5px; font-style: italic; line-height: 1.25; }
+.rk-pips { display: flex; flex-wrap: wrap; gap: 2px; }
+.rk-pips i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid rgba(87,72,50,.3); }
+.rk-pips i.on { border-color: rgba(0,0,0,.3); background: var(--c); }
+.ranks .r0 .rk-medal { background: radial-gradient(circle at 35% 25%, #fff3c4, transparent 45%), linear-gradient(#f6de8e, #b8902a); color: #3a2a08; }
+.ranks .r0 .rk-plaque { box-shadow: 0 0 0 1.5px #c9a45c, 0 0 14px rgba(232,190,90,.45), 0 1px 3px rgba(0,0,0,.25); }
+.ranks .r1 { --c: #8a8a84; }
+.ranks .r1 .rk-medal { background: radial-gradient(circle at 35% 25%, #fff, transparent 45%), linear-gradient(#f0f0ec, #a0a098); color: #2a2a28; }
+.ranks .r2 { --c: #a8683a; }
+.ranks .r2 .rk-medal { background: radial-gradient(circle at 35% 25%, #ffd9b8, transparent 45%), linear-gradient(#e4ac7c, #94562a); }
+.ranks .r3 { --c: #8a1e26; }
+.ranks .r3 .rk-medal { background: linear-gradient(#b4404a, #5a0e14); }
+
+/* II: a strip of sky from midnight blue through dawn and noon to dusk, the sun's path across it, and the day's hours on
+   it as medals with their tags; under it what each hour brings */
+.daysky { position: relative; height: 172px; margin: 12px 0 12px; overflow: hidden; border-radius: 4px;
+  background: radial-gradient(1.2px 1.2px at 6% 18%, #fff 60%, transparent), radial-gradient(1px 1px at 13% 40%, #fff 60%, transparent),
+    radial-gradient(1px 1px at 3% 52%, #fff 60%, transparent), radial-gradient(1.4px 1.4px at 17% 12%, #fff 60%, transparent),
+    radial-gradient(1px 1px at 9% 66%, #fff 60%, transparent), radial-gradient(1px 1px at 95% 20%, #fff 60%, transparent),
+    radial-gradient(ellipse 30% 55% at 50% 8%, rgba(255,250,220,.75), transparent),
+    linear-gradient(90deg, #141a36, #2c3566 16%, #b86a6a 27%, #e8b860 37%, #f3dc92 50%, #ecc47c 63%, #d89a58 75%, #8a4a5e 87%, #3a2a50);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.3), 0 2px 6px rgba(0,0,0,.3); }
+.daysky svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.daysky .arc { fill: none; stroke: rgba(255,250,232,.85); stroke-width: 1.6; stroke-dasharray: 3 5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.daysky .hills { fill: #22180f; }
+.ds-stop { position: absolute; left: var(--x); top: var(--y); display: flex; flex-direction: column; align-items: center; gap: 2px;
+  transform: translate(-50%, -18px); }
+.ds-stop .medal { width: 36px; height: 36px; font-size: 17px; }
+.ds-stop .medal b { font: 900 18px/1 system-ui, sans-serif; -webkit-text-stroke: .04em currentColor; }
+.ds-stop > small, .ds-stop > b { padding: 0 5px; background: rgba(251,246,234,.92); box-shadow: 0 1px 2px rgba(0,0,0,.4); white-space: nowrap; }
+.ds-stop > small { margin-top: 1px; font: 11px/15px var(--typed); letter-spacing: .04em; color: var(--muted); }
+.ds-stop > b { font: 10.5px/14px var(--typed); letter-spacing: .08em; text-transform: uppercase; font-weight: normal; color: var(--ink); }
+.daysteps { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+.daysteps h4 { margin: 0 0 6px; padding-bottom: 3px; border-bottom: 2px solid var(--line); font: 12px var(--typed); letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); font-weight: normal; }
+.daysteps ol { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.daysteps li { display: grid; grid-template-columns: 26px minmax(0, 1fr); column-gap: 8px; padding: 8px 10px 9px 8px; background: #fbf6ea;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.daysteps .ds-icon { font: 19px/1.15 system-ui, sans-serif; text-align: center; }
+.daysteps .ds-icon b { font-weight: 900; -webkit-text-stroke: .04em currentColor; }
+.daysteps h5 { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 2px; font: 13.5px var(--typed); letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink); }
+.daysteps h5 small { font-size: 11.5px; letter-spacing: .04em; color: var(--muted); }
+.daysteps p { margin: 0; font-size: 14.5px; line-height: 1.35; }
+.daysteps .ds-3 { box-shadow: 0 1px 3px rgba(0,0,0,.2), inset 0 3px 0 var(--save, #2e7d46); }
+.daysteps .ds-4 { box-shadow: 0 1px 3px rgba(0,0,0,.2), inset 0 3px 0 var(--elim, #b23a2a); }
+
+/* III: the eight nights in two halves of four: their kinds over them, each night with its moon and its event's icon; the
+   last one is the drawing room */
+.nightgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 12px 0; }
+.nightgrid + .nightgrid { margin-top: 18px; }
+.ng-half { grid-column: 1 / -1; font: 11px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-red); }
+.ng-kind { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 2px 2px 6px; text-align: center; border-bottom: 2px solid var(--line); }
+.ng-kind span { font: 19px/1 system-ui, sans-serif; }
+.ng-kind b { font: 11px/1.2 var(--typed); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: normal; }
+.ng-night { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px 9px; text-align: center;
+  background: #fbf6ea; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.ng-night svg { width: 26px; height: 26px; }
+.ng-night .disc { fill: #2a2438; stroke: #6a5a40; stroke-width: .7; }
+.ng-night .lit { fill: #efe2b4; }
+.ng-night b { font: 700 15px/1 Cinzel, Georgia, serif; color: var(--ink); }
+.ng-night span { font-size: 13.5px; line-height: 1.2; }
+.ng-night em { font: normal 10.5px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: #6a4a14; }
+.ng-icon { position: absolute; top: 5px; left: 6px; font: normal 13px/1 system-ui, sans-serif; opacity: .85; }
+.ng-night.past { opacity: .62; }
+.ng-night.past::after { content: "✓"; position: absolute; top: 4px; right: 6px; font: 700 12px system-ui, sans-serif; color: var(--good); }
+.ng-night.now { background: #efd896; box-shadow: 0 0 0 2px #a8843e, 0 3px 8px rgba(0,0,0,.25); }
+.ng-night.last { background: linear-gradient(#2a2234, #16121c); color: #f3e6c4; }
+.ng-night.last b { color: #f6e3b0; }
+.ng-night.last svg { filter: drop-shadow(0 0 6px rgba(255,240,200,.75)); }
+.ng-night.last.now { box-shadow: 0 0 0 2px #e6c783, 0 3px 10px rgba(0,0,0,.4); }
+.showdown { position: relative; display: flex; align-items: flex-end; min-height: 172px; margin: 14px 0 4px; overflow: hidden; border-radius: 3px;
+  background: #16121c; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.showdown img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.showdown::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,6,8,.94) 0 42%, rgba(10,6,8,.25)); }
+.sd-text { position: relative; z-index: 1; max-width: 64%; padding: 14px 16px; color: #efe4c8; }
+.sd-text span { font: 11.5px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: #c9a45c; }
+.sd-text h4 { margin: 3px 0 5px; font: 700 22px Cinzel, Georgia, serif; color: #f6e3b0; }
+.sd-text p { margin: 0; font-size: 14.5px; line-height: 1.4; }
+
+/* IV: a sign that stops, as two mornings' traces on manila tags with a brass eyelet (as the night's card, reveal.css
+   .trace-tag), the second missing one; then this case's signs as small cards of night sky */
+.signdemo { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 8px 10px; margin: 6px 0 14px;
+  padding: 12px 12px 10px; background: radial-gradient(ellipse at 30% 20%, #2e2a44, #16121e); border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,.35); }
+.sd-morning { display: flex; flex-direction: column; gap: 6px; }
+.sd-when { font: 11px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: #c9a45c; }
+.sd-morning ul { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin: 0; padding: 0; list-style: none;
+  filter: drop-shadow(0 1px 1.2px rgba(0,0,0,.5)); }  /* the shadow of each tag's shape */
+.sd-tag { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 20px; font: 12.5px/1.25 var(--typed);
+  color: var(--paper-ink); transform: rotate(-1deg);
+  background: linear-gradient(rgba(255,252,240,.35), rgba(120,90,40,.06)),
+    radial-gradient(circle at 10px 50%, transparent 2.3px, #8f7034 2.6px 3.6px, #ecd9a6 3.9px);
+  clip-path: polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 50%); }
+.sd-tag:nth-child(even) { transform: rotate(.8deg); }
+.sd-tag span { font-size: 14px; line-height: 1; }
+.sd-tag.gone { opacity: .55; text-decoration: line-through 2px #e0473a; }
+.sd-tag.gone span { opacity: .5; }
+.sd-arrow { font: 26px/1 system-ui, sans-serif; color: #c9a45c; }
+.signdemo figcaption { grid-column: 1 / -1; padding-top: 8px; border-top: 1px dashed rgba(201,164,92,.45); font: 600 18px/1.2 var(--hand); color: #f6e3b0; }
+.signgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin-bottom: 10px; }
+
+/* V: each of the board's marks on a scrap of cork, beside what it means */
+.samples { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sample { display: flex; flex-direction: column; background: #fbf6ea; box-shadow: 0 1px 3px rgba(0,0,0,.22); }
+.sample .visual { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 62px; padding: 6px;
+  background: linear-gradient(135deg, var(--cork), var(--cork-dark)); box-shadow: inset 0 0 12px rgba(0,0,0,.4); }
+.sample p { margin: 0; padding: 7px 10px 9px; font-size: 14.5px; line-height: 1.35; }
+.sample p b { display: block; margin-bottom: 1px; font: 13px var(--typed); letter-spacing: .1em; text-transform: uppercase; font-weight: normal; }
+
+/* VI: the table from above, and a place left empty */
+.seating { display: flex; align-items: center; gap: 18px; }
+.seating p { margin: 0 0 8px; font-size: 15px; line-height: 1.4; }
+.seating .aside { margin: 10px 0 0; font-size: 14.5px; }
+.smp-seating { flex: none; width: 168px; height: 168px; }
+.smp-seating .table { fill: #6a4a2a; stroke: #3a2414; stroke-width: 2; }
+:is(.smp-seating, .smp-closeup) .seat circle { fill: #f4eddc; stroke: #8a6a44; stroke-width: 1; }
+:is(.smp-seating, .smp-closeup) .seat text { font: 7px var(--typed); fill: #3a2a14; text-anchor: middle; dominant-baseline: central; }
+:is(.smp-seating, .smp-closeup) .seat.hand circle { stroke: #7a4aa8; stroke-width: 2.2; }
+:is(.smp-seating, .smp-closeup) .hands { fill: none; stroke: #7a4aa8; stroke-width: 2.5; stroke-linecap: round; opacity: .7; }
+.smp-seating .seat.me circle { fill: #e6c783; stroke: #6a4a14; stroke-width: 2; }
+.smp-closeup { display: block; width: 180px; height: 62px; margin: 0 0 6px; overflow: visible; }
+.smp-closeup .seat text { font-size: 9px; }
+.smp-closeup .seat.gone circle { fill: rgba(244,237,220,.4); stroke-dasharray: 2.5 2; }
+.smp-closeup .seat.gone text { fill: #a8987c; }
+.smp-closeup .left { font: 700 12px var(--hand); fill: var(--ink-red); text-anchor: middle; }
+
+/* VII: the house rules as index cards */
+.houserules { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.house { display: flex; gap: 10px; padding: 10px 10px 10px 8px; background: #fbf6ea; border-left: 3px solid #c24a3a; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.house .icon { flex: none; width: 28px; text-align: center; font: 22px/1 system-ui, sans-serif; }
+.house b { font: 14px var(--typed); letter-spacing: .08em; text-transform: uppercase; }
+.house p { margin: 3px 0 0; font-size: 14.5px; line-height: 1.35; color: var(--muted); }
+
+/* further reading: the buttons at the top of the page as keys on the paper; a click presses the button itself */
+.rules-more { margin-top: 26px; padding-top: 10px; border-top: 2px solid var(--line); }
+.rm-head { display: block; margin: 0 0 4px; font: 13px var(--typed); font-weight: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.rules-more p { font-size: 15px; color: var(--muted); }
+.rules-more b { color: var(--ink); }
+.rl-key { display: inline-block; padding: 0 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; background: #fbf6ea;
+  font: 13px/1.5 var(--typed); color: var(--ink); white-space: nowrap; cursor: pointer; }
+.rl-key:hover { border-color: var(--gold); color: var(--ink-red); }
+
+@media (max-width: 700px) {
+  .ruleshero { height: 140px; }
+  .rh-text h2 { font-size: 24px; }
+  .contents { padding-left: 44px; }
+  .contents::before { left: 33px; }
+  .contents ol { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: minmax(0, 1fr); }
+  .pointtable { border-spacing: 5px; }
+  .pointtable td { min-width: 0; padding: 5px 6px 4px; }
+  .ranks { padding: 4px 20px; }
+  .ranks::before { left: 3px; }
+  .ranks::after { right: 3px; }
+  .ranks li::before { left: -14px; right: -14px; }
+  .rk-medal { min-width: 58px; font-size: 15px; }
+  .rk-line { font-size: 15px; }
+  .ds-stop > b { display: none; }  /* the hours by their times alone: their names are in the list below */
+  .daysky { height: 140px; }
+  .daysteps { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .ng-kind b { display: none; }  /* the kinds by their icons alone */
+  .ng-night span { font-size: 12.5px; }
+  .ng-icon { display: none; }
+  .showdown::after { background: linear-gradient(rgba(10,6,8,.4), rgba(10,6,8,.94) 55%); }
+  .sd-text { max-width: none; padding-top: 70px; }
+  .samples { grid-template-columns: minmax(0, 1fr); }
+  .sample { flex-direction: row; }
+  .sample .visual { flex: none; width: 104px; }
+  .sample p { align-self: center; }
+  .seating { flex-direction: column; }
+}
+@media (max-height: 500px) {
+  .ruleshero { height: 112px; }
+  .daysky { height: 150px; }
+  .rh-stamp { top: 10px; }
+}
+
+/* coming in: as the tab opens, the header's picture settles, its stamp comes down and the counts run up; the contents
+   are typed in line by line. Further down, each picture rises into place as it scrolls into view. */
+@property --rl-n { syntax: "<integer>"; inherits: false; initial-value: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .ruleshero img { animation: rl-settle 1.6s ease-out both; }
+  .rh-text { animation: rl-rise .7s .15s ease-out both; }
+  .rh-stamp { animation: rl-stamp .45s .6s cubic-bezier(.5,0,.75,0) both; }
+  .glance .tile { animation: rl-deal .55s calc(.25s + var(--i) * .09s) cubic-bezier(.2,.8,.3,1.15) both; }
+  .rl-count { position: relative; animation: rl-hide calc(.45s + var(--i, 0) * .09s + .9s) step-end; }
+  .rl-count::after { content: counter(rl-n); counter-reset: rl-n var(--rl-n); position: absolute; inset: 0; display: grid; place-items: center;
+    visibility: hidden; -webkit-text-fill-color: currentColor; animation: rl-count .9s calc(.45s + var(--i, 0) * .09s) ease-out backwards; }
+  .contents { animation: rl-rise .6s .35s ease-out both; }
+  .contents a { animation: rl-type .4s calc(.55s + var(--i) * .07s) ease-out both; }
+  .brief .rsec:target h3 i { animation: rl-found 1.1s ease-out; }  /* over the seal's own, below */
+  @supports (animation-timeline: view()) {
+    .brief :is(h3 i, .pointtable, .ranks li, .daysky, .daysteps li, .nightgrid, .showdown, .signdemo, .signcard, .sample, .seating svg, .house) {
+      animation: rl-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
+    .brief .rs-head h3 i { animation-name: rl-seal; }  /* as specific as the list above, or more */
+    .brief .ranks li { animation-name: rl-rung; }
+    .brief .signgrid .signcard { animation-name: rl-turn; }
+    .daysky { view-timeline-name: --rl-sky; }
+    .ds-stop { animation: rl-pop linear both; animation-timeline: --rl-sky; animation-range: entry calc(var(--i) * 15%) entry calc(25% + var(--i) * 15%); }
+  }
+}
+@keyframes rl-settle { from { transform: scale(1.12); filter: brightness(.4); } }
+@keyframes rl-rise { from { opacity: 0; translate: 0 16px; } }
+@keyframes rl-stamp { from { opacity: 0; scale: 2.4; } 70% { opacity: 1; } }
+@keyframes rl-deal { from { opacity: 0; translate: 0 -24px; rotate: -8deg; scale: 1.15; } 50% { opacity: 1; } }
+@keyframes rl-hide { from, to { -webkit-text-fill-color: transparent; } }
+@keyframes rl-count { from { --rl-n: 0; visibility: visible; } to { --rl-n: var(--n); visibility: visible; } }
+@keyframes rl-type { from { opacity: 0; translate: -10px 0; } }
+@keyframes rl-found { 30% { scale: 1.35; box-shadow: 0 0 0 6px rgba(158,27,27,.25); } }
+@keyframes rl-seal { from { opacity: 0; scale: 1.8; rotate: -20deg; } }
+@keyframes rl-rung { from { opacity: 0; translate: 0 22px; } }
+@keyframes rl-turn { from { opacity: 0; transform: perspective(40em) rotateY(-80deg); } }
+@keyframes rl-pop { from { opacity: 0; scale: .3; } }

@@ -28,33 +28,71 @@
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+    <clipPath id="glass"><rect x="146" y="14" width="58" height="104"/></clipPath>
+    <!-- the firelight that flickers is drawn with these, each like the blurred glow it stands for (a blur under a part
+         that changes would be redrawn every frame) -->
+    <radialGradient id="firelight">
+      <stop offset="0" stop-color="#ff8a30" stop-opacity=".42"/>
+      <stop offset=".4" stop-color="#ff8a30" stop-opacity=".415"/>
+      <stop offset=".5" stop-color="#ff8a30" stop-opacity=".386"/>
+      <stop offset=".6" stop-color="#ff8a30" stop-opacity=".292"/>
+      <stop offset=".7" stop-color="#ff8a30" stop-opacity=".148"/>
+      <stop offset=".8" stop-color="#ff8a30" stop-opacity=".042"/>
+      <stop offset=".9" stop-color="#ff8a30" stop-opacity=".006"/>
+      <stop offset="1" stop-color="#ff8a30" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floorlit">
+      <stop offset="0" stop-color="#ff8a30" stop-opacity=".174"/>
+      <stop offset=".3" stop-color="#ff8a30" stop-opacity=".17"/>
+      <stop offset=".45" stop-color="#ff8a30" stop-opacity=".14"/>
+      <stop offset=".58" stop-color="#ff8a30" stop-opacity=".09"/>
+      <stop offset=".72" stop-color="#ff8a30" stop-opacity=".04"/>
+      <stop offset=".86" stop-color="#ff8a30" stop-opacity=".01"/>
+      <stop offset="1" stop-color="#ff8a30" stop-opacity="0"/>
+    </radialGradient>
     <g id="ph"><rect width="13" height="10" fill="#e6dccb"/><rect x="1.3" y="1.3" width="10.4" height="7.4" fill="#2e2824"/><path d="M4 8.7 C4 6 8 6 8 8.7Z M7.4 4.4 A1.4 1.4 0 1 1 7.39 4.3Z" fill="#6a5e52"/></g>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- in the films (css/film.css): snow falls past the window, the fire burns behind the chair and lights
+       its edges, the lamplight breathes, and the hand comes up to point -->
   <!-- the curtained window, cold snow light -->
   <circle cx="176" cy="68" r="44" fill="#7a90c0" opacity=".14" filter="url(#soft)"/>
   <rect x="146" y="14" width="58" height="104" fill="url(#pane)"/>
+  <g clip-path="url(#glass)">
+    <g class="lf-fall">
+      <g id="flakes" fill="#e8eef8" fill-opacity=".75">
+        <circle cx="152" cy="24" r="1"/><circle cx="168" cy="40" r="1.2"/><circle cx="190" cy="30" r=".9"/><circle cx="160" cy="62" r="1.1"/>
+        <circle cx="182" cy="76" r="1"/><circle cx="198" cy="58" r="1.2"/><circle cx="154" cy="96" r=".9"/><circle cx="174" cy="108" r="1.1"/>
+        <circle cx="196" cy="100" r="1"/><circle cx="186" cy="50" r=".7"/>
+      </g>
+      <use href="#flakes" y="-112"/>
+    </g>
+  </g>
   <path d="M146 66 H204 M175 14 V66" stroke="#0c0e16" stroke-width="2.4"/>
   <rect x="142" y="116" width="66" height="4" fill="#161420"/>
   <path d="M132 8 C138 50 136 96 140 122 H149 C146 90 148 40 150 8Z M218 8 C212 50 214 96 210 122 H201 C204 90 202 40 200 8Z" fill="#110c12"/>
   <path d="M0 150 H360" stroke="#2a1a14" stroke-width="1.2"/>
   <!-- the fireplace behind the chair -->
-  <circle cx="296" cy="138" r="54" fill="#ff8a30" opacity=".42" filter="url(#soft)"/>
+  <circle class="lf-firelit" cx="296" cy="138" r="81" fill="url(#firelight)"/>
   <rect x="246" y="98" width="96" height="5" fill="#3a2214"/>
   <rect x="252" y="103" width="84" height="59" fill="#24140c"/>
   <rect x="266" y="120" width="56" height="42" fill="#060201"/>
-  <path d="M298 162 C300 152 305 155 307 146 C310 154 313 150 315 142 C317 152 320 156 321 162Z" fill="url(#fire)" filter="url(#glow)"/>
+  <g data-fx="glow" data-at="310 150" data-r="30" data-tone="fire"/>
+  <g class="lf-fire"><path d="M298 162 C300 152 305 155 307 146 C310 154 313 150 315 142 C317 152 320 156 321 162Z" fill="none" stroke="url(#fire)" stroke-opacity=".35" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M298 162 C300 152 305 155 307 146 C310 154 313 150 315 142 C317 152 320 156 321 162Z" fill="url(#fire)"/></g>
+  <g data-fx="embers" data-at="310 146" data-r="9"/>
   <!-- floor and the long shadow of the chair -->
   <rect x="0" y="162" width="360" height="38" fill="#0e0a0c"/>
-  <path d="M252 162 H340 L330 200 H240Z" fill="#ff8a30" opacity=".18" filter="url(#soft)"/>
+  <ellipse class="lf-firelit" cx="290" cy="182" rx="70" ry="36" fill="url(#floorlit)"/>
   <path d="M240 162 H300 L250 200 H140Z" fill="#000" opacity=".55"/>
   <!-- the armchair, turned away, lit from behind -->
   <path d="M240 162 V110 C236 106 236 96 242 94 C246 88 254 86 270 86 C286 86 294 88 298 94 C304 96 304 106 300 110 V162Z M242 162 h4 v5 h-4Z M294 162 h4 v5 h-4Z M240 162 V128 C234 128 232 132 233 138 V162Z M300 162 V128 C306 128 308 132 307 138 V162Z" fill="#0b0605"/>
   <path d="M258 86.6 C286 86 294 88 298 94 C304 96 304 106 300 110 V160" fill="none" stroke="#ffa048" stroke-opacity=".75" stroke-width="1.6" filter="url(#glow)"/>
   <path d="M240 160 V110 C236 106 236 98 240 95" fill="none" stroke="#ffa048" stroke-opacity=".3"/>
-  <path d="M300 128 C306 128 308 132 307 138 V160" fill="none" stroke="#ffa048" stroke-opacity=".6" stroke-width="1.2"/>
+  <path class="lf-firelit" d="M300 128 C306 128 308 132 307 138 V160" fill="none" stroke="#ffa048" stroke-opacity=".6" stroke-width="1.2"/>
   <!-- the side table, lamp, case file and photographs -->
   <circle cx="72" cy="112" r="34" fill="#ffb060" opacity=".45" filter="url(#soft)"/>
+  <g data-fx="glow" data-at="72 110" data-r="40" data-tone="lamp"/>
   <rect x="112" y="166" width="12" height="34" fill="#140a06"/>
   <ellipse cx="118" cy="154" rx="78" ry="14" fill="#170c06"/>
   <ellipse cx="118" cy="152" rx="78" ry="14" fill="#2c180c"/>
@@ -71,12 +109,14 @@
   <use href="#ph" transform="translate(110 147) scale(1 .6) rotate(-4)"/>
   <use href="#ph" transform="translate(84 154) scale(1 .6) rotate(-22)"/>
   <!-- the pointing hand in a dark sleeve -->
+  <g class="lf-point">
   <g transform="translate(148 84) rotate(8)">
     <path d="M-200 -18 C-120 -15 -40 -12 -6 -10 L-3 -11 L-1 11 L-6 10 C-40 12 -120 18 -200 24Z" fill="#0a0708"/>
     <path d="M-70 -7 C-48 -5 -30 -1 -14 0 M-3 -11 L-1 11" fill="none" stroke="#1e1614" stroke-width="1.2"/>
     <path d="M0 -8 C8 -11 14 -10 19 -8 L20 -1 C24 -1 25 3 22 4 C25 5 24 9 20 9 C12 10 4 10 0 9Z M17 -8 L40 -6.5 C43.5 -6.2 43.5 -1.6 40 -1.4 L18 -0.6Z" fill="#0c0808"/>
     <path d="M-140 16.5 C-80 13 -30 11 -6 10 M2 9.5 C10 10 16 10 20 9 M8 -2 C12 -1 16 1 19 3" fill="none" stroke="#ffb060" stroke-opacity=".5" stroke-width="1.1"/>
     <path d="M41 -6.2 C43.6 -5.6 43.6 -2.2 41 -1.5" fill="none" stroke="#ffa048" stroke-opacity=".7"/>
+  </g>
   </g>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

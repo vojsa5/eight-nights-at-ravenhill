@@ -43,7 +43,7 @@ def advice_json(a):
 
 
 # The conspirators whose night's work leaves traces the whole house sees next morning (web/js/night.js has the texts).
-TRACES = ("Forger", "Eavesdropper", "Hypnotist", "Mole", "Paymaster", "Grifter", "Lunatic", "Lover")
+TRACES = ("Forger", "Eavesdropper", "Hypnotist", "Mole", "Paymaster", "Lover")  # the roles whose night work has an effect
 
 
 def night_traces(g, r):

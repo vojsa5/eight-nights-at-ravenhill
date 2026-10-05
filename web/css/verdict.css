@@ -5,8 +5,9 @@
    candle goes out. The result card turns the guest's photograph over to their role and stamps it. Each scene's
    message lands within about a second; the rest is mood. */
 
-/* a clear: the double doors swing open onto the morning room, and the daylight floods out */
-.vfx-doors { position: absolute; inset: 0; overflow: hidden; perspective: 120cqw; pointer-events: none; }  /* as deep as the frame is wide */
+/* a clear: the double doors swing open onto the morning room as you step through them, and the daylight floods out */
+.vfx-doors { position: absolute; inset: 0; overflow: hidden; perspective: 120cqw; pointer-events: none;  /* as deep as the frame is wide */
+  animation: vfx-walk 1.1s .1s cubic-bezier(.45,0,.55,1) both; }
 .vfx-doors i { position: absolute; }
 .vfx-flood { inset: 0; opacity: 0; animation: vfx-flood 1.3s .1s ease-out both;
   background: radial-gradient(ellipse 58% 90% at 50% 52%, rgba(255,250,234,.95), rgba(255,236,204,.5) 48%, rgba(255,226,190,0) 82%); }
@@ -17,6 +18,7 @@
 .vfx-door::after { content: ""; position: absolute; inset: 0; background: #000; opacity: 0; animation: vfx-shade .85s .12s ease-in both; }  /* turning from the light */
 .vfx-seam { top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: #fff6de;
   box-shadow: 0 0 9px 2px rgba(255,236,196,.75), 0 0 28px 7px rgba(255,220,160,.3); animation: vfx-out .3s .14s ease-in both; }
+@keyframes vfx-walk { to { scale: 1.12; } }
 @keyframes vfx-door { to { transform: rotateY(calc(var(--turn, 1) * 92deg)); } }
 @keyframes vfx-shade { to { opacity: .75; } }
 @keyframes vfx-flood { 22% { opacity: .8; } to { opacity: 0; } }
@@ -58,18 +60,20 @@
 
 /* a right call's search: the room is dark, a torch sweeps it and stops on what the guest hid (the search picture's
    data-fx="found" mark; data-r is the size of the find, data-tone="right" brings the torch in from the right), the
-   find lights up, then the room. Only in the story after a decision. */
+   find lights up, then the room; the torch stays a little unsteady in the hand, and the find keeps catching its light.
+   Only in the story after a decision. */
 .fx-found { display: none; }
 .film.verdict .fx-found { display: block; width: 100%; aspect-ratio: 1; translate: -50% -50%; --from: -1; }
 .film.verdict .fx-found.tone-right { --from: 1; }
 .film.verdict .fx-found::before, .film.verdict .fx-found::after { content: ""; position: absolute; pointer-events: none; }
 .film.verdict .fx-found::before { left: -150%; top: -150%; width: 400%; height: 400%;  /* the dark, with the torch's circle in it */
-  background: radial-gradient(closest-side, rgba(255,238,200,.12), rgba(255,238,200,.05) calc(var(--w, 34%) / 6),
-    transparent calc(var(--w, 34%) / 4.6), rgba(6,4,3,.6) calc(var(--w, 34%) / 3.2), rgba(4,3,2,.94) calc(var(--w, 34%) / 2.2));
-  animation: vfx-sweep 1.35s .2s both, vfx-lift 1.1s 1.8s ease-in-out both; }
+  background: radial-gradient(closest-side, rgba(255,238,200,.16), rgba(255,238,200,.05) calc(var(--w, 34%) / 7),
+    rgba(255,236,196,.1) calc(var(--w, 34%) / 5.2), transparent calc(var(--w, 34%) / 4.4), rgba(6,4,3,.6) calc(var(--w, 34%) / 3.2),
+    rgba(4,3,2,.94) calc(var(--w, 34%) / 2.2));  /* a hot centre and the ring at the edge of a torch's beam */
+  animation: vfx-sweep 1.35s .2s both, vfx-lift 1.1s 1.8s ease-in-out both, vfx-hand 5.2s 1.55s ease-in-out infinite; }
 .film.verdict .fx-found::after { left: 50%; top: 50%; width: calc(var(--w, 34%) * 1.2); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(255,230,176,.5), rgba(255,214,150,.16) 55%, transparent); mix-blend-mode: screen; opacity: 0;
-  animation: vfx-found 2.6s 1.3s ease-out both; }  /* the find catching the light */
+  animation: vfx-found 2.6s 1.3s ease-out both, vfx-gleam 2.8s 3.9s ease-in-out infinite alternate; }  /* the find catching the light */
 @keyframes vfx-sweep {
   from { transform: translate(calc(var(--from) * 12%), 6%); animation-timing-function: ease-in-out; }
   33% { transform: translate(calc(var(--from) * 5.5%), -4.5%); animation-timing-function: ease-in-out; }
@@ -78,10 +82,20 @@
   to { transform: none; }
 }
 @keyframes vfx-lift { to { opacity: .3; scale: 1.8; } }
+@keyframes vfx-hand { 0%, 100% { translate: 0 0; } 28% { translate: .35% -.25%; } 61% { translate: -.3% .2%; } 82% { translate: .12% .3%; } }
 @keyframes vfx-found { from { opacity: 0; scale: .6; } 16% { opacity: 1; scale: 1.06; } to { opacity: .4; scale: 1; } }
+@keyframes vfx-gleam { from { opacity: .4; } to { opacity: .62; } }
 .film.paused .fx-found::before, .film.paused .fx-found::after { animation-play-state: paused; }
 
 /* the parts of the verdict pictures that move (lf-* classes, as in film.css) */
+/* the morning room, on a clear: the dawn grows at the window and on the floor once the doors are open, the curtains stir,
+   and the door to the warm corridor sways in the draught */
+.film-layer .lf-dawn { animation: lf-dawn var(--scene) ease-out both; }
+.film-layer .lf-stir { transform-origin: 50% 0; animation: lf-stir 6.5s ease-in-out var(--d, 0s) infinite alternate; }
+.film-layer .lf-ajar { transform-origin: 100% 50%; animation: lf-ajar 8s ease-in-out 1.4s infinite; }  /* about its hinge */
+@keyframes lf-dawn { from { opacity: .3; } 30% { opacity: .75; } to { opacity: 1; } }
+@keyframes lf-stir { from { transform: skewX(-1.5deg); } to { transform: skewX(1.1deg); } }
+@keyframes lf-ajar { 0%, 100% { transform: none; } 40%, 58% { transform: scaleX(.78); } }
 /* the cellar, on an arrest: the door swings shut and the cellar shakes, dust sifts down from the arch, the key turns,
    and the lantern swings on its hook with its light */
 .film-layer .lf-shut { animation: lf-shut .6s .12s both; }

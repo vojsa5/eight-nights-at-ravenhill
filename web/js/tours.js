@@ -504,36 +504,37 @@ const EVENTS = [
 
 const RULES = [
   {
-    head: "At a glance",
-    at: (body) => body.querySelector(".glance"),
-    text: `This case in four numbers: the guests in the house, how many are innocent and how many guilty, the nights before the
-      thaw, and the best score you can make.`,
+    head: "Contents",
+    at: (body) => body.querySelector(".contents"),
+    text: `Every section of the rules, with its gist pencilled under it. Click one to jump there; the ↑ beside each heading
+      brings you back.`,
+  },
+  {
+    head: "Your score",
+    join: true,
+    at: (body) => [body.querySelector(".pointtable"), body.querySelector(".ranks")],
+    text: () => `A point for every right call: an innocent cleared or a culprit arrested. At the thaw your score earns one of four
+      verdicts; the pips under each show the scores out of ${2 * ui.S.rounds} that earn it.`,
   },
   {
     head: "A day at Ravenhill",
-    at: (body) => body.querySelector(".dayclock"),
-    text: `Every day runs the same way: the night's secret work, its signs at dawn, then the testimony, your clear and your arrest,
-      and the search of their rooms.`,
+    at: (body) => body.querySelector(".daysky"),
+    text: `Every day runs the same way, along the sun's path: the night's secret work, its signs at dawn and the testimony, then
+      your two calls, a clear and an arrest, and the search of their rooms. Under the sky, what each hour brings.`,
   },
   {
     head: "The eight nights",
     join: true,
     at: (body) => all(body, ".nightgrid"),
-    text: () => `The same eight nights in every case, in two halves: First Impressions, the Notebook, the Footprints and the Blackout,
-      then the Séance, the Dinner Party, the Inquest and the drawing room. Over the nights, their kinds.${
-      live() ? " Tonight is lit gold, and the nights behind you are ticked." : ""}`,
-  },
-  {
-    head: "The drawing room",
-    at: (body) => body.querySelector(".showdown"),
-    text: `On the last night two guests remain and nobody advises any more. You accuse one and the other goes free; both calls
-      still count.`,
+    text: () => `The same eight nights in every case, in two halves, their kinds over them.${
+      live() ? " Tonight is lit gold, and the nights behind you are ticked." : ""} On the last, in the drawing room, two guests
+      remain: you accuse one and the other goes free, and both calls count.`,
   },
   {
     head: "Signs in the night",
-    at: (body) => body.querySelector(".signgrid"),
-    text: `Each culprit here leaves its own sign on the morning's card while its guest is in the house. When a sign stops, that
-      culprit was among the guests you just sent away. The Blackout on night IV hides them all.`,
+    at: (body) => body.querySelector(".signdemo"),
+    text: `Most culprits leave a sign on the morning's card while they are in the house. When a sign stops, its culprit was one of
+      the two guests you sent away the day before. Below it, the signs of this case.`,
   },
 ];
 

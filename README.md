@@ -23,7 +23,8 @@ For testing, `http://localhost:8000/?seed=11` starts a reproducible game (the se
 ## Play online
 
 The game also runs without the Python server, on GitHub Pages: https://vojsa5.github.io/eight-nights-at-ravenhill/.
-There the browser runs the same `ravenhill` package with [Pyodide](https://pyodide.org) (`web/js/pyengine.js`).
+There the browser runs the same `ravenhill` package with [Pyodide](https://pyodide.org) in a Web Worker (`web/js/pyengine.js`,
+`web/js/pyworker.js`), so the page never freezes while it starts.
 The site plays only one case, the shared case below: the plain address and any other link find the gates closed.
 The first visit downloads Pyodide (about 10 MB, cached afterwards). Your own pictures in `web/art/custom/` work only
 with the local server.
@@ -84,24 +85,25 @@ ravenhill/               the game engine (Python package)
     static.py            serving web/ and the custom art folder
 web/                     the browser game
   index.html             page markup
+  manifest.json, icons/  for adding the game to a phone's home screen
   css/                   base (desk, colours), board (corkboard, polaroids, strings, case note), folder, reveal (cards), responsive,
                          title (the opening screen), tour (the guided tours of the folder's tabs), film (the films' camera,
                          the moving parts of their pictures, the cuts between scenes and the old-film grain), verdict (the
                          story after each decision: the doors, the stamp, the search's torch, the result card's turn),
                          flashback (the moving parts of the crimes, an arrest's hall and cellar stairs, and the flashback after
                          a right call: the look of a memory),
-                         reading (the screen that waits while a book is read), minisim (How to play's self-playing mini case),
-                         chapters (the opening's four chapters: their title cards, the chapter bar and each chapter's look)
+                         reading (the screen that waits while a book is read), minisim (the self-playing case in miniature), howto (How to play's exhibits coming alive, scene by scene), rules (the Rules tab),
+                         chapters (the opening's five chapters: their title cards, the chapter bar and each chapter's look)
   js/                    one module per part of the page (main.js is the entry point; prologue.js holds the opening,
                          story.js the story of the birthday night (every crime, every innocent role's story, the opening film),
                          reveal.js the story after each decision, finale.js the ending, film.js plays all three full
-                         screen, chapters.js the opening's four chapters (the story, How to play, the advice and the
-                         case papers), each with its title card and the chapter bar,
+                         screen, chapters.js the opening's five chapters (the story, How to play, a case in miniature,
+                         the advice and the case papers), each with its title card and the chapter bar,
                          roles.js every role's texts, tips.js the advice for the player, books.js the rewards,
                          shared.js the shared case, title.js the opening screen: the manor at night, shown on every
                          visit while the case loads behind it; tour.js plays the "How this tab works" tour of a folder
                          tab, and tours.js holds each tab's steps; crimes.js the folder's Crimes tab; reading.js the screen
-                         that waits while a book is read; minisim.js the mini case that plays itself in How to play;
+                         that waits while a book is read; minisim.js the case in miniature, the chapter after How to play: a small case that plays itself;
                          guests.js who each guest was to Lord Edmund)
   art/roles/             one portrait per role (confidant-a / confidant-b, lover-a / lover-b for the two figures of a pair)
   art/guests/            each guest's own sepia portrait (by surname), shown until their role is revealed
@@ -144,7 +146,7 @@ database.rules.json      the Firebase rules for a shared case (see A shared case
 
 Every round opens with a card announcing its event:
 
-- Round 1 is always **First Impressions**: everyone learns whether the guest in the previous seat looks innocent or guilty.
+- Round 1 is always **First Impressions**: everyone learns whether one other guest, picked at random, looks innocent or guilty.
 - Every night is one of the four kinds in `GROUPS` (`ravenhill/events.py`): the guests learn something, you
   learn something, the testimony changes, the house goes quiet. Each half of the stay opens with the guests
   learning something and ends with the house going quiet, and the schedule is the same in every case: night I
@@ -208,10 +210,11 @@ with the case (online for a shared case, else in the browser).
 ## Each night
 
 Every night's opening card says what the night left behind: ink for the Forger, a glass at the wall for the
-Eavesdropper, steamed-open letters for the Mole, banknotes for the Paymaster, a stacked deck for the Grifter, odd goings-on for the Lunatic, whispers in the night while both Lovers
+Eavesdropper, steamed-open letters for the Mole, banknotes for the Paymaster, whispers in the night while both Lovers
 are free (`night_traces()` in `ravenhill/server/state.py` decides which roles worked, `web/js/night.js` has the texts).
-It names roles, never guests, and a trace stops once its culprit is out of the house; nothing shows after a
-Blackout. On the last night the two who remain are gathered in the drawing room: you accuse one, the other goes free,
+Only roles whose night work has an effect leave a trace, so the Grifter and the Lunatic leave none. A click on a trace
+tells what its culprit does at night. It names roles, never guests, and a trace stops once its culprit is out of the
+house; nothing shows after a Blackout. On the last night the two who remain are gathered in the drawing room: you accuse one, the other goes free,
 and a short film of the summing-up (`showDrawingRoom()` in `finale.js`) leads into the ending.
 
 ## Command-line tools

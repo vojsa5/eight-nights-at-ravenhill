@@ -24,8 +24,11 @@
     <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- in the films (css/film.css): the case file is stamped as the scene comes in, the low sun breathes and dust turns
+       in its light, and the pen and the cup catch it -->
   <!-- the window and the low sun coming through -->
   <circle cx="290" cy="60" r="60" fill="#ffc070" opacity=".3" filter="url(#soft)"/>
+  <g data-fx="glow" data-at="290 62" data-r="66" data-tone="lamp"/>
   <rect x="254" y="16" width="72" height="92" fill="url(#pane)"/>
   <path d="M290 16 V108 M254 46 H326 M254 77 H326" stroke="#140c06" stroke-width="3"/>
   <rect x="252" y="14" width="76" height="96" fill="none" stroke="#140c06" stroke-width="4"/>
@@ -35,6 +38,7 @@
   <path d="M0 120 H360" stroke="#ffc070" stroke-opacity=".35" stroke-width="1.2"/>
   <path d="M20 140 C90 138 150 142 230 139 M40 176 C120 172 200 178 300 174" stroke="#2e1c0e" stroke-width="1" fill="none"/>
   <path d="M262 120 L340 120 L220 200 L90 200Z" fill="#ffc070" opacity=".12"/>
+  <g data-fx="motes" data-at="236 112" data-r="54"/>
   <!-- long shadows thrown to the left -->
   <g fill="#0a0503" opacity=".55">
     <path d="M110 150 L200 146 L150 170 L20 176Z"/>
@@ -42,22 +46,27 @@
     <path d="M150 178 L200 172 L130 184 L90 186Z"/>
   </g>
   <!-- the case file, thick with papers -->
+  <g class="lf-pressed">
   <path d="M108 150 L218 144 L218 152 L108 159Z" fill="#d8c8a8"/>
   <path d="M108 153 L218 147 M108 156 L218 150" stroke="#8a7a60" stroke-width=".6"/>
   <path d="M112 120 L212 114 L218 144 L108 150Z" fill="#a8845a"/>
   <path d="M212 114 L218 144" stroke="#ffd890" stroke-opacity=".6" stroke-width="1.2"/>
   <path d="M110 136 L216 129 M166 117 L162 147" stroke="#e8dcc0" stroke-width="1.4" fill="none"/>
   <path d="M164 132 C156 126 152 134 164 133 C174 126 178 134 164 133 L158 142 M164 133 L170 141" fill="none" stroke="#e8dcc0" stroke-width="1.2"/>
+  <g class="lf-stamped">
   <g transform="rotate(-8 190 126)" fill="none" stroke="#b81e1e" stroke-opacity=".85">
     <rect x="176" y="118" width="30" height="15" rx="2" stroke-width="1.6"/>
     <rect x="179" y="121" width="24" height="9" rx="1" stroke-width=".8"/>
     <path d="M182 125.5 H200" stroke-width="2.4" stroke-dasharray="4 1.5 7 1.5"/>
   </g>
+  </g>
   <path d="M124 124 H148 M122 128 H140" stroke="#5a4028" stroke-width="1" stroke-linecap="round"/>
+  </g>
   <!-- the fountain pen -->
   <g transform="rotate(-6 160 176)">
     <rect x="124" y="173" width="56" height="5" rx="2.5" fill="#0c0a0a"/>
     <path d="M180 173.5 L194 175.5 L180 177.5Z" fill="#c8a860"/>
+    <circle class="lf-glint" style="--d:2.6s" cx="190" cy="175.2" r="1.1" fill="#fff4c8" opacity="0"/>
     <rect x="150" y="172.6" width="3" height="5.8" fill="#c8a860"/>
     <path d="M128 172.4 H148" stroke="#c8a860" stroke-width="1"/>
     <path d="M130 174 H176" stroke="#ffd890" stroke-opacity=".35" stroke-width=".8"/>
@@ -71,5 +80,6 @@
   <ellipse cx="244" cy="128.4" rx="12" ry="2.2" fill="#4a2c14"/>
   <ellipse cx="244" cy="128.4" rx="8" ry="1.2" fill="none" stroke="#7a5a3a" stroke-width=".6"/>
   <path d="M232 132 C233 140 236 144 242 145" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1"/>
+  <ellipse class="lf-glint" style="--d:4.4s" cx="253" cy="128.6" rx="1.6" ry=".9" fill="#fffaf0" opacity="0"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

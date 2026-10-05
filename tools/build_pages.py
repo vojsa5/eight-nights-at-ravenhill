@@ -6,12 +6,33 @@ runs with Pyodide (web/js/pyengine.js) since Pages has no Python server.
 import hashlib
 import io
 import json
+import re
 import shutil
 import sys
 import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+IMPORT = re.compile(r'^import\b[^\n]*?\bfrom "\./([\w-]+\.js)";', re.M)
+
+
+def modules(js, entry="main.js"):
+    """Every module the entry point imports, directly or through others (static imports only), in the order found."""
+    found, todo = [], [entry]
+    while todo:
+        name = todo.pop(0)
+        if name not in found:
+            found.append(name)
+            todo += IMPORT.findall((js / name).read_text())
+    return found[1:]
+
+
+def preload_modules(out):
+    """The page asks for all its modules at once, rather than one level of imports at a time, a round trip each
+    (on a phone's network, seconds before the opening screen shows)."""
+    page = out / "index.html"
+    links = "".join(f'<link rel="modulepreload" href="js/{m}">\n' for m in modules(out / "js"))
+    page.write_text(page.read_text().replace("</head>", links + "</head>", 1))
 
 
 def build(out):
@@ -19,6 +40,7 @@ def build(out):
         shutil.rmtree(out)
     # the page, without the player's own pictures (only their README)
     shutil.copytree(ROOT / "web", out, ignore=lambda d, names: [n for n in names if Path(d).name == "custom" and n != "README.md"])
+    preload_modules(out)
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
         for f in sorted((ROOT / "ravenhill").rglob("*.py")):

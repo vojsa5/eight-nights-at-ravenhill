@@ -81,7 +81,7 @@
    event's name is typed; the medal is struck; the papers are laid down one by one. A click or Enter completes it at once. */
 .modal:has(> .intro)::before { content: ""; position: absolute; inset: 0; pointer-events: none; animation: fade-in .5s ease-out both;
   background: radial-gradient(ellipse 75% 65% at 50% 42%, rgba(12,16,34,.3), rgba(1,1,4,.8)); }
-.intro { position: relative; width: 620px; max-width: 100%; max-height: calc(100vh - 32px); overflow: auto;
+.intro { position: relative; width: 620px; max-width: 100%; max-height: calc(100vh - 32px); max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom))); overflow: auto;
   animation: nt-in .5s calc(var(--dawn, 0ms) - 150ms) cubic-bezier(.2,.8,.2,1) both; }
 .intro-backdrop { position: fixed; inset: -40px; z-index: -1; pointer-events: none; background: #05060c center / cover no-repeat;
   filter: blur(14px) brightness(.42) saturate(.85); animation: fade-in 1s var(--dawn, 0ms) ease-out both; }  /* the event's scene, behind the card */
@@ -182,6 +182,14 @@
   border: 2px solid transparent; box-shadow: 0 0 0 1px rgba(90,68,32,.4);
   background: radial-gradient(circle at 40% 32%, #fffdf6, #efe0bb) padding-box, linear-gradient(150deg, #f6e2a8, #b8954c 50%, #7a5c2a) border-box; }
 .trace-name { margin-right: 3px; font: 11.5px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-red); }
+/* every trace is a button: a click tells what its culprit does at night, on a slip under the traces (night.js) */
+.trace-btn { all: unset; display: inherit; align-items: inherit; gap: inherit; cursor: pointer; }
+.trace-slip .trace-btn { flex: 1; }
+.trace-btn:focus-visible { outline: 2px solid var(--ink-red); outline-offset: 2px; }
+.trace-tag .trace-btn:focus-visible { outline: none; text-decoration: underline; }
+.trace-tag.on, .trace-slip.on .trace-told { color: var(--ink-red); }
+.traces .trace-what { max-width: 460px; margin: 4px auto 8px; padding: 7px 12px; background: #fcf8ec; border: 1px dashed rgba(106,90,68,.45);
+  font-size: 14.5px; line-height: 1.4; text-align: left; }
 .traces li.quiet { justify-content: center; padding: 8px 14px; font-style: italic; color: var(--paper-muted); text-align: center;
   border: 1px dashed rgba(106,90,68,.45); }
 .traces.many { max-width: 580px; }
@@ -237,7 +245,7 @@
 
 /* the prologue: a telegram, then the briefing */
 /* the case papers: the telegram, the guests and the conspiracy, on a wide sheet in large type */
-.prologue { width: min(1060px, 100%); max-height: calc(100vh - 32px); overflow: auto; padding: 36px clamp(22px, 4vw, 54px) 26px;
+.prologue { width: min(1060px, 100%); max-height: calc(100vh - 32px); max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom))); overflow: auto; padding: 36px clamp(22px, 4vw, 54px) 26px;
   animation: unfold .6s cubic-bezier(.2,.7,.2,1) both; }
 .prologue h2 { margin: 2px 0 6px; font: 700 clamp(30px, 4vw, 44px)/1.1 Cinzel, Georgia, serif; letter-spacing: .08em; text-transform: uppercase;
   text-align: center; }
@@ -346,11 +354,11 @@ body:has(> #modal.open > .film), body:has(> #modal.open > .chapter-card) { overf
 @keyframes drop-in { from { opacity: 0; transform: translateY(-24px) rotate(-10deg); } to { opacity: 1; transform: rotate(-4deg); } }
 /* a short screen on its side (a phone): a smaller subtitle and buttons */
 @media (max-height: 500px) and (min-aspect-ratio: 1/1) {
-  .film-foot { padding: 64px var(--pad) 9px; }
+  .film-foot { padding: 64px var(--pad) max(9px, env(safe-area-inset-bottom)); }
   .film .film-caption { font-size: 15.5px; line-height: 1.4; }
   .film .nav { margin-top: 7px; }
   .film .nav .btn { padding: 4px 10px; font-size: 12.5px; }
-  .film .film-skip { top: 10px; right: 10px; padding: 4px 10px; font-size: 12px; }
+  .film .film-skip { top: 10px; right: max(10px, env(safe-area-inset-right)); padding: 4px 10px; font-size: 12px; }
 }
 /* a screen taller than wide: the picture as a band across the top of it, leaving the subtitle its room (and no taller than
    2:3), fading into the dark below; the subtitle right under the picture, the buttons at the bottom of the screen */
@@ -368,7 +376,7 @@ body:has(> #modal.open > .film), body:has(> #modal.open > .chapter-card) { overf
 
 /* the closing card: the next morning's newspaper (finale.js showClosing), spinning in as newspapers do in films. Its
    headline and the medal follow the score; the page scrolls under its buttons when the window is short. */
-.closing { --rule: #3a2c1e; --news-muted: #5c4c36; display: flex; flex-direction: column; width: min(1120px, 100%); max-height: calc(100vh - 32px);
+.closing { --rule: #3a2c1e; --news-muted: #5c4c36; display: flex; flex-direction: column; width: min(1120px, 100%); max-height: calc(100vh - 32px); max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom)));
   background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,250,232,.6), transparent 70%), linear-gradient(172deg, #f0e7cd, #e2d4b0);
   box-shadow: 0 30px 80px rgba(0,0,0,.75); animation: news-spin 1s cubic-bezier(.3,.6,.4,1) both; }
 .news { min-height: 0; overflow: auto; padding: 16px 30px 28px; -webkit-mask: linear-gradient(#000 calc(100% - 26px), transparent);
@@ -527,9 +535,6 @@ body:has(> #modal.open > .film), body:has(> #modal.open > .chapter-card) { overf
 .ex-guests { display: flex; justify-content: center; align-items: center; gap: .25em; }
 .ex-thumb .art { display: block; width: 2em; aspect-ratio: 200 / 262; object-fit: cover; border: 2px solid #f4eddc;
   box-shadow: 0 1px 3px rgba(0,0,0,.4); }
-.ex-guests.two { gap: 12px; }
-.ex-guests.two .art { width: 3.6em; }
-.ex-guests.two b { font: 700 2.2em var(--typed); color: var(--ink-red); }
 .ex-list { margin: 0; padding: 0; list-style: none; text-align: left; }
 .ex-list li { margin: 4px 0; }
 .ex-list i, .ex-clue i { margin-right: 7px; font-style: normal; }
@@ -576,4 +581,11 @@ body:has(> #modal.open > .film), body:has(> #modal.open > .chapter-card) { overf
 }
 @media (prefers-reduced-motion: reduce) {
   .exhibit { animation: none; }
+}
+
+/* notched phones on their side: the subtitle and the film's buttons keep clear of the notch and the corners */
+.film-foot { padding-left: max(var(--pad), env(safe-area-inset-left)); padding-right: max(var(--pad), env(safe-area-inset-right)); }
+/* a trace is a button: on a touch screen, a tag a finger can hit */
+@media (pointer: coarse) {
+  .trace-tag { padding-top: 7px; padding-bottom: 7px; }
 }

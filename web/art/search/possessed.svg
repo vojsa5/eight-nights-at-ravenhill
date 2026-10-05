@@ -32,20 +32,25 @@
   <text x="196" y="170" font-family="Georgia, serif" font-size="11" fill="#c8b890" opacity=".55" transform="rotate(6 196 170)">N</text>
   <text x="214" y="178" font-family="Georgia, serif" font-size="11" fill="#c8b890" opacity=".55" transform="rotate(10 214 178)">O</text>
   <text x="104" y="186" font-family="Georgia, serif" font-size="11" fill="#c8b890" opacity=".55" transform="rotate(-6 104 186)">YES</text>
+  <g class="lf-creep">
   <g transform="rotate(-14 140 146)">
     <path d="M112 168 C98 150 104 122 140 118 C176 122 182 150 168 168 Z" fill="#8a5a2a" stroke="#c89858" stroke-width="2"/>
     <circle cx="140" cy="142" r="9" fill="#15120d" stroke="#c89858" stroke-width="2"/>
     <path d="M140 118 L136 104 L144 104 Z" fill="#8a5a2a" stroke="#c89858" stroke-width="1.5"/>
   </g>
+  <path class="lf-glint" style="--d:-2.53s" d="M132 133.5 L132.6 137.4 L136.5 138 L132.6 138.6 L132 142.5 L131.4 138.6 L127.5 138 L131.4 137.4Z" fill="#fffbe8" opacity="0"/>
+  </g>
   <path d="M120 178 L128 172 L124 184 Z" fill="#8a5a2a"/>
+  <g class="lf-swing" style="transform-box:view-box;transform-origin:284px 40px">
   <g transform="rotate(4 280 104)">
     <rect x="244" y="52" width="72" height="104" rx="4" fill="#3a2414" stroke="#6a4424" stroke-width="3"/>
     <path d="M252 60 L308 148 M308 60 L252 148" stroke="#5a3a1e" stroke-width="2"/>
     <path d="M262 56 L280 40 L298 56" fill="none" stroke="#9a9a9a" stroke-width="1.5"/>
   </g>
-  <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
-       (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
-  <path class="lf-glint" style="--d:-2.53s" d="M132 133.5 L132.6 137.4 L136.5 138 L132.6 138.6 L132 142.5 L131.4 138.6 L127.5 138 L131.4 137.4Z" fill="#fffbe8" opacity="0"/>
+  </g>
+  <!-- in the films (css/film.css) the lights live and what was found glints, the planchette creeps on the board by
+       itself and the mirror sways on its wire; in the story after a decision (css/verdict.css) a torch sweeps the room
+       and finds what the found mark points at -->
   <g data-fx="found" data-at="138 140" data-r="50"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

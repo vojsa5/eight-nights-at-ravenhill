@@ -17,7 +17,7 @@ from .rules import is_bad, registers_bad
 PLANNED_CHANGES = {}
 
 EVENTS = {
-    "First Impressions": "on the first evening everyone learns whether the guest in the previous seat looks innocent or guilty",
+    "First Impressions": "on the first evening everyone learns whether one other guest, picked at random, looks innocent or guilty",
     "Blackout": "the lights fail: nobody can investigate tonight",
     "Dinner Party": "advice names only whom to clear",
     "Inquest": "advice names only whom to arrest",
@@ -65,19 +65,20 @@ def night_group(rules, night):
 
 
 def first_impressions(game):
-    """Everyone learns whether the character in the previous seat looks good or bad (as their abilities would see it)."""
-    circle = sorted(game.alive)
-    for i, c in enumerate(circle):
-        left = circle[i - 1]
+    """Everyone learns whether one other character, picked at random among those whose role they do not know yet,
+    looks good or bad (as their abilities would see it)."""
+    for c in sorted(game.alive):
         m = game.minds[c]
-        if left != c and left not in m.roles:
-            m.known[left] = registers_bad(game.roles[left], m.role)
+        others = [x for x in sorted(game.alive) if x != c and x not in m.roles]
+        if others:
+            x = game.rng.choice(others)
+            m.known[x] = registers_bad(game.roles[x], m.role)
 
 
 
 def seance(game):
     """Everyone learns how many of their two living neighbours look bad (as their abilities would see it),
-    like a Housekeeper; with First Impressions that is often enough to work out both."""
+    like a Housekeeper."""
     circle = sorted(game.alive)
     for i, c in enumerate(circle):
         nb = tuple(sorted({circle[i - 1], circle[(i + 1) % len(circle)]} - {c}))

@@ -131,22 +131,30 @@
 @keyframes guest-in { from { opacity: 0; transform: translateY(8%) scale(.9); } to { opacity: 1; transform: rotate(-2deg); } }
 
 /* a flashback looks like a memory: the picture drains to sepia as it comes in (a wash of colour over it, blended by
-   hue: the one blended layer), fades like an old print, the dark closes in at the edges, and the edges flare now and
-   then as if the film were scorching in the gate. The second scene, the guest's last words, holds the look, and their
-   photograph comes through the picture like a double exposure. */
+   hue: the one blended layer) through a warm haze, fades like an old print, the dark closes in at the edges, the old
+   film hops in the gate and flickers, and the edges flare now and then as if the film were scorching in the gate. The
+   second scene, the guest's last words, holds the look, and their photograph comes through the picture like a double
+   exposure. */
 .memory, .memory i { position: absolute; inset: 0; pointer-events: none; }
 .memory::before, .memory::after { content: ""; position: absolute; inset: 0; }
 .memory .tint { background: #9a6a36; mix-blend-mode: color; opacity: 0; animation: memory-drain 1.8s .15s ease-in-out both; }
 .memory::before { background: #4a3218; opacity: 0; animation: memory-fade 1.8s .15s ease-in-out both; }
-.memory::after { background: radial-gradient(ellipse 72% 70% at 50% 46%, transparent 52%, rgba(26,14,6,.82)); }
+.memory::after { background: radial-gradient(ellipse 72% 70% at 50% 46%, transparent 52%, rgba(26,14,6,.82));
+  animation: memory-close 2.4s .15s ease-out both; }
 .memory .burn { opacity: 0; animation: memory-burn 5.3s steps(1) 1.4s infinite;
   background: radial-gradient(ellipse 14% 55% at 0 42%, rgba(255,214,150,.75), rgba(255,138,52,.32) 45%, transparent 75%); }
 .memory .burn.r { animation-duration: 6.7s; animation-delay: 3.1s;
   background: radial-gradient(ellipse 12% 48% at 100% 60%, rgba(255,214,150,.7), rgba(255,138,52,.3) 45%, transparent 75%); }
 .memory.held .tint { animation: none; opacity: .82; }
 .memory.held::before { animation: none; opacity: .22; }
+.memory.held::after { animation: none; }
+.film-frame:has(> .memory) .film-art { animation: film-weave 11s ease-in-out infinite, memory-gate 4.3s steps(1) 1.7s infinite; }
+.film.paused .film-frame:has(> .memory) .film-art { animation-play-state: paused; }
+.film-frame:has(> .memory) .film-look .flicker { animation-duration: 2.1s; }
 @keyframes memory-drain { to { opacity: .82; } }
-@keyframes memory-fade { to { opacity: .22; } }
+@keyframes memory-fade { from { background-color: #ffd9a0; } 42% { opacity: .3; background-color: #c8884a; } to { opacity: .22; } }
+@keyframes memory-close { from { opacity: 0; transform: scale(1.3); } }
+@keyframes memory-gate { 0% { translate: 0 0; } 37% { translate: 0 -.3%; } 38.5% { translate: 0 0; } 71% { translate: .12% .22%; } 72.5% { translate: 0 0; } }
 @keyframes memory-burn { 0% { opacity: 0; } 9% { opacity: .9; } 11% { opacity: .35; } 13% { opacity: 1; } 17% { opacity: .5; } 22% { opacity: 0; }
   61% { opacity: .55; } 63% { opacity: 0; } }
 .film-photo.recalled { filter: sepia(.55); animation: recall 2.6s .9s ease-in-out both; }
@@ -159,7 +167,7 @@
 .film-frame:has(> .memory.held) .film-look .leak, .film.verdict .film-frame:has(> .memory) .fx-found { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .film-photo.at-guest, .memory .tint, .memory::before { animation: none; }
+  .film-photo.at-guest, .memory .tint, .memory::before, .memory::after { animation: none; }
   .memory .tint { opacity: .82; }
   .memory::before { opacity: .22; }
   .memory .burn { display: none; }

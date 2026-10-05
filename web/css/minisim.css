@@ -1,4 +1,4 @@
-/* How to play's case in miniature (minisim.js): a larger exhibit, a small cork board with five photographs, the
+/* The case in miniature (minisim.js), a chapter in How to play's look: a larger exhibit, a small cork board with five photographs, the
    strings, stamps and counts of the real board (board.css .badge, .stamp, .photo .rl). Every step animates only what
    it changes, delayed by --d to fit the scene; each element's own style is its end state, so with less motion
    asked for a scene simply shows how it ends. */

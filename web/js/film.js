@@ -188,6 +188,8 @@ let film = null;                   // { scenes, done, back, label, skip, cls, ba
 let at = 0;
 let shown = 0;                     // counts renders, so a timer from an earlier scene never fires on a later one
 let paused = false, timer = null, due = 0, left = 0;
+const finishExhibit = () => document.querySelector(".film .exhibit")?.getAnimations({ subtree: true })
+  .filter((a) => a.effect?.getComputedTiming().iterations !== Infinity).forEach((a) => a.finish());
 
 // Play `scenes` from scene `from`; `done` runs after the last one, or when the film is skipped (the Skip button
 // says where to: `skip`), and `back` (if given) is where Back from the first scene goes. `cls` marks the film for
@@ -245,6 +247,7 @@ function showScene(n, fresh = false) {
   $("modal").classList.add("open");
   left = ms;
   if (!paused) play(run);
+  else finishExhibit();  // turned to while paused: the exhibit shows as it ends rather than waiting, blank, for Play
   setPauseLabel();
   $("filmNext").focus({ preventScroll: true });
 }

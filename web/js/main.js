@@ -16,6 +16,7 @@ import { load, store } from "./storage.js";
 import { markChips } from "./testimony.js";
 import { closePicker, showPickedSlip, togglePicker } from "./theory.js";
 import { showHowTo } from "./howto.js";
+import { showMiniCase } from "./minisim.js";
 import { showTips } from "./tips.js";
 import { closeTitle, showTitle, titleClosed, titleFailed, titleOpen } from "./title.js";
 import { readingOpen } from "./reading.js";
@@ -82,7 +83,7 @@ document.addEventListener("keydown", (e) => {
     // in a film and on the prologue's papers ← / → turn the pages and space pauses the film; on a chapter's title
     // card → and space go on into the chapter (space presses another focused button) and ← back; Enter presses the
     // focused button, or the card's main one; Escape skips a film to what follows it and closes a card (the opening film
-    // and papers close altogether; on the title card of How to play or the advice it skips the chapter, as on its film)
+    // and papers close altogether; on the title card of How to play, the case in miniature or the advice it skips the chapter, as on its film)
     const film = filmShowing(), paper = document.querySelector(".prologue");
     const inPrologue = paper || (film && document.querySelector(".film.story"));
     const otherButton = document.activeElement?.closest?.("button") && document.activeElement.id !== "chapterGo";
@@ -120,7 +121,7 @@ document.addEventListener("keydown", (e) => {
 // must not take a key meant for the card).
 new MutationObserver(() => {
   const open = $("modal").classList.contains("open");
-  document.querySelectorAll("body > .casebar, body > .desk").forEach((x) => (x.inert = open));
+  document.querySelectorAll("body > .casebar, body > .desk").forEach((x) => (x.inert = open || titleOpen() || readingOpen()));
 }).observe($("modal"), { attributes: true, attributeFilter: ["class"] });
 $("modal").addEventListener("click", (e) => {
   if (e.target.id === "revealOk") dismiss();
@@ -227,6 +228,7 @@ $("folder-close").onclick = () => openFolder(ui.tab);
 $("newgame").onclick = askNewGame;
 $("briefing").onclick = () => showPrologue(0, dismiss);
 $("howto").onclick = () => showHowTo(dismiss);
+$("minicase").onclick = () => showMiniCase(dismiss);
 $("tips").onclick = () => showTips(dismiss);
 $("theme").onclick = () => {
   const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";

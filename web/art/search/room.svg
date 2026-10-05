@@ -22,13 +22,19 @@
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+    <clipPath id="glass"><rect x="240" y="22" width="52" height="72"/></clipPath>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
   <!-- night at the window -->
   <rect x="240" y="22" width="52" height="72" fill="url(#win)" opacity=".75"/>
   <path d="M266 22 V94 M240 58 H292" stroke="#08090e" stroke-width="4"/>
   <path d="M240 84 C256 80 276 82 292 78 V94 H240Z" fill="#dfe6f2" opacity=".5"/>
-  <g fill="#f0f4fa"><circle cx="250" cy="34" r="1"/><circle cx="280" cy="44" r="1.2"/><circle cx="256" cy="70" r="1"/><circle cx="284" cy="68" r="1"/></g>
+  <!-- in the films (css/film.css) the snow falls past the window -->
+  <g clip-path="url(#glass)"><g class="lf-fall">
+    <g id="flakes" fill="#f0f4fa"><circle cx="250" cy="34" r="1"/><circle cx="280" cy="44" r="1.2"/><circle cx="256" cy="70" r="1"/><circle cx="284" cy="68" r="1"/>
+      <circle cx="270" cy="104" r=".9"/><circle cx="246" cy="126" r="1.1"/><circle cx="286" cy="118" r=".8"/></g>
+    <use href="#flakes" y="-112"/>
+  </g></g>
   <path d="M232 16 C236 50 234 80 238 104 L244 104 C240 80 242 50 242 16Z M300 16 C296 50 298 80 294 104 L288 104 C292 80 290 50 290 16Z" fill="#140f16"/>
   <path d="M240 94 L292 94 L236 150 L170 150Z" fill="#8aa8d8" opacity=".1" filter="url(#soft)"/>
   <!-- lamplight -->

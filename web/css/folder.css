@@ -596,33 +596,9 @@ body:has(#modal.open, #title:not([hidden]), .reading) :is(.cf-new, .cf-new .cf-s
   color: var(--ink-red); font: 10px/15px var(--typed); letter-spacing: .06em; text-transform: uppercase; transform: rotate(-3deg);
   vertical-align: 1px; }
 
-/* Rules: a case briefing under an illustrated header, each section numbered in red, with samples of the board's own marks */
-.ruleshero { position: relative; height: 168px; margin: -14px -18px 16px; overflow: hidden; background: #0a0e18; }
-.ruleshero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
-.ruleshero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 25%, rgba(8,8,14,.88)); }
-.rh-text { position: absolute; left: 18px; right: 18px; bottom: 14px; z-index: 1; }
-.rh-text span { font: 12px var(--typed); letter-spacing: .16em; text-transform: uppercase; color: #c9a45c; }
-.rh-text h2 { margin: 2px 0 0; font: 700 30px/1.1 Cinzel, Georgia, serif; letter-spacing: .04em; color: #f6e3b0; text-shadow: 0 2px 6px rgba(0,0,0,.8); }
-.rh-stamp { position: absolute; top: 16px; right: 16px; z-index: 1; padding: 3px 9px; border: 4px double #e0473a; transform: rotate(9deg);
-  font: 700 14px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: #ff6a58; background: rgba(0,0,0,.25);
-  -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
-.brief h3 { display: flex; align-items: center; gap: 10px; margin-top: 26px; }
-.brief h3::after { content: ""; flex: 1; border-top: 1px dashed var(--line); }
-.brief h3 i { flex: none; display: grid; place-items: center; min-width: 28px; height: 28px; padding: 0 4px; border-radius: 14px;
-  background: var(--ink-red); color: #fff4e0; font: 700 12px/1 Cinzel, Georgia, serif; font-style: normal; letter-spacing: 0;
-  box-shadow: inset 0 -2px 0 rgba(0,0,0,.25); }
-.brief .lede { font-size: 17px; line-height: 1.45; }
-.brief .lede::first-letter { float: left; margin: 5px 8px 0 0; font: 700 48px/.8 Cinzel, Georgia, serif; color: var(--ink-red); }
-.brief .aside { font-size: 15px; color: var(--muted); }
-.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 16px 0 4px; }
-.glance .tile { padding: 10px 6px 8px; text-align: center; background: #fbf6ea; border-top: 3px solid #c9a45c;
-  box-shadow: 0 1px 3px rgba(0,0,0,.25); transform: rotate(-1deg); }
-.glance .tile:nth-child(even) { transform: rotate(1.2deg); }
-.glance .ti { display: block; margin-bottom: 3px; font: 20px/1 system-ui, sans-serif; color: #8a6a2a; }
-.glance b { display: block; font: 700 28px/1.1 Cinzel, Georgia, serif; color: var(--ink); }
-.glance b i { margin: 0 4px; font-style: normal; color: var(--muted); }
-.glance span { font: 11.5px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-/* the verdicts, as a ladder of medals: gold, silver, bronze, and a glass raised by the conspirators */
+/* The board's own marks, drawn small: the Rules tab's samples (css/rules.css has the rest of that tab) and How to play's
+   exhibits (howto.js) draw with them. The verdicts as a ladder of medals (.rankladder) are How to play's: gold, silver, bronze,
+   and a glass raised by the conspirators. Signs in the night (.signcard): a conspirator's trace on a small card of night sky. */
 .rankladder { display: grid; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
 .rankladder li { display: flex; align-items: center; gap: 12px; padding: 6px 12px 6px 6px; background: #fbf6ea; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
 .rankladder b { flex: none; display: grid; place-items: center; min-width: 64px; height: 34px; padding: 0 8px; border-radius: 17px;
@@ -632,57 +608,11 @@ body:has(#modal.open, #title:not([hidden]), .reading) :is(.cf-new, .cf-new .cf-s
 .rankladder .r1 b { background: linear-gradient(#f0f0ec, #a0a098); color: #2a2a28; }
 .rankladder .r2 b { background: linear-gradient(#e4ac7c, #94562a); }
 .rankladder .r3 b { background: linear-gradient(#b4404a, #5a0e14); }
-/* a day at Ravenhill: the hours along a strip of sky, from midnight blue through dawn and noon to dusk */
-.dayclock { position: relative; margin: 14px 0 6px; padding: 0 0 0 58px; list-style: none; }
-.dayclock::before { content: ""; position: absolute; left: 14px; top: 12px; bottom: 12px; width: 10px; border-radius: 5px;
-  background: linear-gradient(#141a36, #2c3566 16%, #c0706a 30%, #e8b860 44%, #f3dc92 62%, #d89a58 82%, #5a3a6a); box-shadow: inset 0 0 3px rgba(0,0,0,.45); }
-.dayclock li { position: relative; margin-bottom: 8px; padding: 8px 12px 9px; background: #fbf6ea; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
-.dayclock .medal { position: absolute; left: -57px; top: 50%; transform: translateY(-50%); }
-.dayclock .medal b { font: 900 20px/1 system-ui, sans-serif; -webkit-text-stroke: .04em currentColor; }
-.dayclock .clock { float: right; margin-left: 8px; font: 12px var(--typed); letter-spacing: .06em; color: var(--muted); }
-.dayclock h4 { margin: 0 0 2px; font: 14px var(--typed); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
-.dayclock p { margin: 0; font-size: 14.5px; line-height: 1.35; }
-/* the eight nights in two halves of four: their kinds over them, each night with its moon; the last one is the drawing room */
-.nightgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 12px 0; }
-.nightgrid + .nightgrid { margin-top: 18px; }
-.ng-kind { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 2px 2px 6px; text-align: center; border-bottom: 2px solid var(--line); }
-.ng-kind span { font: 19px/1 system-ui, sans-serif; }
-.ng-kind b { font: 11px/1.2 var(--typed); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
-.ng-night { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px 9px; text-align: center;
-  background: #fbf6ea; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
-.ng-night svg { width: 26px; height: 26px; }
-.ng-night .disc { fill: #2a2438; stroke: #6a5a40; stroke-width: .7; }
-.ng-night .lit { fill: #efe2b4; }
-.ng-night b { font: 700 15px/1 Cinzel, Georgia, serif; color: var(--ink); }
-.ng-night span { font-size: 13.5px; line-height: 1.2; }
-.ng-night em { font: normal 10.5px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: #6a4a14; }
-.ng-night.past { opacity: .62; }
-.ng-night.past::after { content: "✓"; position: absolute; top: 4px; right: 6px; font: 700 12px system-ui, sans-serif; color: var(--good); }
-.ng-night.now { background: #efd896; box-shadow: 0 0 0 2px #a8843e, 0 3px 8px rgba(0,0,0,.25); }
-.ng-night.last { background: linear-gradient(#2a2234, #16121c); color: #f3e6c4; }
-.ng-night.last b { color: #f6e3b0; }
-.ng-night.last svg { filter: drop-shadow(0 0 6px rgba(255,240,200,.75)); }
-.ng-night.last.now { box-shadow: 0 0 0 2px #e6c783, 0 3px 10px rgba(0,0,0,.4); }
-.showdown { position: relative; display: flex; align-items: flex-end; min-height: 172px; margin: 12px 0 4px; overflow: hidden; border-radius: 3px;
-  background: #16121c; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
-.showdown img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.showdown::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,6,8,.94) 0 42%, rgba(10,6,8,.25)); }
-.sd-text { position: relative; z-index: 1; max-width: 64%; padding: 14px 16px; color: #efe4c8; }
-.sd-text span { font: 11.5px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: #c9a45c; }
-.sd-text h4 { margin: 3px 0 5px; font: 700 22px Cinzel, Georgia, serif; color: #f6e3b0; }
-.sd-text p { margin: 0; font-size: 14.5px; line-height: 1.4; }
-/* signs in the night: this case's conspirators' traces, as small cards of night sky */
-.signgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
 .signcard { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 10px; align-items: center; padding: 9px 10px; border-radius: 3px;
   background: radial-gradient(ellipse at 20% 30%, #2e2a44, #16121e); box-shadow: 0 1px 3px rgba(0,0,0,.35); }
 .signcard .si { grid-row: 1 / span 2; font: 26px/1 system-ui, sans-serif; filter: drop-shadow(0 0 6px rgba(255,220,150,.5)); }
 .signcard b { font: 700 18px/1.1 var(--hand); color: #f6e3b0; }
 .signcard span { font: 11.5px var(--typed); letter-spacing: .08em; text-transform: uppercase; color: #b8a888; }
-.samples { display: grid; gap: 10px; }
-.sample { display: flex; align-items: center; gap: 14px; }
-.sample .visual { display: flex; flex: none; align-items: center; justify-content: center; gap: 8px; width: 108px; min-height: 52px; padding: 6px;
-  border-radius: 3px; background: linear-gradient(135deg, var(--cork), var(--cork-dark)); box-shadow: inset 0 0 12px rgba(0,0,0,.4); }
-.sample p { margin: 0; font-size: 15px; line-height: 1.35; }
 .smp-badge { display: inline-flex; flex-direction: column; padding: 1px 4px; border-radius: 2px; background: rgba(244,237,220,.94);
   font: 700 14px/1.15 system-ui, sans-serif; box-shadow: 0 1px 2px rgba(0,0,0,.4); }
 .smp-badge .s { color: var(--ink-green); }
@@ -708,31 +638,6 @@ body:has(#modal.open, #title:not([hidden]), .reading) :is(.cf-new, .cf-new .cf-s
 .smp-piles .g { color: #9e1b1b; }
 .smp-piles .u { color: #6a5a44; }
 .smp-piles .n { color: #2a6a3c; }
-.seating { display: flex; align-items: center; gap: 16px; }
-.seating p { margin: 0; font-size: 15px; line-height: 1.4; }
-.smp-seating { flex: none; width: 168px; height: 168px; }
-.smp-seating .table { fill: #6a4a2a; stroke: #3a2414; stroke-width: 2; }
-.smp-seating .seat circle { fill: #f4eddc; stroke: #8a6a44; stroke-width: 1; }
-.smp-seating .seat text { font: 7px var(--typed); fill: #3a2a14; text-anchor: middle; dominant-baseline: central; }
-.smp-seating .seat.me circle { fill: #e6c783; stroke: #6a4a14; stroke-width: 2; }
-.smp-seating .seat.hand circle { stroke: #7a4aa8; stroke-width: 2.2; }
-.smp-seating .hands { fill: none; stroke: #7a4aa8; stroke-width: 2.5; stroke-linecap: round; opacity: .7; }
-.smp-seating .look { fill: none; stroke: #8a6420; stroke-width: 2; stroke-dasharray: 3 2; }
-.smp-seating marker path { fill: #8a6420; }
-.houserules { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
-.house { display: flex; gap: 10px; padding: 10px 10px 10px 8px; background: #fbf6ea; border-left: 3px solid #c24a3a; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
-.house .icon { flex: none; width: 28px; text-align: center; font: 22px/1 system-ui, sans-serif; }
-.house b { font: 14px var(--typed); letter-spacing: .08em; text-transform: uppercase; }
-.house p { margin: 3px 0 0; font-size: 14.5px; line-height: 1.35; color: var(--muted); }
-@media (max-width: 700px) {
-  .seating { flex-direction: column; }
-  .ruleshero { height: 140px; }
-  .rh-text h2 { font-size: 24px; }
-  .ng-kind b { display: none; }  /* the kinds by their icons alone */
-  .ng-night span { font-size: 12.5px; }
-  .showdown::after { background: linear-gradient(rgba(10,6,8,.4), rgba(10,6,8,.94) 55%); }
-  .sd-text { max-width: none; padding-top: 70px; }
-}
 /* Events tab: the event cards under their groups (events.js GROUPS) */
 .evgroup + .evgroup { margin-top: 26px; }
 /* the kinds of night, explained in the role-step style (.role-steps), and each group's heading with its icon */

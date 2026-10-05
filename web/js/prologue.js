@@ -1,6 +1,6 @@
 // The prologue: a short illustrated film of how the case began (story.js), then how to play (the How to play film,
-// howto.js), Inspector Hollis's advice (the Advice film, tips.js) and last the case papers: the telegram, the guests
-// and the crimes. Four chapters, each opening with its title card and showing the chapter bar (chapters.js). Shown at
+// howto.js), a case in miniature (minisim.js), Inspector Hollis's advice (the Advice film, tips.js) and last the case
+// papers: the telegram, the guests and the crimes. Five chapters, each opening with its title card and showing the chapter bar (chapters.js). Shown at
 // the start of every case, and from the Story button.
 import { chapterBar, onChapter, showChapterCard, word } from "./chapters.js";
 import { playFilm, preloadArt } from "./film.js";
@@ -11,6 +11,7 @@ import { CRIME_STORY, OPENING } from "./story.js";
 import { $, ui } from "./state.js";
 import { load, store } from "./storage.js";
 import { showHowTo } from "./howto.js";
+import { showMiniCase } from "./minisim.js";
 import { showTips } from "./tips.js";
 
 // The film: [picture, where the camera slowly moves in, caption], the birthday night crime by crime (story.js)
@@ -79,14 +80,14 @@ export function maybeShowPrologue(done) {
   return true;
 }
 
-// Page n of the prologue: the film's scenes first, then How to play, the advice and the papers; `done` opens the case. Each chapter
+// Page n of the prologue: the film's scenes first, then How to play, the case in miniature, the advice and the papers; `done` opens the case. Each chapter
 // opens with its title card, but not when turning back into it.
 export function showPrologue(n = 0, done = finish, resume = false) {
   finish = done;
   const story = (from) => playFilm(SCENES, { from, done: () => lesson(), label: "The story", skip: "Skip to How to play", cls: "story", resume,
     bar: chapterBar(0) });
   if (n === 0 && !resume) {
-    showChapterCard(0, { promise: `How the case began, in ${word(SCENES.length)} scenes`, go: () => story(0), skip: "Skip to How to play", skipTo: () => lesson() });
+    showChapterCard(0, { promise: "How the case began", go: () => story(0), skip: "Skip to How to play", skipTo: () => lesson() });
   } else if (n < SCENES.length) story(n);
   else showPaper(n - SCENES.length);
 }
@@ -94,7 +95,7 @@ export function showPrologue(n = 0, done = finish, resume = false) {
 // The case papers, the last chapter: their title card, then the first page; after the last page, the case.
 const start = () => (ui.S?.history.length ? "Back to the case" : "Start the case");
 function papers() {
-  showChapterCard(3, { promise: "The telegram, the guests and the crimes", go: () => showPaper(0), back: () => advice(true),
+  showChapterCard(4, { promise: "The telegram, the guests and the crimes", go: () => showPaper(0), back: () => advice(true),
     skip: start(), skipTo: () => finish() });
 }
 
@@ -103,7 +104,7 @@ function showPaper(i) {
   const [html, label] = PAPERS[paper], next = paper === PAPERS.length - 1 ? `${start()} →` : label;
   const dots = PAPERS.map((_, j) => `<i class="${j === paper ? "on" : ""}"></i>`).join("");
   $("modal").innerHTML = `<div class="prologue paper" role="dialog" aria-modal="true" aria-label="Case briefing">
-    <div class="paper-chapters">${chapterBar(3)}<button class="ch-skip" id="paperSkip">${start()} ⏭</button></div>
+    <div class="paper-chapters">${chapterBar(4)}<button class="ch-skip" id="paperSkip">${start()} ⏭</button></div>
     ${html()}
     <div class="nav">
       <button class="btn" data-action="prologue-back">← Back</button>
@@ -115,15 +116,16 @@ function showPaper(i) {
   $("prologueNext").focus({ preventScroll: true });
 }
 
-// After the story, the lesson and then the advice, then the case papers; Back from the first scene of either returns
-// to what came before.
+// After the story, the lesson, the case in miniature and then the advice, then the case papers; Back from the first
+// scene of any returns to what came before.
 function lesson(last = false) {
-  showHowTo(() => advice(), { back: () => showPrologue(SCENES.length - 1, finish, true), last, chained: true });
+  showHowTo(() => mini(), { back: () => showPrologue(SCENES.length - 1, finish, true), last, chained: true });
 }
-const advice = (last = false) => showTips(papers, () => lesson(true), { chained: true, skip: "Skip to the case papers", last });
+const mini = (last = false) => showMiniCase(() => advice(), { back: () => lesson(true), last, chained: true });
+const advice = (last = false) => showTips(papers, () => mini(true), { chained: true, skip: "Skip to the case papers", last });
 
 // The chapter bar's jumps: to the start of any chapter, its title card first.
-onChapter((i) => [() => showPrologue(0), () => lesson(), () => advice(), papers][i]());
+onChapter((i) => [() => showPrologue(0), () => lesson(), () => mini(), () => advice(), papers][i]());
 
 // ← / → on the papers; turning back from the first one returns to the advice's last tip, and on from the last one
 // opens the case

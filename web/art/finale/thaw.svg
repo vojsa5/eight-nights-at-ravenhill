@@ -23,21 +23,83 @@
       <feGaussianBlur stdDeviation="2" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+    <!-- the parts that move are lit with these, each drawn like the blurred glow it stands for (a blur under a moving
+         part would be redrawn every frame) -->
+    <radialGradient id="halo">
+      <stop offset="0" stop-color="#ffd8a0" stop-opacity=".35"/>
+      <stop offset=".5" stop-color="#ffd8a0" stop-opacity=".345"/>
+      <stop offset=".6" stop-color="#ffd8a0" stop-opacity=".305"/>
+      <stop offset=".7" stop-color="#ffd8a0" stop-opacity=".186"/>
+      <stop offset=".8" stop-color="#ffd8a0" stop-opacity=".059"/>
+      <stop offset=".9" stop-color="#ffd8a0" stop-opacity=".008"/>
+      <stop offset="1" stop-color="#ffd8a0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sun">
+      <stop offset="0" stop-color="#fff0c8" stop-opacity="1"/>
+      <stop offset=".684" stop-color="#fff0c8" stop-opacity="1"/>
+      <stop offset=".685" stop-color="#fff0c8" stop-opacity=".47"/>
+      <stop offset=".737" stop-color="#fff0c8" stop-opacity=".283"/>
+      <stop offset=".789" stop-color="#fff0c8" stop-opacity=".142"/>
+      <stop offset=".842" stop-color="#fff0c8" stop-opacity=".058"/>
+      <stop offset=".895" stop-color="#fff0c8" stop-opacity=".019"/>
+      <stop offset="1" stop-color="#fff0c8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lamphalo">
+      <stop offset="0" stop-color="#ffd890" stop-opacity=".304"/>
+      <stop offset=".1" stop-color="#ffd890" stop-opacity=".288"/>
+      <stop offset=".2" stop-color="#ffd890" stop-opacity=".243"/>
+      <stop offset=".3" stop-color="#ffd890" stop-opacity=".182"/>
+      <stop offset=".4" stop-color="#ffd890" stop-opacity=".119"/>
+      <stop offset=".5" stop-color="#ffd890" stop-opacity=".067"/>
+      <stop offset=".6" stop-color="#ffd890" stop-opacity=".033"/>
+      <stop offset=".7" stop-color="#ffd890" stop-opacity=".013"/>
+      <stop offset=".8" stop-color="#ffd890" stop-opacity=".005"/>
+      <stop offset="1" stop-color="#ffd890" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lampcore">
+      <stop offset="0" stop-color="#fff4cc" stop-opacity="1"/>
+      <stop offset=".375" stop-color="#fff4cc" stop-opacity="1"/>
+      <stop offset=".376" stop-color="#fff4cc" stop-opacity=".384"/>
+      <stop offset=".479" stop-color="#fff4cc" stop-opacity=".224"/>
+      <stop offset=".583" stop-color="#fff4cc" stop-opacity=".109"/>
+      <stop offset=".688" stop-color="#fff4cc" stop-opacity=".044"/>
+      <stop offset=".792" stop-color="#fff4cc" stop-opacity=".014"/>
+      <stop offset="1" stop-color="#fff4cc" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="drop">
+      <stop offset="0" stop-color="#d8ecff" stop-opacity="1"/>
+      <stop offset=".26" stop-color="#d8ecff" stop-opacity="1"/>
+      <stop offset=".3" stop-color="#d8ecff" stop-opacity=".3"/>
+      <stop offset=".55" stop-color="#d8ecff" stop-opacity=".12"/>
+      <stop offset=".8" stop-color="#d8ecff" stop-opacity=".03"/>
+      <stop offset="1" stop-color="#d8ecff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="puff">
+      <stop offset="0" stop-color="#eef0f6" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#eef0f6" stop-opacity="0"/>
+    </radialGradient>
   </defs>
+  <!-- in the films (css/film.css): the sky and the far ridge are the far layer, the manor's eaves the near one; the sun
+       lifts clear of the ridge, the snow shrinks to the patches drawn here, the puddles shine, the motor car labours up
+       the drive with its radiator steaming, the lamp in the manor goes out (it is drawn out), and the icicles drip -->
+  <g class="lf-far">
   <rect width="360" height="200" fill="url(#bg)"/>
   <!-- the sun lifting over the moor -->
-  <circle cx="292" cy="100" r="60" fill="#ffd8a0" opacity=".35" filter="url(#soft)"/>
-  <circle cx="292" cy="100" r="13" fill="#fff0c8" filter="url(#glow)"/>
+  <g class="lf-rise">
+    <circle cx="292" cy="100" r="84" fill="url(#halo)"/>
+    <circle cx="292" cy="100" r="19" fill="url(#sun)"/>
+  </g>
+  <g data-fx="glow" data-at="292 96" data-r="64" data-tone="lamp"/>
   <!-- far ridge and near moor, snow going in patches -->
   <path d="M0 104 C50 94 100 100 150 96 C200 92 250 102 300 100 C330 99 350 96 360 98 V200 H0Z" fill="#2c2838"/>
+  </g>
   <path d="M0 118 C60 110 120 116 180 112 C240 108 300 116 360 112 V200 H0Z" fill="#171a26"/>
   <g fill="#b8c4d8" opacity=".6">
-    <path d="M40 124 C56 118 82 120 96 126 C80 130 56 130 40 124Z"/>
-    <path d="M110 140 C130 134 150 138 158 144 C140 148 120 146 110 140Z"/>
-    <path d="M280 124 C300 118 330 120 346 126 C326 130 300 130 280 124Z"/>
-    <path d="M296 150 C312 144 336 148 344 154 C326 158 306 156 296 150Z"/>
-    <path d="M60 170 C84 162 116 166 124 174 C100 178 76 178 60 170Z"/>
+    <path class="lf-melt" opacity=".5" d="M45.6 124.17 C58.4 119.97 79.2 121.37 90.4 125.57 C77.6 128.37 58.4 128.37 45.6 124.17Z"/>
+    <path class="lf-melt" opacity=".5" d="M114.8 140.47 C130.8 136.27 146.8 139.07 153.2 143.27 C138.8 146.07 122.8 144.67 114.8 140.47Z"/>
+    <path class="lf-melt" opacity=".5" d="M286.6 124.17 C302.6 119.97 326.6 121.37 339.4 125.57 C323.4 128.37 302.6 128.37 286.6 124.17Z"/>
+    <path class="lf-melt" opacity=".5" d="M300.8 150.47 C313.6 146.27 332.8 149.07 339.2 153.27 C324.8 156.07 308.8 154.67 300.8 150.47Z"/>
+    <path class="lf-melt" opacity=".5" d="M66.4 170.34 C85.6 164.74 111.2 167.54 117.6 173.14 C98.4 175.94 79.2 175.94 66.4 170.34Z"/>
   </g>
   <g fill="#7a8298" opacity=".45">
     <path d="M150 104 C164 101 180 102 188 104 C174 106 160 106 150 104Z"/>
@@ -48,12 +110,15 @@
   <path d="M262 106 C240 110 200 118 190 134 C178 152 150 176 118 200 M272 106 C260 112 250 122 248 134 C254 152 282 176 322 200" fill="none" stroke="#c8d0e2" stroke-opacity=".55" stroke-width="2.4"/>
   <path d="M252 116 C258 112 264 109 268 107" stroke="#f0b880" stroke-opacity=".4" stroke-width="2"/>
   <g fill="#e8a878" opacity=".45">
-    <ellipse cx="236" cy="160" rx="12" ry="2"/><ellipse cx="200" cy="178" rx="16" ry="2.4"/><ellipse cx="262" cy="188" rx="14" ry="2.2"/>
+    <ellipse class="lf-shimmer" cx="236" cy="160" rx="12" ry="2"/><ellipse class="lf-shimmer" style="--d:-1.4s" cx="200" cy="178" rx="16" ry="2.4"/>
+    <ellipse class="lf-shimmer" style="--d:-2.5s" cx="262" cy="188" rx="14" ry="2.2"/>
   </g>
   <!-- the motor car, coming on -->
+  <g class="lf-approach" style="transform-box:view-box;transform-origin:218px 137px">
   <g transform="translate(218 136)">
-    <path d="M-12 -14 L-44 64 L-4 64Z M12 -14 L44 64 L4 64Z" fill="url(#beam)"/>
+    <path class="lf-hum" d="M-12 -14 L-44 64 L-4 64Z M12 -14 L44 64 L4 64Z" fill="url(#beam)"/>
     <ellipse cx="0" cy="1" rx="30" ry="3" fill="#07080c" opacity=".7"/>
+    <g class="lf-chug">
     <rect x="-25" y="-14" width="7" height="15" rx="3" fill="#07080c"/>
     <rect x="18" y="-14" width="7" height="15" rx="3" fill="#07080c"/>
     <path d="M-29 -7 C-29 -18 -14 -18 -14 -7Z M29 -7 C29 -18 14 -18 14 -7Z" fill="#0e1018"/>
@@ -66,14 +131,25 @@
     <rect x="-1.5" y="-27" width="3" height="3" fill="#c8b898"/>
     <rect x="-20" y="-6" width="40" height="2.4" fill="#8a8070"/>
     <path d="M-11 -10 V-14 M11 -10 V-14" stroke="#10131c" stroke-width="1.4"/>
-    <circle cx="-11" cy="-15" r="12" fill="#ffd890" opacity=".45" filter="url(#soft)"/>
-    <circle cx="11" cy="-15" r="12" fill="#ffd890" opacity=".45" filter="url(#soft)"/>
-    <circle cx="-11" cy="-15" r="3.6" fill="#fff4cc" filter="url(#glow)"/>
-    <circle cx="11" cy="-15" r="3.6" fill="#fff4cc" filter="url(#glow)"/>
+    <circle cx="-11" cy="-15" r="36" fill="url(#lamphalo)"/>
+    <circle cx="11" cy="-15" r="36" fill="url(#lamphalo)"/>
+    <circle cx="-11" cy="-15" r="9.6" fill="url(#lampcore)"/>
+    <circle cx="11" cy="-15" r="9.6" fill="url(#lampcore)"/>
+    <!-- the radiator steaming on the climb -->
+    <g fill="url(#puff)">
+      <circle class="lf-puff" cx="0" cy="-30" r="3" opacity="0"/><circle class="lf-puff" style="--d:-.8s" cx="-1" cy="-30" r="3" opacity="0"/>
+      <circle class="lf-puff" style="--d:-1.6s" cx="1" cy="-30" r="3" opacity="0"/>
+    </g>
+    </g>
+  </g>
   </g>
   <!-- the manor's corner, eaves and dripping icicles -->
+  <g class="lf-near">
   <rect x="0" y="26" width="24" height="174" fill="#0a0b12"/>
-  <rect x="6" y="70" width="12" height="30" fill="#ffb050" opacity=".55" filter="url(#glow)"/>
+  <g class="lf-douse" fill="#ffb050" opacity=".1">
+    <rect x="3" y="67" width="18" height="36" rx="4" opacity=".1"/><rect x="4.5" y="68.5" width="15" height="33" rx="2.5" opacity=".18"/>
+    <rect x="6" y="70" width="12" height="30" opacity=".72"/>
+  </g>
   <path d="M0 0 H158 L146 22 H0Z" fill="#07080c"/>
   <rect x="0" y="22" width="148" height="4" fill="#12141c"/>
   <path d="M146 22 L158 0" stroke="#e8a878" stroke-opacity=".35" stroke-width="1.2"/>
@@ -82,9 +158,12 @@
     <path d="M66 26 L68 40 L70 26Z"/><path d="M78 26 L81 52 L84 26Z"/><path d="M92 26 L94 36 L96 26Z"/>
     <path d="M104 26 L107 48 L110 26Z"/><path d="M118 26 L120 40 L122 26Z"/><path d="M130 26 L132.5 46 L135 26Z"/>
   </g>
-  <g fill="#d8ecff" filter="url(#glow)">
-    <ellipse cx="55.5" cy="66" rx="1.1" ry="1.8"/><ellipse cx="81" cy="62" rx="1" ry="1.6"/><ellipse cx="107" cy="58" rx="1" ry="1.6"/>
-    <ellipse cx="31" cy="60" rx="1" ry="1.6"/><ellipse cx="81" cy="80" rx="1" ry="1.6"/><ellipse cx="132.5" cy="60" rx="1" ry="1.6"/>
+  <!-- a drop at the tip of each long icicle: it swells, falls, and the next one comes -->
+  <g fill="url(#drop)">
+    <ellipse class="lf-drip" style="--d:-.4s" cx="55.5" cy="59" rx="4.2" ry="6.9"/><ellipse class="lf-drip" style="--d:-2.3s" cx="81" cy="53" rx="3.8" ry="6.1"/>
+    <ellipse class="lf-drip" style="--d:-1.5s" cx="107" cy="49" rx="3.8" ry="6.1"/><ellipse class="lf-drip" style="--d:-3.1s" cx="31" cy="51" rx="3.8" ry="6.1"/>
+    <ellipse class="lf-drip" style="--d:-.9s" cx="132.5" cy="47" rx="3.8" ry="6.1"/><ellipse class="lf-drip" style="--d:-2.7s" cx="68" cy="41" rx="3.5" ry="5.4"/>
+  </g>
   </g>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

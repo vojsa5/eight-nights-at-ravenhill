@@ -21,21 +21,43 @@
       <feGaussianBlur stdDeviation="2" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="blur"><feGaussianBlur stdDeviation="1"/></filter>
+    <!-- a near flake, drawn soft rather than blurred: it moves -->
+    <radialGradient id="flake">
+      <stop offset="0" stop-color="#eef3fa" stop-opacity=".966"/>
+      <stop offset=".125" stop-color="#eef3fa" stop-opacity=".936"/>
+      <stop offset=".25" stop-color="#eef3fa" stop-opacity=".824"/>
+      <stop offset=".375" stop-color="#eef3fa" stop-opacity=".61"/>
+      <stop offset=".5" stop-color="#eef3fa" stop-opacity=".348"/>
+      <stop offset=".625" stop-color="#eef3fa" stop-opacity=".143"/>
+      <stop offset=".75" stop-color="#eef3fa" stop-opacity=".04"/>
+      <stop offset=".875" stop-color="#eef3fa" stop-opacity=".007"/>
+      <stop offset="1" stop-color="#eef3fa" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="glass"><rect x="88" y="4" width="184" height="102"/></clipPath>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
   <!-- the dark window and the snow -->
   <rect x="80" y="0" width="200" height="110" fill="#0c0908"/>
   <rect x="88" y="4" width="184" height="102" fill="url(#night)"/>
-  <g fill="#eef3fa">
+  <!-- in the films (css/film.css) the snow falls past the window, the near flakes faster (each fall has a copy of
+       itself above the window, so that it can go round) -->
+  <g clip-path="url(#glass)">
+  <g class="lf-fall">
+  <g id="flakes" fill="#eef3fa">
     <circle cx="100" cy="16" r="1.4"/><circle cx="122" cy="38" r="1.1"/><circle cx="140" cy="14" r="1.6"/><circle cx="160" cy="32" r="1.2"/>
     <circle cx="108" cy="66" r="1.5"/><circle cx="132" cy="80" r="1.1"/><circle cx="154" cy="64" r="1.4"/><circle cx="166" cy="86" r="1.2"/>
     <circle cx="202" cy="20" r="1.3"/><circle cx="224" cy="40" r="1.6"/><circle cx="246" cy="16" r="1.1"/><circle cx="262" cy="36" r="1.4"/>
     <circle cx="196" cy="72" r="1.2"/><circle cx="218" cy="88" r="1.5"/><circle cx="240" cy="68" r="1.1"/><circle cx="258" cy="84" r="1.3"/>
     <circle cx="116" cy="94" r="1"/><circle cx="210" cy="54" r="1"/><circle cx="150" cy="46" r="1"/><circle cx="234" cy="96" r="1"/>
   </g>
-  <g fill="#eef3fa" opacity=".7" filter="url(#blur)">
-    <circle cx="128" cy="24" r="2.6"/><circle cx="252" cy="56" r="2.8"/><circle cx="172" cy="98" r="2.4"/><circle cx="98" cy="46" r="2.2"/>
+  <use href="#flakes" y="-112"/>
+  </g>
+  <g class="lf-fall fast">
+  <g id="near" fill="url(#flake)" opacity=".7">
+    <circle cx="128" cy="24" r="5.6"/><circle cx="252" cy="56" r="6"/><circle cx="172" cy="98" r="5.2"/><circle cx="98" cy="46" r="4.7"/>
+  </g>
+  <use href="#near" y="-112"/>
+  </g>
   </g>
   <path d="M88 94 C110 86 140 90 180 84 C220 88 250 82 272 88 L272 106 L88 106Z" fill="#dfe6f2" opacity=".6"/>
   <path d="M180 4 L180 106 M88 54 L272 54" stroke="#0c0908" stroke-width="5"/>

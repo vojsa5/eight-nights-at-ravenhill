@@ -5,7 +5,7 @@ import { ui } from "./state.js";
 // name -> [icon, scene in art/events/, line of atmosphere, what it means for you, one-line reminder]
 export const EVENTS = {
   "First Impressions": ["🤝", "first-impressions", "The guests arrive at Ravenhill and are shown to their seats at the long table.",
-    "Everyone has sized up the guest in the previous seat and knows whether they look innocent or guilty (#5 knows about #4, #0 about #15). Tonight's advice already carries that knowledge.", "Everyone knows whether the previous seat looks innocent or guilty."],
+    "Everyone has sized up one other guest, picked at random, and knows whether they look innocent or guilty. Tonight's advice already carries that knowledge.", "Everyone knows whether one random guest looks innocent or guilty."],
   Blackout: ["🕯", "blackout", "A storm takes the lights. Somewhere in the dark, a candle gutters and dies.",
     "Nobody could investigate last night. Today's advice rests only on what the guests already knew, so anyone who suddenly changes their mind deserves a second look.", "Nobody could investigate last night."],
   "Dinner Party": ["🍷", "dinner-party", "Silver, candles and too much claret. Nobody wants to spoil the evening with an accusation.",
@@ -74,21 +74,16 @@ export function nightKindHtml(event, meaning) {
     <span class="ev-kind-name">${g.name}</span></div><p class="ev-kind-text"><span class="ev-lead">${lead}</span>${rest}</p>${figure}</div>`;
 }
 
-// A place card at the table, and a look along it: a dotted line from one seat to the one before, an eye on top.
+// A place card at the table, and a look along it: a dotted line from one seat to another, an eye on top.
 const seatHtml = (n, cls) => `<span class="ev-seat ${cls}">#${n}</span>`;
 const GLANCE = `<svg class="ev-glance" viewBox="0 0 94 24" aria-hidden="true"><path class="ev-arc" d="M74 22C70 4 24 4 20 20"/>
   <path class="ev-head" d="M18.6 15.2 20 20 23.5 16.4"/><g class="ev-eye" transform="translate(47 8)"><path d="M-8 0Q0-6 8 0Q0 6-8 0Z"/><circle r="2.3"/></g></svg>`;
 const HANDS = `<svg class="ev-hands" viewBox="0 0 150 24" aria-hidden="true"><path d="M72 22C68 6 23 6 19 22M78 22C82 6 127 6 131 22"/>
   <circle cx="45.5" cy="10" r="2.8"/><circle cx="104.5" cy="10" r="2.8"/></svg>`;
 const FIGURES = {
-  // each guest looks at the previous seat: the seats the example names, in pairs ("#5 knows about #4, #0 about #15")
-  "First Impressions": (example) => {
-    const n = (example || "").match(/\d+/g) || [];
-    if (n.length < 4) return "";
-    const pair = (who, seen) => `<span class="ev-pair">${GLANCE}${seatHtml(seen, "seen")}${seatHtml(who, "who")}</span>`;
-    return `<figure class="ev-fig"><div class="ev-table" aria-hidden="true">${pair(n[0], n[1])}<span class="ev-more">···</span>${pair(n[2], n[3])}</div>
-      <figcaption>${example}</figcaption></figure>`;
-  },
+  // each guest looks at one other guest, wherever they sit
+  "First Impressions": () => `<figure class="ev-fig"><div class="ev-table" aria-hidden="true"><span class="ev-pair">${GLANCE}${seatHtml("?", "seen")}
+    ${seatHtml(5, "who")}</span></div><figcaption>#5 knows about one guest, picked at random</figcaption></figure>`,
   // everyone holds the hands of the guests on either side
   "Séance": () => `<figure class="ev-fig" aria-hidden="true"><div class="ev-table"><span class="ev-trio">${HANDS}${seatHtml(4, "seen")}
     ${seatHtml(5, "who")}${seatHtml(6, "seen")}</span></div></figure>`,

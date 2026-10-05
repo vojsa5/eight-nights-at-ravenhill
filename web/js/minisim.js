@@ -1,7 +1,9 @@
-// A case in miniature (How to play, howto.js): five anonymous guests on one small board, played by itself over five
-// scenes: the morning's testimony, a clear, the search, an arrest, then a mistake. Each scene draws the board as the
-// last one left it and animates its own step, timed to the scene's length (minisim.css).
-import { sceneMs } from "./film.js";
+// A case in miniature, the chapter after How to play: five anonymous guests on one small board, played by itself: the
+// morning's testimony, a clear, the search, an arrest, a mistake, then what it all shows. Each scene draws the board as
+// the last one left it and animates its own step, timed to the scene's length (minisim.css).
+import { chapterBar, showChapterCard } from "./chapters.js";
+import { playFilm, sceneMs } from "./film.js";
+import { exhibit } from "./howto.js";
 import { portrait } from "./portrait.js";
 
 const NAMES = "ABCDE";
@@ -10,9 +12,9 @@ const ROLES = ["Sleuth", "Forger"];                            // A and B, the t
 // [from, to, "s" clear | "e" arrest]: A, the Sleuth, tells the truth; B, the Forger, lies; C, guilty, tells the truth to
 // look honest; D and E, innocent, believe what they say
 const ADVICE = [[0, 4, "s"], [0, 1, "e"], [1, 3, "s"], [1, 0, "e"], [2, 0, "s"], [2, 1, "e"], [3, 2, "s"], [3, 4, "e"], [4, 0, "s"], [4, 3, "e"]];
-const SCORES = ["0 of 0", "0 of 0", "1 of 1", "2 of 2", "2 of 3"];
-const PICKS = [null, 0, null, 1, 2];     // whom each step clears or arrests
-const REVEALS = [null, null, 0, 1, null];  // whose search is a right call, +1
+const SCORES = ["0 of 0", "0 of 0", "1 of 1", "2 of 2", "2 of 3", "2 of 3"];
+const PICKS = [null, 0, null, 1, 2, null];     // whom each step clears or arrests
+const REVEALS = [null, null, 0, 1, null, null];  // whose search is a right call, +1
 
 // a string from one photograph to another, bowed to its left so that the two strings of a pair never overlap
 function stringPath([f, t]) {
@@ -24,7 +26,7 @@ const d = (s) => `--d:${s.toFixed(2)}s`;
 const now = (t) => (t === undefined ? "" : " now");
 const at = (t) => (t === undefined ? "" : d(t));
 
-// The board after `step` (0 testimony … 4 the mistake), animating what that step does: `t` maps each change to the
+// The board after `step` (0 testimony … 4 the mistake, 5 the board as it ends), animating what that step does: `t` maps each change to the
 // second it happens at in the scene.
 function board(step, t) {
   const strings = ADVICE.map((a, i) => {
@@ -60,7 +62,7 @@ function board(step, t) {
       const when = stamped[1] === step ? t.stamp : undefined;
       parts.push(`<span class="stamp ${g === 1 ? "arrested" : "cleared"}${now(when)}" style="${at(when)}">${g === 1 ? "Arrested" : "Cleared"}</span>`);
     }
-    if (g === 2 && step === 4) parts.push(`<span class="ms-sealed now" style="${d(t.seal)}"><b>Guilty</b><span>role sealed</span></span>`);
+    if (g === 2 && step >= 4) parts.push(`<span class="ms-sealed${now(t.seal)}" style="${at(t.seal)}"><b>Guilty</b><span>role sealed</span></span>`);
     if (t.plus !== undefined && g === REVEALS[step]) parts.push(`<span class="ms-plus now" style="${d(t.plus)}">+1</span>`);
     return `<span class="ms-card${cls.length ? " " + cls.join(" ") : ""}" style="${style}">${parts.join("")}</span>`;
   }).join("");
@@ -71,7 +73,7 @@ function board(step, t) {
   const score = t.tick === undefined ? `<b>${SCORES[step]}</b>`
     : `<span class="ms-tick"><b class="was now" style="${d(t.tick)}">${SCORES[step - 1]}</b><b class="is now" style="${d(t.tick)}">${SCORES[step]}</b></span>`;
   return `<div class="ms-board"><svg class="ms-strings" viewBox="0 0 100 80" aria-hidden="true">${strings}</svg>${cards}${hand}</div>
-    <div class="ms-foot"><span>${step === 4 ? "Day II" : "Day I"}</span><span>Score ${score}</span></div>`;
+    <div class="ms-foot"><span>${step >= 4 ? "Day II" : "Day I"}</span><span>Score ${score}</span></div>`;
 }
 
 // Each step's moments, in seconds into a scene of `s` seconds.
@@ -84,11 +86,12 @@ function timeline(step, s) {
   if (step === 1) return { pick: 1.9, stamp: 2.5 };
   if (step === 2) return { turn: 1.2, plus: 2.3, tick: 2.5, lit: 3.6, ok: 4.6, sus: 5.2 };
   if (step === 3) return { pick: 1.9, stamp: 2.5, turn: 3.6, plus: 4.7, tick: 4.9, lie: Math.min(6.2, s - 3) };
-  return { pick: 1.9, stamp: 2.5, seal: 4.2, tick: 4.6 };
+  if (step === 4) return { pick: 1.9, stamp: 2.5, seal: 4.2, tick: 4.6 };
+  return {};
 }
 
 const CAPTIONS = [
-  ["A case in miniature", `Watch a small case play itself: five guests, two of them guilty. In the morning each one tells you whom
+  ["The morning", `Watch a small case play itself: five guests, two of them guilty. In the morning each one tells you whom
     to clear and whom to arrest, and the strings go up: green for clear, red for arrest. The counts add them up.`],
   ["Clear one", `Each day you clear one guest. A has the most voices for them, so A is cleared: +1 if A is innocent. The
     cleared wait in the morning room and testify no more.`],
@@ -98,16 +101,28 @@ const CAPTIONS = [
     to the wine cellar and testify no more. B was the Forger, so every string B pinned up was a lie.`],
   ["A mistake", `Next day you clear C, whom nobody accused. But C was guilty: the guilty tell the truth when it suits them. After a
     mistake you learn only their side, the role stays sealed until the thaw, and no point: 2 of 3.`],
+  ["What it shows", `A right call tells you whom to trust: the Sleuth's strings were true, so E is innocent, and the Forger's
+    were lies. A guest nobody accuses is not safe for that: C was guilty. The real case is bigger, but every day works the same way.`],
 ];
 const PICTURES = [["events/interview", "50% 50%"], ["verdict/clear", "50% 55%"], ["search/room", "50% 55%"],
-  ["verdict/arrest", "50% 55%"], ["verdict/door", "50% 50%"]];
+  ["verdict/arrest", "50% 55%"], ["verdict/door", "50% 50%"], ["finale/summation", "50% 50%"]];
 
-// The five scenes, as howto.js's [picture, focus, caption, exhibit]; `exhibit(html, cls)` pins the board up as one
-// of How to play's exhibits.
-export function miniCase(exhibit) {
+// The scenes, as How to play's [picture, focus, caption, exhibit], the board pinned up as an exhibit.
+function miniCase() {
   return CAPTIONS.map(([heading, text], step) => {
     const caption = `<span class="film-title">${heading}</span>${text}`;
     const html = board(step, timeline(step, sceneMs(caption) / 1000));
-    return [...PICTURES[step], caption, exhibit(html, `minisim${step ? " cont" : ""}`)];
+    return [...PICTURES[step], caption, exhibit(0, html, `minisim${step ? " cont" : ""}`)];
   });
+}
+
+// `done` runs after the last scene, or on Skip; `back`, if given, is where Back from the first scene goes, and `last`
+// starts on the last scene (coming back from what follows), without the chapter's title card; `chained` when it is the
+// third of the prologue's chapters (chapters.js), which go on to the advice.
+export function showMiniCase(done, { back, last = false, chained = false } = {}) {
+  const list = miniCase(), skip = chained ? "Skip to the advice" : "Close the mini case";
+  const play = () => playFilm(list, { from: last ? list.length - 1 : 0, done, back, label: "A case in miniature", skip, cls: "howto",
+    bar: chapterBar(2, !chained) });
+  if (last) play();
+  else showChapterCard(2, { promise: "A small case that plays itself", go: play, back, skip, skipTo: done, alone: !chained });
 }

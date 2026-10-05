@@ -17,7 +17,7 @@ export const ROLES = {
   Photographer: ["good", { night: "Learns whether two guests are on the same side.", day: "Honest: clears whoever they trust most, arrests whoever they suspect most." },
     "The camera never lies. Mostly."],
   Confidant: ["good", { start: "Spent the whole night of the murder with the other Confidant, so knows who they are, and that they are innocent.",
-    day: "Vouches for that alibi: always advises clearing the other Confidant, and never arresting them. Otherwise honest." },
+    day: "Vouches for that alibi: advises clearing the other Confidant, and never arresting them. Otherwise honest. A bribed or hypnotised Confidant says what they must, though." },
     "One long game of chess, one alibi for two."],
   Colonel: ["good", { day: "Repays yesterday's favours and slights: advises clearing whoever advised clearing them, and arresting whoever advised arresting them. With nothing to repay, honest." },
     "A gentleman never forgets a debt, or an insult."],
@@ -37,7 +37,7 @@ export const ROLES = {
     "Does the heavy lifting and asks no questions."],
   Eavesdropper: ["bad", { night: "Listens at the door of whoever's advice has looked most reliable, and learns whatever they learned that night, even a forged result.", day: "Lies to save their own skin: accuses whoever looks innocent, above all their own accusers, and clears any guest they know to be guilty." },
     "Every keyhole tells a story."],
-  Lover: ["bad", { start: "Knows who the other Lover is.", night: "Checks one guest: guilty or not? The two Lovers tell each other everything they learn.", day: "Lies like any guilty guest, but never names the other Lover, to clear or to arrest. On a day with both tips, the two Lovers always share at least one." },
+  Lover: ["bad", { start: "Knows who the other Lover is.", night: "Checks one guest: guilty or not? The two Lovers tell each other everything they learn and agree on what to say in the morning.", day: "Lies like any guilty guest, but never names the other Lover, to clear or to arrest. On a day with both tips, the two Lovers share at least one. A bribed or hypnotised Lover says what they must, though." },
     "A secret affair is the best alibi."],
   Paymaster: ["bad", { night: "From night II, bribes one guest: whoever accused the Paymaster the day before, otherwise whoever looks most reliable.", day: "Lies. And the guest they bribed advises clearing the Paymaster next morning." },
     "Every man has his price. Most come cheap."],
@@ -67,7 +67,7 @@ export const ROLES = {
 // in the ending; story.js tells each one at length.
 export const CRIMES = {
   Lover: "Poisoned Lord Edmund's nightcap with the other Lover, and of all that night's crimes only theirs killed him: one tipped the vial into the brandy at the library door while the other kept watch. He had found them out, and each swears the other was at their side all evening.",
-  Eavesdropper: "Learnt the combination of Lord Edmund's safe by listening at the library door, and slipped away from the birthday dinner to burn the letter to Scotland Yard that named them, still sealed.",
+  Eavesdropper: "Learnt the combination of Lord Edmund's safe by listening at the library door, and slipped away from the birthday dinner to burn the letter to Scotland Yard that named them, still sealed, and to empty his purse of gold sovereigns.",
   Paymaster: "Owed Lord Edmund more than they could ever repay. On the birthday night they paid the footman fifty pounds to look the other way at the study door, and cut from Lord Edmund's ledger every page of their debts.",
   Copycat: "Telephoned Lord Edmund's solicitor on the birthday night and, in Lord Edmund's own voice, called off Monday's signing of the new will.",
   Grifter: "Swindled Lord Edmund out of a fortune with shares in the Matabele Reef Gold Company, a Rhodesian mine that does not exist, and over the birthday port sold him ten thousand pounds' worth more.",

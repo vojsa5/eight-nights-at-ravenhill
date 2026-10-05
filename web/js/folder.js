@@ -403,106 +403,113 @@ function eventCard(name, [icon, scene, mood, meaning], state, stamp, group) {
     <div class="evtext"><h3>${name}${plannedEventHtml(name)}</h3><p class="mood">${mood}</p>${groupStepsHtml([[group, meaning]])}</div></article>`;
 }
 
-// The Rules tab: the case's standing orders, told with this case where it can (its nights, its culprits'
-// signs). The samples reuse the board's own looks (board.css, board.js noteSvg).
+// The Rules tab: the case's standing orders, told with this case where it can (its nights, its culprits' signs). A
+// contents card leads to a section per subject, each with a small picture drawn with the board's own marks (board.css,
+// board.js noteSvg). Styles in css/rules.css; the tab's tour (tours.js RULES) points at its parts.
 function rulesHtml() {
   const S = ui.S;
   const n = S.roster.length, good = S.roster.filter((r) => ROLES[r][0] === "good").length, decisions = 2 * S.rounds;
-  const h3 = (num, text) => `<h3><i>${ROMAN[num]}</i>${text}</h3>`;
-  const tile = (icon, num, label) => `<div class="tile"><span class="ti">${icon}</span><b>${num}</b><span>${label}</span></div>`;
-  const hour = (time, icon, name, text) => `<li><span class="medal">${icon}</span><div><span class="clock">${time}</span><h4>${name}</h4><p>${text}</p></div></li>`;
-  const sample = (visual, text) => `<div class="sample"><div class="visual">${visual}</div><p>${text}</p></div>`;
-  const house = (icon, name, text) => `<div class="house"><span class="icon">${icon}</span><div><b>${name}</b><p>${text}</p></div></div>`;
-  const pins = ["", "good", "bad"].map((c) => `<span class="smp-pin ${c}"></span>`).join("");
-  const notes = [1, 2].map((m) => `<span class="smp-polaroid"><span class="scrawl">${noteSvg(m)}</span></span>`).join("");
-  const signs = [...new Set(S.roster)].filter((r) => TRACES[r])
-    .map((r) => `<div class="signcard"><span class="si">${TRACES[r][0]}</span><b>${TRACES[r][2]}</b><span>${title(r)}</span></div>`).join("");
+  const traced = [...new Set(S.roster)].filter((r) => TRACES[r]);
+  const parts = [
+    ["verdict", "The verdict on you", "a point for every right call", verdictHtml(decisions)],
+    ["day", "A day at Ravenhill", "from the night's work to your two calls", dayHtml()],
+    ["nights", "The eight nights", "the same in every case", nightsHtml()],
+    traced.length && ["signs", "Signs in the night", "what a sign that stops tells you", signsHtml(traced)],
+    ["board", "Reading the board", "the marks on the photographs", boardHtml()],
+    ["seating", "The seating", "who holds whose hand", seatingHtml()],
+    ["house", "House rules", "pairs, grudges, sealed roles, clues", houseHtml()],
+  ].filter(Boolean);
+  const tile = (icon, num, label, i) => `<div class="tile" style="--i:${i}"><span class="ti">${icon}</span><b>${num}</b><span>${label}</span></div>`;
+  const contents = parts.map(([id, head, gist], i) => `<li><a href="#rules-${id}" style="--i:${i}"><i>${ROMAN[i + 1]}</i><b>${head}</b>
+    <small>${gist}</small></a></li>`).join("");
+  const sections = parts.map(([id, head, , html], i) => `<section class="rsec" id="rules-${id}"><div class="rs-head"><h3><i>${ROMAN[i + 1]}</i>${head}</h3>
+    <a class="rs-up" href="#rules-contents" title="Back to the contents" aria-label="Back to the contents">↑</a></div>${html}</section>`).join("");
   return `<div class="rules brief">
     <div class="ruleshero"><img src="art/story/manor.svg" alt=""><div class="rh-text"><span>Case no. 1924/17 · Standing orders</span>
       <h2>The rules of Ravenhill</h2></div><b class="rh-stamp">Scotland Yard</b></div>
-    <p class="lede">Lord Edmund Ravenhill lies dead in his library, and the snow has closed the roads. ${n} guests remain in the house:
-    ${good} are innocent, and each of the other ${n - good} did him a wrong on his birthday night, for reasons of their own: two secret
-    lovers poisoned him, and the rest robbed, cheated or betrayed him without knowing what the others were about. Now each of the
-    guilty lies to save their own skin, and covers for any other culprit they find out. Before the thaw, clear the innocent and
-    arrest the guilty.</p>
-    <div class="glance">${tile("👥", n, "guests")}${tile("⚖", `${good}<i>·</i>${n - good}`, "innocent · guilty")}${tile("🌙", S.rounds, "nights")}${tile("★", decisions, "best score")}</div>
-
-    ${h3(1, "The verdict on you")}
-    <p>Every night you clear one guest and arrest one: ${decisions} decisions, and a point for each one you get right.
-    When the thaw comes, the Yard reads your score.</p>
-    ${ranksHtml(decisions)}
-
-    ${h3(2, "A day at Ravenhill")}
-    <ol class="dayclock">
-      ${hour("00:00", "🌙", "Night", "The guests investigate in secret, and the guilty go about their work.")}
-      ${hour("06:30", "🌅", "Dawn", "The house wakes to the signs of the night, and after nights II and III a clue of your own.")}
-      ${hour("09:00", "🗣", "Testimony", "Every guest still in the house names one guest to clear and one to arrest. The guilty lie.")}
-      ${hour("12:00", '<b class="ok">✓</b>', "Clear", "Send one guest to the morning room: +1 if they are innocent.")}
-      ${hour("15:00", '<b class="no">✕</b>', "Arrest", "Send one guest to the wine cellar: +1 if they are guilty.")}
-      ${hour("18:00", "🔍", "The search", "Their rooms are searched. A right call reveals the guest's role; a wrong one only their side, and the role stays sealed until the case is closed. Either way, they give no more testimony.")}
-    </ol>
-
-    ${h3(3, "The eight nights")}
-    <p>The nights come in two halves and run the same in every case. Each half opens with the guests learning something and ends
-    with the house going quiet; in between, the first half brings you two clues of your own and the second changes the testimony twice.</p>
-    ${nightGridHtml()}
-    <div class="showdown"><img src="art/finale/drawing-room.svg" alt=""><div class="sd-text"><span>Night ${ROMAN[S.rounds]} · the last night</span>
-      <h4>${LAST_NIGHT[0]} The drawing room</h4><p>Two guests remain, and nobody advises any more. ${LAST_NIGHT[3]}</p></div></div>
-
-    ${signs ? `${h3(4, "Signs in the night")}
-    <p>Every morning's card says what the night left behind. A sign shows while its culprit is in the house and stops once
-    they are gone, so when one stops, its culprit was among the guests you just sent away. A Blackout hides them all.</p>
-    <div class="signgrid">${signs}</div>` : ""}
-
-    ${h3(signs ? 5 : 4, "Reading the board")}
-    <div class="samples">
-      ${sample('<span class="smp-badge"><span class="s"><i>✓</i>3</span><span class="e"><i>✕</i>1</span></span>',
-        "Today's testimony about a guest: how many advise clearing them, and how many arresting.")}
-      ${sample(`<svg class="smp-strings" viewBox="0 0 92 40" aria-hidden="true"><path class="out e" d="M6 8 Q46 30 86 8"/>
-        <path class="out s" d="M6 20 Q46 40 86 20"/><path class="in e" d="M6 32 Q46 46 86 32"/></svg>`,
-        "Point at a photograph for its strings: solid for that guest's own advice, dashed for advice about them. Red means arrest, green clear.")}
-      ${sample(pins, "Pins: gold while a guest is in the house, green once they are known to be innocent, red once known to be guilty.")}
-      ${sample(notes, "Your notes: click the small circle on a photograph to mark the guest guilty, then innocent, then unsure again.")}
-      ${sample('<span class="smp-piles"><i class="g">3</i><i class="u">9</i><i class="n">2</i></span>',
-        "The Theory tab sorts your notes into piles and counts how many of the guilty are still hidden.")}
-      ${sample('<span class="smp-polaroid guess"><span>Lover?</span></span>', "Guess a guest's role in the Theory tab, and it is pencilled on their photograph.")}
-    </div>
-
-    ${h3(signs ? 6 : 5, "The seating")}
-    <div class="seating">${seatingSvg()}<p>The guests sit in a circle, numbered clockwise from the top. On the first night everyone
-    sizes up the guest in the previous seat (#5 knows about #4), and at a Séance everyone holds hands with both neighbours (#4 and #6).
-    As guests leave, their neighbours close up.</p></div>
-
-    ${h3(signs ? 7 : 6, "House rules")}
-    <div class="houserules">
-      ${house("👥", "Pairs", "The Confidants spent the whole night of the murder together, so each knows the other is innocent, and they always vouch for each other. The Lovers know each other too: they never name each other, and on a day with both tips they always share at least one.")}
-      ${house("😠", "Grudges", "Guests are more suspicious of whoever advised arresting them last round.")}
-      ${house("🔒", "Sealed roles", "A guest you misjudged shows only their side until the end, so a mistake teaches you less than a success.")}
-      ${house("🔎", "Clues", "On night II the Notebook opens one guest's notebook for you, and on night III the Footprints name two guests, at least one of them guilty. Both clues are on that night's card, on the case note and in the Case file.")}
-    </div>
-    <p class="aside">The <b>Roles</b> tab explains every role in the house, and <b>Events</b> every night.
-    For Inspector Hollis's tips on reading the testimony, press <b>Advice</b> at the top of the page.</p></div>`;
+    <p class="lede">Lord Edmund Ravenhill lies dead in his library, and the snow has closed the roads. Of the ${n} guests in the house,
+    ${good} are innocent. The other ${n - good} wronged him on his birthday night: two secret lovers poisoned him, and each of the rest did
+    something of their own, without knowing what the others were about. Now the guilty lie to save their own skin,
+    and cover for any other culprit they find out. Before the thaw, clear the innocent and arrest the guilty.</p>
+    <div class="glance">${tile("👥", countUp(n), "guests", 0)}${tile("⚖", `${countUp(good)}<i>·</i>${countUp(n - good)}`, "innocent · guilty", 1)}
+      ${tile("🌙", countUp(S.rounds), "nights", 2)}${tile("★", countUp(decisions), "best score", 3)}</div>
+    <nav class="contents" id="rules-contents" aria-label="Contents"><b class="ct-head" aria-hidden="true">Contents</b>
+      <ol style="--rows:${Math.ceil(parts.length / 2)}">${contents}</ol></nav>
+    ${sections}${moreHtml()}</div>`;
 }
 
-// The verdicts of RANKS (board.js) as a ladder, each with the scores that earn it.
+// A number that counts up from nought as the tab opens (rules.css .rl-count).
+const countUp = (v) => `<span class="rl-count" style="--n:${v}">${v}</span>`;
+
+// I: a point for each right call, as a table of the four outcomes, then the verdicts.
+function verdictHtml(decisions) {
+  const cell = (ok) => (ok ? `<td class="pt-ok"><b>+1</b><small>a right call</small></td>` : `<td class="pt-no"><b>0</b><small>a mistake</small></td>`);
+  return `<p>Every night you clear one guest and arrest one: ${decisions} calls in all, and a point for each one you get right.</p>
+    <table class="pointtable"><thead><tr><td></td><th><span class="smp-pin good"></span>Innocent</th><th><span class="smp-pin bad"></span>Guilty</th></tr></thead>
+      <tbody><tr><th><span class="pt-stamp cleared">Cleared</span></th>${cell(true)}${cell(false)}</tr>
+      <tr><th><span class="pt-stamp arrested">Arrested</span></th>${cell(false)}${cell(true)}</tr></tbody></table>
+    <p>When the thaw comes, the Yard reads your score:</p>${ranksHtml(decisions)}`;
+}
+
+// The verdicts of RANKS (board.js) as a ladder, the best at the top: each rung a medal with the scores that earn it and
+// the verdict, and under it those scores lit on a row of a pip per call.
 function ranksHtml(decisions) {
   const from = (share) => Math.ceil(share * decisions);
-  return `<ol class="rankladder">${RANKS.map(([share, line], i) => {
+  return `<ol class="ranks">${RANKS.map(([share, line], i) => {
     const lo = from(share), hi = i ? from(RANKS[i - 1][0]) - 1 : decisions;
-    return `<li class="r${i}"><b>${lo === hi ? lo : `${lo}–${hi}`}</b><span>${line}</span></li>`;
+    const pips = Array.from({ length: decisions }, (_, k) => `<i${k + 1 >= lo && k + 1 <= hi ? ` class="on"` : ""}></i>`).join("");
+    return `<li class="r${i}"><div class="rk-plaque"><b class="rk-medal">${lo === hi ? lo : `${lo}–${hi}`}</b><span class="rk-line">${line}</span>
+      <span class="rk-pips" aria-hidden="true">${pips}</span></div></li>`;
   }).join("")}</ol>`;
 }
 
+// II: the hours of a day along the sun's path over a strip of sky, then what each brings: first what the house does,
+// then your two calls and what follows them.
+const DAY = [
+  ["00:00", "🌙", "Night", "The guests investigate in secret, and the guilty go about their work."],
+  ["06:30", "🌅", "Dawn", "The morning's card shows the signs of the night; after nights II and III, a clue of your own too."],
+  ["09:00", "🗣", "Testimony", "Every guest still in the house names one guest to clear and one to arrest (at a Dinner Party or an Inquest, only one of the two). The guilty lie."],
+  ["12:00", `<b class="ok">✓</b>`, "Clear", "Send one guest to the morning room: +1 if they are innocent."],
+  ["15:00", `<b class="no">✕</b>`, "Arrest", "Send one guest to the wine cellar: +1 if they are guilty."],
+  ["18:00", "🔍", "The search", "Their rooms are searched. A right call shows the guest's role, a mistake only their side. Either way, they give no more testimony."],
+];
+
+function dayHtml() {
+  const sun = (x) => 88 - 64 * Math.sqrt(Math.max(0, 1 - ((x - 50) / 45) ** 2));  // the path's height at x, both in % of the strip
+  const path = Array.from({ length: 91 }, (_, i) => `${i ? "L" : "M"}${i + 5} ${sun(i + 5).toFixed(1)}`).join("");
+  const stops = DAY.map(([time, icon, name], i) => {
+    const x = 9 + i * 16.4;
+    return `<span class="ds-stop" style="--i:${i};--x:${x}%;--y:${sun(x).toFixed(1)}%"><span class="medal">${icon}</span>
+      <small>${time}</small><b>${name}</b></span>`;
+  }).join("");
+  const steps = (from, to) => DAY.slice(from, to).map(([time, icon, name, text], i) => `<li class="ds-${from + i}"><span class="ds-icon">${icon}</span>
+    <div><h5>${name}<small>${time}</small></h5><p>${text}</p></div></li>`).join("");
+  return `<div class="daysky"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="arc" d="${path}"/>
+      <path class="hills" d="M0 90Q12 84 24 89T50 88T76 87T100 89V100H0Z"/></svg>${stops}</div>
+    <div class="daysteps"><div><h4>The house</h4><ol>${steps(0, 3)}</ol></div><div><h4>Your calls</h4><ol start="4">${steps(3)}</ol></div></div>`;
+}
+
+// III: the case's nights, then the last one.
+function nightsHtml() {
+  const S = ui.S;
+  return `<p>Every case runs the same eight nights, in two halves. Each half opens with the guests learning something and ends with the house
+    going quiet; in between, the first half hands you two clues and the second changes the testimony twice.</p>
+    ${nightGridHtml()}
+    <div class="showdown"><img src="art/finale/drawing-room.svg" alt=""><div class="sd-text"><span>Night ${ROMAN[S.rounds]} · the last night</span>
+      <h4>${LAST_NIGHT[0]} The drawing room</h4><p>Two guests remain, and nobody advises any more. ${LAST_NIGHT[3]}</p></div></div>`;
+}
+
 // The case's nights in two halves, a row of four each (events.js NIGHTS): over the nights their kinds, one label
-// over two nights of the same kind, and each night with its moon and its event. Tonight is marked.
+// over two nights of the same kind, and each night with its moon, its event and its icon. Tonight is marked.
 function nightGridHtml() {
   const S = ui.S;
   const night = (r) => {
-    const g = nightGroup(r), last = r === S.rounds;
-    const name = nightEvent(S, r) || (last ? "The drawing room" : g.name);
+    const g = nightGroup(r), last = r === S.rounds, e = nightEvent(S, r);
+    const name = e || (last ? "The drawing room" : g.name), icon = e ? EVENTS[e][0] : last ? LAST_NIGHT[0] : "";
+    const tip = e ? EVENTS[e][4] : last ? "Name the one you believe is guilty; the other goes free." : g.what;
     const state = S.finished || r < S.round ? "past" : r === S.round ? "now" : "future";
-    return `<div class="ng-night ${state}${last ? " last" : ""}">${moonSvg(r / S.rounds)}
-      <b>${ROMAN[r]}</b><span>${name}</span>${state === "now" ? "<em>tonight</em>" : ""}</div>`;
+    return `<div class="ng-night ${state}${last ? " last" : ""}" title="${tip}">${moonSvg(r / S.rounds)}
+      <b>${ROMAN[r]}</b><span>${name}</span>${icon ? `<i class="ng-icon">${icon}</i>` : ""}${state === "now" ? "<em>tonight</em>" : ""}</div>`;
   };
   const kind = ([r, n]) => { const g = nightGroup(r); return `<div class="ng-kind" style="grid-column:span ${n}" title="${g.what}"><span>${g.icon}</span><b>${g.name}</b></div>`; };
   const halves = [];
@@ -510,27 +517,102 @@ function nightGridHtml() {
     const nights = Array.from({ length: Math.min(HALF, S.rounds - from + 1) }, (_, i) => from + i);
     const runs = [];  // [first night, how many] for each run of nights of one kind
     nights.forEach((r) => (runs.length && nightGroup(r) === nightGroup(r - 1) ? runs[runs.length - 1][1]++ : runs.push([r, 1])));
-    halves.push(`<div class="nightgrid">${runs.map(kind).join("")}${nights.map(night).join("")}</div>`);
+    const label = `${from === 1 ? "First" : "Second"} half · nights ${ROMAN[from]}–${ROMAN[nights[nights.length - 1]]}`;
+    halves.push(`<div class="nightgrid" role="group" aria-label="${label}"><span class="ng-half">${label}</span>${runs.map(kind).join("")}${nights.map(night).join("")}</div>`);
   }
   return halves.join("");
 }
 
-// The seating as a small ring of 16 seats: #5 sizes up #4 on the first night, and holds hands with #4 and #6 at a Séance.
+// IV: this case's signs, after a small example of one that stops: of two signs one morning, the second is gone the
+// next (the Lovers' last, as their whispers stop once either of them leaves).
+function signsHtml(traced) {
+  const S = ui.S, who = (r) => (r === "Lover" ? "The Lovers" : title(r));
+  const [a, b] = [...traced.filter((r) => r !== "Lover"), ...traced.filter((r) => r === "Lover")], gone = b || a;
+  const tag = (r, cls = "") => `<li class="sd-tag${cls}"><span>${TRACES[r][0]}</span>${TRACES[r][2]}</li>`;
+  const demo = `<figure class="signdemo"><div class="sd-morning"><span class="sd-when">One morning</span><ul>${tag(a)}${b ? tag(b) : ""}</ul></div>
+    <span class="sd-arrow" aria-hidden="true">→</span>
+    <div class="sd-morning"><span class="sd-when">The next morning</span><ul>${b ? tag(a) : ""}${tag(gone, " gone")}</ul></div>
+    <figcaption>${gone === "Lover" ? "The Lovers' sign stopped, so at least one of them was among"
+      : `${title(gone)}'s sign stopped, so ${lowerFirst(title(gone))} was one of`} the two guests you sent away the day before.</figcaption></figure>`;
+  const cards = traced.map((r) => `<div class="signcard"><span class="si">${TRACES[r][0]}</span><b>${TRACES[r][2]}</b><span>${who(r)}</span></div>`).join("");
+  const quiet = [...new Set(S.roster)].filter((r) => ROLES[r][0] === "bad" && !TRACES[r]).map((r, i) => (i ? lowerFirst(title(r)) : title(r)));
+  const none = quiet.length ? `${quiet.length > 1 ? `${quiet.slice(0, -1).join(", ")} and ${quiet[quiet.length - 1]} leave` : `${quiet[0]} leaves`} no sign. ` : "";
+  return `<p>Every morning's card says what the night left behind. A sign shows while its culprit is in the house, and stops once they are gone.</p>
+    ${demo}
+    <p>The signs in this case:</p><div class="signgrid">${cards}</div>
+    <p class="aside">${traced.includes("Lover") ? "The Lovers whisper only while both of them are in the house. " : ""}${none}In a Blackout
+    nobody works, so that morning shows no sign: compare the next one with the morning before it.</p>`;
+}
+
+// V: the board's marks, each beside a sample of it.
+function boardHtml() {
+  const sample = (visual, head, text) => `<div class="sample"><div class="visual">${visual}</div><p><b>${head}</b>${text}</p></div>`;
+  const pins = ["", "good", "bad"].map((c) => `<span class="smp-pin ${c}"></span>`).join("");
+  const notes = [1, 2].map((m) => `<span class="smp-polaroid"><span class="scrawl">${noteSvg(m)}</span></span>`).join("");
+  return `<div class="samples">
+    ${sample('<span class="smp-badge"><span class="s"><i>✓</i>3</span><span class="e"><i>✕</i>1</span></span>', "The tally",
+      "Today's testimony about a guest: how many advise clearing them, and how many arresting.")}
+    ${sample(`<svg class="smp-strings" viewBox="0 0 92 40" aria-hidden="true"><path class="out e" d="M6 8 Q46 30 86 8"/>
+      <path class="out s" d="M6 20 Q46 40 86 20"/><path class="in e" d="M6 32 Q46 46 86 32"/></svg>`, "Strings",
+      "Point at a photograph (not on a phone): solid strings for that guest's own advice, dashed for advice about them. Red means arrest, green clear.")}
+    ${sample(pins, "Pins", "Gold while a guest is in the house, green once they are known to be innocent, red once known to be guilty.")}
+    ${sample(notes, "Your notes", "Click the small circle on a photograph to mark the guest guilty, then innocent, then unsure again.")}
+    ${sample('<span class="smp-piles"><i class="g">3</i><i class="u">9</i><i class="n">2</i></span>', "Piles",
+      "The Theory tab sorts your notes into piles and counts how many of the guilty are still hidden.")}
+    ${sample('<span class="smp-polaroid guess"><span>Lover?</span></span>', "Guesses", "Guess a guest's role in the Theory tab, and it is pencilled on their photograph.")}
+  </div>`;
+}
+
+// VI: the table, and a guest's neighbours closing up once they leave.
+function seatingHtml() {
+  return `<div class="seating">${seatingSvg()}<div>
+    <p>The guests sit in a circle, numbered clockwise from the top (on a phone the board shows them in rows, in the same order). At a Séance
+    everyone holds hands with both neighbours: #5 with #4 and #6, and #15 with #14 and #0.</p>
+    ${closeUpSvg()}<p>When a guest leaves, their neighbours close up: with #5 gone, #4 and #6 hold hands.</p>
+    <p class="aside">First Impressions has nothing to do with the seating: each guest sizes up one other guest, picked at random.</p></div></div>`;
+}
+
+// The seating as a small ring of 16 seats: #5 holds hands with #4 and #6 at a Séance.
 function seatingSvg() {
   const at = (i, r) => [60 + r * Math.cos(-Math.PI / 2 + (i * Math.PI) / 8), 60 + r * Math.sin(-Math.PI / 2 + (i * Math.PI) / 8)];
   const seats = Array.from({ length: 16 }, (_, i) => {
     const [x, y] = at(i, 47), cls = i === 5 ? "me" : i === 4 || i === 6 ? "hand" : "";
     return `<g class="seat ${cls}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6.6"/><text x="${x.toFixed(1)}" y="${y.toFixed(1)}">${i}</text></g>`;
   }).join("");
-  const [x5, y5] = at(5, 38), [x4, y4] = at(4, 38.5);
-  return `<svg class="smp-seating" viewBox="0 0 120 120" aria-hidden="true">
-    <defs><marker id="look-tip" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L6 3L0 6Z"/></marker></defs>
-    <circle class="table" cx="60" cy="60" r="27"/>
-    <path class="hands" d="${arc(at, 4, 6, 57)}"/>
-    <path class="look" marker-end="url(#look-tip)" d="M${x5.toFixed(1)} ${y5.toFixed(1)} Q78 60 ${x4.toFixed(1)} ${y4.toFixed(1)}"/>${seats}</svg>`;
+  return `<svg class="smp-seating" viewBox="0 0 120 120" aria-hidden="true"><circle class="table" cx="60" cy="60" r="27"/>
+    <path class="hands" d="${arc(at, 4, 6, 57)}"/>${seats}</svg>`;
 }
 
 const arc = (at, from, to, r) => {
   const [x1, y1] = at(from, r), [x2, y2] = at(to, r);
   return `M${x1.toFixed(1)} ${y1.toFixed(1)} A${r} ${r} 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)}`;
 };
+
+// Seats #4, #5 and #6 in a row once #5 has left: its place is empty, and #4 and #6 hold hands across it.
+function closeUpSvg() {
+  const seat = (x, n, cls) => `<g class="seat ${cls}"><circle cx="${x}" cy="28" r="9"/><text x="${x}" y="28">${n}</text></g>`;
+  return `<svg class="smp-closeup" viewBox="0 0 150 52" aria-hidden="true"><path class="hands" d="M28 20Q75 -6 122 20"/>
+    ${seat(25, 4, "hand")}${seat(75, 5, "gone")}${seat(125, 6, "hand")}<text class="left" x="75" y="48">gone</text></svg>`;
+}
+
+// VII: the rules that hold in every case.
+function houseHtml() {
+  const house = (icon, name, text) => `<div class="house"><span class="icon">${icon}</span><div><b>${name}</b><p>${text}</p></div></div>`;
+  return `<div class="houserules">
+    ${house("👥", "Pairs", `The two Confidants spent the night of the murder together, so each knows the other is innocent and advises clearing them.
+      The two Lovers know each other too: they never name each other, and on a day with both tips they share at least one. A guest
+      who is bribed or hypnotised says what they must, though.`)}
+    ${house("😠", "Grudges", "Guests are more suspicious of whoever advised arresting them the day before.")}
+    ${house("🔒", "Sealed roles", "A guest you misjudged shows only their side until the case is closed, so a mistake teaches you less than a right call.")}
+    ${house("🔎", "Clues", "On night II a notebook is left open for you, and on night III footprints name two guests, at least one of them guilty. Both are on that night's card, on the case note and in the Case file.")}
+  </div>`;
+}
+
+// Where to read more: the folder's other tabs, and the buttons at the top of the page (a label clicks its button).
+function moreHtml() {
+  const press = (id, text) => `<label class="rl-key" for="${id}">${text}</label>`;
+  return `<footer class="rules-more"><b class="rm-head">Further reading</b>
+    <p>In this folder, <b>Roles</b> explains every role in the house and <b>Events</b> every night. At the top of the page, ${press("briefing", "Story")}
+    replays the opening's five chapters: the story, how to play, a case in miniature, Inspector Hollis's advice and the case papers.
+    ${press("howto", "How to play")}, ${press("minicase", "Mini case")} and ${press("tips", "Advice")} play one chapter each.</p></footer>`;
+}

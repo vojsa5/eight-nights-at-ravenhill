@@ -25,8 +25,6 @@ const LAST_TRACE = {
   Eavesdropper: "the chair drawn up to the library door again last night",
   Hypnotist: "a sleepwalker on the east corridor in the night",
   Paymaster: "one more banknote found under a door this morning",
-  Grifter: "the stacked deck on the billiard table",
-  Lunatic: "the stopped clocks on the first floor",
   Mole: "one more letter steamed open in the night",
   Lover: "the whispering on the back stairs before dawn",
 };

@@ -52,7 +52,9 @@
     <rect x="304" y="150" width="16" height="3" fill="#6a2a2a"/>
     <rect x="304" y="159" width="16" height="3" fill="#6a2a2a"/>
   </g>
-  <!-- in the story after a decision (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->
+  <!-- in the films (css/film.css) dust turns in the light; in the story after a decision (css/verdict.css) a torch
+       sweeps the room and finds what the found mark points at -->
+  <g data-fx="motes" data-at="196 112" data-r="64"/>
   <g data-fx="found" data-at="150 136" data-r="62"/>
   <rect width="360" height="200" fill="url(#vig)"/>
 </svg>

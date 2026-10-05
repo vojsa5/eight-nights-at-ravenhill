@@ -1,6 +1,7 @@
 // What happened last night: the traces the night work of the guilty left in the house, shown on each
 // night's opening card. The server says which roles worked that night (ravenhill/server/state.py
 // night_traces), never who holds them; once a culprit is out of the house, their trace stops.
+import { ROLES, title } from "./roles.js";
 import { ui } from "./state.js";
 
 // role -> [icon, the traces, one of which is told each night, the trace in a word or two]
@@ -30,16 +31,6 @@ export const TRACES = {
     "The butler found a five-pound note in the umbrella stand, and nobody would claim it.",
     "The paper band from a bundle of banknotes lay on the billiard-room floor.",
   ], "banknotes"],
-  Grifter: ["🃏", [
-    "A pack of cards was left on the billiard table, every ace on top.",
-    "Someone had been through the coats in the cloakroom, and taken nothing at all.",
-    "An unfinished letter on the writing desk offered someone in London shares in a gold mine.",
-  ], "a stacked deck"],
-  Lunatic: ["🌀", [
-    "Someone was heard laughing quietly in the east wing long after midnight.",
-    "The telephone in the hall had been taken apart again, and the pieces laid out in a neat row.",
-    "Every clock on the first floor had been stopped at a quarter past eleven.",
-  ], "odd goings-on"],
   Lover: ["🌹", [
     "Two voices were heard whispering on the back stairs at three in the morning, and then a laugh cut short.",
     "Low voices were heard in the conservatory long after midnight, and then a door closing softly.",
@@ -58,8 +49,11 @@ function pick(list, round, role) {
   return list[h % list.length];
 }
 
-// A trace as an evidence tag: its icon and its name, and the night's trace in full on hover.
-const tagHtml = (r, told = "") => `<li class="trace-tag"${told && ` title="${told}"`}><span class="trace-icon">${TRACES[r][0]}</span>${TRACES[r][2]}</li>`;
+// A trace as an evidence tag: its icon and its name, and the night's trace in full on hover. Every trace is a button
+// that tells what its culprit does at night, under the traces (WHAT).
+const tagHtml = (r, told = "") => `<li class="trace-tag" data-trace="${r}"><button type="button" class="trace-btn" aria-expanded="false"${told
+  && ` title="${told}"`}><span class="trace-icon">${TRACES[r][0]}</span>${TRACES[r][2]}</button></li>`;
+const WHAT = '<p class="trace-what" hidden></p>';
 
 // The traces of night `round`, for its opening card. On the first night everyone is still in the house, so
 // the card only says what to look for, each kind of trace as a tag. Later nights lay down a slip per trace;
@@ -69,17 +63,37 @@ export function tracesHtml(round, blackout, compact = false) {
   if (!roles) return "";
   if (round === 1) {
     const kinds = Object.keys(TRACES).filter((r) => ui.S.roster.includes(r)).map((r) => tagHtml(r)).join("");
-    return `<div class="traces first"><div class="traces-head">Traces of the night</div><p>Every night the guilty go about their
-      business, and it leaves traces in the house:</p><ul class="trace-tags">${kinds}</ul>
+    return `<div class="traces first"><div class="traces-head">Traces of the night</div><p>Every night some of the guilty go about their
+      business, and it leaves traces in the house. Click one to see what was done:</p><ul class="trace-tags">${kinds}</ul>${WHAT}
       <p class="traces-note">Watch for them each morning. When one stops, that culprit is out of the house.</p></div>`;
   }
   if (compact && roles.length >= 4) {
     const tags = roles.map((r) => tagHtml(r, pick(TRACES[r][1], round, r))).join("");
-    return `<div class="traces compact"><div class="traces-head">Last night at Ravenhill</div><ul class="trace-tags">${tags}</ul></div>`;
+    return `<div class="traces compact"><div class="traces-head">Last night at Ravenhill</div><ul class="trace-tags">${tags}</ul>${WHAT}</div>`;
   }
-  const lines = roles.length ? roles.map((r) => `<li class="trace-slip"><span class="trace-icon">${TRACES[r][0]}</span>
-      <span class="trace-told"><b class="trace-name">${TRACES[r][2]}</b> ${pick(TRACES[r][1], round, r)}</span></li>`)
+  const lines = roles.length ? roles.map((r) => `<li class="trace-slip" data-trace="${r}"><button type="button" class="trace-btn" aria-expanded="false">
+      <span class="trace-icon">${TRACES[r][0]}</span><span class="trace-told"><b class="trace-name">${TRACES[r][2]}</b> ${pick(TRACES[r][1], round, r)}</span>
+      </button></li>`)
     : [`<li class="quiet">${blackout ? DARK : QUIET}</li>`];
   return `<div class="traces${lines.length >= 4 ? " many" : ""}"><div class="traces-head">Last night at Ravenhill</div>
-    <ul class="trace-slips">${lines.join("")}</ul></div>`;
+    <ul class="trace-slips">${lines.join("")}</ul>${roles.length ? WHAT : ""}</div>`;
 }
+
+// What a trace's culprit does at night: the Roles tab's words; the Lovers' trace is the two of them meeting.
+const LOVERS = "Each checks one guest, guilty or not. At night they meet, tell each other everything they learned and agree on what to say in the morning.";
+const doneAtNight = (r) => `<b class="trace-name">${r === "Lover" ? "The Lovers" : title(r)}</b> ${r === "Lover" ? LOVERS : ROLES[r][1].night}`;
+
+// A click on a trace tells what was done under the traces; a second click on it puts that away.
+document.addEventListener("click", (e) => {
+  const tag = e.target.closest?.(".traces [data-trace]");
+  if (!tag) return;
+  const box = tag.closest(".traces"), what = box.querySelector(".trace-what"), r = tag.dataset.trace;
+  const open = what.hidden || what.dataset.role !== r;
+  box.querySelectorAll("[data-trace]").forEach((t) => {
+    t.classList.toggle("on", open && t === tag);
+    t.querySelector(".trace-btn").setAttribute("aria-expanded", String(open && t === tag));
+  });
+  what.hidden = !open;
+  what.dataset.role = r;
+  what.innerHTML = doneAtNight(r);
+});

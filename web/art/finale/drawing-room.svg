@@ -24,12 +24,59 @@
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+    <clipPath id="pane"><rect x="30" y="40" width="32" height="104"/></clipPath>
+    <!-- the firelight that flickers is drawn with these, each like the blurred glow it stands for (a blur under a part
+         that changes would be redrawn every frame) -->
+    <radialGradient id="hearth">
+      <stop offset="0" stop-color="#ff7a24" stop-opacity=".33"/>
+      <stop offset=".2" stop-color="#ff7a24" stop-opacity=".31"/>
+      <stop offset=".35" stop-color="#ff7a24" stop-opacity=".25"/>
+      <stop offset=".5" stop-color="#ff7a24" stop-opacity=".155"/>
+      <stop offset=".65" stop-color="#ff7a24" stop-opacity=".075"/>
+      <stop offset=".8" stop-color="#ff7a24" stop-opacity=".025"/>
+      <stop offset="1" stop-color="#ff7a24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bed">
+      <stop offset="0" stop-color="#ffb050" stop-opacity=".6"/>
+      <stop offset=".35" stop-color="#ffb050" stop-opacity=".45"/>
+      <stop offset=".6" stop-color="#ffb050" stop-opacity=".2"/>
+      <stop offset=".8" stop-color="#ffb050" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#ffb050" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="candle">
+      <stop offset="0" stop-color="#ffcf70" stop-opacity="1"/>
+      <stop offset=".26" stop-color="#ffcf70" stop-opacity="1"/>
+      <stop offset=".3" stop-color="#ffcf70" stop-opacity=".3"/>
+      <stop offset=".55" stop-color="#ffcf70" stop-opacity=".12"/>
+      <stop offset=".8" stop-color="#ffcf70" stop-opacity=".03"/>
+      <stop offset="1" stop-color="#ffcf70" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floorlit">
+      <stop offset="0" stop-color="#ff9a40" stop-opacity=".15"/>
+      <stop offset=".25" stop-color="#ff9a40" stop-opacity=".145"/>
+      <stop offset=".45" stop-color="#ff9a40" stop-opacity=".11"/>
+      <stop offset=".6" stop-color="#ff9a40" stop-opacity=".075"/>
+      <stop offset=".75" stop-color="#ff9a40" stop-opacity=".035"/>
+      <stop offset=".9" stop-color="#ff9a40" stop-opacity=".008"/>
+      <stop offset="1" stop-color="#ff9a40" stop-opacity="0"/>
+    </radialGradient>
     <path id="ch" fill="#170c08" d="M2 -30 L-2 -86 C-3 -94 12 -97 16 -89 L20 -30Z M14 -90 C24 -90 28 -80 26 -64 L18 -60Z M0 -12 V-42 H52 V-12Z M2 -12 H7 V0 H2Z M45 -12 H50 V0 H45Z"/>
     <path id="arm" fill="#170c08" d="M8 -42 V-52 C8 -58 40 -58 46 -54 C52 -51 51 -44 46 -42Z"/>
     <path id="rim" fill="none" stroke="#ff9a40" stroke-opacity=".3" d="M24 -86 C27 -80 27 -72 26 -64 M12 -57 C30 -58.5 40 -58 46 -54"/>
   </defs>
   <rect width="360" height="200" fill="url(#bg)"/>
+  <!-- in the films (css/film.css, flashback.css): the fire burns and throws its light on the mantel and the chairs, the
+       candles flicker, snow falls past the window, and in the doorway one guest leans to whisper to the next -->
   <rect x="30" y="40" width="32" height="104" fill="#222c44"/>
+  <g clip-path="url(#pane)">
+    <g class="lf-fall">
+      <g id="flakes" fill="#c8d4ea" fill-opacity=".7">
+        <circle cx="35" cy="48" r=".9"/><circle cx="51" cy="62" r="1.1"/><circle cx="42" cy="84" r=".8"/><circle cx="57" cy="98" r="1"/>
+        <circle cx="36" cy="116" r="1.1"/><circle cx="48" cy="134" r=".9"/><circle cx="59" cy="44" r=".8"/><circle cx="45" cy="106" r=".7"/>
+      </g>
+      <use href="#flakes" y="-112"/>
+    </g>
+  </g>
   <path d="M46 40 V144 M30 76 H62 M30 110 H62" stroke="#0c0e16" stroke-width="2.4"/>
   <path d="M22 30 C28 70 26 120 30 150 H38 C34 110 36 60 40 30Z M70 30 C64 70 66 120 62 150 H54 C58 110 56 60 52 30Z" fill="#120c12"/>
   <path d="M0 134 H360" stroke="#3a2418" stroke-width="1.4"/>
@@ -37,19 +84,27 @@
   <circle cx="180" cy="134" r="76" fill="#ff8a30" opacity=".34" filter="url(#soft)"/>
   <ellipse cx="180" cy="38" rx="24" ry="17" fill="#1c1214" stroke="#4a3020" stroke-width="2"/>
   <rect x="128" y="76" width="104" height="6" fill="#3a2214"/>
-  <path d="M128 76 H232" stroke="#ffb060" stroke-opacity=".4"/>
+  <path class="lf-firelit" d="M128 76 H232" stroke="#ffb060" stroke-opacity=".4"/>
   <rect x="138" y="82" width="84" height="92" fill="#26160e"/>
   <path d="M154 174 V118 Q180 102 206 118 V174Z" fill="#060201" stroke="#ff9a40" stroke-opacity=".3" stroke-width="1.4"/>
-  <ellipse cx="180" cy="168" rx="28" ry="10" fill="#ff7a24" opacity=".45" filter="url(#soft)"/>
-  <path d="M164 172 C166 166 170 168 172 161 C175 166 178 158 181 154 C183 161 187 163 189 159 C192 165 194 168 196 172Z" fill="url(#fire)" filter="url(#glow)"/>
-  <ellipse cx="180" cy="171" rx="18" ry="2.2" fill="#ffb050" filter="url(#glow)"/>
+  <ellipse class="lf-firelit" cx="180" cy="168" rx="48" ry="30" fill="url(#hearth)"/>
+  <g data-fx="glow" data-at="180 160" data-r="44" data-tone="fire"/>
+  <!-- the fire and the bed of embers, each glowing with a soft edge drawn around it -->
+  <g class="lf-fire"><path d="M164 172 C166 166 170 168 172 161 C175 166 178 158 181 154 C183 161 187 163 189 159 C192 165 194 168 196 172Z" fill="none" stroke="url(#fire)" stroke-opacity=".35" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M164 172 C166 166 170 168 172 161 C175 166 178 158 181 154 C183 161 187 163 189 159 C192 165 194 168 196 172Z" fill="url(#fire)"/></g>
+  <g class="lf-flicker"><ellipse cx="180" cy="171" rx="24" ry="7" fill="url(#bed)"/><ellipse cx="180" cy="171" rx="18" ry="2.2" fill="#ffb050"/></g>
+  <g data-fx="embers" data-at="180 150" data-r="13"/>
   <path d="M161 167 H199 M164 167 V174 M196 167 V174" stroke="#0a0504" stroke-width="1.4"/>
   <rect x="120" y="174" width="120" height="5" fill="#2e1a10"/>
   <path d="M170 76 V62 C170 52 190 52 190 62 V76Z M141 66 h3 v10 h-3Z M216 66 h3 v10 h-3Z" fill="#140c08"/>
   <rect x="167" y="74" width="26" height="2.4" fill="#2e1c12"/>
   <circle cx="180" cy="63" r="6" fill="#e8d4a8" stroke="#8a6a3a" filter="url(#glow)"/>
   <path d="M180 63 L178.2 59 M180 63 V58" stroke="#1a100a" stroke-linecap="round"/>
-  <g fill="#ffcf70" filter="url(#glow)"><ellipse cx="142.5" cy="63" rx="1.4" ry="2.4"/><ellipse cx="217.5" cy="63" rx="1.4" ry="2.4"/></g>
+  <!-- each flame in its glow, flickering about its wick -->
+  <g fill="url(#candle)">
+    <ellipse class="lf-flame" style="transform-origin:50% 63%" cx="142.5" cy="63" rx="5.4" ry="9.2"/>
+    <ellipse class="lf-flame" style="--d:-.8s;transform-origin:50% 63%" cx="217.5" cy="63" rx="5.4" ry="9.2"/>
+  </g>
   <!-- the doorway, crowded with listeners -->
   <circle cx="292" cy="112" r="30" fill="#8ea4d0" opacity=".16" filter="url(#soft)"/>
   <rect x="272" y="40" width="42" height="136" fill="#1a1420"/>
@@ -59,14 +114,18 @@
     <path d="M277 176 V107 C277 101 291 101 291 107 V176Z M289.5 176 V104 C289.5 98 304.5 98 304.5 104 V176Z M300 176 V109 C300 103 314 103 314 109 V176Z"/>
   </g>
   <g fill="#06050a">
-    <circle cx="278" cy="101" r="5.6"/><circle cx="291" cy="99" r="5.8"/><circle cx="303" cy="103" r="5.6"/>
-    <path d="M269 176 V115 C269 108 287 108 287 115 V176Z M282 176 V113 C282 106 300 106 300 113 V176Z M294.5 176 V117 C294.5 110 311.5 110 311.5 117 V176Z"/>
+    <circle cx="291" cy="99" r="5.8"/><circle cx="303" cy="103" r="5.6"/>
+    <path d="M282 176 V113 C282 106 300 106 300 113 V176Z M294.5 176 V117 C294.5 110 311.5 110 311.5 117 V176Z"/>
   </g>
-  <path d="M272.6 97 A5.6 5.6 0 0 1 283.4 99.5 M285.4 98 A5.8 5.8 0 0 1 296.6 97.5 M297.6 102 A5.6 5.6 0 0 1 308.4 102" fill="none" stroke="#b8c8e8" stroke-opacity=".35"/>
+  <path d="M285.4 98 A5.8 5.8 0 0 1 296.6 97.5 M297.6 102 A5.6 5.6 0 0 1 308.4 102" fill="none" stroke="#b8c8e8" stroke-opacity=".35"/>
+  <g class="lf-lean" style="--d:1.8s">
+    <path fill="#06050a" d="M269 176 V115 C269 108 287 108 287 115 V176Z"/><circle cx="278" cy="101" r="5.6" fill="#06050a"/>
+    <path d="M272.6 97 A5.6 5.6 0 0 1 283.4 99.5" fill="none" stroke="#b8c8e8" stroke-opacity=".35"/>
+  </g>
   <path d="M308 46 L320 40 V182 L308 176Z" fill="#141018"/>
   <rect x="0" y="179" width="360" height="21" fill="#0e0a0c"/>
   <ellipse cx="180" cy="190" rx="116" ry="9" fill="#3a1a10" opacity=".7"/>
-  <path d="M150 179 H210 L250 200 H110Z" fill="#ff9a40" opacity=".2" filter="url(#soft)"/>
+  <ellipse class="lf-firelit" cx="180" cy="190" rx="78" ry="30" fill="url(#floorlit)"/>
   <!-- the two armchairs, facing each other -->
   <g transform="translate(96 188)">
     <use href="#ch"/>
@@ -74,8 +133,8 @@
     <circle cx="46" cy="-88" r="8" fill="#040305"/>
     <use href="#arm"/>
     <path fill="#040305" d="M34 -61 L54 -59.5 L55 -53 L36 -54Z M53.2 -56 A3.8 3.8 0 1 0 60.8 -56 A3.8 3.8 0 1 0 53.2 -56Z"/>
-    <use href="#rim"/>
-    <path d="M50 -94.9 A8 8 0 0 1 50 -81.1 M45 -74 C47 -70 46 -66 45 -62 M59 -59.2 A3.8 3.8 0 0 1 60.6 -54.5 M54 -51 C57 -51 58.5 -49 58.5 -46" fill="none" stroke="#ff9a40" stroke-opacity=".6" stroke-width="1.2"/>
+    <use class="lf-firelit" href="#rim"/>
+    <path class="lf-firelit" d="M50 -94.9 A8 8 0 0 1 50 -81.1 M45 -74 C47 -70 46 -66 45 -62 M59 -59.2 A3.8 3.8 0 0 1 60.6 -54.5 M54 -51 C57 -51 58.5 -49 58.5 -46" fill="none" stroke="#ff9a40" stroke-opacity=".6" stroke-width="1.2"/>
   </g>
   <g transform="translate(264 188) scale(-1 1)">
     <use href="#ch"/>
@@ -83,8 +142,8 @@
     <circle cx="28" cy="-89" r="8" fill="#040305"/>
     <use href="#arm"/>
     <path fill="#040305" d="M20 -53 L54 -58 C61 -59 62 -49 56 -48 L20 -44Z M53 -52 L61 -20 C62 -17 69 -17 69 -20 C69 -22 66 -23 65 -24 L60 -55Z M22 -61 L46 -60 V-56 L22 -57Z M45 -58 A3 3 0 1 0 51 -58 A3 3 0 1 0 45 -58Z"/>
-    <use href="#rim"/>
-    <path d="M32 -95.9 A8 8 0 0 1 32 -82.1 M35 -75 C37 -70 37 -65 36 -60 M44 -56.6 L54 -58 C58 -58.6 60.5 -56 60 -53 M61 -52 L67 -24" fill="none" stroke="#ff9a40" stroke-opacity=".6" stroke-width="1.2"/>
+    <use class="lf-firelit" href="#rim"/>
+    <path class="lf-firelit" d="M32 -95.9 A8 8 0 0 1 32 -82.1 M35 -75 C37 -70 37 -65 36 -60 M44 -56.6 L54 -58 C58 -58.6 60.5 -56 60 -53 M61 -52 L67 -24" fill="none" stroke="#ff9a40" stroke-opacity=".6" stroke-width="1.2"/>
   </g>
   <path d="M96 188 H148 L70 200 H20Z M212 188 H264 L340 200 H290Z" fill="#000" opacity=".4"/>
   <rect width="360" height="200" fill="url(#vig)"/>

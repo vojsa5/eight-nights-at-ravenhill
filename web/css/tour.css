@@ -50,7 +50,7 @@
 .tour-card[data-side="below"]::before { top: -8px; left: calc(var(--notch) - 7px); border-right: 0; border-bottom: 0; }
 .tour-card[data-side="above"]::before { bottom: -8px; left: calc(var(--notch) - 7px); border-left: 0; border-top: 0; }
 .tour-card[data-side=""]::before { display: none; }
-.tour-in { max-height: calc(100vh - 56px); overflow-y: auto; }  /* a very short window: the card scrolls, its notch stays */
+.tour-in { max-height: calc(100vh - 56px); max-height: calc(100dvh - 56px); overflow-y: auto; }  /* a very short window: the card scrolls, its notch stays */
 .tour-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .tour-kicker { font: 12px var(--typed); letter-spacing: .12em; text-transform: uppercase; color: #8a6a2a; }
 .tour-skip { border: 0; background: none; padding: 2px 0; font: 12px var(--typed); letter-spacing: .06em; color: var(--paper-muted); }
@@ -59,7 +59,7 @@
 .tour-text { margin: 0 0 12px; font: italic 17px/1.45 "EB Garamond", Georgia, serif; animation: tour-fade .7s .1s ease-out both; }
 .tour-nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .tour-nav > span:last-child { display: flex; gap: 6px; }
-.tour-card .btn { padding: 5px 11px; color: var(--paper-ink); border-color: var(--paper-line); background: rgba(255,255,255,.45); font-size: 13px; white-space: nowrap; }
+.tour-card .btn { padding: 5px 9px; color: var(--paper-ink); border-color: var(--paper-line); background: rgba(255,255,255,.45); font-size: 13px; white-space: nowrap; }
 .tour-card .btn:hover { border-color: #a8843e; }
 .tour-card .btn.primary { color: #1b140a; background: linear-gradient(#d8b46a, #a8843e); border-color: #b08a44; }
 .tour-nav .dots { white-space: nowrap; }

@@ -13,10 +13,12 @@ export const CRIME_STORY = {
     scene: "crimes/eavesdropper",
     told: `Between the soup and the fish, someone slipped away from the table. Weeks of listening at the library door had
       given them the combination of the safe, and told them that Lord Edmund's letter to Scotland Yard bore their name.
-      They took the letter out and burnt it in the grate, still sealed.`,
+      They took the letter out and burnt it in the grate, still sealed, and before closing the safe they emptied his purse
+      of gold sovereigns into their pockets.`,
     flashback: (name) => `Between the soup and the fish it was <b>${name}</b> who slipped away from the table, opened the
-      safe with the combination learnt at the library door, and burnt Lord Edmund's letter to the Yard without breaking the seal.`,
-    confess: () => `"I never read the other names, Inspector. I burnt it sealed. I only wanted mine gone."`,
+      safe with the combination learnt at the library door, burnt Lord Edmund's letter to the Yard without breaking the seal,
+      and pocketed his purse of gold sovereigns.`,
+    confess: () => `"I never read the other names, Inspector. I burnt it sealed. The sovereigns? They were just lying there."`,
   },
   Grifter: {
     title: "The gold-mine shares",
@@ -287,8 +289,7 @@ export const OPENING = [
   ["story/will", "40% 70%", `He wrote a new will that cut every one of them out, and a letter to Scotland Yard that named them all, and locked
     both in the library safe. His solicitor would witness the will on Monday. Until then, every night, he took it out and read it over by the fire.`],
   ["story/birthday", "50% 40%", `Then he invited them all to Ravenhill for his seventieth birthday. Sixteen guests sat down to dinner, every one of
-    them bound to him by blood, money, work or old friendship. Before the night was out, eight of them would do him a wrong, and apart
-    from two secret lovers, not one of them knew what the others were about.`],
+    them bound to him by blood, money, work or old friendship. Before the night was out, eight of them would do him a wrong.`],
   crime("Eavesdropper"),
   crime("Grifter"),
   crime("Paymaster"),

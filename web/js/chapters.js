@@ -1,18 +1,19 @@
-// The opening comes in four chapters: the story (a film), How to play (a film), Inspector Hollis's advice (a film) and
-// the case papers; every case begins with all four (prologue.js). Each chapter opens with a title card, and every scene
-// and page shows the chapter bar: where it is among the four, any of which it jumps to. A chapter played on its own (the
-// How to play and Advice buttons) shows only itself on the bar. Styles, and each chapter's own look, in css/chapters.css.
+// The opening comes in five chapters: the story (a film), How to play (a film), a case in miniature (a film), Inspector
+// Hollis's advice (a film) and the case papers; every case begins with all five (prologue.js). Each chapter opens with a
+// title card, and every scene and page shows the chapter bar: where it is among the five, any of which it jumps to. A
+// chapter played on its own (the How to play, Mini case and Advice buttons) shows only itself on the bar. Styles, and each chapter's own
+// look, in css/chapters.css.
 import { ROMAN } from "./format.js";
 import { $ } from "./state.js";
 
-export const CHAPTERS = ["The story", "How to play", "Inspector Hollis's advice", "The case papers"];
-const SHORT = ["Story", "How to play", "Advice", "Case papers"];
-const LOOKS = ["story", "howto", "advice", "papers"];  // each chapter's own look in css/chapters.css
+export const CHAPTERS = ["The story", "How to play", "A case in miniature", "Inspector Hollis's advice", "The case papers"];
+const SHORT = ["Story", "How to play", "Mini case", "Advice", "Case papers"];
+const LOOKS = ["story", "howto", "howto", "advice", "papers"];  // each chapter's own look in css/chapters.css
 const WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
   "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
 export const word = (n) => WORDS[n] || String(n);
 
-// The bar: the four chapters, the current one marked; `alone`, just the current one, which goes nowhere.
+// The bar: the five chapters, the current one marked; `alone`, just the current one, which goes nowhere.
 export function chapterBar(current, alone = false) {
   const step = (name, i) => `<b>${i + 1}</b><span>${name}</span>`;
   if (alone) return `<nav class="chapters alone" aria-label="Chapter"><span class="ch-step on">${step(SHORT[current], current)}</span></nav>`;
@@ -30,8 +31,8 @@ document.addEventListener("click", (e) => {
 
 // A chapter's title card, full screen: its number, its name and a line on what it holds. It goes on to the chapter by
 // itself after a moment, or at once on Next (Enter, →, space); ← goes `back` (to the end of the chapter before) and
-// Skip skips the chapter (`skipTo`, labelled `skip`), as Escape does on the cards of the two films that end by going on
-// (How to play and the advice). main.js turns the keys into chapterNext / chapterBack / chapterEscape.
+// Skip skips the chapter (`skipTo`, labelled `skip`), as Escape does on the cards of the films that end by going on
+// (How to play, the case in miniature and the advice). main.js turns the keys into chapterNext / chapterBack / chapterEscape.
 const CARD_MS = 2800;
 let card = null;                   // { i, go, back, skip, timer } while a title card shows
 export function showChapterCard(i, { promise, go, back = null, skip = "", skipTo = null, alone = false }) {
@@ -62,5 +63,6 @@ export function showChapterCard(i, { promise, go, back = null, skip = "", skipTo
 export const chapterShowing = () => !!card && !!document.querySelector("#modal > .chapter-card");
 export const chapterNext = () => chapterShowing() && card.go();
 export const chapterBack = () => chapterShowing() && card.back?.();
-// Escape on a title card: skips How to play or the advice, as Escape does on their films; false elsewhere (the card closes).
-export const chapterEscape = () => chapterShowing() && (card.i === 1 || card.i === 2) && !!card.skip && (card.skip(), true);
+// Escape on a title card: skips How to play, the case in miniature or the advice, as Escape does on their films; false
+// elsewhere (the card closes).
+export const chapterEscape = () => chapterShowing() && card.i >= 1 && card.i <= 3 && !!card.skip && (card.skip(), true);

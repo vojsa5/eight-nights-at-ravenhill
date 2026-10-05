@@ -1,6 +1,7 @@
 // The game engine in the browser, for hosting without the Python server (GitHub Pages): Pyodide runs the
-// same ravenhill package, published next to the page by tools/build_pages.py. The routes mirror
-// ravenhill/server/app.py. It plays only the shared case (shared.js), which is kept online.
+// same ravenhill package, published next to the page by tools/build_pages.py, in a worker of its own (pyworker.js),
+// so the page stays live while it starts. The routes mirror ravenhill/server/app.py. It plays only the shared case
+// (shared.js), which is kept online.
 import { CLOSED, addMoves, readCase, sharedCase, startCase, theCase } from "./shared.js";
 
 const PYODIDE = "https://cdn.jsdelivr.net/pyodide/v0.29.5/full/";
@@ -40,27 +41,71 @@ def state(gid):
     return json.dumps(game_state(gid, GAMES[gid]))
 `;
 
-let ready = null;
+let worker = null, ready = null, noted = null, calls = 0;
+const waiting = new Map();  // call id -> its promise's { ok, fail, timer }
+const LOST = "The game engine could not start. Try again in a moment.";
+const STOPPED = "The game engine stopped. Try again in a moment.";
+const PATIENCE = 30000;  // a game call answers in well under a second; one that does not, the worker is gone (a phone short of memory)
+
+// The worker failed or went quiet: drop it and everything it was asked. The next call starts a new one, which
+// replays the case from the record online.
+function reset(message) {
+  worker?.terminate();
+  worker = ready = null;
+  played = null;
+  waiting.forEach((call) => { clearTimeout(call.timer); call.fail(new Error(message)); });
+  waiting.clear();
+}
+
+// One message to the worker; resolves to its answer. Starting Pyodide may take long on a slow line, so only the
+// game's own calls have a time limit.
+function send(message) {
+  if (!worker) return Promise.reject(new Error(STOPPED));
+  const id = ++calls;
+  return new Promise((ok, fail) => {
+    const timer = message.boot ? 0 : setTimeout(() => reset(STOPPED), PATIENCE);
+    waiting.set(id, { ok, fail, timer });
+    worker.postMessage({ id, ...message });
+  });
+}
 
 function boot() {
-  const note = document.createElement("div");
-  note.className = "engine-loading";
-  note.textContent = "Unpacking the case files…";
-  document.body.append(note);
-  ready = (async () => {
-    const { loadPyodide } = await import(PYODIDE + "pyodide.mjs");
-    const py = await loadPyodide({ indexURL: PYODIDE });
-    const manifest = await fetch("py/manifest.json", { cache: "no-cache" });
-    if (!manifest.ok) throw new Error("The game engine is not here: open the page from the static build (README.md, Play online).");
-    const { zip } = await manifest.json();
-    py.unpackArchive(await (await fetch("py/" + zip)).arrayBuffer(), "zip");
-    py.runPython(GLUE);
-    return py;
-  })().finally(() => note.remove());
+  worker = new Worker(new URL("pyworker.js", import.meta.url));
+  worker.onmessage = ({ data: { id, result, error } }) => {
+    const call = waiting.get(id);
+    if (!call) return;  // asked of a worker since reset
+    clearTimeout(call.timer);
+    waiting.delete(id);
+    if (error === undefined) call.ok(result);
+    else call.fail(new Error(error));
+  };
+  worker.onerror = (e) => {  // the worker itself failed (did not load, or broke): it answers nothing any more
+    e.preventDefault();
+    console.error("game engine:", e.message);
+    reset(LOST);
+  };
+  ready = send({ boot: { index: PYODIDE, manifest: new URL("py/manifest.json", document.baseURI).href, glue: GLUE } });
   return ready;
 }
 
-const call = (py, fn, ...args) => JSON.parse(py.globals.get(fn)(...args));
+// A shared case's link starts the engine as the page opens (index.html), while the rest of the page is still coming.
+export const warmUp = () => theCase().then((yes) => yes && !ready && boot().catch(() => {}));  // a failure shows on the first call
+
+// The engine, started if it was not; a note at the foot of the page says so while it starts (again, after a reset).
+function engine() {
+  if (!ready) boot();
+  if (noted !== ready) {
+    noted = ready;
+    const note = document.createElement("div");
+    note.className = "engine-loading";
+    note.textContent = "Unpacking the case files…";
+    document.body.append(note);
+    ready.finally(() => note.remove()).catch(() => {});
+  }
+  return ready;
+}
+
+const call = async (fn, ...args) => JSON.parse(await send({ fn, args }));
 const randomSeed = () => crypto.getRandomValues(new Uint32Array(1))[0];
 // The moves of a request: one, or on the last night two (the guest who goes free, then the accused).
 const asMoves = (route, body) => (route === "/api/act" ? (body.chars || [body.char]).map((c) => ["act", Number(c)])
@@ -71,9 +116,9 @@ export async function pyApi(path, body) {
   const [route] = path.split("?");
   if (route === "/api/art") return {};  // no custom art without a server to list it
   if (!(await theCase())) throw new Error(CLOSED);  // the shared case is the only one
-  const py = await (ready || boot());
+  await engine();
   try {
-    return await sharedApi(py, route, body);
+    return await sharedApi(route, body);
   } catch (e) {
     // a Python error (an invalid move) arrives as a PythonError; keep only its last line
     throw new Error(String(e.message || e).trim().split("\n").pop());
@@ -90,52 +135,52 @@ let queue = Promise.resolve();
 const key = (seed, moves) => JSON.stringify([seed, moves]);
 const count = (s) => s.history.length + s.interviews.length;
 
-function replay(py, rec) {
-  call(py, "start", sharedCase, rec.seed, JSON.stringify(rec.moves));
+async function replay(rec) {
+  await call("start", sharedCase, rec.seed, JSON.stringify(rec.moves));
   played = key(rec.seed, rec.moves);
 }
 
-async function sync(py) {
+async function sync() {
   let rec = await readCase();
   if (!rec) {
     await startCase(randomSeed());  // false when another browser started the case first: its seed is the one
     rec = await readCase();
     if (!rec) throw new Error("Could not open the shared case. Try again in a moment.");
   }
-  if (key(rec.seed, rec.moves) !== played) replay(py, rec);
+  if (key(rec.seed, rec.moves) !== played) await replay(rec);
   return rec;
 }
 
 const withNotes = (s, rec) => ({ ...s, notes: rec.notes, read: rec.read });
 
-function sharedApi(py, route, body) {
-  const run = queue.then(() => sharedCall(py, route, body));
+function sharedApi(route, body) {
+  const run = queue.then(() => sharedCall(route, body));
   queue = run.catch(() => {});  // the caller sees the error; the next call still runs
   return run;
 }
 
-async function sharedCall(py, route, body) {
+async function sharedCall(route, body) {
   if (route === "/api/state") {
-    const rec = await sync(py);
-    return withNotes(call(py, "state", sharedCase), rec);
+    const rec = await sync();
+    return withNotes(await call("state", sharedCase), rec);
   }
   if (route === "/api/act" || route === "/api/tool") {
-    const rec = await sync(py), now = call(py, "state", sharedCase);
+    const rec = await sync(), now = await call("state", sharedCase);
     if (body.n !== count(now)) return { ...withNotes(now, rec), stale: true };
     const ms = asMoves(route, body);
     let s, saved;
     try {
-      for (const m of ms) s = call(py, "move", sharedCase, JSON.stringify(m));  // an invalid move fails here, before anything is saved
+      for (const m of ms) s = await call("move", sharedCase, JSON.stringify(m));  // an invalid move fails here, before anything is saved
       saved = await addMoves(rec.next, ms);
     } catch (e) {
-      replay(py, rec);  // not saved: take the moves back
+      await replay(rec);  // not saved: take the moves back
       throw e;
     }
     if (!saved) {  // another browser saved a move first
       played = null;  // the engine has made these moves: replay what is saved instead
-      const later = await sync(py);
+      const later = await sync();
       if (later.next === rec.next) throw new Error("The case file refused the move: check the database rules (README.md, A shared case).");
-      return { ...withNotes(call(py, "state", sharedCase), later), stale: true };
+      return { ...withNotes(await call("state", sharedCase), later), stale: true };
     }
     played = key(rec.seed, [...rec.moves, ...ms]);
     return s;

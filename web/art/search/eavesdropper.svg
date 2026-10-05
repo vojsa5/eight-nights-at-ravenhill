@@ -68,11 +68,11 @@
   <ellipse cx="252" cy="136" rx="5" ry="15" fill="#10181a" fill-opacity=".3" stroke="#f0fafc" stroke-width="1.4" filter="url(#glow)"/>
   <path d="M212 128 L246 123" stroke="#fff" stroke-width="1.4" opacity=".75"/>
   <path d="M214 146 L240 146" stroke="#ffc070" stroke-width="1" opacity=".6"/>
-  <!-- what comes through the wall -->
+  <!-- what comes through the wall (in the films, css/film.css, it keeps coming, ring after ring) -->
   <g fill="none" stroke="#e8d8a8" stroke-width="1.3" stroke-linecap="round" opacity=".55">
-    <path d="M263 126 q5 10 0 20"/>
-    <path d="M271 121 q7 15 0 30"/>
-    <path d="M279 116 q9 20 0 40"/>
+    <path class="lf-murmur" style="--d:-1.6s" d="M263 126 q5 10 0 20"/>
+    <path class="lf-murmur" style="--d:-.8s" d="M271 121 q7 15 0 30"/>
+    <path class="lf-murmur" d="M279 116 q9 20 0 40"/>
   </g>
   <!-- in the films (css/film.css) the lights live and what was found glints; in the story after a decision
        (css/verdict.css) a torch sweeps the room and finds what the found mark points at -->

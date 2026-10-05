@@ -1,4 +1,4 @@
-/* The opening's four chapters (chapters.js): each chapter's title card, the chapter bar over every scene and page, and
+/* The opening's five chapters (chapters.js): each chapter's title card, the chapter bar over every scene and page, and
    each chapter's own look, so that a player can tell at a glance what they are watching: the story is a film (as every
    film is, reveal.css), the case papers are papers, How to play is a manual (the picture in blueprint blue under a grid,
    the subtitle typed) and the advice is Inspector Hollis's notes (handwritten on a notepaper card, signed). */
@@ -99,7 +99,9 @@ button.ch-step:hover { color: #f6eedb; border-color: #cfb482; }
   text-decoration: underline 2px rgba(138,31,31,.5); text-underline-offset: .18em; }
 .film.tips-film .film-caption .film-title::before, .film.tips-film .film-caption .film-title::after { display: none; }
 .film.tips-film .film-caption .ph { animation-name: film-ink; }  /* ink, not light */
+.film.tips-film .film-caption { animation: tips-note .55s ease-out both; }  /* each note laid down on the picture */
 @keyframes film-ink { from { opacity: 0; } }
+@keyframes tips-note { from { opacity: 0; transform: translate(-1.5%, 10px) rotate(-2.6deg); } }
 
 /* a short screen on its side */
 @media (max-height: 500px) and (min-aspect-ratio: 1/1) {
@@ -119,10 +121,11 @@ button.ch-step:hover { color: #f6eedb; border-color: #cfb482; }
   .film.tips-film .film-caption { padding: .7em 1em 1.4em 2.3em; font-size: clamp(17px, 4.6vw, 23px);
     background-position: 0 0, -.4em 0, 0 0; }
 }
-@media (max-width: 520px) {
+/* where the five names would not fit on one line, only the current chapter keeps its name */
+@media (max-width: 560px), (max-width: 820px) and (min-aspect-ratio: 1/1) {
   .ch-step:not(.on) { padding-right: 4px; }
   .ch-step:not(.on) span { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .chapter-card, .ch-num, .ch-title h2, .ch-title p, .chapter-card > .btn { animation: none; }
+  .chapter-card, .ch-num, .ch-title h2, .ch-title p, .chapter-card > .btn, .film.tips-film .film-caption { animation: none; }
 }

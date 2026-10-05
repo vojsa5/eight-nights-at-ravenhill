@@ -1,6 +1,6 @@
 /* The reading screen (reading.js): the book won, under a reading lamp, until the player has finished it. It covers the
    game (z 95: under the opening screen, over the cards). The seal is held down until its ring closes (--hold). */
-.reading { position: fixed; inset: 0; z-index: 95; display: grid; place-items: center; padding: 16px; overflow: auto;
+.reading { position: fixed; inset: 0; z-index: 95; display: grid; place-items: center; place-items: safe center; padding: 16px; overflow: auto;
   background: radial-gradient(ellipse 70% 60% at 38% 30%, rgba(255,200,120,.22), transparent 70%),
     radial-gradient(ellipse at 50% 120%, #1a0f07, transparent 60%), linear-gradient(#0b0705, #160d07);
   animation: fade-in .6s ease-out both; }
