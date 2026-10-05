@@ -1,0 +1,141 @@
+/* A guest's dossier, once the case is closed (dossier.js): a manila file over the board, the guest's photograph clipped
+   to its cover and stamped with their side; then their nights as dated pages, every line a thing they did, learned or
+   said, ticked or crossed as it proved true; ‹ › along its foot to the guests beside them. Only its pages scroll. */
+.dz-card { --pencil: #34405e; display: flex; flex-direction: column; width: min(780px, 100%); max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom))); animation: rise .45s ease-out both; }
+.dz-head { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 20px; padding: 18px 22px 14px 26px;
+  border-bottom: 2px solid var(--paper-ink); background: linear-gradient(172deg, #ecd9a9, #dcc28a);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 3px 6px rgba(60,40,10,.18); }
+.dz-photo { position: relative; align-self: start; width: 112px; padding: 6px 6px 22px; background: linear-gradient(172deg, #f8f2e4, #ebe1ca);
+  box-shadow: 0 3px 8px rgba(0,0,0,.35); transform: rotate(-3deg); container-type: inline-size; }
+.dz-photo::before { content: ""; position: absolute; top: -13px; left: 12px; z-index: 2; width: 18px; height: 40px; border: 3px solid #a8a8a8;
+  border-radius: 9px; border-bottom-color: transparent; }  /* the paper clip */
+.dz-photo .art { display: block; width: 100%; aspect-ratio: 200 / 262; object-fit: cover; background: #111; }
+.dz-photo .stamp { top: 44%; font-size: clamp(11px, 15cqw, 17px); padding: 1px 6px; animation: thump .35s .25s cubic-bezier(.3,1.6,.5,1) both; }
+.dz-kicker { display: block; font: 11px/1.4 var(--typed); letter-spacing: .12em; text-transform: uppercase; color: #6a5434; }
+.dz-id h2 { margin: 3px 0 0; font: 700 26px/1.1 Cinzel, Georgia, serif; letter-spacing: .03em; }
+.dz-id h2 small { font: 13px var(--typed); letter-spacing: 0; color: #6a5434; }
+.dz-job { display: block; font: italic 16px "EB Garamond", Georgia, serif; color: #574832; }
+.dz-role { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 7px 0 0; }
+.dz-role b { font: 19px var(--typed); letter-spacing: .03em; }
+.dz-role .team { align-self: center; }
+.dz-sum { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 8px 0 0; font-size: 15.5px; line-height: 1.3; }
+.dz-fate-sum { font: 700 19px/1.15 var(--hand); color: var(--ink-green); }
+.dz-fate-sum.miss { color: var(--ink-red); }
+.dz-sum b.hit { color: var(--ink-green); }
+.dz-sum b.miss { color: var(--ink-red); }
+/* the pages: a night each, its moon and event kept in view as its lines scroll by */
+.dz-body { min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 0 22px 14px; }
+.dz-body:focus-visible { outline: 2px solid #a8843e; outline-offset: -3px; }
+.dz-night { margin-top: 10px; }
+.dz-date { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 9px; padding: 8px 0 5px;
+  background: var(--paper); border-bottom: 1.5px solid var(--paper-ink); }
+.dz-date svg { width: 24px; height: 24px; flex: none; }
+.dz-date .disc { fill: #2a2438; stroke: #6a5a40; stroke-width: .7; }
+.dz-date .lit { fill: #efe2b4; }
+.dz-date h3 { margin: 0; font: 700 19px/1 Cinzel, Georgia, serif; letter-spacing: .06em; white-space: nowrap; }
+.dz-event { margin-left: auto; padding: 1px 8px; border: 1px dashed var(--paper-muted); background: rgba(255,255,255,.35); white-space: nowrap;
+  font: 11.5px var(--typed); letter-spacing: .1em; text-transform: uppercase; }
+.dz-event span { margin-right: 5px; font-family: system-ui, sans-serif; letter-spacing: 0; }
+.dz-night ul { margin: 0; padding: 0; list-style: none; }
+.dz-part { margin: 9px 0 2px; font: 11px var(--typed); letter-spacing: .14em; text-transform: uppercase; color: var(--paper-muted); }
+.dz-line { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; padding: 3px 0; font-size: 16.5px; line-height: 1.38; }
+.dz-line + .dz-line { border-top: 1px dotted rgba(106,90,68,.3); }
+.dz-icon { font: 16px/1.4 system-ui, sans-serif; text-align: center; }
+.dz-line b.bad { color: var(--ink-red); }
+.dz-line b.good { color: var(--ink-green); }
+.dz-line.quiet { font-style: italic; color: var(--paper-muted); }
+.dz-facts { margin: 2px 0 0; padding-left: 18px; list-style: disc; }
+.dz-then { display: block; }
+.dz-why { display: block; margin-top: 1px; font-size: 15px; font-style: italic; color: #574832; }
+/* true or false, right or wrong: ticked or crossed in pencil */
+.dz-mark { margin-left: 2px; font: 12.5px var(--typed); letter-spacing: .02em; white-space: nowrap; }
+.dz-mark.hit { color: var(--ink-green); }
+.dz-mark.miss { color: var(--ink-red); white-space: normal; }
+/* a guest named: in their side's ink, and a click away from their own dossier */
+.dz-who { padding: 0 1px; border: 0; border-bottom: 1.5px dotted currentColor; border-radius: 0; background: none; font: 600 1em/1.2 "EB Garamond", Georgia, serif;
+  color: inherit; cursor: pointer; }
+.dz-who.good { color: var(--ink-green); }
+.dz-who.bad { color: var(--ink-red); }
+.dz-who:is(:hover, :focus-visible) { background: #efd896; outline: none; }
+/* how their part ended: the board's stamp, and the point it earned */
+.dz-fate { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin: 10px 0 4px; padding: 8px 10px;
+  background: #fbf7ec; box-shadow: 0 1px 2px rgba(0,0,0,.2); transform: rotate(-.4deg); font-size: 16px; }
+.dz-stamp { padding: 1px 7px; border: 3px double; border-radius: 3px; font: 700 13px var(--typed); letter-spacing: .08em; text-transform: uppercase;
+  transform: rotate(-8deg); -webkit-mask: var(--worn) 0 0 / 70px 70px; mask: var(--worn) 0 0 / 70px 70px; }
+.dz-stamp.save { color: var(--ink-green); }
+.dz-stamp.eliminate { color: var(--ink-red); }
+.dz-grade { margin-left: 6px; font: 700 21px/1 var(--hand); color: var(--ink-green); }
+.dz-fate.miss .dz-grade { color: var(--ink-red); }
+.dz-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; padding: 10px 16px;
+  border-top: 1px solid var(--paper-line); background: rgba(228,212,176,.5); }
+.dz-step { justify-self: start; display: inline-flex; align-items: center; gap: 6px; max-width: 100%; }
+.dz-step span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dz-step.next { justify-self: end; }
+@media (prefers-reduced-motion: reduce) {
+  .dz-card, .dz-photo .stamp { animation: none; }
+}
+
+/* A guest's name in the folder's tabs once the case is closed: their dossier (dossier.js dossierLink). In the Testimony
+   the whole witness cell takes the click. */
+.dz-link { padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: inherit; cursor: pointer;
+  text-decoration: underline dotted 1.5px; text-underline-offset: 3px; }
+.dz-link:is(:hover, :focus-visible) { color: var(--ink-red); outline: none; }
+.grid td.wit .dz-link::after { content: ""; position: absolute; inset: 0; }
+
+/* The closed case on the board: every polaroid opens its guest's dossier, as the chalk under the case note says. */
+.board:has(> .note > .closed) .card { cursor: pointer; }
+.board:has(> .note > .closed) .card:is(:hover, :focus-visible) { transform: translate(-50%, -52%) rotate(0deg) scale(1.07); z-index: 5; }
+.board:has(> .note > .closed) .card:hover::after { opacity: 1; }
+/* chalked on the cork under the note, outside the room board.js keeps clear for it, where no polaroid comes up under the note
+   (dossier.js .chalk); on phones, at the foot of the note */
+.note:has(> .closed)::after { content: "Click a photograph to see what that guest did"; display: none; font: 600 min(16px, 6cqw)/1.15 var(--hand);
+  pointer-events: none; }
+.note.chalk:has(> .closed)::after { display: block; position: absolute; top: calc(100% + 7px); left: 50%; white-space: nowrap; color: #f4e8cc;
+  text-shadow: 0 1px 2px rgba(0,0,0,.75); transform: translateX(-50%) rotate(-1.5deg); }
+@media (pointer: coarse) {
+  .note:has(> .closed)::after { content: "Tap a photograph to see what that guest did"; }
+}
+@media (max-width: 700px), (max-height: 500px) {
+  .note:has(> .closed)::after, .note.chalk:has(> .closed)::after { display: block; position: static; max-width: 100%; white-space: normal;
+    color: #ecdcb8; opacity: .88; text-shadow: none; transform: rotate(-1.5deg); }
+}
+
+/* Phones upright: the photograph smaller beside the name, the lines a size smaller. */
+@media (max-width: 700px) {
+  .dz-head { gap: 0 14px; padding: 14px 14px 10px 18px; }
+  .dz-photo { width: 78px; padding: 4px 4px 14px; }
+  .dz-photo::before { top: -10px; left: 8px; width: 13px; height: 30px; border-width: 2px; }
+  .dz-kicker { font-size: 10px; letter-spacing: .08em; }
+  .dz-id h2 { font-size: 21px; }
+  .dz-job { font-size: 15px; }
+  .dz-role { margin-top: 4px; }
+  .dz-role b { font-size: 16px; }
+  .dz-sum { gap: 2px 12px; margin-top: 5px; font-size: 14.5px; }
+  .dz-fate-sum { font-size: 17px; }
+  .dz-body { padding: 0 14px 12px; }
+  .dz-line { grid-template-columns: 20px minmax(0, 1fr); gap: 6px; font-size: 15.5px; }
+  .dz-icon { font-size: 14px; }
+  .dz-why { font-size: 14.5px; }
+  .dz-nav { gap: 6px; padding: 8px 10px max(8px, env(safe-area-inset-bottom)); }
+  .dz-nav .btn { padding: 6px 9px; font-size: 12.5px; }
+  .dz-step span { max-width: 9ch; }
+}
+/* Phones on their side: the cover on the left, the pages beside it, the buttons along the foot. */
+@media (max-height: 500px) and (min-width: 701px) {
+  .dz-card { display: grid; grid-template-columns: minmax(0, 34%) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; width: min(860px, 100%); }
+  .dz-head { grid-template-columns: 1fr; align-content: start; gap: 10px; padding: 16px 14px 12px; border-bottom: 0;
+    border-right: 2px solid var(--paper-ink); overflow: auto; }
+  .dz-photo { width: 70px; padding: 4px 4px 13px; }
+  .dz-photo::before { top: -10px; left: 8px; width: 13px; height: 30px; border-width: 2px; }
+  .dz-id h2 { font-size: 19px; }
+  .dz-job { font-size: 14.5px; }
+  .dz-role b { font-size: 15px; }
+  .dz-sum { font-size: 14px; }
+  .dz-fate-sum { font-size: 16px; }
+  .dz-body { padding: 0 14px 10px; }
+  .dz-line { font-size: 15px; }
+  .dz-nav { grid-column: 1 / -1; padding: 6px 12px; }
+  .dz-nav .btn { padding: 4px 10px; font-size: 12.5px; }
+}
+.cr-polaroid[data-dossier], .cr-alibi-photo[data-dossier] { cursor: pointer; }  /* the Crimes tab's photographs (crimes.js) */

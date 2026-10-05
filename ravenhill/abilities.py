@@ -4,6 +4,7 @@ Each ability is a function (game, mind, others, unknown, forged) registered in A
 `others` are the living characters except the actor, `unknown` those the actor knows nothing about.
 A forged actor gets a false result.
 """
+from .notebook import facts_learned
 from .rules import is_bad, registers_bad
 
 
@@ -15,22 +16,27 @@ def run_night(game):
     forger = game.find_alive("Forger")
     if forger is not None:
         forged = menace_target(game, forger)
+        game.jot(forger, "forge", target=forged)
     blackmailer = game.find_alive("Blackmailer")
     if blackmailer is not None and len(game.alive) > 1:
         game.silenced[game.round] = menace_target(game, blackmailer)
+        game.jot(blackmailer, "silence", target=game.silenced[game.round])
     paymaster = game.find_alive("Paymaster")
     if paymaster is not None and len(game.alive) > 2 and game.round > 1:  # from night II, as the Hypnotist
         game.bribes[game.round] = (paymaster, menace_target(game, paymaster))
+        game.jot(paymaster, "bribe", target=game.bribes[game.round][1])
     hypnotist = game.find_alive("Hypnotist")
     said = game.suggestions.get(game.round - 1)
     if hypnotist is not None and said and set(said) <= game.alive and len(game.alive) > 3:
         # tomorrow the subject repeats what the Hypnotist said today, so it cannot be one of the two it named
         game.hypnosis[game.round] = (hypnotist, menace_target(game, hypnotist, exclude=set(said)))
+        game.jot(hypnotist, "hypnotise", target=game.hypnosis[game.round][1])
     eavesdropper = game.find_alive("Eavesdropper")
     if eavesdropper is not None:
         m = game.minds[eavesdropper]
         m.following = most_reliable(game, eavesdropper)
         m.following_knew = game.minds[m.following].snapshot()
+        game.jot(eavesdropper, "follow", target=m.following)
     for c in sorted(game.alive):
         if c != eavesdropper:
             game.use_ability(c, c == forged)
@@ -39,7 +45,9 @@ def run_night(game):
     share_between_lovers(game)
     if game.round in game.hypnosis:
         hypnotist, subject = game.hypnosis[game.round]
+        knew = game.minds[hypnotist].snapshot()
         tell(game.minds[subject], game.minds[hypnotist])
+        game.jot(hypnotist, "told", by=subject, facts=facts_learned(knew, game.minds[hypnotist]))
 
 
 def share_between_lovers(game):
@@ -47,8 +55,11 @@ def share_between_lovers(game):
     lovers = [game.minds[c] for c in sorted(game.alive) if game.roles[c] == "Lover"]
     if len(lovers) != 2:
         return
+    knew = [m.snapshot() for m in lovers]
     for src, dst in (lovers, lovers[::-1]):
         tell(src, dst)
+    for m, partner, before in zip(lovers, lovers[::-1], knew):
+        game.jot(m.c, "meet", partner=partner.c, facts=facts_learned(before, m))
 
 
 def tell(src, dst):
@@ -70,7 +81,9 @@ def use_ability(game, c, forged):
         return
     others = [x for x in sorted(game.alive) if x != c]
     unknown = [x for x in others if x not in m.known and x not in m.roles]
+    knew = m.snapshot()
     ability(game, m, others, unknown, forged)
+    game.jot(c, "ability", facts=facts_learned(knew, m), forged=forged)
 
 
 def menace_target(game, attacker, exclude=()):
@@ -144,6 +157,7 @@ def constable(game, m, others, unknown, forged):
         ally = min(friends, key=lambda x: (trust[x], game.rng.random()))
         if t not in game.minds[ally].roles:  # a tip never overrides certain knowledge
             game.minds[ally].known.setdefault(t, result)
+            game.jot(m.c, "tip", to=ally, facts=[("side", t, result)], forged=forged)
 
 
 def eavesdropper(game, m, others, unknown, forged):

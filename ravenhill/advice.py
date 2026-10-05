@@ -45,15 +45,19 @@ def advise_round(game):
             save, eliminate = game.suggestions[game.round - 1]
             today[c] = Advice(game.round, c, save, eliminate)
             game.hypnotised[game.round] = c
+            game.jot(c, "hypnotised", by=hypnotist)
         elif c == bribed and paymaster in game.alive:
             today[c] = bribed_advice(game, c, paymaster, public, last)
+            game.jot(c, "bribed", by=paymaster)
         else:
             today[c] = game.advice_of(c, others, public, last)
         if game.roles[c] == "Hypnotist":
             game.suggestions[game.round] = (today[c].save, today[c].eliminate)
     lovers = [c for c in sorted(today) if game.roles[c] == "Lover" and c != subject and not (c == bribed and paymaster in game.alive)]
     if game.rules.lovers_agree and len(lovers) == 2 and not events.single_tip(event):
+        meant = (today[lovers[1]].save, today[lovers[1]].eliminate)
         agree(today[lovers[0]], today[lovers[1]])
+        game.jot(lovers[1], "agree", partner=lovers[0], meant=meant)  # what the second Lover would have said alone
     for c in sorted(today):
         events.trim_advice(event, today[c])
         game.advice.append(today[c])

@@ -1,17 +1,20 @@
 // The Testimony tab: every guest's advice, one column per round, coloured once targets are revealed;
-// the guests still in the house first, then those cleared or arrested.
+// the guests still in the house first, then those cleared or arrested. Once the case is closed a name opens that
+// guest's dossier (dossier.js).
+import { dossierLink } from "./dossier.js";
 import { EVENTS } from "./events.js";
 import { ROMAN } from "./format.js";
 import { portrait } from "./portrait.js";
 import { $, showInFolder, ui, verdict } from "./state.js";
 
 // A key made of real chips (the Interview's only in rule variants that have it), then one line of help.
-const key = (interviews) => `<div class="key">
+const key = (interviews, closed) => `<div class="key">
   <span><span class="chip s">3</span> clear #3</span><span><span class="chip e">5</span> arrest #5</span>
   <span><span class="chip s right">4</span><span class="chip e wrong">6</span> proved right / wrong</span>
   ${interviews ? `<span><span class="chip s interview">7</span> from an Interview</span>` : ""}</div>
-  <p class="key-help">The numbers under a name count how many of their tips proved right and wrong. Point at a row to see its
-  strings on the board; click a name or a chip to select that guest.</p>`;
+  <p class="key-help">The numbers under a name count how many of their tips proved right and wrong. ${closed
+    ? "Click a name to open that guest's dossier: what they really did each night, and why they advised as they did."
+    : "Point at a row to see its strings on the board; click a name or a chip to select that guest."}</p>`;
 
 const NOTES = ["", `<span class="mynote n1" title="Your note: guilty">✕</span>`, `<span class="mynote n2" title="Your note: innocent">✓</span>`];
 
@@ -46,7 +49,7 @@ export function testimonyHtml() {
   };
   const inHouse = S.chars.filter((c) => c.alive), gone = S.chars.filter((c) => !c.alive);
   const group = (label, list) => (list.length ? `<tr class="group"><th colspan="${rounds.length + 1}"><span>${label} · ${list.length}</span></th></tr>${list.map(row).join("")}` : "");
-  return key(S.interviews.length) + `<table class="grid"><thead><tr><th class="wit">Witness</th>${rounds.map(head).join("")}</tr></thead>
+  return key(S.interviews.length, S.finished) + `<table class="grid"><thead><tr><th class="wit">Witness</th>${rounds.map(head).join("")}</tr></thead>
     <tbody>${group("In the house", inHouse)}${group("Cleared or arrested", gone)}</tbody></table>`;
 }
 
@@ -70,5 +73,6 @@ function advisorCell(c, right, wrong) {
     : `<span class="job">${c.profession}</span>`;
   const rec = right + wrong ? `<span class="rec" title="${right} of their tips proved right, ${wrong} wrong"><span class="right">${right}</span><span class="wrong">${wrong}</span></span>` : "";
   const note = c.alive && !ui.S.finished ? NOTES[ui.marks[c.id] || 0] : "";
-  return `<div class="who">${portrait(known ? c.role : c.name, "thumb", c.art)}<span class="nm"><small>${c.id}</small> ${c.name}${note}<span class="sub">${tag}${rec}</span></span></div>`;
+  const name = ui.S.finished ? dossierLink(c) : c.name;
+  return `<div class="who">${portrait(known ? c.role : c.name, "thumb", c.art)}<span class="nm"><small>${c.id}</small> ${name}${note}<span class="sub">${tag}${rec}</span></span></div>`;
 }

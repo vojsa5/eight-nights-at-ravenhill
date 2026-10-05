@@ -4,6 +4,7 @@ import { api, closed } from "./api.js";
 import { renderFocus } from "./board.js";
 import { chapterBack, chapterEscape, chapterNext, chapterShowing } from "./chapters.js";
 import { replayCalls } from "./crimes.js";
+import "./dossier.js";  // a closed case's dossiers wire up their own clicks and keys
 import { filmShowing, nextScene, previousScene, skipFilm, togglePause } from "./film.js";
 import { showFinale } from "./finale.js";
 import { TABS, closeBook, renderFolder, showBook, tabInBook, toggleRole, turnBook } from "./folder.js";

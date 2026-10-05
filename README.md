@@ -38,7 +38,9 @@ A link with `?case=<name>` plays one case kept online, so it goes on in any brow
 same link, for example `https://vojsa5.github.io/eight-nights-at-ravenhill/?case=<name>`. Anyone with the link can play
 it, so pick a name nobody would guess (letters, digits, `-` and `_`). It is the only case the site plays: the page
 keeps the SHA-256 of its name (`CASE_SHA256` in `web/js/shared.js`), so the public source does not give the name
-away, and the database takes no second case. There is no "New case", and a move once made stays made.
+away, and the database takes no second case. A move once made stays made. New case starts the case over as a new
+game, once its seal is held down; every device with the link moves on to it, and the games before stay in the
+database (the first at the case's own level, each later one under `games/<n>`, with `game` naming the current one).
 When the case moves on in another browser, the page catches up (notes too) as soon as you come back to it; a move
 made on a board that was out of date is not made, and the page catches up instead.
 
@@ -56,7 +58,7 @@ The case lives in a free Firebase Realtime Database (`web/js/shared.js`). To set
    `python3 -c "import hashlib, sys; print(hashlib.sha256(sys.argv[1].encode()).hexdigest())" <name>`. Push, and open
    the link: the first visit starts the case.
 
-To start over, delete the case under `cases/` on the Data tab: the same link then starts a new one. To move to another
+To start completely afresh, delete the case under `cases/` on the Data tab: the same link then starts a new one. To move to another
 name, delete it too and put the new name's SHA-256 in `CASE_SHA256`. To try the static build locally:
 `python3 -m tools.build_pages && python3 -m http.server -d _site`, then open `http://localhost:8000/?case=<name>`,
 which plays the real case.
@@ -67,7 +69,7 @@ which plays the real case.
 play.py                  start the web game
 ravenhill/               the game engine (Python package)
   rules.py               roster, constants, rule variants (Rules), alignment helpers
-  game.py                round flow: night → advice → clear → arrest; the player's tools
+  game.py                round flow: night → advice → clear → arrest; the player's tools; the diary of the nights (jot)
   mind.py                a character's private knowledge and beliefs
   abilities.py           night abilities, one function per role
   advice.py              advice policies, one function per style, and the patterns the smart player reads too
@@ -93,7 +95,8 @@ web/                     the browser game
                          flashback (the moving parts of the crimes, an arrest's hall and cellar stairs, and the flashback after
                          a right call: the look of a memory),
                          reading (the screen that waits while a book is read), minisim (the self-playing case in miniature), howto (How to play's exhibits coming alive, scene by scene), rules (the Rules tab),
-                         chapters (the opening's five chapters: their title cards, the chapter bar and each chapter's look)
+                         chapters (the opening's five chapters: their title cards, the chapter bar and each chapter's look),
+                         dossier (a guest's dossier once the case is closed)
   js/                    one module per part of the page (main.js is the entry point; prologue.js holds the opening,
                          story.js the story of the birthday night (every crime, every innocent role's story, the opening film),
                          reveal.js the story after each decision, finale.js the ending, film.js plays all three full
@@ -104,7 +107,7 @@ web/                     the browser game
                          visit while the case loads behind it; tour.js plays the "How this tab works" tour of a folder
                          tab, and tours.js holds each tab's steps; crimes.js the folder's Crimes tab; reading.js the screen
                          that waits while a book is read; minisim.js the case in miniature, the chapter after How to play: a small case that plays itself;
-                         guests.js who each guest was to Lord Edmund)
+                         guests.js who each guest was to Lord Edmund; dossier.js a guest's dossier once the case is closed)
   art/roles/             one portrait per role (confidant-a / confidant-b, lover-a / lover-b for the two figures of a pair)
   art/guests/            each guest's own sepia portrait (by surname), shown until their role is revealed
   art/events/            one wide scene per event, shown on the round's opening card, where it comes alive (each file
@@ -192,6 +195,18 @@ Got away. Under the crimes, every innocent guest rightly cleared, with their rol
 and `TRUTHS`). A right call's Replay button plays its flashback, the film after the decision (`replayFlashbacks()` in
 `reveal.js`; the last night's two are seen only here); a mistake has none, as in the story after it. On phones the tab bar shortens the longer names
 (`data-short` in `index.html`).
+
+## The dossiers
+
+Once the case is closed, a click on a guest's photograph on the board (or on their name in the Testimony or Crimes tab)
+opens their dossier (`web/js/dossier.js`, styles in `css/dossier.css`): what they really did, night by night. Each night
+shows what the event taught them, whom they investigated and what they found (true or false, and why: the Forger's ink,
+the Grifter's disguise), the night work of the guilty (whom the Forger spoiled, the Paymaster bribed, the Hypnotist
+hypnotised and the Eavesdropper listened to, and what they learned from it) and the Lovers' meetings; each morning, what
+they advised and whether it proved right, and what bent it (a trance, a bribe, the other Lover, the Séance's spirit); then
+how their part ended. ‹ › and ← → turn to the guests beside them. The engine notes all this as it happens in
+`Game.diary` (`jot()` in `game.py`, which never draws on the rng, so a stored case replays the same), and
+`game_state()` sends it only once the case is closed.
 
 ## Rewards
 

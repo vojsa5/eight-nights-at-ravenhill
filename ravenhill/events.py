@@ -73,6 +73,7 @@ def first_impressions(game):
         if others:
             x = game.rng.choice(others)
             m.known[x] = registers_bad(game.roles[x], m.role)
+            game.jot(c, "impression", facts=[("side", x, m.known[x])])
 
 
 
@@ -85,6 +86,7 @@ def seance(game):
         if nb:
             m = game.minds[c]
             m.counts.append((nb, sum(registers_bad(game.roles[x], m.role) for x in nb)))
+            game.jot(c, "seance", facts=[("count",) + m.counts[-1]])
 
 
 def footprints(game):

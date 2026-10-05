@@ -42,6 +42,14 @@ def advice_json(a):
     return {"round": a.round, "speaker": a.speaker, "save": a.save, "eliminate": a.eliminate}
 
 
+def diary_json(g):
+    """What every guest did and learned night by night, and why some advised as they did (Game.jot), for the
+    dossiers of a closed case (web/js/dossier.js): one entry per note, its night as "round" (0: before night I)."""
+    def value(k, v):
+        return [fact_json(f) for f in v] if k == "facts" else list(v) if isinstance(v, tuple) else v
+    return [{"round": r, **{k: value(k, v) for k, v in e.items()}} for r in sorted(g.diary) for e in g.diary[r]]
+
+
 # The conspirators whose night's work leaves traces the whole house sees next morning (web/js/night.js has the texts).
 TRACES = ("Forger", "Eavesdropper", "Hypnotist", "Mole", "Paymaster", "Lover")  # the roles whose night work has an effect
 
@@ -83,4 +91,5 @@ def game_state(gid, g):
         "interviews": [advice_json(a) for a in g.interviews],
         "footprints": {str(r): list(pair) for r, pair in g.footprints.items()},
         "traces": {str(r): night_traces(g, r) for r in range(1, g.round + 1)},
+        **({"diary": diary_json(g)} if g.finished else {}),  # every secret of the nights: only once the case is closed
     }

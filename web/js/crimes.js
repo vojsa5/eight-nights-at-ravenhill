@@ -5,7 +5,9 @@
 // guest cleared by mistake keeps their role sealed until the thaw (the server leaves it out), so nothing here may say
 // which crime was theirs; once the case is closed every crime names its culprits, and those who walked free are
 // stamped Got away. Under the crimes, the innocent guests rightly cleared and who they really were. A right call's
-// flashback, the film after it (reveal.js), plays again from its Replay button.
+// flashback, the film after it (reveal.js), plays again from its Replay button. Once the case is closed a guest's name or
+// photograph opens their dossier (dossier.js).
+import { dossierLink } from "./dossier.js";
 import { ROMAN } from "./format.js";
 import { portrait } from "./portrait.js";
 import { closeModal, replayFlashbacks } from "./reveal.js";
@@ -66,7 +68,8 @@ function headHtml(S, crimes) {
   const sealed = !S.finished && freed
     ? `<p class="cr-sealed"><i class="cr-wax" aria-hidden="true"></i>${freed === 1 ? "One culprit walked free; which crime was theirs stays"
       : `${word(freed)} culprits walked free; which crimes were theirs stay`} sealed until the thaw.</p>` : "";
-  const closed = S.finished ? `<p class="cr-closed">Closed at the thaw: every culprit named${away ? `, and ${word(away).toLowerCase()} got away` : ""}.</p>` : "";
+  const closed = S.finished ? `<p class="cr-closed">Closed at the thaw: every culprit named${away ? `, and ${word(away).toLowerCase()} got away` : ""}.
+    A name or a photograph opens that guest's dossier.</p>` : "";
   const shared = crimes.find((x) => x.role === "Lover" && x.n > 1);  // the murder (story.js)
   return `<header class="cr-head">
     <span class="cr-kicker">${S.finished ? "Case closed" : "Scotland Yard"} · The charges</span>
@@ -110,11 +113,15 @@ function cardHtml(S, x, newest) {
       <ul class="cr-who">${whoHtml(x)}</ul>${replay}</div></article>`;
 }
 
+// A guest's name, and their photograph, which open their dossier once the case is closed.
+const named = (c) => (ui.S.finished ? dossierLink(c) : c.name);
+const dossierAt = (c) => (ui.S.finished ? ` data-dossier="${c.id}"` : "");
+
 // A culprit's polaroid on the scene: their own photograph once unmasked (pointing at it lifts it on the board, main.js
 // data-row), stamped Got away if they walked free; a silhouette while unknown. Screen readers get the list under the text instead.
 function polaroidHtml(s, k, fresh) {
   if (!s) return `<span class="cr-polaroid unknown" style="--k:${k}" aria-hidden="true"><img class="art" src="art/unknown.svg" alt=""><span class="cr-cap">?</span></span>`;
-  return `<span class="cr-polaroid ${s.caught ? "caught" : "away"}${fresh ? " fresh" : ""}" style="--k:${k}" data-row="${s.c.id}" aria-hidden="true">${portrait(s.c.name, "", s.c.portrait)}
+  return `<span class="cr-polaroid ${s.caught ? "caught" : "away"}${fresh ? " fresh" : ""}" style="--k:${k}" data-row="${s.c.id}"${dossierAt(s.c)} aria-hidden="true">${portrait(s.c.name, "", s.c.portrait)}
     <span class="cr-cap">${s.c.short}</span>${s.caught ? "" : `<b class="cr-stamp away">Got away</b>`}</span>`;
 }
 
@@ -122,7 +129,7 @@ function polaroidHtml(s, k, fresh) {
 function whoHtml(x) {
   const found = x.slots.filter(Boolean).map(({ c, h, caught }) => {
     const when = caught ? `Arrested · night ${ROMAN[h.round]}` : h ? `Cleared · night ${ROMAN[h.round]} · got away` : "Never caught";
-    return `<li class="${caught ? "caught" : "away"}" data-row="${c.id}"><b>${c.name}</b> <small>#${c.id}</small> <em>the ${c.profession}</em>
+    return `<li class="${caught ? "caught" : "away"}" data-row="${c.id}"><b>${named(c)}</b> <small>#${c.id}</small> <em>the ${c.profession}</em>
       <span class="cr-when">${when}</span></li>`;
   });
   const unknown = x.slots.filter((s) => !s).length;
@@ -138,9 +145,9 @@ function clearedHtml(S) {
   const items = cleared.map((h) => {
     const c = S.chars[h.char], story = TRUTH_STORY[h.role];
     return `<article class="cr-alibi" data-row="${c.id}">
-      <span class="cr-alibi-photo" aria-hidden="true">${portrait(c.name, "", c.portrait)}</span>
+      <span class="cr-alibi-photo"${dossierAt(c)} aria-hidden="true">${portrait(c.name, "", c.portrait)}</span>
       <div class="cr-alibi-body"><span class="cr-form">${h.round === S.rounds ? "Let go · the last night" : `Cleared · night ${ROMAN[h.round]}`}</span>
-        <h4><b>${c.name}</b> <small>#${c.id}</small> <em>the ${c.profession}</em></h4>
+        <h4><b>${named(c)}</b> <small>#${c.id}</small> <em>the ${c.profession}</em></h4>
         <p class="cr-alibi-role"><span>${title(h.role)}</span>${story ? `<i>·</i>${story.title}` : ""}</p>
         <p class="cr-alibi-text">${TRUTHS[h.role] || ""}</p>
         ${story ? replayHtml([h], `Replay who ${c.name} really was`) : ""}</div></article>`;

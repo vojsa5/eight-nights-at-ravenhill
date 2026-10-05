@@ -41,6 +41,7 @@ class Game:
         self.phase = None
         self.events = events.schedule(rng, rules)  # round -> event name
         self.night_log = {}  # round -> char -> facts learned that night
+        self.diary = {}  # round -> what the guests did and learned that night, and why they advised as they did; secret (jot)
         self.tools_used = set()  # rounds in which the round's tool was used
         self.notebooks = []   # the notebooks the player read: {"round", "char", "facts"}
         self.interviews = []  # the extra Advice from Interviews
@@ -54,7 +55,9 @@ class Game:
         for c, r in enumerate(roles):  # the Witness saw one of the guilty leave the library, face to face: the Grifter too
             seen = [x for x, rx in enumerate(roles) if r == "Witness" and is_bad(rx)]
             if seen:
-                self.minds[c].known[rng.choice(seen)] = True
+                x = rng.choice(seen)
+                self.minds[c].known[x] = True
+                self.jot(c, "saw", facts=[("side", x, True)])
         self._start_round()
 
     @property
@@ -115,6 +118,11 @@ class Game:
                 self.notebooks.append(opened)
         advice.advise_round(self)
         self.phase = "save"
+
+    def jot(self, c, what, **details):
+        """Note in tonight's diary what `c` did or learned (round 0: before the first night), for the dossiers once
+        the case is closed (server/state.py). Only a record: it never draws on the rng, so a case replays the same."""
+        self.diary.setdefault(self.round, []).append({"char": c, "what": what, **details})
 
     # hooks, so tools/audit.py can observe every action
     def use_ability(self, c, forged):

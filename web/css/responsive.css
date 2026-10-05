@@ -227,6 +227,7 @@
   .casebar .btn::after { content: ""; position: absolute; inset: -3px; }  /* the header's buttons may wrap to two rows 6px apart */
   .note .btn::after { content: ""; position: absolute; inset: -2px -3px; }  /* the note's buttons sit close: a tap never reaches the next one */
   .mark::after, .folder-close::after { content: ""; position: absolute; inset: -8px; }
+  .dz-step { position: relative; } .dz-step::after { content: ""; position: absolute; inset: -8px -3px; }  /* a dossier's ‹ › (dossier.css) */
   /* the Theory tab's switches and role lines sit too close for that: a little larger instead */
   .tslip .tswitch button { width: 30px; height: 28px; }
   .tslip .trole { padding: 3px 8px; }
