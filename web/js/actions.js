@@ -25,8 +25,12 @@ export function render() {
   renderFolder();
 }
 
-// A book was read (reading.js): the night it held back may begin (state.js), so all of the page is drawn again.
-document.addEventListener("bookread", render);
+// A book was read (reading.js): the night it held back may begin (state.js), so all of the page is drawn again, with
+// no guest still picked from before.
+document.addEventListener("bookread", () => {
+  ui.selected = null;
+  render();
+});
 
 // The nights in the case bar as a moon waxing to full on the last night, each named (the schedule is the same every case).
 function moon(r) {
