@@ -141,12 +141,11 @@ async function finish(slot) {
   setTimeout(() => el === shown && showReading(next), reduced() ? 0 : 1300);  // the stamp, then the next book or the case, unless put down meanwhile
 }
 
-// The book put down unread: the night's card comes as it would (maybeShowIntro passes the book over now), but a closed
-// case's ending does not.
+// The book put down unread: what follows it (the night's card, a closed case's ending) waits for it.
 function putAside() {
-  const waiting = unread()[0];  // none when the last book was stamped read meanwhile
+  const waiting = unread()[0];  // none when the last book was stamped read meanwhile: then what follows it comes
   aside = waiting ? keyOf(waiting) : null;
-  if (ui.S.finished && waiting) next = null;
+  if (waiting) next = null;
   close();
 }
 

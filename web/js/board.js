@@ -161,8 +161,8 @@ export function renderBoard() {
 }
 
 // The stamps come down with a thump when the board is next in view, not behind the film, a card, the reading screen
-// or the opening screen: the phase on the note each time it changes (the next night too), and CLEARED or ARRESTED on
-// the photograph of a guest just sent away.
+// or the opening screen: the phase on the note each time it changes (the next night too), but only once no book won
+// waits to be read, and CLEARED or ARRESTED on the photograph of a guest just sent away.
 let phaseKey = null, phaseDue = false, gone = null;
 const goneDue = new Set();
 
@@ -183,15 +183,17 @@ const covered = () => document.body.classList.contains("title-open") || $("modal
   || ($("desk").classList.contains("folder-open") && matchMedia("(max-width: 1100px), (max-height: 500px)").matches);  // the folder over it
 
 function putDown() {
-  if ((!phaseDue && !goneDue.size) || !cards.length || covered()) return;
+  if (!cards.length || covered()) return;
+  const phase = phaseDue && !unreadIn(ui.S, ui.read).length;
+  if (!phase && !goneDue.size) return;
   if (!reducedMotion()) {
-    if (phaseDue) {
+    if (phase) {
       note.querySelector(".phase, .closed")?.classList.add("thump");
       note.animate([{ translate: "0 0" }, { translate: "0 3px", offset: 0.4 }, { translate: "0 0" }], { duration: 300, delay: 160, easing: "ease-out" });
     }
     goneDue.forEach((id) => cards[id]?.over.querySelector(".stamp")?.classList.add("thump"));
   }
-  phaseDue = false;
+  if (phase) phaseDue = false;
   goneDue.clear();
 }
 new MutationObserver(putDown).observe($("modal"), { attributes: true, attributeFilter: ["class"] });

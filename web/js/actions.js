@@ -85,7 +85,10 @@ export function refresh() {
     }
     loadRead(s);
     readElsewhere();
-    if (JSON.stringify(ui.read) !== read) render();  // the case note's button back to the book goes
+    if (JSON.stringify(ui.read) !== read) {  // a book read in another browser: its buttons go, and the night it held back begins
+      render();
+      maybeShowIntro();
+    }
   }).catch(() => {});  // the next move catches up anyway
 }
 
