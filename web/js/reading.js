@@ -58,8 +58,7 @@ export function showReading(then) {
   }
   el.classList.remove("done");  // the next book comes unstamped
   const more = waiting.slice(1).map((x) => `<i>${x.book.title}</i>`);
-  el.innerHTML = `<div class="rd-lamp"></div>
-    <div class="rd-card">
+  el.innerHTML = `<div class="rd-card">
       <div class="rd-book">${coversHtml(book)}<span class="rd-ribbon"></span><span class="rd-stamp">Read</span></div>
       <div class="rd-text">
         <div class="rd-kicker">${S.finished ? "Before the thaw" : `Night ${ROMAN[S.round]} of ${ROMAN[S.rounds]}`} · the case waits</div>
