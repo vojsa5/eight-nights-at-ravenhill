@@ -25,6 +25,9 @@ export function render() {
   renderFolder();
 }
 
+// A book was read (reading.js): the night it held back may begin (state.js), so all of the page is drawn again.
+document.addEventListener("bookread", render);
+
 // The nights in the case bar as a moon waxing to full on the last night, each named (the schedule is the same every case).
 function moon(r) {
   const S = ui.S, state = S.finished || r < S.round ? "done" : r === S.round ? "now" : "";
@@ -39,14 +42,14 @@ const count = (S) => S.history.length + S.interviews.length;  // the moves made 
 const sameCase = (a, b) => JSON.stringify([a.id, a.history, a.advice, a.interviews]) === JSON.stringify([b.id, b.history, b.advice, b.interviews]);
 
 export function setGame(s) {
-  ui.S = s;
+  ui.game = s;
   ui.selected = null;
   ui.marks = loadJSON("marks-" + s.id, {});
   ui.guesses = loadJSON("guesses-" + s.id, {});
   if (sharedCase) takeNotes(s);
   else store("current-game", s.id);
   loadRead(s);
-  titleReady(s);
+  titleReady(ui.S);
 }
 
 // The notes saved with the shared case, if any. Anyone with its link can write them, so only real notes are taken.
@@ -77,7 +80,7 @@ function catchUp(s) {
 export function refresh() {
   if (!sharedCase || !ui.S || busy) return;
   api("/api/state?id=" + sharedCase).then((s) => {
-    if (!sameCase(s, ui.S)) return catchUp(s);
+    if (!sameCase(s, ui.game)) return catchUp(s);
     const read = JSON.stringify(ui.read);
     if ((s.notes ?? null) !== notesSeen && !notesPending()) {
       takeNotes(s);
@@ -95,13 +98,13 @@ export function refresh() {
 // A decision, sent with the number of moves the page has seen: the shared case refuses it (`stale`) if it moved on.
 function send(path, body) {
   busy = true;
-  return api(path, { id: ui.S.id, n: count(ui.S), ...body }).finally(() => (busy = false));
+  return api(path, { id: ui.game.id, n: count(ui.game), ...body }).finally(() => (busy = false));
 }
 
 // Does a state hold exactly the moves asked for on top of the board shown? In a shared case it can, though the
 // answer said otherwise: the moves were saved, but the answer got lost.
-const madeHere = (s, chars) => s.id === ui.S.id && count(s) === count(ui.S) + chars.length
-  && chars.every((c, i) => (s.history[ui.S.history.length + i] || {}).char === c);
+const madeHere = (s, chars) => s.id === ui.game.id && count(s) === count(ui.game) + chars.length
+  && chars.every((c, i) => (s.history[ui.game.history.length + i] || {}).char === c);
 
 // The answer to a decision: `done` it, or catch up when the case moved on instead.
 const answer = (chars, done) => (s) => (s.stale && !(chars && madeHere(s, chars)) ? catchUp(s) : done(s));
@@ -111,7 +114,7 @@ const answer = (chars, done) => (s) => (s.stale && !(chars && madeHere(s, chars)
 const failed = (chars, done) => (e) => {
   if (!sharedCase) return showError(e);
   api("/api/state?id=" + sharedCase)
-    .then((s) => (chars && madeHere(s, chars) ? done(s) : !sameCase(s, ui.S) ? catchUp(s) : showError(e)))
+    .then((s) => (chars && madeHere(s, chars) ? done(s) : !sameCase(s, ui.game) ? catchUp(s) : showError(e)))
     .catch(() => showError(e));
 };
 
@@ -160,9 +163,9 @@ const reading = () => unread().length > 0 && (takeUpBook(), true);
 
 export function act() {
   if (busy || ui.selected === null || reading()) return;
-  const before = ui.S.history.length, c = ui.selected;
+  const before = ui.game.history.length, c = ui.selected;
   const done = (s) => {
-    ui.S = s;
+    ui.game = s;
     ui.selected = null;
     render();
     if (s.history[before]) showReveal(s.history[before]);
@@ -176,7 +179,7 @@ export function accuse() {
   if (busy || ui.selected === null || reading()) return;
   const accused = ui.selected, freed = ui.S.chars.find((c) => c.alive && c.id !== accused).id;
   const done = (s) => {
-    ui.S = s;
+    ui.game = s;
     ui.selected = null;
     render();
     showDrawingRoom();
@@ -189,7 +192,7 @@ export function useTool(tool) {
   if (busy || ui.selected === null || reading()) return;
   const c = ui.selected;
   const done = (s) => {
-    ui.S = s;
+    ui.game = s;
     render();
     showClue(tool, c);
   };

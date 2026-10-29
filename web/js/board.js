@@ -324,6 +324,10 @@ function noteHtml() {
   const a = S.phase, event = eventOf(S.round), accuse = inDrawingRoom();
   let h = noteHead(`<div class="kicker">${moonSvg(S.round / S.rounds, "moon")}Night ${ROMAN[S.round]} of ${ROMAN[S.rounds]}</div>`);
   if (event) h += eventTag(EVENTS[event][0], event, EVENTS[event][3]);
+  if (S.held) {  // the night ended with a book won, and the next begins once it is read (state.js)
+    return `${h}<div class="prompt"><span class="hint">Night ${ROMAN[S.round]} is over.</span><span class="goal">The next night
+      begins once you have read your book.</span></div>${bookButton(book)}`;
+  }
   if (accuse) h += eventTag(LAST_NIGHT[0], "The drawing room", "Name the guilty one; the other goes free.");
   h += `<div class="phase ${accuse ? "eliminate" : a}">${accuse ? "Accuse" : a === "save" ? "Clear" : "Arrest"}</div>`;
   if (accuse && ui.selected === null) {

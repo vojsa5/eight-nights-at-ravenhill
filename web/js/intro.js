@@ -21,6 +21,7 @@ export function maybeShowIntro() {
   const S = ui.S;
   if (!S || titleOpen() || readingOpen() || $("modal").classList.contains("open")) return;
   if (unread().length) {
+    if (S.held) store(seenKey(), S.round);  // the night after it begins once the book is read, card and all (state.js)
     if (!readingAside()) takeUpBook();
     return;
   }
@@ -31,22 +32,8 @@ export function maybeShowIntro() {
   showIntro();
 }
 
-// A book waits that was won by the decision that ended the last night: the night it opened has not begun yet.
-const nightWaits = () => unread().some((x) => x.h.round < ui.S.round);
-
 // The reading screen, put down or not: then the night's card, or a closed case's ending.
-export function takeUpBook() {
-  showReading(ui.S.finished ? showFinale : nightWaits() ? beginNight : maybeShowIntro);
-}
-
-// The book that opened this night is read: the night begins, its card shown whether or not it was seen before.
-function beginNight() {
-  if (ui.S && !unread().length) store(seenKey(), ui.S.round - 1);
-  maybeShowIntro();
-}
-
-// The case note's event tag: the night's card again, or the book first when the night has not begun yet.
-export const reopenIntro = () => (nightWaits() ? takeUpBook() : showIntro());
+export const takeUpBook = () => showReading(ui.S.finished ? showFinale : maybeShowIntro);
 
 // after the prologue: the first night's card
 function openCase() {

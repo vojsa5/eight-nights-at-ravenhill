@@ -8,7 +8,7 @@ import "./dossier.js";  // a closed case's dossiers wire up their own clicks and
 import { filmShowing, nextScene, previousScene, skipFilm, togglePause } from "./film.js";
 import { showFinale } from "./finale.js";
 import { TABS, closeBook, renderFolder, showBook, tabInBook, toggleRole, turnBook } from "./folder.js";
-import { maybeShowIntro, reopenIntro, takeUpBook } from "./intro.js";
+import { maybeShowIntro, showIntro, takeUpBook } from "./intro.js";
 import { nextPage, previousPage, showPrologue } from "./prologue.js";
 import { closeModal } from "./reveal.js";
 import { CLOSED, flushNotes, sharedCase, sharedProblem } from "./shared.js";
@@ -24,7 +24,7 @@ import { readingOpen } from "./reading.js";
 import { tourKey } from "./tour.js";
 
 const ACTIONS = {
-  "new-game": newGame, act, accuse, "reset-notes": resetNotes, intro: reopenIntro, interview: () => useTool("interview"),
+  "new-game": newGame, act, accuse, "reset-notes": resetNotes, intro: showIntro, interview: () => useTool("interview"),
   "prologue-next": nextPage, "prologue-back": previousPage, finale: showFinale,
   "film-next": nextScene, "film-back": previousScene, "film-pause": togglePause, "film-skip": skipFilm, read: takeUpBook,
 };

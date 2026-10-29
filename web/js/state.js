@@ -1,7 +1,9 @@
 // Shared UI state and small helpers over the game state received from the server.
+import { unreadIn } from "./books.js";
 
 export const ui = {
-  S: null,           // game state from the server
+  game: null,        // game state from the server
+  get S() { return shown(this.game, this.read); },  // the game as the page shows it
   selected: null,    // character picked for the current decision
   hoverRow: null,    // testimony row under the mouse
   hoverChar: null,   // portrait under the mouse
@@ -14,6 +16,22 @@ export const ui = {
 };
 
 export const $ = (id) => document.getElementById(id);
+
+// The game as shown. While a book won by the decision that ended the last night waits to be read (reading.js), that
+// night is not over for the player: what the next one brought (its advice, clues and traces) stays out of sight, and
+// the page shows the last night as it ended, with `held` set. Worked out again only when the game or the books read change.
+let shownFor = [], view = null;
+function shown(game, read) {
+  if (shownFor[0] !== game || shownFor[1] !== read) {
+    shownFor = [game, read];
+    view = game && !game.finished && unreadIn(game, read).some((x) => x.h.round < game.round) ? heldBack(game, game.round - 1) : game;
+  }
+  return view;
+}
+const upTo = (byRound, r) => Object.fromEntries(Object.entries(byRound || {}).filter(([k]) => Number(k) <= r));
+const heldBack = (g, r) => ({ ...g, round: r, held: true, advice: g.advice.filter((a) => a.round <= r),
+  interviews: g.interviews.filter((a) => a.round <= r), notebooks: g.notebooks.filter((x) => x.round <= r),
+  events: upTo(g.events, r), footprints: upTo(g.footprints, r), traces: upTo(g.traces, r), silenced: upTo(g.silenced, r) });
 
 // A slip at the foot of the page, gone after `ms` (or staying, with 0).
 export function notice(text, ms = 6000) {

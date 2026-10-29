@@ -3,11 +3,9 @@
 // stray click never does. The book can be put down to look over the case meanwhile, but every decision, a new case and
 // a closed case's ending wait for it all the same, and bring the screen back. A book once read stays read, kept with
 // the case: online for the shared case (shared.js), else in this browser. Styles: css/reading.css.
-import { renderBoard } from "./board.js";
 import { BOOKS, coversHtml, slotOf, unreadIn } from "./books.js";
 import { ROMAN } from "./format.js";
 import { markRead, sharedCase } from "./shared.js";
-import { renderFolder } from "./folder.js";
 import { $, notice, ui } from "./state.js";
 import { loadJSON, store } from "./storage.js";
 
@@ -132,9 +130,7 @@ async function finish(slot) {
     store("read-" + ui.S.id, JSON.stringify({ ...ui.read, [slot]: when }));
   }
   ui.read = { ...ui.read, [slot]: when };
-  renderBoard();  // the case note's button back to the book
-  markBookButton();
-  renderFolder();  // the Rewards tab's reading list, if open
+  document.dispatchEvent(new Event("bookread"));  // actions.js draws the page again
   if (!el) return;  // marked read in another browser meanwhile, and the screen has gone
   const shown = el;
   el.classList.add("done");
