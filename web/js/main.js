@@ -8,7 +8,7 @@ import "./dossier.js";  // a closed case's dossiers wire up their own clicks and
 import { filmShowing, nextScene, previousScene, skipFilm, togglePause } from "./film.js";
 import { showFinale } from "./finale.js";
 import { TABS, closeBook, renderFolder, showBook, tabInBook, toggleRole, turnBook } from "./folder.js";
-import { maybeShowIntro, showIntro } from "./intro.js";
+import { maybeShowIntro, showIntro, takeUpBook } from "./intro.js";
 import { nextPage, previousPage, showPrologue } from "./prologue.js";
 import { closeModal } from "./reveal.js";
 import { CLOSED, flushNotes, sharedCase, sharedProblem } from "./shared.js";
@@ -26,7 +26,7 @@ import { tourKey } from "./tour.js";
 const ACTIONS = {
   "new-game": newGame, act, accuse, "reset-notes": resetNotes, intro: showIntro, interview: () => useTool("interview"),
   "prologue-next": nextPage, "prologue-back": previousPage, finale: showFinale,
-  "film-next": nextScene, "film-back": previousScene, "film-pause": togglePause, "film-skip": skipFilm,
+  "film-next": nextScene, "film-back": previousScene, "film-pause": togglePause, "film-skip": skipFilm, read: takeUpBook,
 };
 
 // closing any card may reveal the next one: a round's opening card waits until the reveal is dismissed

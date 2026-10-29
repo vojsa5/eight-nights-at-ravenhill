@@ -65,6 +65,7 @@ export function showDrawingRoom() {
 
 export function showFinale() {
   if (!ui.S || !ui.S.finished) return;
+  if (unread().length) return showReading(showFinale);  // the books won are read before the thaw
   playFilm(finaleScenes(), { done: showClosing, label: "The thaw", skip: "Skip to the verdict" });
 }
 

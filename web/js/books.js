@@ -62,5 +62,10 @@ export function shelf(S) {
 // The book a decision won, if any.
 export const bookFor = (S, h) => (shelf(S).won.find((x) => x.h.char === h.char) || {}).book;
 
+export const slotOf = (book) => Object.keys(BOOKS).find((k) => BOOKS[k] === book);
+
+// The books won but not read yet (`read`: book slot -> when it was finished, reading.js), in the order they were won.
+export const unreadIn = (S, read) => shelf(S).won.filter((x) => !read[slotOf(x.book)]);
+
 export const coversHtml = (book) => `<span class="covers${book.covers.length > 1 ? " two" : ""}">${book.covers
   .map((c) => `<img src="art/books/${c}.jpg" alt="" loading="lazy">`).join("")}</span>`;

@@ -1,6 +1,7 @@
 // The case board: guests pinned up as polaroids in their seating order, red string for the hovered
 // guest's testimony, and the case note in the middle. The polaroids are built once and then patched:
 // rebuilding them made the browser redraw all sixteen portraits on every mouse move.
+import { unreadIn } from "./books.js";
 import { TOOLS, morningClueLine } from "./clues.js";
 import { EVENTS, LAST_NIGHT, eventOf, namesArrest, namesClear } from "./events.js";
 import { ROMAN, moonSvg } from "./format.js";
@@ -306,15 +307,17 @@ export const RANKS = [[1, "Flawless. Scotland Yard would like a word about a job
 const noteHead = (night) => `<div class="note-head">${night}</div>`;
 // the night's event, which opens its card again
 const eventTag = (icon, name, title) => `<button class="event" data-action="intro" title="${title}"><span>${icon}</span> ${name}</button>`;
+// A book won and put down unread (reading.js): it stands in for the decision's button, and opens the book again.
+const bookButton = (book) => `<button class="btn" data-action="read" title="The case waits until you have read it">📖 Finish <i>${book.title}</i> first</button>`;
 
 function noteHtml() {
-  const S = ui.S;
+  const S = ui.S, book = unreadIn(S, ui.read)[0]?.book;
   if (S.finished) {
     const n = S.history.length, s = S.score;
     const line = RANKS.find(([share]) => s >= share * n)[1];
     return `${noteHead(moonSvg(1, "moon"))}<div class="closed">Case closed</div><div class="final">${s}<span>/ ${n}</span></div>
-      <div class="prompt">${line}</div><button class="btn primary" data-action="new-game">Take another case</button>
-      <button class="btn" data-action="finale">Watch the ending</button>`;
+      <div class="prompt">${line}</div>${book ? bookButton(book) : `<button class="btn primary" data-action="new-game">Take another case</button>
+      <button class="btn" data-action="finale">Watch the ending</button>`}`;
   }
   const a = S.phase, event = eventOf(S.round), accuse = inDrawingRoom();
   let h = noteHead(`<div class="kicker">${moonSvg(S.round / S.rounds, "moon")}Night ${ROMAN[S.round]} of ${ROMAN[S.rounds]}</div>`);
@@ -323,10 +326,10 @@ function noteHtml() {
   h += `<div class="phase ${accuse ? "eliminate" : a}">${accuse ? "Accuse" : a === "save" ? "Clear" : "Arrest"}</div>`;
   if (accuse && ui.selected === null) {
     h += `<div class="prompt"><span class="hint">Two remain, and nobody advises any more.</span><span class="goal">Name the one you
-      believe is guilty; the other goes free. +1 for each you judge right.</span><small>Point at a photograph to choose.</small></div>`;
+      believe is guilty; the other goes free. +1 for each you judge right.</span>${book ? "" : "<small>Point at a photograph to choose.</small>"}</div>${book ? bookButton(book) : ""}`;
   } else if (accuse) {
     const c = S.chars[ui.selected];
-    h += `${pickHtml(c, "")}<button class="btn press eliminate" data-action="accuse">Accuse ${c.name}</button>`;
+    h += `${pickHtml(c, "")}${book ? bookButton(book) : `<button class="btn press eliminate" data-action="accuse">Accuse ${c.name}</button>`}`;
   } else if (ui.selected === null) {
     const quiet = !S.advice.some((x) => x.round === S.round);
     const alive = S.chars.filter((c) => c.alive).length;
@@ -334,12 +337,12 @@ function noteHtml() {
       : event ? morningClueLine(S, S.round) || EVENTS[event][4]
       : quiet ? "Only two remain, and no one can advise any more." : "";
     const goal = a === "save" ? "Clear one guest of suspicion. +1 if they are innocent." : "Make an arrest. +1 if they are guilty.";
-    h += `<div class="prompt">${hint ? `<span class="hint">${hint}</span>` : ""}<span class="goal">${goal}</span><small>Point at a photograph to see its string.</small></div>`;
+    h += `<div class="prompt">${hint ? `<span class="hint">${hint}</span>` : ""}<span class="goal">${goal}</span>${book ? "" : "<small>Point at a photograph to see its string.</small>"}</div>${book ? bookButton(book) : ""}`;
   } else {
     const c = S.chars[ui.selected], v = currentVotes()[ui.selected] || { s: 0, e: 0 };
     h += `${pickHtml(c, `<div class="prompt">${v.s} advise clearing · ${v.e} advise arresting</div>`)}
-      <button class="btn press ${a}" data-action="act">${a === "save" ? "Clear" : "Arrest"} ${c.name}</button>
-      ${Object.keys(TOOLS).filter((t) => TOOLS[t][3] === event).map((t) => `<div class="tools">${toolButton(t)}</div>`).join("")}`;
+      ${book ? bookButton(book) : `<button class="btn press ${a}" data-action="act">${a === "save" ? "Clear" : "Arrest"} ${c.name}</button>
+      ${Object.keys(TOOLS).filter((t) => TOOLS[t][3] === event).map((t) => `<div class="tools">${toolButton(t)}</div>`).join("")}`}`;
   }
   return h;
 }

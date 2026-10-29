@@ -57,6 +57,8 @@ button, .card, [data-trace], [data-c] { touch-action: manipulation; }  /* a quic
 .btn:hover { border-color: var(--gold); }
 .btn.ghost { background: transparent; }
 .btn.primary { background: linear-gradient(#d8b46a, #a8843e); color: #1b140a; border-color: #d8b46a; }
+.btn.book { border-color: var(--gold); box-shadow: 0 0 10px rgba(216,180,106,.45); }  /* a book put down unread (reading.js) */
+.btn.book span { line-height: 0; }  /* the emoji would make the button, and the case bar, taller than the others */
 #theme { padding: 5px 10px; line-height: 0; }
 
 /* the desk: the board, and the case folder at the right edge */

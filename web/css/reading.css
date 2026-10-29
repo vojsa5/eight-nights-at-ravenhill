@@ -1,5 +1,6 @@
 /* The reading screen (reading.js): the book won, under a reading lamp, until the player has finished it. It covers the
-   game (z 95: under the opening screen, over the cards). The seal is held down until its ring closes (--hold). */
+   game (z 95: under the opening screen, over the cards), unless put down to look over the case. The seal is held down
+   until its ring closes (--hold). */
 .reading { position: fixed; inset: 0; z-index: 95; display: grid; place-items: center; place-items: safe center; padding: 16px; overflow: auto;
   background: radial-gradient(ellipse 70% 60% at 38% 30%, rgba(255,200,120,.22), transparent 70%),
     radial-gradient(ellipse at 50% 120%, #1a0f07, transparent 60%), linear-gradient(#0b0705, #160d07);
@@ -25,9 +26,11 @@
 .rd-title span { display: block; font-size: 16px; font-style: italic; color: var(--paper-muted); }
 .rd-text p { margin: 0; font-size: 16.5px; line-height: 1.45; }
 .rd-text .rd-more { font-size: 15px; color: var(--paper-muted); }
-.rd-done, .rd-notyet { font: 14px var(--typed); letter-spacing: .06em; border-radius: 4px; padding: 9px 18px; cursor: pointer; }
-.rd-done { margin-top: 6px; color: #1b140a; border: 1px solid #b08a44; background: linear-gradient(#d8b46a, #a8843e); }
-.rd-notyet { color: var(--paper-ink); border: 1px solid var(--paper-line); background: rgba(255,255,255,.4); }
+.rd-go { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.rd-go[hidden] { display: none; }
+.rd-done, .rd-notyet, .rd-aside { font: 14px var(--typed); letter-spacing: .06em; border-radius: 4px; padding: 9px 18px; cursor: pointer; }
+.rd-done { color: #1b140a; border: 1px solid #b08a44; background: linear-gradient(#d8b46a, #a8843e); }
+.rd-notyet, .rd-aside { color: var(--paper-ink); border: 1px solid var(--paper-line); background: rgba(255,255,255,.4); }
 .rd-confirm { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 4px; padding: 12px 14px; border-left: 3px solid #a8843e;
   background: rgba(90,70,40,.08); }
 .rd-confirm[hidden] { display: none; }
@@ -55,7 +58,7 @@
 @media (max-width: 700px) {
   .rd-card { grid-template-columns: 1fr; justify-items: center; gap: 18px; padding: 24px 20px; }
   .rd-text { align-items: center; text-align: center; }
-  .rd-confirm { justify-content: center; }
+  .rd-go, .rd-confirm { justify-content: center; }
   .rd-book .covers { --w: 130px; }
   .rd-book .covers.two { --w: 104px; }
   .rd-text h2 { font-size: 26px; }

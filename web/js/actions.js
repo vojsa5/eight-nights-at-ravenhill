@@ -6,13 +6,13 @@ import { armReset, closePicker } from "./theory.js";
 import { ROLES, isBadRole } from "./roles.js";
 import { ROMAN, moonSvg } from "./format.js";
 import { nightEvent } from "./events.js";
-import { maybeShowIntro } from "./intro.js";
+import { maybeShowIntro, takeUpBook } from "./intro.js";
 import { showDrawingRoom } from "./finale.js";
 import { closeModal, showClue, showReveal } from "./reveal.js";
 import { notesPending, saveNotes as saveSharedNotes, sharedCase } from "./shared.js";
 import { $, notice, patch, ui } from "./state.js";
 import { showTitle, titleFailed, titleOpen, titleReady } from "./title.js";
-import { holdToConfirm, loadRead, readElsewhere, showReading, unread } from "./reading.js";
+import { holdToConfirm, loadRead, markBookButton, readElsewhere, unread } from "./reading.js";
 import { loadJSON, store } from "./storage.js";
 
 export function render() {
@@ -20,6 +20,7 @@ export function render() {
   if (!S) return;
   patch($("pips"), Array.from({ length: S.rounds }, (_, i) => moon(i + 1)).join(""));
   $("score").textContent = `${S.score} / ${S.history.length}`;
+  markBookButton();
   renderBoard();
   renderFolder();
 }
@@ -77,12 +78,14 @@ export function refresh() {
   if (!sharedCase || !ui.S || busy) return;
   api("/api/state?id=" + sharedCase).then((s) => {
     if (!sameCase(s, ui.S)) return catchUp(s);
+    const read = JSON.stringify(ui.read);
     if ((s.notes ?? null) !== notesSeen && !notesPending()) {
       takeNotes(s);
       render();
     }
     loadRead(s);
     readElsewhere();
+    if (JSON.stringify(ui.read) !== read) render();  // the case note's button back to the book goes
   }).catch(() => {});  // the next move catches up anyway
 }
 
@@ -114,6 +117,7 @@ const failed = (chars, done) => (e) => {
 export function askNewGame() {
   const S = ui.S;
   if (!S) return sharedCase ? undefined : newGame();  // the shared case is still opening: there is nothing to start over yet
+  if (reading()) return;
   if (S.finished) return newGame();  // a closed case is in the files already
   $("modal").innerHTML = `<div class="restart" role="dialog" aria-modal="true" aria-labelledby="rs-head">
     <div class="rd-kicker">Night ${ROMAN[S.round]} of ${ROMAN[S.rounds]} · score ${S.score} of ${S.history.length}</div>
@@ -132,6 +136,7 @@ export function askNewGame() {
 
 // A new case opens on the opening screen, while it loads behind it. A shared case moves on to a new game of its own.
 export function newGame() {
+  if (reading()) return;
   closeModal();
   if (!titleOpen()) showTitle(maybeShowIntro);
   const seed = new URLSearchParams(location.search).get("seed");  // for tests only; never shown
@@ -146,8 +151,9 @@ export function newGame() {
   }).catch(showError);
 }
 
-// No decision while a book won waits to be read: the reading screen comes back instead.
-const reading = () => unread().length > 0 && (showReading(maybeShowIntro), true);
+// No decision while a book won waits to be read, even one put down to look over the case: the reading screen comes
+// back instead.
+const reading = () => unread().length > 0 && (takeUpBook(), true);
 
 export function act() {
   if (busy || ui.selected === null || reading()) return;

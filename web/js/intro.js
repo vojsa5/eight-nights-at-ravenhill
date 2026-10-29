@@ -9,24 +9,27 @@ import { title } from "./roles.js";
 import { closeModal } from "./reveal.js";
 import { $, ui } from "./state.js";
 import { titleOpen } from "./title.js";
-import { readingOpen, showReading, unread } from "./reading.js";
+import { readingAside, readingOpen, showReading, unread } from "./reading.js";
 import { showFinale } from "./finale.js";
 import { load, store } from "./storage.js";
 
 const seenKey = () => "intro-" + ui.S.id;
 
 // Show the current round's card unless it has been shown already (or another card is open). A book won and not yet
-// read comes first: the reading screen, and the night's card once it is finished.
+// read comes first: the reading screen, and the night's card once it is finished (or put down to look over the case).
 export function maybeShowIntro() {
   const S = ui.S;
   if (!S || titleOpen() || readingOpen() || $("modal").classList.contains("open")) return;
-  if (unread().length) return showReading(S.finished ? showFinale : maybeShowIntro);  // a closed case: then the ending
+  if (unread().length && !readingAside()) return takeUpBook();
   if (S.finished) return;
   if (maybeShowPrologue(openCase)) return;  // the briefing comes before the very first night
   if (Number(load(seenKey()) || 0) >= S.round) return;
   store(seenKey(), S.round);
   showIntro();
 }
+
+// The reading screen, put down or not: then the night's card, or a closed case's ending.
+export const takeUpBook = () => showReading(ui.S.finished ? showFinale : maybeShowIntro);
 
 // after the prologue: the first night's card
 function openCase() {

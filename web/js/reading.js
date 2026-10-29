@@ -1,8 +1,10 @@
 // Reading: a book won is read before the case goes on. While a book waits to be finished this screen covers the game,
 // and only the player can let it go on: "I have finished it", then holding the seal down until its ring closes, so a
-// stray click never does. A book once read stays read, kept with the case: online for the shared case (shared.js),
-// else in this browser. Styles: css/reading.css.
-import { BOOKS, coversHtml, shelf } from "./books.js";
+// stray click never does. The book can be put down to look over the case meanwhile, but every decision, a new case and
+// a closed case's ending wait for it all the same, and bring the screen back. A book once read stays read, kept with
+// the case: online for the shared case (shared.js), else in this browser. Styles: css/reading.css.
+import { renderBoard } from "./board.js";
+import { BOOKS, coversHtml, slotOf, unreadIn } from "./books.js";
 import { ROMAN } from "./format.js";
 import { markRead, sharedCase } from "./shared.js";
 import { renderFolder } from "./folder.js";
@@ -10,11 +12,10 @@ import { $, notice, ui } from "./state.js";
 import { loadJSON, store } from "./storage.js";
 
 const HOLD_MS = 1600;
-const slotOf = (book) => Object.keys(BOOKS).find((k) => BOOKS[k] === book);
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // The books won but not read yet, in the order they were won.
-export const unread = () => (ui.S ? shelf(ui.S).won.filter((x) => !ui.read[slotOf(x.book)]) : []);
+export const unread = () => (ui.S ? unreadIn(ui.S, ui.read) : []);
 
 // The books read in this case, when the case is (re)loaded: slot -> when it was finished. Online they come with the
 // state, and anyone with the link could write there, so only real slots and times are taken (in this browser too).
@@ -24,13 +25,25 @@ export function loadRead(s) {
   ui.read = Object.fromEntries(Object.entries(read && typeof read === "object" ? read : {}).filter(([k, t]) => BOOKS[k] && real(t)));
 }
 
-let el = null, next = null;
+let el = null, next = null, aside = null;
 export const readingOpen = () => !!el;
+// The book put down to look over the case: the screen stays away until a decision or the case note's button brings it
+// back (or the page is opened again). It is kept by case and slot, so a book won later, or one left first once this
+// one was read in another browser, comes up as usual.
+const keyOf = (x) => ui.S.id + " " + slotOf(x.book);
+export const readingAside = () => !!unread().length && keyOf(unread()[0]) === aside;
+// The case bar's way back to the book, there while one waits.
+export function markBookButton() {
+  const waiting = unread()[0];
+  $("readbook").hidden = !waiting;
+  if (waiting) $("readbook").title = `Back to ${waiting.book.title}: the case waits until you have read it`;
+}
 const behind = () => document.querySelectorAll("body > .casebar, body > .desk, body > #modal");
 
 // The first book waiting to be read; `then` runs once every book is read (at once if none is waiting).
 export function showReading(then) {
   next = then;
+  aside = null;
   const waiting = unread();
   if (!waiting.length) return close();
   const { h, book } = waiting[0], c = ui.S.chars[h.char], S = ui.S;
@@ -53,9 +66,11 @@ export function showReading(then) {
         <h2 id="rd-head">Time to read</h2>
         <p class="rd-title"><i>${book.title}</i><span>${book.author}</span></p>
         <p>You found it in ${c.name}'s room, and it is yours. Ravenhill will keep: the snow is going nowhere, and neither are
-          the guests. Read it, every page, and come back when you have finished.</p>
+          the guests. Read it, every page, and come back when you have finished. You may look over the case meanwhile, but
+          ${S.finished ? "the ending waits for the book" : "nobody is cleared or arrested until you have read it"}.</p>
         ${more.length ? `<p class="rd-more">After it, ${more.join(" and ")} ${more.length === 1 ? "is" : "are"} waiting too.</p>` : ""}
-        <button class="rd-done" id="rd-done">I have finished it</button>
+        <div class="rd-go" id="rd-go"><button class="rd-done" id="rd-done">I have finished it</button>
+          <button class="rd-aside" id="rd-aside">Look over the case</button></div>
         <div class="rd-confirm" id="rd-confirm" hidden>
           <p>Every page? Then press the seal and hold it down until the ring closes.</p>
           <button class="rd-seal" id="rd-seal" aria-label="Hold down to confirm that you have finished ${book.title}">
@@ -66,15 +81,16 @@ export function showReading(then) {
       </div>
     </div>`;
   $("rd-done").onclick = () => {
-    $("rd-done").hidden = true;
+    $("rd-go").hidden = true;
     $("rd-confirm").hidden = false;
     $("rd-seal").focus();
   };
   $("rd-notyet").onclick = () => {
     $("rd-confirm").hidden = true;
-    $("rd-done").hidden = false;
+    $("rd-go").hidden = false;
     $("rd-done").focus();
   };
+  $("rd-aside").onclick = putAside;
   holdToConfirm($("rd-seal"), () => finish(slotOf(book)));
   $("rd-done").focus();
 }
@@ -117,13 +133,25 @@ async function finish(slot) {
     store("read-" + ui.S.id, JSON.stringify({ ...ui.read, [slot]: when }));
   }
   ui.read = { ...ui.read, [slot]: when };
+  renderBoard();  // the case note's button back to the book
+  markBookButton();
   renderFolder();  // the Rewards tab's reading list, if open
   if (!el) return;  // marked read in another browser meanwhile, and the screen has gone
+  const shown = el;
   el.classList.add("done");
-  setTimeout(() => showReading(next), reduced() ? 0 : 1300);  // the stamp, then the next book or the case
+  setTimeout(() => el === shown && showReading(next), reduced() ? 0 : 1300);  // the stamp, then the next book or the case, unless put down meanwhile
 }
 
-// Every book is read: the case goes on.
+// The book put down unread: the night's card comes as it would (maybeShowIntro passes the book over now), but a closed
+// case's ending does not.
+function putAside() {
+  const waiting = unread()[0];  // none when the last book was stamped read meanwhile
+  aside = waiting ? keyOf(waiting) : null;
+  if (ui.S.finished && waiting) next = null;
+  close();
+}
+
+// Every book is read, or put down: the case goes on.
 function close() {
   if (el) {
     el.remove();
